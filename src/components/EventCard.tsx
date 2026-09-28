@@ -3,6 +3,7 @@ import { Clock, CheckCircle2 } from "lucide-react";
 import type { EventItem } from "@/lib/events";
 import { statusLabel } from "@/lib/events";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
+import { useEventAvailability } from "@/hooks/use-event-availability";
 
 export function StatusBadge({ status }: { status: EventItem["registrationStatus"] }) {
   if (status === "registered") {
@@ -25,8 +26,10 @@ export function StatusBadge({ status }: { status: EventItem["registrationStatus"
 
 export function EventCard({ event }: { event: EventItem }) {
   const { ids } = useMyRegistrations();
+  const { availableSpots } = useEventAvailability(event.fientaEventId);
   const status = effectiveStatus(event, ids);
-  const registered = status === "registered";
+  const displayStatus = status === "open" && availableSpots === 0 ? "full" : status;
+  const registered = displayStatus === "registered";
 
   return (
     <Link
@@ -50,10 +53,15 @@ export function EventCard({ event }: { event: EventItem }) {
         </div>
       </div>
       <div className="mt-3 flex items-center justify-between gap-2">
-        <StatusBadge status={status} />
-        {status === "open" && (
-          <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
-            Registreeru
+        <StatusBadge status={displayStatus} />
+        {displayStatus === "open" && (
+          <span className="ml-auto flex items-center gap-3">
+            <span className="text-sm font-semibold text-primary">
+              Vabu kohti: {availableSpots ?? 50}
+            </span>
+            <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+              Registreeru
+            </span>
           </span>
         )}
       </div>
