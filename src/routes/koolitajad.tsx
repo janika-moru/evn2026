@@ -3,6 +3,7 @@ import {
   speakersInListOrder,
   speakerEventRows,
   isTeamSpeaker,
+  initials,
   dayLabel,
   displayTime,
 } from "@/lib/events";
@@ -30,13 +31,6 @@ export const Route = createFileRoute("/koolitajad")({
   component: SpeakersPage,
 });
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .slice(0, 2)
-    .map((n) => n[0])
-    .join("");
-}
 
 const contactLink =
   "text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground";
