@@ -22,4 +22,4 @@
 - [x] Info leht: „Studio MindZ meeskond" pallikeste rida (Kiia, Janika, Selje, Liisi) — roheka taustaga, kõigil pilt
 - [x] Kiia, Selje, Liisi pildid lõigatud ruutu nii, et nägu keskel
 - [ ] Selje ja Liisi: sihtkohad nimede klõpsamiseks (oodab kasutajalt)
-- [x] Googlei arvustuse otselink: https://g.page/r/CcA2FXmeWHxzEBM/review (avaneb apa sees)
+- [x] Googlei arvustuse otselink (kasutaja g.page link) — avab otse arvustuse vormi, apa sees
