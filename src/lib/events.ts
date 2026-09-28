@@ -45,11 +45,11 @@ export interface Speaker {
 }
 
 export const EVENT_DAYS = [
-  { date: "2026-10-05", label: "E 5.10" },
-  { date: "2026-10-06", label: "T 6.10" },
-  { date: "2026-10-07", label: "K 7.10" },
-  { date: "2026-10-08", label: "N 8.10" },
-  { date: "2026-10-09", label: "R 9.10" },
+  { date: "2026-10-05", label: "E 5. okt" },
+  { date: "2026-10-06", label: "T 6. okt" },
+  { date: "2026-10-07", label: "K 7. okt" },
+  { date: "2026-10-08", label: "N 8. okt" },
+  { date: "2026-10-09", label: "R 9. okt" },
 ] as const;
 
 export const EVENTS: EventItem[] = [
@@ -715,19 +715,24 @@ export function speakerEventRows(speaker: Speaker): SpeakerEventRow[] {
   });
 }
 
-/** Päeva label, nt "E 5.10" */
+/** Päeva label, nt "E 5. okt" */
 export function dayLabel(date: string): string {
   const day = EVENT_DAYS.find((d) => d.date === date);
   return day ? day.label : date;
 }
 
-/** Pikk kuupäev, nt "esmaspäev, 5. oktoober" */
+/** Pikk kuupäev, nt "esmaspäev, 5. okt" */
 export function longDate(date: string): string {
   return new Intl.DateTimeFormat("et-EE", {
     weekday: "long",
     day: "numeric",
-    month: "long",
+    month: "short",
   }).format(new Date(date + "T12:00:00"));
+}
+
+/** Eesti kirjapildis kellaaeg, nt "09:30" → "9.30". */
+export function displayTime(time: string): string {
+  return time.replace(/^0/, "").replace(":", ".");
 }
 
 /** Tänane kuupäev event-nädala kontekstis: kui täna on nädala sees, tagasta see; muidu esimene päev. */

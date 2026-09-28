@@ -12,3 +12,4 @@
 - [ ] Koolitajate kontaktid/pildid — ülejäänud koolitajad (andmed kasutajalt)
 - [x] Info leht: „Koolitajad & materjalid“ menüü roosaks, „Anna tagasisidet“ eemaldatud
 - [x] Koolitajate leht: hommikune Morning Mindset koondatud üheks realelingiks seeria juurde
+- [x] Kuupäevad ja kellaajad kogu äpis eestikeelsesse kirjapilti (`9. okt`, `9.30`)

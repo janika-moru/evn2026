@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Facebook, Globe, Instagram, Linkedin, Mail, Phone } from "lucide-react";
-import { SPEAKERS, speakerEventRows, dayLabel } from "@/lib/events";
+import { SPEAKERS, speakerEventRows, dayLabel, displayTime } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
@@ -83,7 +83,7 @@ function SpeakersPage() {
                         </a>
                         <span className="block text-xs text-muted-foreground">
                           {row.events.length} hommikust sessiooni · kell{" "}
-                          {row.events[0]!.startTime}
+                          {row.events[0] ? displayTime(row.events[0].startTime) : ""}
                         </span>
                       </li>
                     ) : (
@@ -96,7 +96,7 @@ function SpeakersPage() {
                           {row.event.title}
                         </Link>
                         <span className="block text-xs text-muted-foreground">
-                          {dayLabel(row.event.date)} · {row.event.startTime}
+                          {dayLabel(row.event.date)} · {displayTime(row.event.startTime)}
                         </span>
                       </li>
                     ),

@@ -3,7 +3,7 @@ import { ArrowLeft, CalendarPlus, Clock, MapPin, MessageSquareHeart, FileText } 
 import { StatusBadge, SoldOutPill } from "@/components/EventCard";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
-import { getEvent, longDate, dayLabel, type EventItem } from "@/lib/events";
+import { getEvent, longDate, dayLabel, displayTime, type EventItem } from "@/lib/events";
 
 export const Route = createFileRoute("/sundmus/$id")({
   loader: ({ params }) => {
@@ -87,7 +87,7 @@ function EventDetailPage() {
 
       <div className="mt-4 flex flex-wrap gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-sm font-medium">
-          <Clock className="size-4" /> {event.startTime}–{event.endTime}
+          <Clock className="size-4" /> {displayTime(event.startTime)}–{displayTime(event.endTime)}
         </span>
         <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-sm font-medium">
           <MapPin className="size-4" /> {event.venue}
