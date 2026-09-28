@@ -664,6 +664,49 @@ export function speakersForEvent(eventId: string): Speaker[] {
   return SPEAKERS.filter((speaker) => speaker.eventIds.includes(eventId));
 }
 
+/** Koolitaja sündmuste nimekirja rida — korduvad sessioonid on ühendatud seeriaks. */
+export type SpeakerEventRow =
+  | { kind: "single"; event: EventItem }
+  | { kind: "series"; title: string; url: string; events: EventItem[] };
+
+/**
+ * Koolitaja sündmused ridadena: samasse seeriasse kuuluvad sessioonid
+ * (nt hommikune Morning Mindset) kuvatakse ühe reale lingiga seeria lehele.
+ */
+export function speakerEventRows(speaker: Speaker): SpeakerEventRow[] {
+  const rows: SpeakerEventRow[] = [];
+  const series = new Map<string, EventItem[]>();
+
+  for (const id of speaker.eventIds) {
+    const event = getEvent(id);
+    if (!event) continue;
+    if (event.seriesUrl) {
+      const bucket = series.get(event.seriesUrl) ?? [];
+      bucket.push(event);
+      series.set(event.seriesUrl, bucket);
+      continue;
+    }
+    rows.push({ kind: "single", event });
+  }
+
+  for (const [url, events] of series) {
+    events.sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`));
+    const first = events[0];
+    const shortTitle = first.title.split(":")[0].trim();
+    const label =
+      events.length > 1
+        ? `${shortTitle} — ${dayLabel(first.date)}–${dayLabel(events[events.length - 1].date)}`
+        : first.title;
+    rows.push({ kind: "series", title: label, url, events });
+  }
+
+  return rows.sort((a, b) => {
+    const keyA = a.kind === "single" ? `${a.event.date}T${a.event.startTime}` : `${a.events[0].date}T${a.events[0].startTime}`;
+    const keyB = b.kind === "single" ? `${b.event.date}T${b.event.startTime}` : `${b.events[0].date}T${b.events[0].startTime}`;
+    return keyA.localeCompare(keyB);
+  });
+}
+
 /** Päeva label, nt "E 5.10" */
 export function dayLabel(date: string): string {
   const day = EVENT_DAYS.find((d) => d.date === date);
