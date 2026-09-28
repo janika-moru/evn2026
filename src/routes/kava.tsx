@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef } from "react";
 import { EventCard } from "@/components/EventCard";
 import yldineBanner from "@/assets/yldine-nadala-banner.png.asset.json";
+import ruumidBanner from "@/assets/ruumid-banner.png.asset.json";
 import { EVENT_DAYS, eventsForDate, longDate, todayEventDate } from "@/lib/events";
 
 const validateSearch = (search: Record<string, unknown>): { paev?: string } =>
