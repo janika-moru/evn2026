@@ -1,10 +1,10 @@
+import { useMyRegistrations } from "@/hooks/use-my-registrations";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, CalendarCheck, MapPin, MessageSquareHeart } from "lucide-react";
 import { EventCard } from "@/components/EventCard";
 import {
   eventsForDate,
   nextEventOn,
-  registeredEvents,
   todayEventDate,
   longDate,
 } from "@/lib/events";
@@ -35,7 +35,8 @@ function TodayPage() {
   const today = todayEventDate();
   const todaysEvents = eventsForDate(today);
   const next = nextEventOn(today);
-  const myToday = registeredEvents().filter((e) => e.date === today);
+  const { ids } = useMyRegistrations();
+  const myToday = todaysEvents.filter((e) => e.fientaEventId && ids.has(e.fientaEventId));
 
   return (
     <main className="px-4 pt-8">
