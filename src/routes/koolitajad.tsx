@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FileText, Linkedin, Mail } from "lucide-react";
-import { SPEAKERS, getEvent } from "@/lib/events";
+import { SPEAKERS, getEvent, dayLabel } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
@@ -50,11 +50,13 @@ function SpeakersPage() {
                 </div>
                 <div className="min-w-0">
                   <h2 className="text-base font-semibold leading-snug">{s.name}</h2>
-                  <p className="text-sm text-muted-foreground">{s.role}</p>
+                  {s.role && <p className="text-sm text-muted-foreground">{s.role}</p>}
                 </div>
               </div>
 
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.bio}</p>
+              {s.bio && (
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.bio}</p>
+              )}
 
               {events.length > 0 && (
                 <ul className="mt-3 space-y-1.5">
@@ -67,6 +69,23 @@ function SpeakersPage() {
                       >
                         {e!.title}
                       </Link>
+                      <span className="block text-xs text-muted-foreground">
+                        {dayLabel(e!.date)} · {e!.startTime}
+                      </span>
+                      {(e!.slidesUrl || e!.materialsUrl) && (
+                        <span className="mt-1 flex gap-3">
+                          {e!.slidesUrl && (
+                            <a href={e!.slidesUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold">
+                              <FileText className="size-3.5" /> Vaata slaide
+                            </a>
+                          )}
+                          {e!.materialsUrl && (
+                            <a href={e!.materialsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold">
+                              <FileText className="size-3.5" /> Materjalid
+                            </a>
+                          )}
+                        </span>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -89,16 +108,6 @@ function SpeakersPage() {
                     className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
                   >
                     <Linkedin className="size-4" /> LinkedIn
-                  </a>
-                )}
-                {events.some((e) => e!.slidesUrl) && (
-                  <a
-                    href={events.find((e) => e!.slidesUrl)!.slidesUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
-                  >
-                    <FileText className="size-4" /> Vaata slaide
                   </a>
                 )}
               </div>

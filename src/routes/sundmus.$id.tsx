@@ -126,6 +126,16 @@ function EventDetailPage() {
             <FileText className="size-4" /> Vaata slaide
           </a>
         )}
+        {event.materialsUrl && (
+          <a
+            href={event.materialsUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold"
+          >
+            <FileText className="size-4" /> Materjalid
+          </a>
+        )}
       </div>
     </main>
   );
