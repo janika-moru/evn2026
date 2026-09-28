@@ -25,6 +25,7 @@ export interface EventItem {
   icalUrl?: string;
   slidesUrl?: string;
   materialsUrl?: string;
+  seriesUrl?: string; // Korduvate sessioonide seeria leht Fientas
   registrationStatus: RegistrationStatus;
 }
 
