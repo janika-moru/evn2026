@@ -13,8 +13,10 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-/** Kohale tuleku juhise pilt — lisa URL, kui pilt on olemas. */
-const DIRECTIONS_IMAGE_URL: string | null = null;
+import directionsImage from "@/assets/studio-mindz-sissepaas.jpg.asset.json";
+
+/** Kohale tuleku juhise pilt. */
+const DIRECTIONS_IMAGE_URL: string | null = directionsImage.url;
 
 const MAPS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=Lutsu+t%C3%A4nav+3%2C+51005+Tartu%2C+Tartu+maakond%2C+Eesti";
@@ -70,7 +72,7 @@ function InfoPage() {
       {DIRECTIONS_IMAGE_URL && (
         <img
           src={DIRECTIONS_IMAGE_URL}
-          alt="Kohale tuleku juhis: Lutsu 3 hoov ja puittrepp 2. korrusele"
+          alt="Studio MindZ sissepääs: Lutsu 3, Tartu, Antoniuse õuemaja 2. korrus"
           className="mt-4 w-full rounded-2xl object-cover"
         />
       )}
