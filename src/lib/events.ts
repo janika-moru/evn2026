@@ -1,6 +1,11 @@
 // Keskmne sündmuste andmemudel — sisu ja UI on eraldi.
 // Päris andmed Fienta ametlikust avalikust API-st (organizer 33715), seisuga 28.09.2026.
 
+import kiiaPaalPhoto from "@/assets/kiia-paal.jpg.asset.json";
+import liisiPhoto from "@/assets/liisi.jpg.asset.json";
+import seljePhoto from "@/assets/selje.jpg.asset.json";
+
+
 export type RegistrationStatus =
   | "open" // Registreeru
   | "registered" // Oled registreerunud ✓
