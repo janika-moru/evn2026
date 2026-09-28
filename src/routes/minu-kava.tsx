@@ -223,9 +223,9 @@ function MaterialsSection({ events }: { events: EventItem[] }) {
                   href={e.slidesUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
                 >
-                  <FileText className="size-4" /> Vaata slaide
+                  <FileText className="size-3.5" /> Vaata slaide
                 </a>
               )}
               {e.materialsUrl && (
@@ -233,9 +233,9 @@ function MaterialsSection({ events }: { events: EventItem[] }) {
                   href={e.materialsUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
                 >
-                  <FileText className="size-4" /> Materjalid
+                  <FileText className="size-3.5" /> Materjalid
                 </a>
               )}
             </div>
