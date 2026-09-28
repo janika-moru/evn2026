@@ -4,8 +4,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { EVENTS, getEvent } from "@/lib/events";
 
 const TYPE_LABEL: Record<string, string> = {
-  keep: "Teeme samamoodi edasi",
-  change: "Teeksin teisiti",
+  training: "Koolitus",
+  keep: "Kiidan",
+  change: "Laidan",
   help: "Abi vaja",
 };
 
@@ -70,9 +71,9 @@ export function FeedbackAdmin() {
       <div className="mt-3 flex flex-wrap gap-2">
         <select value={typeF} onChange={(e) => setTypeF(e.target.value)} className={sel}>
           <option value="all">Kõik tüübid</option>
-          <option value="help">Abi vaja</option>
-          <option value="change">Teeksin teisiti</option>
-          <option value="keep">Teeme edasi</option>
+          <option value="training">Koolitus</option>
+          <option value="keep">Kiidan</option>
+          <option value="change">Laidan</option>
         </select>
         <select value={eventF} onChange={(e) => setEventF(e.target.value)} className={`${sel} max-w-full`}>
           <option value="all">Kõik sündmused</option>
@@ -123,6 +124,12 @@ export function FeedbackAdmin() {
             <p className="mt-1 text-xs text-muted-foreground">
               {r.event_id ? (getEvent(r.event_id)?.title ?? r.event_id) : "Üldine korraldus"}
             </p>
+            {r.rating != null && <p className="mt-2 font-semibold">Hinnang: {r.rating}/10</p>}
+            {r.keep_text && <p className="mt-2 whitespace-pre-wrap"><span className="font-medium">Jääks samaks:</span> {r.keep_text}</p>}
+            {r.change_text && <p className="mt-2 whitespace-pre-wrap"><span className="font-medium">Teistmoodi:</span> {r.change_text}</p>}
+            {(r.respondent_name || r.respondent_field) && (
+              <p className="mt-2 text-xs text-muted-foreground">{[r.respondent_name, r.respondent_field].filter(Boolean).join(", ")}</p>
+            )}
             {(r.message ?? r.comment) && (
               <p className="mt-2 whitespace-pre-wrap">{r.message ?? r.comment}</p>
             )}
