@@ -99,6 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap",
       },
     ],
+    scripts: [{ src: "https://fienta.com/embed.js" }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
