@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { CalendarCheck, LogOut, Mail } from "lucide-react";
-import type { Session } from "@supabase/supabase-js";
+import { useState } from "react";
+import { CalendarCheck, LogOut, Mail, RefreshCw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { EventCard } from "@/components/EventCard";
-import { registeredEvents, longDate, EVENT_DAYS } from "@/lib/events";
+import { EVENTS, longDate, EVENT_DAYS } from "@/lib/events";
+import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
 
 export const Route = createFileRoute("/minu-kava")({
   head: () => ({
@@ -28,17 +28,7 @@ export const Route = createFileRoute("/minu-kava")({
 });
 
 function MySchedulePage() {
-  const [session, setSession] = useState<Session | null>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setReady(true);
-    });
-    return () => sub.subscription.unsubscribe();
-  }, []);
+  const { session, ready } = useSession();
 
   return (
     <main className="px-4 pt-8">
@@ -63,8 +53,9 @@ function SignInCard() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("sending");
+    const clean = email.trim().toLowerCase();
     const { error } = await supabase.auth.signInWithOtp({
-      email,
+      email: clean,
       options: { emailRedirectTo: `${window.location.origin}/minu-kava` },
     });
     if (error) {
@@ -73,24 +64,25 @@ function SignInCard() {
       return;
     }
     setStatus("sent");
-    setMessage(`Saatsime sisselogimise lingi aadressile ${email}. Ava see oma telefonis.`);
+    setMessage(`Saatsime sisselogimise lingi aadressile ${clean}. Ava kiri ja vajuta lingil.`);
   }
 
   return (
     <>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        Logi sisse sama e-posti aadressiga, mida kasutasid Fientas registreerumisel. Siis
-        näed siin kõiki oma registreeringuid.
+      <h2 className="mt-4 text-lg font-semibold">Vaata oma kava</h2>
+      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+        Logi sisse sama e-posti aadressiga, mida kasutasid Fientas registreerumisel.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-5 rounded-2xl bg-secondary p-4">
         <label htmlFor="email" className="text-sm font-semibold">
-          E-posti aadress
+          E-post
         </label>
         <input
           id="email"
           type="email"
           required
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="sinu@email.ee"
@@ -102,7 +94,7 @@ function SignInCard() {
           className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground disabled:opacity-60"
         >
           <Mail className="size-4" />
-          {status === "sending" ? "Saadan…" : "Saada sisselogimise link"}
+          {status === "sending" ? "Saadan…" : "Saada sisselogimislink"}
         </button>
         <p className="mt-2 text-xs text-muted-foreground">Parooli ei ole vaja luua.</p>
         {message && (
@@ -113,23 +105,13 @@ function SignInCard() {
           </p>
         )}
       </form>
-
-      <section className="mt-6">
-        <h2 className="text-base font-semibold">Näidis: nii näeb sinu kava välja</h2>
-        <div className="mt-3 space-y-3 opacity-60">
-          {registeredEvents()
-            .slice(0, 2)
-            .map((e) => (
-              <EventCard key={e.id} event={e} />
-            ))}
-        </div>
-      </section>
     </>
   );
 }
 
 function SignedIn({ email }: { email: string }) {
-  const mine = registeredEvents();
+  const { ids, query } = useMyRegistrations();
+  const mine = EVENTS.filter((e) => e.fientaEventId && ids.has(e.fientaEventId));
 
   return (
     <>
@@ -143,33 +125,55 @@ function SignedIn({ email }: { email: string }) {
         </button>
       </div>
 
-      {mine.length === 0 ? (
+      {query.isLoading ? (
+        <p className="mt-6 text-sm text-muted-foreground">Otsin sinu registreeringuid…</p>
+      ) : mine.length === 0 ? (
         <div className="mt-6 rounded-2xl border border-border bg-card p-5 text-center">
           <CalendarCheck className="mx-auto size-8 text-primary" />
-          <p className="mt-2 text-sm text-muted-foreground">
-            Sul ei ole veel ühtegi registreeringut.
+          <p className="mt-2 font-semibold">
+            Me ei leidnud selle e-posti aadressiga registreeringuid.
           </p>
-          <Link
-            to="/kava"
-            search={{}}
-            className="mt-4 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
-          >
-            Vaata kava
-          </Link>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Kui registreerusid teise e-posti aadressiga, logi sisse selle aadressiga.
+          </p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <button
+              onClick={() => query.refetch()}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border px-5 py-2.5 text-sm font-semibold"
+            >
+              <RefreshCw className="size-4" /> Värskenda registreeringuid
+            </button>
+            <Link
+              to="/kava"
+              search={{}}
+              className="inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+            >
+              Vaata kava
+            </Link>
+          </div>
         </div>
       ) : (
-        EVENT_DAYS.filter((d) => mine.some((e) => e.date === d.date)).map((d) => (
-          <section key={d.date} className="mt-6">
-            <h2 className="text-base font-semibold">{longDate(d.date)}</h2>
-            <div className="mt-3 space-y-3">
-              {mine
-                .filter((e) => e.date === d.date)
-                .map((e) => (
-                  <EventCard key={e.id} event={e} />
-                ))}
-            </div>
-          </section>
-        ))
+        <>
+          {EVENT_DAYS.filter((d) => mine.some((e) => e.date === d.date)).map((d) => (
+            <section key={d.date} className="mt-6">
+              <h2 className="text-base font-semibold first-letter:uppercase">{longDate(d.date)}</h2>
+              <div className="mt-3 space-y-3">
+                {mine
+                  .filter((e) => e.date === d.date)
+                  .sort((a, b) => a.startTime.localeCompare(b.startTime))
+                  .map((e) => (
+                    <EventCard key={e.id} event={e} />
+                  ))}
+              </div>
+            </section>
+          ))}
+          <button
+            onClick={() => query.refetch()}
+            className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+          >
+            <RefreshCw className="size-4" /> Värskenda registreeringuid
+          </button>
+        </>
       )}
     </>
   );
