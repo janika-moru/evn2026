@@ -6,5 +6,5 @@
 - [x] Info lehel parkimislingid ja 15 minutit varem saabumise juhis
 - [x] Koolitajate profiilid toetavad pilti, LinkedIni, Instagrami, kodulehte, e-posti ja telefoni
 - [x] „Minu kava“ sündmustel koolitaja profiili ning slaidide ja materjalide lingid
-- [ ] Lisa kasutaja saadetav asukohapilt Info lehele
+- [x] Info lehele „Kohale tulek“ alla Studio MindZi sissepääsu pilt
 - [x] Minu kava: eraldi sektsioon „Koolitajate slaidid ja materjalid" (ainult registreeritud sündmused, lingid jäävad ka sündmuse alla)
