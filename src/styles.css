@@ -42,6 +42,7 @@
   --color-mindz-green: var(--mindz-green);
   --color-mindz-pink: var(--mindz-pink);
   --color-mindz-grey: var(--mindz-grey);
+  --color-mindz-mint: var(--mindz-mint);
 }
 
 :root {
@@ -71,6 +72,7 @@
   --destructive-foreground: oklch(1 0 0);
   /* #C3C2C1 */
   --mindz-grey: oklch(0.815 0.004 60);
+  --mindz-mint: oklch(0.95 0.018 190);
   --border: oklch(0.92 0.006 194);
   --input: oklch(0.92 0.006 194);
   --ring: var(--mindz-green);

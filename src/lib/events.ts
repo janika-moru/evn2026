@@ -669,6 +669,10 @@ const PINNED_SPEAKER_IDS = ["kiia-paal", "janika-moru"];
 /** Studio MindZ tiimiliikmed — märgistatakse koolitajate nimekirjas. */
 export const TEAM_SPEAKER_IDS = PINNED_SPEAKER_IDS;
 
+export function isTeamSpeaker(speaker: Speaker): boolean {
+  return TEAM_SPEAKER_IDS.includes(speaker.id);
+}
+
 function firstName(name: string): string {
   return name.split(" ")[0] ?? name;
 }
