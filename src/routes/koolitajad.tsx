@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { FileText, Linkedin, Mail } from "lucide-react";
+import { Globe, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import { SPEAKERS, getEvent, dayLabel } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
@@ -43,11 +43,19 @@ function SpeakersPage() {
         {SPEAKERS.map((s) => {
           const events = s.eventIds.map(getEvent).filter(Boolean);
           return (
-            <article key={s.id} className="rounded-2xl border border-border bg-card p-4">
+            <article id={s.id} key={s.id} className="scroll-mt-6 rounded-2xl border border-border bg-card p-4">
               <div className="flex items-center gap-3">
-                <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-secondary text-lg font-semibold">
-                  {initials(s.name)}
-                </div>
+                {s.imageUrl ? (
+                  <img
+                    src={s.imageUrl}
+                    alt={s.name}
+                    className="size-16 shrink-0 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex size-16 shrink-0 items-center justify-center rounded-full bg-secondary text-lg font-semibold">
+                    {initials(s.name)}
+                  </div>
+                )}
                 <div className="min-w-0">
                   <h2 className="text-base font-semibold leading-snug">{s.name}</h2>
                   {s.role && <p className="text-sm text-muted-foreground">{s.role}</p>}
@@ -72,20 +80,6 @@ function SpeakersPage() {
                       <span className="block text-xs text-muted-foreground">
                         {dayLabel(e!.date)} · {e!.startTime}
                       </span>
-                      {(e!.slidesUrl || e!.materialsUrl) && (
-                        <span className="mt-1 flex gap-3">
-                          {e!.slidesUrl && (
-                            <a href={e!.slidesUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold">
-                              <FileText className="size-3.5" /> Vaata slaide
-                            </a>
-                          )}
-                          {e!.materialsUrl && (
-                            <a href={e!.materialsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold">
-                              <FileText className="size-3.5" /> Materjalid
-                            </a>
-                          )}
-                        </span>
-                      )}
                     </li>
                   ))}
                 </ul>
@@ -108,6 +102,34 @@ function SpeakersPage() {
                     className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
                   >
                     <Linkedin className="size-4" /> LinkedIn
+                  </a>
+                )}
+                {s.instagramUrl && (
+                  <a
+                    href={s.instagramUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
+                  >
+                    <Instagram className="size-4" /> Instagram
+                  </a>
+                )}
+                {s.websiteUrl && (
+                  <a
+                    href={s.websiteUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
+                  >
+                    <Globe className="size-4" /> Koduleht
+                  </a>
+                )}
+                {s.phone && (
+                  <a
+                    href={`tel:${s.phone.replaceAll(" ", "")}`}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
+                  >
+                    <Phone className="size-4" /> {s.phone}
                   </a>
                 )}
               </div>

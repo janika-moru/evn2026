@@ -33,8 +33,12 @@ export interface Speaker {
   name: string;
   role: string;
   bio: string;
+  imageUrl?: string;
   email?: string;
+  phone?: string;
+  websiteUrl?: string;
   linkedinUrl?: string;
+  instagramUrl?: string;
   eventIds: string[];
 }
 
@@ -640,6 +644,10 @@ export function eventsForDate(date: string): EventItem[] {
 
 export function getEventByFientaId(fientaId: string): EventItem | undefined {
   return EVENTS.find((e) => e.fientaEventId === fientaId);
+}
+
+export function speakersForEvent(eventId: string): Speaker[] {
+  return SPEAKERS.filter((speaker) => speaker.eventIds.includes(eventId));
 }
 
 /** Päeva label, nt "E 5.10" */
