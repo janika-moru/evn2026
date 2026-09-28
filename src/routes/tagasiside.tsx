@@ -120,10 +120,11 @@ function FeedbackPage() {
             Ütle veel midagi
           </button>
           <Link
-            to="/"
+            to="/kava"
+            search={{}}
             className="inline-flex rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
           >
-            Tagasi avalehele
+            Tagasi kava juurde
           </Link>
         </div>
       </main>

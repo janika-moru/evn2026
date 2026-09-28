@@ -12,7 +12,6 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { BottomNav } from "../components/BottomNav";
-import { FeedbackFab } from "../components/FeedbackFab";
 
 function NotFoundComponent() {
   return (
@@ -25,10 +24,11 @@ function NotFoundComponent() {
         </p>
         <div className="mt-6">
           <Link
-            to="/"
+            to="/kava"
+            search={{}}
             className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Avalehele
+            Ava kava
           </Link>
         </div>
       </div>
@@ -63,10 +63,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             Proovi uuesti
           </button>
           <a
-            href="/"
+            href="/kava"
             className="inline-flex items-center justify-center rounded-full border border-input bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Avalehele
+            Ava kava
           </a>
         </div>
       </div>
@@ -129,7 +129,6 @@ function RootComponent() {
       <div className="mx-auto min-h-screen w-full max-w-md bg-background pb-24">
         <Outlet />
       </div>
-      <FeedbackFab />
       <BottomNav />
     </QueryClientProvider>
   );

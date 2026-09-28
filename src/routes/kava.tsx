@@ -1,6 +1,7 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { EventCard } from "@/components/EventCard";
-import { EVENT_DAYS, eventsForDate, todayEventDate } from "@/lib/events";
+import { EVENT_DAYS, eventsForDate, longDate, nextEvent, todayEventDate } from "@/lib/events";
 
 const validateSearch = (search: Record<string, unknown>): { paev?: string } =>
   typeof search["paev"] === "string" ? { paev: search["paev"] as string } : {};
@@ -31,6 +32,7 @@ function SchedulePage() {
   const navigate = useNavigate();
   const selected = EVENT_DAYS.some((d) => d.date === paev) ? paev! : todayEventDate();
   const events = eventsForDate(selected);
+  const next = nextEvent();
 
   return (
     <main className="px-4 pt-8">
@@ -38,6 +40,25 @@ function SchedulePage() {
       <p className="mt-1 text-sm text-muted-foreground">
         Studio MindZi programm · 5.–9. oktoober
       </p>
+
+      {next && (
+        <section className="mt-5 rounded-2xl bg-secondary p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            Järgmine sündmus
+          </p>
+          <p className="mt-1 text-lg font-semibold leading-snug">{next.title}</p>
+          <p className="mt-0.5 text-sm text-muted-foreground">
+            {longDate(next.date)} · {next.startTime}–{next.endTime} · {next.speaker}
+          </p>
+          <Link
+            to="/sundmus/$id"
+            params={{ id: next.id }}
+            className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+          >
+            Vaata detaili <ArrowRight className="size-4" />
+          </Link>
+        </section>
+      )}
 
       <div
         role="tablist"
