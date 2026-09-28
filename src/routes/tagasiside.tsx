@@ -187,8 +187,8 @@ function FeedbackPage() {
           className="mt-8 w-full rounded-2xl"
         />
       </main>
-
     );
+
   }
 
   const current = TYPES.find((t) => t.id === type)!;

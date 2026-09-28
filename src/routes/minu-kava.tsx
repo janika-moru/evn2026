@@ -48,8 +48,8 @@ function MySchedulePage() {
 
       <SpeakersTeamLinks />
     </main>
-
   );
+
 }
 
 function SignInCard() {
