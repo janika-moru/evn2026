@@ -66,6 +66,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kiia-morning-mindset-kiia-paal-studio-mindzis-05-10",
     "registrationUrl": "https://fienta.com/kiia-morning-mindset-kiia-paal-studio-mindzis-05-10",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -142,6 +143,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/morning-mindset-06-10-studio-mindzis",
     "registrationUrl": "https://fienta.com/morning-mindset-06-10-studio-mindzis",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -217,6 +219,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/morning-mindset-07-10-studio-mindzis",
     "registrationUrl": "https://fienta.com/morning-mindset-07-10-studio-mindzis",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -292,6 +295,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/morning-mindset-08-10-studio-mindzis",
     "registrationUrl": "https://fienta.com/morning-mindset-08-10-studio-mindzis",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -367,6 +371,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/morning-mindset-09-10-studio-mindzis",
     "registrationUrl": "https://fienta.com/morning-mindset-09-10-studio-mindzis",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
