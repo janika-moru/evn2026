@@ -23,3 +23,4 @@
 - [x] Kiia, Selje, Liisi pildid lõigatud ruutu nii, et nägu keskel
 - [ ] Selje ja Liisi: sihtkohad nimede klõpsamiseks (oodab kasutajalt)
 - [x] Googlei arvustuse otselink (kasutaja g.page link) — avab otse arvustuse vormi, apa sees
+- [x] Tagasiside menüü sõnastused: „Jäta tagasiside koolitusele", „Kiidan korraldust/ruume/tiimi", „Parandusettepanek korraldusele/ruumidele/tiimile", „Lisa Google arvustus"

@@ -5,8 +5,8 @@ import { EVENTS, getEvent } from "@/lib/events";
 
 const TYPE_LABEL: Record<string, string> = {
   training: "Koolitus",
-  keep: "Kiidan",
-  change: "Laidan",
+  keep: "Kiidan korraldust",
+  change: "Parandusettepanek",
   help: "Abi vaja",
 };
 
@@ -72,8 +72,8 @@ export function FeedbackAdmin() {
         <select value={typeF} onChange={(e) => setTypeF(e.target.value)} className={sel}>
           <option value="all">Kõik tüübid</option>
           <option value="training">Koolitus</option>
-          <option value="keep">Kiidan</option>
-          <option value="change">Laidan</option>
+          <option value="keep">Kiidan korraldust</option>
+          <option value="change">Parandusettepanek</option>
         </select>
         <select value={eventF} onChange={(e) => setEventF(e.target.value)} className={`${sel} max-w-full`}>
           <option value="all">Kõik sündmused</option>
