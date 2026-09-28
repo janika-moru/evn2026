@@ -14,3 +14,4 @@
 - Public event availability is persisted in event_availability and computed during Fienta sync as 50 minus non-cancelled/refunded ticket quantities — keeps attendee data private while exposing counts.
 - Speaker contact and photo fields live on SPEAKERS, while slides and materials stay on EVENTS — profiles remain reusable and resources stay tied to the correct session.
 - Repeated sessions are tagged with seriesUrl on EVENTS and collapsed to one row by speakerEventRows() (src/lib/events.ts) — keeps the koolitajad list scannable and links to the Fienta series page instead of five near-duplicate events.
+- Event dates and times stay in ISO/Fienta format internally and are localized only for display through helpers in src/lib/events.ts — preserves sorting, comparisons, and calendar exports.

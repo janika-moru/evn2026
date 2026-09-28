@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Clock, CheckCircle2 } from "lucide-react";
 import type { EventItem } from "@/lib/events";
-import { statusLabel } from "@/lib/events";
+import { displayTime, statusLabel } from "@/lib/events";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
 
@@ -55,7 +55,7 @@ export function EventCard({ event }: { event: EventItem }) {
         <div className="min-w-0">
           <p className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
             <Clock className="size-4 shrink-0" />
-            {event.startTime}–{event.endTime}
+            {displayTime(event.startTime)}–{displayTime(event.endTime)}
           </p>
           <h3 className="mt-1 text-base font-semibold leading-snug">{event.title}</h3>
           <p className="mt-0.5 text-sm text-muted-foreground">{event.speaker}</p>

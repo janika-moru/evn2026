@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CalendarCheck, FileText, LogOut, Mail, MessageSquareHeart, RefreshCw, UserRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { EventCard } from "@/components/EventCard";
-import { EVENTS, longDate, EVENT_DAYS, speakersForEvent, type EventItem } from "@/lib/events";
+import { EVENTS, longDate, EVENT_DAYS, speakersForEvent, displayTime, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
 
 export const Route = createFileRoute("/minu-kava")({
@@ -200,7 +200,7 @@ function MaterialsSection({ events }: { events: EventItem[] }) {
         {sorted.map((e) => (
           <div key={e.id} className="rounded-xl border border-border bg-background p-3">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              {longDate(e.date)} · {e.startTime}–{e.endTime}
+              {longDate(e.date)} · {displayTime(e.startTime)}–{displayTime(e.endTime)}
             </p>
             <Link
               to="/sundmus/$id"

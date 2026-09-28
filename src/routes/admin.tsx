@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/hooks/use-my-registrations";
-import { EVENTS, getEventByFientaId } from "@/lib/events";
+import { EVENTS, dayLabel, displayTime, getEventByFientaId } from "@/lib/events";
 import { importRegistrations } from "@/lib/admin.functions";
 import { adminSyncFienta } from "@/lib/sync.functions";
 import { FeedbackAdmin } from "@/components/FeedbackAdmin";
@@ -214,7 +214,7 @@ function CsvImport() {
               <option value="">Vali sündmus…</option>
               {EVENTS.map((e) => (
                 <option key={e.id} value={e.fientaEventId}>
-                  {e.date} {e.startTime} {e.title}
+                  {dayLabel(e.date)} {displayTime(e.startTime)} {e.title}
                 </option>
               ))}
             </select>

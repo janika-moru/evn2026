@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, Camera, HeartHandshake, LifeBuoy, Lightbulb, X } from "lucide-react";
-import { EVENTS, getEvent, dayLabel } from "@/lib/events";
+import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 
 const validateSearch = (search: Record<string, unknown>): { sundmus?: string } =>
@@ -191,7 +191,7 @@ function FeedbackPage() {
               <option value="general">Üldine korraldus</option>
               {EVENTS.map((ev) => (
                 <option key={ev.id} value={ev.id}>
-                  {dayLabel(ev.date)} {ev.startTime} · {ev.title}
+                  {dayLabel(ev.date)} {displayTime(ev.startTime)} · {ev.title}
                 </option>
               ))}
             </select>
