@@ -696,7 +696,7 @@ export function speakerEventRows(speaker: Speaker): SpeakerEventRow[] {
     const first = sorted[0];
     const last = sorted[sorted.length - 1];
     if (!first) continue;
-    const shortTitle = first.title.split(":")[0].trim();
+    const shortTitle = (first.title.split(":")[0] ?? first.title).trim();
     const label =
       sorted.length > 1 && last
         ? `${shortTitle} — ${dayLabel(first.date)}–${dayLabel(last.date)}`
