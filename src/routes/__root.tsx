@@ -24,10 +24,11 @@ function NotFoundComponent() {
         </p>
         <div className="mt-6">
           <Link
-            to="/"
+            to="/kava"
+            search={{}}
             className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Avalehele
+            Ava kava
           </Link>
         </div>
       </div>
@@ -62,10 +63,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             Proovi uuesti
           </button>
           <a
-            href="/"
+            href="/kava"
             className="inline-flex items-center justify-center rounded-full border border-input bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Avalehele
+            Ava kava
           </a>
         </div>
       </div>
