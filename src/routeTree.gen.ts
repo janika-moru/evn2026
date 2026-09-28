@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KavaRouteImport } from './routes/kava'
+import { Route as SundmusIdRouteImport } from './routes/sundmus.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KavaRoute = KavaRouteImport.update({
+  id: '/kava',
+  path: '/kava',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SundmusIdRoute = SundmusIdRouteImport.update({
+  id: '/sundmus/$id',
+  path: '/sundmus/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kava': typeof KavaRoute
+  '/sundmus/$id': typeof SundmusIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kava': typeof KavaRoute
+  '/sundmus/$id': typeof SundmusIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kava': typeof KavaRoute
+  '/sundmus/$id': typeof SundmusIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/kava' | '/sundmus/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/kava' | '/sundmus/$id'
+  id: '__root__' | '/' | '/kava' | '/sundmus/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KavaRoute: typeof KavaRoute
+  SundmusIdRoute: typeof SundmusIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kava': {
+      id: '/kava'
+      path: '/kava'
+      fullPath: '/kava'
+      preLoaderRoute: typeof KavaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sundmus/$id': {
+      id: '/sundmus/$id'
+      path: '/sundmus/$id'
+      fullPath: '/sundmus/$id'
+      preLoaderRoute: typeof SundmusIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KavaRoute: KavaRoute,
+  SundmusIdRoute: SundmusIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
