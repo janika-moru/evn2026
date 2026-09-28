@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useRef } from "react";
 import { EventCard } from "@/components/EventCard";
+import yldineBanner from "@/assets/yldine-nadala-banner.png.asset.json";
 import { EVENT_DAYS, eventsForDate, longDate, todayEventDate } from "@/lib/events";
 
 const validateSearch = (search: Record<string, unknown>): { paev?: string } =>
@@ -50,7 +51,12 @@ function SchedulePage() {
 
   return (
     <main className="px-4 pt-8">
-      <h1 className="text-2xl font-bold">Kava</h1>
+      <img
+        src={yldineBanner.url}
+        alt="Tartu Ettevõtlusnädal 5.–9. oktoober Studio MindZis, Lutsu 3 — 5 päeva, 22 koolitajat, 26 üritust"
+        className="w-full rounded-2xl"
+      />
+      <h1 className="mt-4 text-2xl font-bold">Kava</h1>
       <p className="mt-1 text-sm text-muted-foreground">
         Studio MindZi programm · 5.–9. oktoober
       </p>
@@ -89,6 +95,12 @@ function SchedulePage() {
           events.map((e) => <EventCard key={e.id} event={e} />)
         )}
       </div>
+
+      <img
+        src={ruumidBanner.url}
+        alt="Studio MindZi ruumid — registreerimine Fienta.com/studiomindz"
+        className="mt-8 w-full rounded-2xl"
+      />
     </main>
   );
 }

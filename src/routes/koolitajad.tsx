@@ -7,6 +7,7 @@ import {
   dayLabel,
   displayTime,
 } from "@/lib/events";
+import koolitajadBanner from "@/assets/koolitajad-programm-banner.png.asset.json";
 
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
@@ -38,7 +39,12 @@ const contactLink =
 function SpeakersPage() {
   return (
     <main className="px-4 pt-8">
-      <h1 className="text-2xl font-bold">Koolitajad &amp; materjalid</h1>
+      <img
+        src={koolitajadBanner.url}
+        alt="Tartu Ettevõtlusnädala koolitajad, 5.–9. oktoober Studio MindZis"
+        className="w-full rounded-2xl"
+      />
+      <h1 className="mt-4 text-2xl font-bold">Koolitajad &amp; materjalid</h1>
       <p className="mt-1 text-sm text-muted-foreground">
         Kontaktid ja materjalid leiad siit ka pärast koolitust.
       </p>
