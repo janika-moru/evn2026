@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Facebook, Globe, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import { SPEAKERS, speakerEventRows, dayLabel, displayTime } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
@@ -104,64 +103,38 @@ function SpeakersPage() {
                 </ul>
               )}
 
-              <div className="mt-4 flex flex-wrap gap-2">
-                {s.email && (
-                  <a
-                    href={`mailto:${s.email}`}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
-                  >
-                    <Mail className="size-4" /> Kirjuta
-                  </a>
-                )}
-                {s.linkedinUrl && (
-                  <a
-                    href={s.linkedinUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
-                  >
-                    <Linkedin className="size-4" /> LinkedIn
-                  </a>
-                )}
-                {s.instagramUrl && (
-                  <a
-                    href={s.instagramUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
-                  >
-                    <Instagram className="size-4" /> Instagram
-                  </a>
-                )}
-                {s.facebookUrl && (
-                  <a
-                    href={s.facebookUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
-                  >
-                    <Facebook className="size-4" /> Facebook
-                  </a>
-                )}
-                {s.websiteUrl && (
-                  <a
-                    href={s.websiteUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
-                  >
-                    <Globe className="size-4" /> Koduleht
-                  </a>
-                )}
-                {s.phone && (
-                  <a
-                    href={`tel:${s.phone.replaceAll(" ", "")}`}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
-                  >
-                    <Phone className="size-4" /> {s.phone}
-                  </a>
-                )}
-              </div>
+              {(s.email || s.websiteUrl || s.linkedinUrl) && (
+                <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                  {s.email && (
+                    <a
+                      href={`mailto:${s.email}`}
+                      className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground"
+                    >
+                      E-post
+                    </a>
+                  )}
+                  {s.websiteUrl && (
+                    <a
+                      href={s.websiteUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground"
+                    >
+                      Koduleht
+                    </a>
+                  )}
+                  {s.linkedinUrl && (
+                    <a
+                      href={s.linkedinUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground"
+                    >
+                      LinkedIn
+                    </a>
+                  )}
+                </div>
+              )}
             </article>
           );
         })}
