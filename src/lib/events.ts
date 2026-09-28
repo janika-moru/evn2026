@@ -690,20 +690,28 @@ export function speakerEventRows(speaker: Speaker): SpeakerEventRow[] {
   }
 
   for (const [url, events] of series) {
-    events.sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`));
-    const first = events[0];
+    const sorted = [...events].sort((a, b) =>
+      `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`),
+    );
+    const first = sorted[0];
+    const last = sorted[sorted.length - 1];
+    if (!first) continue;
     const shortTitle = first.title.split(":")[0].trim();
     const label =
-      events.length > 1
-        ? `${shortTitle} — ${dayLabel(first.date)}–${dayLabel(events[events.length - 1].date)}`
+      sorted.length > 1 && last
+        ? `${shortTitle} — ${dayLabel(first.date)}–${dayLabel(last.date)}`
         : first.title;
-    rows.push({ kind: "series", title: label, url, events });
+    rows.push({ kind: "series", title: label, url, events: sorted });
   }
 
   return rows.sort((a, b) => {
-    const keyA = a.kind === "single" ? `${a.event.date}T${a.event.startTime}` : `${a.events[0].date}T${a.events[0].startTime}`;
-    const keyB = b.kind === "single" ? `${b.event.date}T${b.event.startTime}` : `${b.events[0].date}T${b.events[0].startTime}`;
-    return keyA.localeCompare(keyB);
+    const firstOf = (row: SpeakerEventRow) =>
+      row.kind === "single" ? row.event : row.events[0];
+    const key = (row: SpeakerEventRow) => {
+      const event = firstOf(row);
+      return event ? `${event.date}T${event.startTime}` : "";
+    };
+    return key(a).localeCompare(key(b));
   });
 }
 
