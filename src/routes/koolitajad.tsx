@@ -1,5 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { speakersInListOrder, speakerEventRows, dayLabel, displayTime } from "@/lib/events";
+import {
+  speakersInListOrder,
+  speakerEventRows,
+  isTeamSpeaker,
+  dayLabel,
+  displayTime,
+} from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
