@@ -210,7 +210,14 @@ function MaterialsSection({ events }: { events: EventItem[] }) {
               {e.title}
             </Link>
             <p className="mt-0.5 text-xs text-muted-foreground">{e.speaker}</p>
-            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5">
+            <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1.5">
+              <Link
+                to="/tagasiside"
+                search={{ sundmus: e.id }}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
+              >
+                <MessageSquareHeart className="size-3.5" /> Anna tagasisidet
+              </Link>
               {e.slidesUrl && (
                 <a
                   href={e.slidesUrl}
@@ -241,7 +248,6 @@ function MaterialsSection({ events }: { events: EventItem[] }) {
 
 function MyScheduleEvent({ event }: { event: EventItem }) {
   const speakers = speakersForEvent(event.id);
-  const hasLinks = speakers.length > 0 || event.slidesUrl || event.materialsUrl;
 
   return (
     <div>
