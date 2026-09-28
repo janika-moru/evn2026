@@ -39,6 +39,7 @@ export interface Speaker {
   websiteUrl?: string;
   linkedinUrl?: string;
   instagramUrl?: string;
+  facebookUrl?: string;
   eventIds: string[];
 }
 
