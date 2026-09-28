@@ -663,15 +663,20 @@ export function speakersForEvent(eventId: string): Speaker[] {
   return SPEAKERS.filter((speaker) => speaker.eventIds.includes(eventId));
 }
 
-/** Koolitajate lehe järjekord: eesnime järgi, erandina kõige ees Kiia Paal (mitu sündmust). */
-const PINNED_SPEAKER_IDS = ["kiia-paal"];
+/** Koolitajate lehe järjekord: eesnime järgi, erandina kõige ees Studio MindZ tiim (Kiia, Janika). */
+const PINNED_SPEAKER_IDS = ["kiia-paal", "janika-moru"];
+
+/** Studio MindZ tiimiliikmed — märgistatakse koolitajate nimekirjas. */
+export const TEAM_SPEAKER_IDS = PINNED_SPEAKER_IDS;
 
 function firstName(name: string): string {
   return name.split(" ")[0] ?? name;
 }
 
 export function speakersInListOrder(): Speaker[] {
-  const pinned = SPEAKERS.filter((s) => PINNED_SPEAKER_IDS.includes(s.id));
+  const pinned = PINNED_SPEAKER_IDS.map((id) => SPEAKERS.find((s) => s.id === id)).filter(
+    (s): s is Speaker => Boolean(s),
+  );
   const rest = SPEAKERS.filter((s) => !PINNED_SPEAKER_IDS.includes(s.id)).sort((a, b) => {
     const byFirstName = firstName(a.name).localeCompare(firstName(b.name), "et");
     return byFirstName !== 0 ? byFirstName : a.name.localeCompare(b.name, "et");
