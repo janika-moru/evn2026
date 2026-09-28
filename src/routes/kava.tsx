@@ -63,7 +63,7 @@ function SchedulePage() {
       <div
         role="tablist"
         aria-label="Vali päev"
-        className="no-scrollbar -mx-4 mt-4 flex gap-2 overflow-x-auto px-4 pb-1"
+        className="mt-4 grid grid-cols-5 gap-1.5 pb-1"
       >
         {EVENT_DAYS.map((d) => {
           const active = d.date === selected;
@@ -75,7 +75,7 @@ function SchedulePage() {
               onClick={() =>
                 navigate({ to: "/kava", search: { paev: d.date }, replace: true })
               }
-              className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${
+              className={`rounded-full px-1 py-2.5 text-center text-[13px] font-semibold transition-colors ${
                 active
                   ? "bg-primary text-primary-foreground"
                   : "bg-secondary text-secondary-foreground"
