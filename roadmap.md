@@ -20,4 +20,4 @@
 - [x] Koolitajate leht: kaardid eesnime järgi tähestikus, Kiia Paal erandina kõige ees
 - [x] Studio MindZ tiim (Kiia, Janika): nimekirja alguses, roheka tausta ja rohelise „Studio MindZ tiim" märgiga (ainult koolitajate lehel)
 - [x] Info leht: „Meie tiim" pallikeste rida (Kiia, Janika, Selje, Liisi) — Kiia ja Janika avavad profiili
-- [ ] Selje ja Liisi: pildid + sihtkohad nimede klõpsamiseks (oodkab kasutajalt)
+- [ ] Selje ja Liisi: pildid + sihtkohad nimede klõpsamiseks (oodab kasutajalt)
