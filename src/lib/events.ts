@@ -638,8 +638,8 @@ export function eventsForDate(date: string): EventItem[] {
   );
 }
 
-export function registeredEvents(): EventItem[] {
-  return EVENTS.filter((e) => e.registrationStatus === "registered");
+export function getEventByFientaId(fientaId: string): EventItem | undefined {
+  return EVENTS.find((e) => e.fientaEventId === fientaId);
 }
 
 /** Päeva label, nt "E 5.10" */

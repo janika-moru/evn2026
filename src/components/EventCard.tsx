@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Clock, CheckCircle2 } from "lucide-react";
 import type { EventItem } from "@/lib/events";
 import { statusLabel } from "@/lib/events";
+import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 
 export function StatusBadge({ status }: { status: EventItem["registrationStatus"] }) {
   if (status === "registered") {
@@ -23,7 +24,9 @@ export function StatusBadge({ status }: { status: EventItem["registrationStatus"
 }
 
 export function EventCard({ event }: { event: EventItem }) {
-  const registered = event.registrationStatus === "registered";
+  const { ids } = useMyRegistrations();
+  const status = effectiveStatus(event, ids);
+  const registered = status === "registered";
 
   return (
     <Link
@@ -47,8 +50,8 @@ export function EventCard({ event }: { event: EventItem }) {
         </div>
       </div>
       <div className="mt-3 flex items-center justify-between gap-2">
-        <StatusBadge status={event.registrationStatus} />
-        {event.registrationStatus === "open" && (
+        <StatusBadge status={status} />
+        {status === "open" && (
           <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
             Registreeru
           </span>

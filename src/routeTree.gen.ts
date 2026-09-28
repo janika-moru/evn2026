@@ -16,6 +16,7 @@ import { Route as KoolitajadRouteImport } from './routes/koolitajad'
 import { Route as MinuKavaRouteImport } from './routes/minu-kava'
 import { Route as TagasisideRouteImport } from './routes/tagasiside'
 import { Route as SundmusIdRouteImport } from './routes/sundmus.$id'
+import { Route as ApiPublicFientaWebhookRouteImport } from './routes/api/public/fienta-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const SundmusIdRoute = SundmusIdRouteImport.update({
   path: '/sundmus/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicFientaWebhookRoute = ApiPublicFientaWebhookRouteImport.update({
+  id: '/api/public/fienta-webhook',
+  path: '/api/public/fienta-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/minu-kava': typeof MinuKavaRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
+  '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/minu-kava': typeof MinuKavaRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
+  '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/minu-kava': typeof MinuKavaRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
+  '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/minu-kava'
     | '/tagasiside'
     | '/sundmus/$id'
+    | '/api/public/fienta-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/minu-kava'
     | '/tagasiside'
     | '/sundmus/$id'
+    | '/api/public/fienta-webhook'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/minu-kava'
     | '/tagasiside'
     | '/sundmus/$id'
+    | '/api/public/fienta-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   MinuKavaRoute: typeof MinuKavaRoute
   TagasisideRoute: typeof TagasisideRoute
   SundmusIdRoute: typeof SundmusIdRoute
+  ApiPublicFientaWebhookRoute: typeof ApiPublicFientaWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SundmusIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/fienta-webhook': {
+      id: '/api/public/fienta-webhook'
+      path: '/api/public/fienta-webhook'
+      fullPath: '/api/public/fienta-webhook'
+      preLoaderRoute: typeof ApiPublicFientaWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   MinuKavaRoute: MinuKavaRoute,
   TagasisideRoute: TagasisideRoute,
   SundmusIdRoute: SundmusIdRoute,
+  ApiPublicFientaWebhookRoute: ApiPublicFientaWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
