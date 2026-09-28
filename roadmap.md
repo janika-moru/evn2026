@@ -19,5 +19,6 @@
 - [x] Janika Mõru portree vahetatud uue pildi vastu (janika-hele-portree.jpg)
 - [x] Koolitajate leht: kaardid eesnime järgi tähestikus, Kiia Paal erandina kõige ees
 - [x] Studio MindZ tiim (Kiia, Janika): nimekirja alguses, roheka tausta ja rohelise „Studio MindZ tiim" märgiga (ainult koolitajate lehel)
-- [x] Info leht: „Meie tiim" pallikeste rida (Kiia, Janika, Selje, Liisi) — Kiia ja Janika avavad profiili
-- [ ] Selje ja Liisi: pildid + sihtkohad nimede klõpsamiseks (oodab kasutajalt)
+- [x] Info leht: „Studio MindZ meeskond" pallikeste rida (Kiia, Janika, Selje, Liisi) — roheka taustaga, kõigil pilt
+- [x] Kiia, Selje, Liisi pildid lõigatud ruutu nii, et nägu keskel
+- [ ] Selje ja Liisi: sihtkohad nimede klõpsamiseks (oodab kasutajalt)

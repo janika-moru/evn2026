@@ -146,8 +146,8 @@ function InfoPage() {
         </Link>
       </section>
 
-      <section className="mt-4 rounded-2xl border border-border bg-card p-4">
-        <p className="text-sm font-semibold">Meie tiim</p>
+      <section className="mt-4 rounded-2xl border border-primary/25 bg-mindz-mint p-4">
+        <p className="text-sm font-semibold">Studio MindZ meeskond</p>
         <div className="mt-3 grid grid-cols-4 gap-2">
           {teamMembers().map((member) => {
             const cell = (

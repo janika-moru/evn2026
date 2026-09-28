@@ -1,6 +1,11 @@
 // Keskmne sündmuste andmemudel — sisu ja UI on eraldi.
 // Päris andmed Fienta ametlikust avalikust API-st (organizer 33715), seisuga 28.09.2026.
 
+import kiiaPaalPhoto from "@/assets/kiia-paal.jpg.asset.json";
+import liisiPhoto from "@/assets/liisi.jpg.asset.json";
+import seljePhoto from "@/assets/selje.jpg.asset.json";
+
+
 export type RegistrationStatus =
   | "open" // Registreeru
   | "registered" // Oled registreerunud ✓
@@ -455,6 +460,7 @@ export const SPEAKERS: Speaker[] = [
   {
     "id": "kiia-paal",
     "name": "Kiia Paal",
+    "imageUrl": kiiaPaalPhoto.url,
     "role": "",
     "bio": "",
     "eventIds": [
@@ -679,13 +685,15 @@ export type TeamMember = {
   name: string;
   /** Koolitaja profiil koolitajate lehel, kui inimene ka koolitab. */
   speakerId?: string;
+  /** oma pilt, kui inimesel pole koolitaja profiili */
+  imageUrl?: string;
 };
 
 export const TEAM: TeamMember[] = [
   { id: "kiia", name: "Kiia Paal", speakerId: "kiia-paal" },
   { id: "janika", name: "Janika Mõru", speakerId: "janika-moru" },
-  { id: "selje", name: "Selje" },
-  { id: "liisi", name: "Liisi" },
+  { id: "selje", name: "Selje", imageUrl: seljePhoto.url },
+  { id: "liisi", name: "Liisi", imageUrl: liisiPhoto.url },
 ];
 
 /** Tiimi liikmed koos piltidega, kui need on olemas. */
@@ -694,7 +702,8 @@ export function teamMembers(): (TeamMember & { imageUrl?: string })[] {
     const speaker = member.speakerId
       ? SPEAKERS.find((s) => s.id === member.speakerId)
       : undefined;
-    return speaker?.imageUrl ? { ...member, imageUrl: speaker.imageUrl } : member;
+    const imageUrl = member.imageUrl ?? speaker?.imageUrl;
+    return imageUrl ? { ...member, imageUrl } : member;
   });
 }
 
