@@ -2,9 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { EventCard } from "@/components/EventCard";
 import { EVENT_DAYS, eventsForDate, todayEventDate } from "@/lib/events";
 
-const validateSearch = (search: Record<string, unknown>): { paev?: string } => ({
-  paev: typeof search["paev"] === "string" ? (search["paev"] as string) : undefined,
-});
+const validateSearch = (search: Record<string, unknown>): { paev?: string } =>
+  typeof search["paev"] === "string" ? { paev: search["paev"] as string } : {};
 
 export const Route = createFileRoute("/kava")({
   validateSearch,
