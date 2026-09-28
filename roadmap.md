@@ -1,5 +1,5 @@
 # Roadmap
 
-- [ ] Tagasiside alumise menüü viiendaks punktiks; hõljuv nupp eemaldada
-- [ ] „Täna“ leht eemaldada; `/` suunab Kava lehele
-- [ ] Kava ülaossa „Järgmine sündmus“ plokk, selle alla päevade valikuriba
+- [x] Tagasiside alumise menüü punktiks; hõljuv nupp eemaldatud
+- [x] „Täna“ leht eemaldatud; `/` suunab Kava lehele
+- [x] Kava ülaosas „Järgmine sündmus“ plokk, selle all päevade valikuriba
