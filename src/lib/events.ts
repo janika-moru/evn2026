@@ -672,9 +672,10 @@ function firstName(name: string): string {
 
 export function speakersInListOrder(): Speaker[] {
   const pinned = SPEAKERS.filter((s) => PINNED_SPEAKER_IDS.includes(s.id));
-  const rest = SPEAKERS.filter((s) => !PINNED_SPEAKER_IDS.includes(s.id)).sort((a, b) =>
-    firstName(a.name).localeCompare(firstName(b.name), "et"),
-  );
+  const rest = SPEAKERS.filter((s) => !PINNED_SPEAKER_IDS.includes(s.id)).sort((a, b) => {
+    const byFirstName = firstName(a.name).localeCompare(firstName(b.name), "et");
+    return byFirstName !== 0 ? byFirstName : a.name.localeCompare(b.name, "et");
+  });
   return [...pinned, ...rest];
 }
 
