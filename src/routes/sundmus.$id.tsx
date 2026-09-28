@@ -86,7 +86,7 @@ function EventDetailPage() {
       <div className="mt-6 space-y-3">
         {open && (
           <a
-            href={event.fientaUrl}
+            href={event.registrationUrl}
             target="_blank"
             rel="noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
