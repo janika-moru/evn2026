@@ -3,7 +3,6 @@ import {
   MapPin,
   Navigation,
   Users,
-  MessageSquareHeart,
   Footprints,
   Car,
   Sparkles,
@@ -139,17 +138,10 @@ function InfoPage() {
       <section className="mt-8 grid gap-3">
         <Link
           to="/koolitajad"
-          className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4"
+          className="flex items-center gap-3 rounded-2xl border border-mindz-pink bg-mindz-pink p-4"
         >
-          <Users className="size-5 text-primary" />
-          <span className="text-sm font-semibold">Koolitajad &amp; materjalid</span>
-        </Link>
-        <Link
-          to="/tagasiside"
-          className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4"
-        >
-          <MessageSquareHeart className="size-5 text-primary" />
-          <span className="text-sm font-semibold">Anna tagasisidet</span>
+          <Users className="size-5 text-foreground" />
+          <span className="text-sm font-semibold text-foreground">Koolitajad &amp; materjalid</span>
         </Link>
       </section>
     </main>
