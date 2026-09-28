@@ -116,6 +116,16 @@ function SpeakersPage() {
                     <Instagram className="size-4" /> Instagram
                   </a>
                 )}
+                {s.facebookUrl && (
+                  <a
+                    href={s.facebookUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
+                  >
+                    <Facebook className="size-4" /> Facebook
+                  </a>
+                )}
                 {s.websiteUrl && (
                   <a
                     href={s.websiteUrl}
