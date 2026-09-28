@@ -41,6 +41,7 @@ export type Database = {
       feedback: {
         Row: {
           attachment_url: string | null
+          change_text: string | null
           comment: string | null
           contact: string | null
           contact_requested: boolean
@@ -48,13 +49,17 @@ export type Database = {
           event_id: string | null
           feedback_type: string
           id: string
+          keep_text: string | null
           message: string | null
           needs_help: boolean
           rating: number | null
+          respondent_field: string | null
+          respondent_name: string | null
           status: string
         }
         Insert: {
           attachment_url?: string | null
+          change_text?: string | null
           comment?: string | null
           contact?: string | null
           contact_requested?: boolean
@@ -62,13 +67,17 @@ export type Database = {
           event_id?: string | null
           feedback_type?: string
           id?: string
+          keep_text?: string | null
           message?: string | null
           needs_help?: boolean
           rating?: number | null
+          respondent_field?: string | null
+          respondent_name?: string | null
           status?: string
         }
         Update: {
           attachment_url?: string | null
+          change_text?: string | null
           comment?: string | null
           contact?: string | null
           contact_requested?: boolean
@@ -76,9 +85,12 @@ export type Database = {
           event_id?: string | null
           feedback_type?: string
           id?: string
+          keep_text?: string | null
           message?: string | null
           needs_help?: boolean
           rating?: number | null
+          respondent_field?: string | null
+          respondent_name?: string | null
           status?: string
         }
         Relationships: []
