@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Facebook, Globe, Instagram, Linkedin, Mail, Phone } from "lucide-react";
-import { SPEAKERS, getEvent, dayLabel } from "@/lib/events";
+import { SPEAKERS, speakerEventRows, dayLabel } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
@@ -43,7 +43,7 @@ function SpeakersPage() {
 
       <div className="mt-5 space-y-4">
         {SPEAKERS.map((s) => {
-          const events = s.eventIds.map(getEvent).filter(Boolean);
+          const rows = speakerEventRows(s);
           return (
             <article id={s.id} key={s.id} className="scroll-mt-6 rounded-2xl border border-border bg-card p-4">
               <div className="flex items-center gap-3">
@@ -68,22 +68,39 @@ function SpeakersPage() {
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.bio}</p>
               )}
 
-              {events.length > 0 && (
+              {rows.length > 0 && (
                 <ul className="mt-3 space-y-1.5">
-                  {events.map((e) => (
-                    <li key={e!.id}>
-                      <Link
-                        to="/sundmus/$id"
-                        params={{ id: e!.id }}
-                        className="text-sm font-medium text-primary underline underline-offset-2"
-                      >
-                        {e!.title}
-                      </Link>
-                      <span className="block text-xs text-muted-foreground">
-                        {dayLabel(e!.date)} · {e!.startTime}
-                      </span>
-                    </li>
-                  ))}
+                  {rows.map((row) =>
+                    row.kind === "series" ? (
+                      <li key={row.url}>
+                        <a
+                          href={row.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-sm font-medium text-primary underline underline-offset-2"
+                        >
+                          {row.title}
+                        </a>
+                        <span className="block text-xs text-muted-foreground">
+                          {row.events.length} hommikust sessiooni · kell{" "}
+                          {row.events[0]!.startTime}
+                        </span>
+                      </li>
+                    ) : (
+                      <li key={row.event.id}>
+                        <Link
+                          to="/sundmus/$id"
+                          params={{ id: row.event.id }}
+                          className="text-sm font-medium text-primary underline underline-offset-2"
+                        >
+                          {row.event.title}
+                        </Link>
+                        <span className="block text-xs text-muted-foreground">
+                          {dayLabel(row.event.date)} · {row.event.startTime}
+                        </span>
+                      </li>
+                    ),
+                  )}
                 </ul>
               )}
 

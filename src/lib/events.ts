@@ -25,6 +25,7 @@ export interface EventItem {
   icalUrl?: string;
   slidesUrl?: string;
   materialsUrl?: string;
+  seriesUrl?: string; // Korduvate sessioonide seeria leht Fientas
   registrationStatus: RegistrationStatus;
 }
 
@@ -65,6 +66,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kiia-morning-mindset-kiia-paal-studio-mindzis-05-10",
     "registrationUrl": "https://fienta.com/kiia-morning-mindset-kiia-paal-studio-mindzis-05-10",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -141,6 +143,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/morning-mindset-06-10-studio-mindzis",
     "registrationUrl": "https://fienta.com/morning-mindset-06-10-studio-mindzis",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -216,6 +219,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/morning-mindset-07-10-studio-mindzis",
     "registrationUrl": "https://fienta.com/morning-mindset-07-10-studio-mindzis",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -291,6 +295,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/morning-mindset-08-10-studio-mindzis",
     "registrationUrl": "https://fienta.com/morning-mindset-08-10-studio-mindzis",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -366,6 +371,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/morning-mindset-09-10-studio-mindzis",
     "registrationUrl": "https://fienta.com/morning-mindset-09-10-studio-mindzis",
+    "seriesUrl": "https://fienta.com/et/s/kiia-morning-mindset-kiia-paal-studio-mindzis",
     "registrationStatus": "open"
   },
   {
@@ -656,6 +662,57 @@ export function getEventByFientaId(fientaId: string): EventItem | undefined {
 
 export function speakersForEvent(eventId: string): Speaker[] {
   return SPEAKERS.filter((speaker) => speaker.eventIds.includes(eventId));
+}
+
+/** Koolitaja sündmuste nimekirja rida — korduvad sessioonid on ühendatud seeriaks. */
+export type SpeakerEventRow =
+  | { kind: "single"; event: EventItem }
+  | { kind: "series"; title: string; url: string; events: EventItem[] };
+
+/**
+ * Koolitaja sündmused ridadena: samasse seeriasse kuuluvad sessioonid
+ * (nt hommikune Morning Mindset) kuvatakse ühe reale lingiga seeria lehele.
+ */
+export function speakerEventRows(speaker: Speaker): SpeakerEventRow[] {
+  const rows: SpeakerEventRow[] = [];
+  const series = new Map<string, EventItem[]>();
+
+  for (const id of speaker.eventIds) {
+    const event = getEvent(id);
+    if (!event) continue;
+    if (event.seriesUrl) {
+      const bucket = series.get(event.seriesUrl) ?? [];
+      bucket.push(event);
+      series.set(event.seriesUrl, bucket);
+      continue;
+    }
+    rows.push({ kind: "single", event });
+  }
+
+  for (const [url, events] of series) {
+    const sorted = [...events].sort((a, b) =>
+      `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`),
+    );
+    const first = sorted[0];
+    const last = sorted[sorted.length - 1];
+    if (!first) continue;
+    const shortTitle = (first.title.split(":")[0] ?? first.title).trim();
+    const label =
+      sorted.length > 1 && last
+        ? `${shortTitle} — ${dayLabel(first.date)}–${dayLabel(last.date)}`
+        : first.title;
+    rows.push({ kind: "series", title: label, url, events: sorted });
+  }
+
+  return rows.sort((a, b) => {
+    const firstOf = (row: SpeakerEventRow) =>
+      row.kind === "single" ? row.event : row.events[0];
+    const key = (row: SpeakerEventRow) => {
+      const event = firstOf(row);
+      return event ? `${event.date}T${event.startTime}` : "";
+    };
+    return key(a).localeCompare(key(b));
+  });
 }
 
 /** Päeva label, nt "E 5.10" */
