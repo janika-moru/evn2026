@@ -38,15 +38,117 @@ export type Database = {
         }
         Relationships: []
       }
+      registrations: {
+        Row: {
+          attendee_name: string | null
+          created_at: string
+          dedupe_key: string
+          email_normalized: string
+          fienta_event_id: string
+          fienta_order_id: string | null
+          fienta_ticket_id: string | null
+          id: string
+          raw_payload: Json | null
+          source: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          attendee_name?: string | null
+          created_at?: string
+          dedupe_key: string
+          email_normalized: string
+          fienta_event_id: string
+          fienta_order_id?: string | null
+          fienta_ticket_id?: string | null
+          id?: string
+          raw_payload?: Json | null
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          attendee_name?: string | null
+          created_at?: string
+          dedupe_key?: string
+          email_normalized?: string
+          fienta_event_id?: string
+          fienta_order_id?: string | null
+          fienta_ticket_id?: string | null
+          id?: string
+          raw_payload?: Json | null
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      webhook_logs: {
+        Row: {
+          email_normalized: string | null
+          error: string | null
+          event_found: boolean | null
+          fienta_event_id: string | null
+          id: string
+          raw_payload: Json | null
+          received_at: string
+          source: string
+        }
+        Insert: {
+          email_normalized?: string | null
+          error?: string | null
+          event_found?: boolean | null
+          fienta_event_id?: string | null
+          id?: string
+          raw_payload?: Json | null
+          received_at?: string
+          source?: string
+        }
+        Update: {
+          email_normalized?: string | null
+          error?: string | null
+          event_found?: boolean | null
+          fienta_event_id?: string | null
+          id?: string
+          raw_payload?: Json | null
+          received_at?: string
+          source?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -173,6 +275,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const

@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, CalendarPlus, Clock, MapPin, MessageSquareHeart, FileText, ExternalLink } from "lucide-react";
 import { StatusBadge } from "@/components/EventCard";
+import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { getEvent, longDate, dayLabel, type EventItem } from "@/lib/events";
 
 export const Route = createFileRoute("/sundmus/$id")({
@@ -50,7 +51,9 @@ function icsHref(event: EventItem): string {
 
 function EventDetailPage() {
   const { event } = Route.useLoaderData();
-  const open = event.registrationStatus === "open";
+  const { ids } = useMyRegistrations();
+  const status = effectiveStatus(event, ids);
+  const open = status === "open";
 
   return (
     <main className="px-4 pt-6">
@@ -78,7 +81,7 @@ function EventDetailPage() {
       </div>
 
       <div className="mt-4">
-        <StatusBadge status={event.registrationStatus} />
+        <StatusBadge status={status} />
       </div>
 
       <p className="mt-5 whitespace-pre-line leading-relaxed text-foreground/90">{event.description}</p>
@@ -94,7 +97,7 @@ function EventDetailPage() {
             Registreeru Fientas <ExternalLink className="size-4" />
           </a>
         )}
-        {event.registrationStatus === "registered" && (
+        {status === "registered" && (
           <p className="rounded-2xl border border-primary/40 bg-secondary/40 p-4 text-center text-sm font-semibold text-primary">
             Oled sellele sündmusele registreerunud ✓
           </p>
