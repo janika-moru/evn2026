@@ -169,6 +169,7 @@ function SignedIn({ email }: { email: string }) {
               </div>
             </section>
           ))}
+          <MaterialsSection events={mine.filter((e) => e.slidesUrl || e.materialsUrl)} />
           <button
             onClick={() => query.refetch()}
             className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
@@ -178,6 +179,63 @@ function SignedIn({ email }: { email: string }) {
         </>
       )}
     </>
+  );
+}
+
+function MaterialsSection({ events }: { events: EventItem[] }) {
+  if (events.length === 0) return null;
+  const sorted = [...events].sort((a, b) => {
+    if (a.date !== b.date) return a.date.localeCompare(b.date);
+    return a.startTime.localeCompare(b.startTime);
+  });
+
+  return (
+    <section className="mt-8 rounded-2xl border border-border bg-card p-4">
+      <h2 className="text-base font-semibold">Koolitajate slaidid ja materjalid</h2>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Siin on kõigi sinu koolituste materjalid ühes kohas. Kui slaidid pole veel lisatud,
+        palun tule hiljem tagasi — need ilmuvad siia niipea, kui koolitajad need jagavad.
+      </p>
+      <div className="mt-3 space-y-3">
+        {sorted.map((e) => (
+          <div key={e.id} className="rounded-xl border border-border bg-background p-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              {longDate(e.date)} · {e.startTime}–{e.endTime}
+            </p>
+            <Link
+              to="/sundmus/$id"
+              params={{ id: e.id }}
+              className="mt-0.5 block text-sm font-semibold leading-snug"
+            >
+              {e.title}
+            </Link>
+            <p className="mt-0.5 text-xs text-muted-foreground">{e.speaker}</p>
+            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5">
+              {e.slidesUrl && (
+                <a
+                  href={e.slidesUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+                >
+                  <FileText className="size-4" /> Vaata slaide
+                </a>
+              )}
+              {e.materialsUrl && (
+                <a
+                  href={e.materialsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+                >
+                  <FileText className="size-4" /> Materjalid
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
