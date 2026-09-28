@@ -5,6 +5,17 @@ import { statusLabel } from "@/lib/events";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
 
+/** Kohad on otsas — brändi roosas toonis, registreerumise nupu asemel. */
+export function SoldOutPill({ className = "" }: { className?: string }) {
+  return (
+    <span
+      className={`inline-flex items-center justify-center rounded-full bg-mindz-pink px-4 py-2 text-sm font-semibold text-foreground ${className}`}
+    >
+      Välja müüdud
+    </span>
+  );
+}
+
 export function StatusBadge({ status }: { status: EventItem["registrationStatus"] }) {
   if (status === "registered") {
     return (
@@ -14,13 +25,14 @@ export function StatusBadge({ status }: { status: EventItem["registrationStatus"
       </span>
     );
   }
-  if (status === "full" || status === "closed") {
+  if (status === "closed") {
     return (
       <span className="inline-flex items-center rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
         {statusLabel(status)}
       </span>
     );
   }
+  // "full" kuvatakse SoldOutPill-ina, "open" ei vaja eraldi märki.
   return null;
 }
 
@@ -56,14 +68,13 @@ export function EventCard({ event }: { event: EventItem }) {
         <StatusBadge status={displayStatus} />
         {displayStatus === "open" && (
           <span className="ml-auto flex items-center gap-3">
-            <span className="text-sm font-semibold text-primary">
-              Vabu kohti: {availableSpots ?? 50}
-            </span>
+            <span className="text-sm text-primary">Vabu kohti: {availableSpots ?? 50}</span>
             <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
               Registreeru
             </span>
           </span>
         )}
+        {displayStatus === "full" && <SoldOutPill className="ml-auto" />}
       </div>
     </Link>
   );

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, CalendarPlus, Clock, MapPin, MessageSquareHeart, FileText } from "lucide-react";
-import { StatusBadge } from "@/components/EventCard";
+import { StatusBadge, SoldOutPill } from "@/components/EventCard";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
 import { getEvent, longDate, dayLabel, type EventItem } from "@/lib/events";
@@ -83,9 +83,11 @@ function EventDetailPage() {
         </span>
       </div>
 
-      <div className="mt-4">
-        <StatusBadge status={displayStatus} />
-      </div>
+      {displayStatus !== "full" && (
+        <div className="mt-4">
+          <StatusBadge status={displayStatus} />
+        </div>
+      )}
 
       <p className="mt-5 whitespace-pre-line leading-relaxed text-foreground/90">{event.description}</p>
 
@@ -98,11 +100,10 @@ function EventDetailPage() {
             >
               Registreeru
             </a>
-            <span className="shrink-0 text-sm font-semibold text-primary">
-              Vabu kohti: {availableSpots ?? 50}
-            </span>
+            <span className="shrink-0 text-sm text-primary">Vabu kohti: {availableSpots ?? 50}</span>
           </div>
         )}
+        {displayStatus === "full" && <SoldOutPill className="w-full py-3.5 text-base" />}
         {status === "registered" && (
           <p className="rounded-2xl border border-primary/40 bg-secondary/40 p-4 text-center text-sm font-semibold text-primary">
             Oled sellele sündmusele registreerunud ✓
