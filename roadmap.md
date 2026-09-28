@@ -8,3 +8,5 @@
 - [x] „Minu kava“ sündmustel koolitaja profiili ning slaidide ja materjalide lingid
 - [x] Info lehele „Kohale tulek“ alla Studio MindZi sissepääsu pilt
 - [x] Minu kava: eraldi sektsioon „Koolitajate slaidid ja materjalid" (ainult registreeritud sündmused, lingid jäävad ka sündmuse alla)
+- [x] Janika Mõru pilt ja kontaktid lisatud (e-post, telefon, koduleht, LinkedIn, Facebook, slaidid)
+- [ ] Koolitajate kontaktid/pildid — ülejäänud koolitajad (andmed kasutajalt)

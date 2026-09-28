@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Globe, Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import { Facebook, Globe, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import { SPEAKERS, getEvent, dayLabel } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
@@ -114,6 +114,16 @@ function SpeakersPage() {
                     className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
                   >
                     <Instagram className="size-4" /> Instagram
+                  </a>
+                )}
+                {s.facebookUrl && (
+                  <a
+                    href={s.facebookUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-sm font-semibold"
+                  >
+                    <Facebook className="size-4" /> Facebook
                   </a>
                 )}
                 {s.websiteUrl && (
