@@ -673,8 +673,43 @@ export function isTeamSpeaker(speaker: Speaker): boolean {
   return TEAM_SPEAKER_IDS.includes(speaker.id);
 }
 
-function firstName(name: string): string {
+/** Studio MindZ tiim — Info lehe pallikeste rida. */
+export type TeamMember = {
+  id: string;
+  name: string;
+  /** Koolitaja profiil koolitajate lehel, kui inimene ka koolitab. */
+  speakerId?: string;
+};
+
+export const TEAM: TeamMember[] = [
+  { id: "kiia", name: "Kiia Paal", speakerId: "kiia-paal" },
+  { id: "janika", name: "Janika Mõru", speakerId: "janika-moru" },
+  { id: "selje", name: "Selje" },
+  { id: "liisi", name: "Liisi" },
+];
+
+/** Tiimi liikmed koos piltidega, kui need on olemas. */
+export function teamMembers(): (TeamMember & { imageUrl?: string })[] {
+  return TEAM.map((member) => {
+    const speaker = member.speakerId
+      ? SPEAKERS.find((s) => s.id === member.speakerId)
+      : undefined;
+    return speaker?.imageUrl ? { ...member, imageUrl: speaker.imageUrl } : member;
+  });
+}
+
+/** Nime esimene sõna, nt „Kiia Paal" → „Kiia". */
+export function firstName(name: string): string {
   return name.split(" ")[0] ?? name;
+}
+
+/** Algustähed, nt „Kiia Paal" → „KP". */
+export function initials(name: string): string {
+  return name
+    .split(" ")
+    .slice(0, 2)
+    .map((part) => part[0] ?? "")
+    .join("");
 }
 
 export function speakersInListOrder(): Speaker[] {

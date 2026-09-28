@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import { firstName, initials, teamMembers } from "@/lib/events";
 import directionsImage from "@/assets/studio-mindz-sissepaas.jpg.asset.json";
 
 /** Kohale tuleku juhise pilt. */
@@ -143,6 +144,45 @@ function InfoPage() {
           <Users className="size-5 text-foreground" />
           <span className="text-sm font-semibold text-foreground">Koolitajad &amp; materjalid</span>
         </Link>
+      </section>
+
+      <section className="mt-4 rounded-2xl border border-border bg-card p-4">
+        <p className="text-sm font-semibold">Meie tiim</p>
+        <div className="mt-3 grid grid-cols-4 gap-2">
+          {teamMembers().map((member) => {
+            const cell = (
+              <>
+                {member.imageUrl ? (
+                  <img
+                    src={member.imageUrl}
+                    alt={member.name}
+                    className="size-14 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex size-14 items-center justify-center rounded-full bg-secondary text-base font-semibold">
+                    {initials(member.name)}
+                  </div>
+                )}
+                <span className="text-xs font-medium">{firstName(member.name)}</span>
+              </>
+            );
+            const className = "flex flex-col items-center gap-1.5";
+            return member.speakerId ? (
+              <Link
+                key={member.id}
+                to="/koolitajad"
+                hash={member.speakerId}
+                className={className}
+              >
+                {cell}
+              </Link>
+            ) : (
+              <div key={member.id} className={className}>
+                {cell}
+              </div>
+            );
+          })}
+        </div>
       </section>
     </main>
   );
