@@ -498,12 +498,11 @@ export const SPEAKERS: Speaker[] = [
     "name": "Janika Mõru",
     "role": "",
     "bio": "",
-    "imageUrl": "/__l5e/assets-v1/f12ddec7-201e-40f6-929e-3588f80b79ff/janika-moru.jpg",
+    "imageUrl": "/__l5e/assets-v1/cc3a7c71-0e00-4a78-b819-41b01ac98a4f/janika-hele-portree.jpg",
     "email": "janika@assisto.ee",
     "phone": "5358 3234",
     "websiteUrl": "https://janikamoru.ee",
     "linkedinUrl": "https://www.linkedin.com/in/janika-moru/",
-    "facebookUrl": "https://www.facebook.com/Janika.Moru",
     "eventIds": [
       "202933"
     ]

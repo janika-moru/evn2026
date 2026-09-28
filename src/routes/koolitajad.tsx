@@ -32,6 +32,9 @@ function initials(name: string) {
     .join("");
 }
 
+const contactLink =
+  "text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground";
+
 function SpeakersPage() {
   return (
     <main className="px-4 pt-8">
@@ -103,34 +106,26 @@ function SpeakersPage() {
                 </ul>
               )}
 
-              {(s.email || s.websiteUrl || s.linkedinUrl) && (
+              {(s.websiteUrl || s.linkedinUrl || s.facebookUrl || s.instagramUrl) && (
                 <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-                  {s.email && (
-                    <a
-                      href={`mailto:${s.email}`}
-                      className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground"
-                    >
-                      E-post
-                    </a>
-                  )}
                   {s.websiteUrl && (
-                    <a
-                      href={s.websiteUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground"
-                    >
+                    <a href={s.websiteUrl} target="_blank" rel="noreferrer" className={contactLink}>
                       Koduleht
                     </a>
                   )}
                   {s.linkedinUrl && (
-                    <a
-                      href={s.linkedinUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground"
-                    >
+                    <a href={s.linkedinUrl} target="_blank" rel="noreferrer" className={contactLink}>
                       LinkedIn
+                    </a>
+                  )}
+                  {s.facebookUrl && (
+                    <a href={s.facebookUrl} target="_blank" rel="noreferrer" className={contactLink}>
+                      Facebook
+                    </a>
+                  )}
+                  {s.instagramUrl && (
+                    <a href={s.instagramUrl} target="_blank" rel="noreferrer" className={contactLink}>
+                      Instagram
                     </a>
                   )}
                 </div>
