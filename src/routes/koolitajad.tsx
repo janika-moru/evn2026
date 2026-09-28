@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Globe, Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import { Facebook, Globe, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import { SPEAKERS, getEvent, dayLabel } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
