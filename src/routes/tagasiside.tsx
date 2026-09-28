@@ -180,7 +180,14 @@ function FeedbackPage() {
             Lisa Google arvustus
           </a>
         </div>
+
+        <img
+          src={ruumidBanner.url}
+          alt="Studio MindZi ruumid — registreerimine Fienta.com/studiomindz"
+          className="mt-8 w-full rounded-2xl"
+        />
       </main>
+
     );
   }
 

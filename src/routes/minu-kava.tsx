@@ -45,7 +45,10 @@ function MySchedulePage() {
       ) : (
         <SignInCard />
       )}
+
+      <SpeakersTeamLinks />
     </main>
+
   );
 }
 
