@@ -663,6 +663,21 @@ export function speakersForEvent(eventId: string): Speaker[] {
   return SPEAKERS.filter((speaker) => speaker.eventIds.includes(eventId));
 }
 
+/** Koolitajate lehe järjekord: eesnime järgi, erandina kõige ees Kiia Paal (mitu sündmust). */
+const PINNED_SPEAKER_IDS = ["kiia-paal"];
+
+function firstName(name: string): string {
+  return name.split(" ")[0] ?? name;
+}
+
+export function speakersInListOrder(): Speaker[] {
+  const pinned = SPEAKERS.filter((s) => PINNED_SPEAKER_IDS.includes(s.id));
+  const rest = SPEAKERS.filter((s) => !PINNED_SPEAKER_IDS.includes(s.id)).sort((a, b) =>
+    firstName(a.name).localeCompare(firstName(b.name), "et"),
+  );
+  return [...pinned, ...rest];
+}
+
 /** Koolitaja sündmuste nimekirja rida — korduvad sessioonid on ühendatud seeriaks. */
 export type SpeakerEventRow =
   | { kind: "single"; event: EventItem }
