@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, CalendarPlus, Clock, MapPin, MessageSquareHeart, FileText, ExternalLink } from "lucide-react";
+import { ArrowLeft, CalendarPlus, Clock, MapPin, MessageSquareHeart, FileText } from "lucide-react";
 import { StatusBadge } from "@/components/EventCard";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { getEvent, longDate, dayLabel, type EventItem } from "@/lib/events";
@@ -90,11 +90,9 @@ function EventDetailPage() {
         {open && (
           <a
             href={event.registrationUrl}
-            target="_blank"
-            rel="noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
           >
-            Registreeru Fientas <ExternalLink className="size-4" />
+            Registreeru
           </a>
         )}
         {status === "registered" && (
