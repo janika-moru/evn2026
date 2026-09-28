@@ -673,6 +673,14 @@ export function nextEventOn(date: string, now = new Date()): EventItem | undefin
   return events.find((e) => e.startTime >= hhmm) ?? events[0];
 }
 
+/** Järgmine algav sündmus üle kogu kava, päris kuupäeva ja kellaaja järgi. */
+export function nextEvent(now = new Date()): EventItem | undefined {
+  const nowKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}T${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+  return [...EVENTS]
+    .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
+    .find((e) => `${e.date}T${e.startTime}` >= nowKey);
+}
+
 export function statusLabel(status: RegistrationStatus): string {
   switch (status) {
     case "open":
