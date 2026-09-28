@@ -56,6 +56,7 @@ function EventDetailPage() {
     <main className="px-4 pt-6">
       <Link
         to="/kava"
+        search={{}}
         className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground"
       >
         <ArrowLeft className="size-4" /> Tagasi kava juurde

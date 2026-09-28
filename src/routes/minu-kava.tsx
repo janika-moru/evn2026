@@ -151,6 +151,7 @@ function SignedIn({ email }: { email: string }) {
           </p>
           <Link
             to="/kava"
+            search={{}}
             className="mt-4 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
           >
             Vaata kava

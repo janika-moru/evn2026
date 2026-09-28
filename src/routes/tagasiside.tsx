@@ -4,8 +4,8 @@ import { CheckCircle2, Star } from "lucide-react";
 import { EVENTS, getEvent } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 
-const validateSearch = (search: Record<string, unknown>) => ({
-  sundmus: typeof search.sundmus === "string" ? search.sundmus : undefined,
+const validateSearch = (search: Record<string, unknown>): { sundmus?: string } => ({
+  sundmus: typeof search["sundmus"] === "string" ? (search["sundmus"] as string) : undefined,
 });
 
 export const Route = createFileRoute("/tagasiside")({
