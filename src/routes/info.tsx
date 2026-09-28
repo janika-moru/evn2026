@@ -1,14 +1,42 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MapPin, Navigation, Users, MessageSquareHeart } from "lucide-react";
+import {
+  MapPin,
+  Navigation,
+  Users,
+  MessageSquareHeart,
+  Footprints,
+  Car,
+  Sparkles,
+  Backpack,
+  Clock,
+  Mail,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+/** Kohale tuleku juhise pilt — lisa URL, kui pilt on olemas. */
+const DIRECTIONS_IMAGE_URL: string | null = null;
 
 const MAPS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=Lutsu+t%C3%A4nav+3%2C+51005+Tartu%2C+Tartu+maakond%2C+Eesti";
 
-const BEFORE_YOU_COME = [
-  "Palun jõua kohale vähemalt 10 minutit enne algust, et jõuaksid end rahulikult sisse seada.",
-  "Võta kaasa hea tuju ja märkmete tegemiseks arvuti või märkmik.",
-  "Parkimine toimub linna üldkorra alusel.",
-  "Puitpõranda kaitseks võib ruumis viibida sokkides või ilma terava kontsata vahetusjalanõudes.",
+const STEPS: { icon: LucideIcon; title: string; text: string }[] = [
+  { icon: Footprints, title: "Saabumine", text: "Hoovis liigu puittrepi juurde ja tule üles 2. korrusele." },
+  { icon: Car, title: "Parkimine", text: "Parkimine toimub linna üldkorra alusel." },
+  {
+    icon: Sparkles,
+    title: "Jalanõud",
+    text: "Puitpõranda kaitseks võib ruumis viibida sokkides või ilma terava kontsata vahetusjalanõudes.",
+  },
+  {
+    icon: Backpack,
+    title: "Võta kaasa",
+    text: "Võta kaasa hea tuju ja märkmete tegemiseks arvuti või märkmik.",
+  },
+  {
+    icon: Clock,
+    title: "Tule 10 minutit varem",
+    text: "Palun jõua kohale vähemalt 10 minutit enne algust, et jõuaksid end rahulikult sisse seada.",
+  },
 ];
 
 export const Route = createFileRoute("/info")({
@@ -37,14 +65,19 @@ function InfoPage() {
     <main className="px-4 pt-8">
       <h1 className="text-2xl font-bold">Kohale tulek</h1>
 
+      {DIRECTIONS_IMAGE_URL && (
+        <img
+          src={DIRECTIONS_IMAGE_URL}
+          alt="Kohale tuleku juhis: Lutsu 3 hoov ja puittrepp 2. korrusele"
+          className="mt-4 w-full rounded-2xl object-cover"
+        />
+      )}
+
       <section className="mt-4 rounded-2xl bg-secondary p-5">
         <MapPin className="size-6 text-primary" />
         <p className="mt-2 text-lg font-semibold leading-snug">Studio MindZ</p>
         <p className="text-base">Lutsu 3, Tartu</p>
         <p className="text-base">Antoniuse Õuemaja, 2. korrus</p>
-        <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-          Hoovis liigu puittrepi juurde ja tule üles 2. korrusele.
-        </p>
         <a
           href={MAPS_URL}
           target="_blank"
@@ -55,25 +88,29 @@ function InfoPage() {
         </a>
       </section>
 
-      <section className="mt-8">
-        <h2 className="text-lg font-semibold">Enne tulekut</h2>
-        <ul className="mt-3 space-y-3">
-          {BEFORE_YOU_COME.map((text) => (
-            <li
-              key={text}
-              className="rounded-2xl border border-border bg-card p-4 text-sm leading-relaxed"
-            >
-              {text}
-            </li>
-          ))}
-          <li className="rounded-2xl border border-border bg-card p-4 text-sm leading-relaxed">
-            Küsimuste või murede korral kirjuta julgelt{" "}
-            <a href="mailto:info@mindz.ee" className="font-semibold text-primary underline">
-              info@mindz.ee
-            </a>
+      <ul className="mt-4 space-y-3">
+        {STEPS.map((st) => (
+          <li key={st.title} className="flex gap-3 rounded-2xl border border-border bg-card p-4">
+            <st.icon className="mt-0.5 size-5 shrink-0 text-primary" />
+            <div>
+              <p className="text-sm font-semibold">{st.title}</p>
+              <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">{st.text}</p>
+            </div>
           </li>
-        </ul>
-      </section>
+        ))}
+        <li className="flex gap-3 rounded-2xl border border-border bg-card p-4">
+          <Mail className="mt-0.5 size-5 shrink-0 text-primary" />
+          <div>
+            <p className="text-sm font-semibold">Kontakt</p>
+            <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
+              Küsimuste või murede korral kirjuta julgelt{" "}
+              <a href="mailto:info@mindz.ee" className="font-semibold text-primary underline">
+                info@mindz.ee
+              </a>
+            </p>
+          </div>
+        </li>
+      </ul>
 
       <section className="mt-8 grid gap-3">
         <Link
