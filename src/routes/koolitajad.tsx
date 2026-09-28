@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SPEAKERS, speakerEventRows, dayLabel, displayTime } from "@/lib/events";
+import { speakersInListOrder, speakerEventRows, dayLabel, displayTime } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
@@ -44,7 +44,7 @@ function SpeakersPage() {
       </p>
 
       <div className="mt-5 space-y-4">
-        {SPEAKERS.map((s) => {
+        {speakersInListOrder().map((s) => {
           const rows = speakerEventRows(s);
           return (
             <article id={s.id} key={s.id} className="scroll-mt-6 rounded-2xl border border-border bg-card p-4">
