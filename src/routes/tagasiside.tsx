@@ -15,12 +15,12 @@ export const Route = createFileRoute("/tagasiside")({
       {
         name: "description",
         content:
-          "Ütle meile kiiresti, mis töötab, mida võiks muuta või kui vajad kohe abi. Tagasiside on anonüümne.",
+          "Hinda koolitust, kiida või paku muutmist — ja jäta meile Google'i arvustus. Tagasiside on anonüümne.",
       },
       { property: "og:title", content: "Anna tagasisidet — Studio MindZ 2026" },
       {
         property: "og:description",
-        content: "Ütle meile kiiresti, mis töötab, mida võiks muuta või kui vajad abi.",
+        content: "Hinda koolitust, kiida või paku muutmist — ja jäta meile Google'i arvustus.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -31,8 +31,8 @@ export const Route = createFileRoute("/tagasiside")({
 
 type FType = "training" | "keep" | "change";
 
-// TODO: asenda Studio MindZi otselingiga Google'i arvustuse kirjutamiseks
-const GOOGLE_REVIEW_URL = "https://www.google.com/maps/search/?api=1&query=Studio+MindZ+Lutsu+3+Tartu";
+// Google'i arvustuse otselink (Studio MindZ) — avab otse arvustuse kirjutamise vormi
+const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJscTlJO8360YRwDYVeZ5YfHM";
 
 const TYPES: { id: FType; label: string; icon: typeof HeartHandshake; hint: string }[] = [
   { id: "training", label: "Jäta tagasisidet koolitusele", icon: GraduationCap, hint: "" },
@@ -115,8 +115,6 @@ function FeedbackPage() {
         <h1 className="mt-4 text-2xl font-bold">Aitäh! Saime su mõtte kätte.</h1>
         <a
           href={GOOGLE_REVIEW_URL}
-          target="_blank"
-          rel="noopener noreferrer"
           className="mx-auto mt-5 flex max-w-xs items-center justify-center gap-2 rounded-2xl bg-mindz-pink p-4 text-sm font-semibold"
         >
           <Star className="size-4" /> Jäta meile ka Google'i arvustus
@@ -172,8 +170,6 @@ function FeedbackPage() {
           ))}
           <a
             href={GOOGLE_REVIEW_URL}
-            target="_blank"
-            rel="noopener noreferrer"
             className="flex w-full items-center gap-4 rounded-2xl border border-mindz-pink bg-mindz-pink p-5 text-left text-base font-semibold transition active:scale-[0.98]"
           >
             <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
