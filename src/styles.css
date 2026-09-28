@@ -99,3 +99,20 @@
     display: none;
   }
 }
+
+/* Nähtav tagasiside päevavahetusel: uus nimekiri tuhub lühidalt sisse */
+@keyframes mindz-day-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility day-in {
+  animation: mindz-day-in 260ms ease-out;
+}
+
