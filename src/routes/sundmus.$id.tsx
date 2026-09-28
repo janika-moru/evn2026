@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, CalendarPlus, Clock, MapPin, MessageSquareHeart, FileText } from "lucide-react";
-import { StatusBadge } from "@/components/EventCard";
+import { StatusBadge, SoldOutPill } from "@/components/EventCard";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
 import { getEvent, longDate, dayLabel, type EventItem } from "@/lib/events";
