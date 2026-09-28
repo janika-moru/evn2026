@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
+import ruumidBanner from "@/assets/ruumid-banner.png.asset.json";
+
 
 const validateSearch = (search: Record<string, unknown>): { sundmus?: string } =>
   typeof search["sundmus"] === "string" ? { sundmus: search["sundmus"] as string } : {};

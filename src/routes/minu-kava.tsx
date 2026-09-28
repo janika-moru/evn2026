@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { EventCard } from "@/components/EventCard";
 import { EVENTS, longDate, EVENT_DAYS, speakersForEvent, displayTime, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
+import { SpeakersTeamLinks } from "@/components/SpeakersTeamLinks";
+
 
 export const Route = createFileRoute("/minu-kava")({
   head: () => ({
