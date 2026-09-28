@@ -88,7 +88,7 @@ function SchedulePage() {
       </div>
 
       <div ref={dayStartRef} className="mt-5 scroll-mt-3">
-        <h2 className="text-lg font-semibold capitalize">{longDate(selected)}</h2>
+        <h2 className="text-lg font-semibold first-letter:uppercase">{longDate(selected)}</h2>
         <p className="mt-0.5 text-xs text-muted-foreground">
           {events.length === 0 ? "Sündmusi ei ole" : countLabel(events.length)}
         </p>
