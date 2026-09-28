@@ -666,6 +666,9 @@ export function todayEventDate(now = new Date()): string {
 /** Järgmine algav sündmus antud päeval (või päeva esimene, kui kõik on möödas). */
 export function nextEventOn(date: string, now = new Date()): EventItem | undefined {
   const events = eventsForDate(date);
+  const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  // Kui küsitud päev pole täna (nt enne nädalat või pärast), võta päeva esimene sündmus.
+  if (date !== todayIso) return events[0];
   const hhmm = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
   return events.find((e) => e.startTime >= hhmm) ?? events[0];
 }
