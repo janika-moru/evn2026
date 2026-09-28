@@ -34,10 +34,10 @@ type FType = "training" | "keep" | "change";
 // Google'i arvustuse otselink (Studio MindZ) — avab otse arvustuse kirjutamise vormi
 const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJscTlJO8360YRwDYVeZ5YfHM";
 
-const TYPES: { id: FType; label: string; icon: typeof HeartHandshake; hint: string }[] = [
-  { id: "training", label: "Jäta tagasisidet koolitusele", icon: GraduationCap, hint: "" },
-  { id: "keep", label: "Kiidan — tehke edaspidi samamoodi", icon: HeartHandshake, hint: "Mis tiimi, korralduse või ruumide juures meeldis?" },
-  { id: "change", label: "Laidan — tehke edaspidi teistmoodi", icon: Lightbulb, hint: "Mida tiimi, korralduse või ruumide juures muuta?" },
+const TYPES: { id: FType; label: string; short: string; icon: typeof HeartHandshake; hint: string }[] = [
+  { id: "training", label: "Jäta tagasiside koolitusele", short: "Koolitus", icon: GraduationCap, hint: "" },
+  { id: "keep", label: "Kiidan korraldust/ruume/tiimi", short: "Kiidan", icon: HeartHandshake, hint: "Mis tiimi, korralduse või ruumide juures meeldis?" },
+  { id: "change", label: "Parandusettepanek korraldusele/ruumidele/tiimile", short: "Parandus", icon: Lightbulb, hint: "Mida tiimi, korralduse või ruumide juures muuta?" },
 ];
 
 function FeedbackPage() {
@@ -117,7 +117,7 @@ function FeedbackPage() {
           href={GOOGLE_REVIEW_URL}
           className="mx-auto mt-5 flex max-w-xs items-center justify-center gap-2 rounded-2xl bg-mindz-pink p-4 text-sm font-semibold"
         >
-          <Star className="size-4" /> Jäta meile ka Google'i arvustus
+          <Star className="size-4" /> Lisa Google arvustus
         </a>
         <div className="mt-6 flex flex-col items-center gap-3">
           <button
@@ -175,7 +175,7 @@ function FeedbackPage() {
             <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
               <Star className="size-5" />
             </span>
-            Jäta tagasisidet Google'i arvustuses
+            Lisa Google arvustus
           </a>
         </div>
       </main>
@@ -191,7 +191,7 @@ function FeedbackPage() {
         onClick={() => setType(null)}
         className="inline-flex items-center gap-1 text-sm font-semibold text-muted-foreground"
       >
-        <ArrowLeft className="size-4" /> {current.label}
+        <ArrowLeft className="size-4 shrink-0" /> {current.short}
       </button>
 
       <form onSubmit={submit} className="mt-4 space-y-5">
