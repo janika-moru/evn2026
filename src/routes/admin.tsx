@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSession } from "@/hooks/use-my-registrations";
 import { EVENTS, getEventByFientaId } from "@/lib/events";
 import { importRegistrations } from "@/lib/admin.functions";
+import { adminSyncFienta } from "@/lib/sync.functions";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -73,9 +74,12 @@ function WebhookLogs() {
     <section>
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Viimased webhookid</h2>
-        <button onClick={() => q.refetch()} className="text-sm font-semibold text-primary">
-          Värskenda
-        </button>
+        <div className="flex gap-3">
+          <SyncButton onDone={() => q.refetch()} />
+          <button onClick={() => q.refetch()} className="text-sm font-semibold text-primary">
+            Värskenda
+          </button>
+        </div>
       </div>
       <div className="mt-3 space-y-2">
         {(q.data ?? []).length === 0 && (
@@ -243,5 +247,27 @@ function CsvImport() {
         </>
       )}
     </section>
+  );
+}
+
+function SyncButton({ onDone }: { onDone: () => void }) {
+  const fn = useServerFn(adminSyncFienta);
+  const [msg, setMsg] = useState("");
+  return (
+    <button
+      onClick={async () => {
+        setMsg("Sünkroniseerin…");
+        try {
+          const r = await fn();
+          setMsg(`${r.upserted} piletit${r.errors.length ? `, ${r.errors.length} viga` : ""}`);
+          onDone();
+        } catch {
+          setMsg("Viga");
+        }
+      }}
+      className="text-sm font-semibold text-primary"
+    >
+      {msg || "Sünk Fientast"}
+    </button>
   );
 }

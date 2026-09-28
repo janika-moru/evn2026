@@ -104,3 +104,84 @@ export async function upsertRegistration(
   if (error) console.error("[fienta]", error);
   return error ? { ok: false, error } : { ok: true };
 }
+
+/**
+ * Sünkroniseerib kõik piletid Fienta ametlikust API-st (GET /api/v1/events/{id}/tickets).
+ * Piiratud: kui viimane sünk oli alla `minIntervalMs` tagasi, ei tee midagi.
+ */
+export async function syncFromFientaApi(
+  admin: SupabaseClient,
+  minIntervalMs = 60_000,
+): Promise<{ skipped: boolean; upserted: number; errors: string[] }> {
+  const key = process.env["FIENTA_API"];
+  if (!key) return { skipped: true, upserted: 0, errors: ["FIENTA_API puudub"] };
+
+  if (minIntervalMs > 0) {
+    const { data: last } = await admin
+      .from("webhook_logs")
+      .select("received_at")
+      .eq("source", "api-sync")
+      .order("received_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (last && Date.now() - new Date(last.received_at).getTime() < minIntervalMs) {
+      return { skipped: true, upserted: 0, errors: [] };
+    }
+  }
+  // Märgi sünk alanuks kohe, et paralleelsed päringud ei dubleeriks.
+  await admin.from("webhook_logs").insert({ source: "api-sync", error: null });
+
+  const { EVENTS } = await import("@/lib/events");
+  const ids = [...new Set(EVENTS.map((e) => e.fientaEventId).filter(Boolean))] as string[];
+  const errors: string[] = [];
+  const rows: Record<string, unknown>[] = [];
+
+  await Promise.all(
+    ids.map(async (id) => {
+      try {
+        const res = await fetch(`https://fienta.com/api/v1/events/${id}/tickets`, {
+          headers: { Authorization: `Bearer ${key}`, Accept: "application/json" },
+        });
+        if (!res.ok) {
+          errors.push(`${id}: HTTP ${res.status}`);
+          return;
+        }
+        const body = (await res.json()) as { tickets?: Record<string, unknown>[] };
+        for (const t of body.tickets ?? []) {
+          const email = normalizeEmail(t["order_email"]);
+          if (!email || t["id"] == null) continue;
+          rows.push({
+            dedupe_key: `ticket:${t["id"]}`,
+            fienta_event_id: String(t["event_id"] ?? id),
+            email_normalized: email,
+            attendee_name: null,
+            fienta_order_id: t["order_id"] != null ? String(t["order_id"]) : null,
+            fienta_ticket_id: String(t["id"]),
+            status: String(t["status"] ?? "active").toLowerCase(),
+            source: "api",
+            raw_payload: t,
+          });
+        }
+      } catch (e) {
+        errors.push(`${id}: ${(e as Error).message}`);
+      }
+    }),
+  );
+
+  let upserted = 0;
+  for (let i = 0; i < rows.length; i += 500) {
+    const chunk = rows.slice(i, i + 500);
+    const { error } = await admin
+      .from("registrations")
+      .upsert(chunk as never, { onConflict: "dedupe_key" });
+    if (error) errors.push(`DB: ${error.message}`);
+    else upserted += chunk.length;
+  }
+  if (errors.length) {
+    await admin
+      .from("webhook_logs")
+      .insert({ source: "api-sync", error: errors.slice(0, 10).join("; ") });
+    console.error("[fienta-sync]", errors);
+  }
+  return { skipped: false, upserted, errors };
+}
