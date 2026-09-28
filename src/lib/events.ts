@@ -703,6 +703,15 @@ export function firstName(name: string): string {
   return name.split(" ")[0] ?? name;
 }
 
+/** Algustähed, nt „Kiia Paal" → „KP". */
+export function initials(name: string): string {
+  return name
+    .split(" ")
+    .slice(0, 2)
+    .map((part) => part[0] ?? "")
+    .join("");
+}
+
 export function speakersInListOrder(): Speaker[] {
   const pinned = PINNED_SPEAKER_IDS.map((id) => SPEAKERS.find((s) => s.id === id)).filter(
     (s): s is Speaker => Boolean(s),
