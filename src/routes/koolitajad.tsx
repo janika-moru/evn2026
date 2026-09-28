@@ -52,8 +52,15 @@ function SpeakersPage() {
       <div className="mt-5 space-y-4">
         {speakersInListOrder().map((s) => {
           const rows = speakerEventRows(s);
+          const team = isTeamSpeaker(s);
           return (
-            <article id={s.id} key={s.id} className="scroll-mt-6 rounded-2xl border border-border bg-card p-4">
+            <article
+              id={s.id}
+              key={s.id}
+              className={`scroll-mt-6 rounded-2xl border p-4 ${
+                team ? "border-primary/25 bg-mindz-mint" : "border-border bg-card"
+              }`}
+            >
               <div className="flex items-center gap-3">
                 {s.imageUrl ? (
                   <img
@@ -68,6 +75,11 @@ function SpeakersPage() {
                 )}
                 <div className="min-w-0">
                   <h2 className="text-base font-semibold leading-snug">{s.name}</h2>
+                  {team && (
+                    <span className="mt-1 inline-block rounded-full bg-primary px-2 py-0.5 text-[11px] font-medium text-primary-foreground">
+                      Studio MindZ tiim
+                    </span>
+                  )}
                   {s.role && <p className="text-sm text-muted-foreground">{s.role}</p>}
                 </div>
               </div>
