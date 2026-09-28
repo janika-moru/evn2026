@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FileText, Linkedin, Mail } from "lucide-react";
-import { SPEAKERS, getEvent } from "@/lib/events";
+import { SPEAKERS, getEvent, dayLabel } from "@/lib/events";
 
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
@@ -69,6 +69,9 @@ function SpeakersPage() {
                       >
                         {e!.title}
                       </Link>
+                      <span className="block text-xs text-muted-foreground">
+                        {dayLabel(e!.date)} · {e!.startTime}
+                      </span>
                       {(e!.slidesUrl || e!.materialsUrl) && (
                         <span className="mt-1 flex gap-3">
                           {e!.slidesUrl && (
