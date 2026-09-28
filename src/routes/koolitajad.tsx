@@ -16,6 +16,8 @@ export const Route = createFileRoute("/koolitajad")({
         property: "og:description",
         content: "Koolitajate kontaktid, sündmused ja materjalid ühes kohas.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { property: "og:url", content: "/koolitajad" },
     ],
     links: [{ rel: "canonical", href: "/koolitajad" }],

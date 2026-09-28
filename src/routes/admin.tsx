@@ -17,6 +17,8 @@ export const Route = createFileRoute("/admin")({
       { name: "robots", content: "noindex, nofollow" },
       { property: "og:title", content: "Admin — Studio MindZ 2026" },
       { property: "og:description", content: "Korraldaja debug- ja importvaade." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: AdminPage,

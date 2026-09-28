@@ -53,6 +53,8 @@ export const Route = createFileRoute("/info")({
         property: "og:description",
         content: "Studio MindZ, Lutsu 3, Tartu, Antoniuse Õuemaja 2. korrus.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { property: "og:url", content: "/info" },
     ],
     links: [{ rel: "canonical", href: "/info" }],

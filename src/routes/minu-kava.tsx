@@ -20,6 +20,8 @@ export const Route = createFileRoute("/minu-kava")({
         property: "og:description",
         content: "Näe kõiki oma Studio MindZi registreeringuid ühes kohas.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { property: "og:url", content: "/minu-kava" },
     ],
     links: [{ rel: "canonical", href: "/minu-kava" }],

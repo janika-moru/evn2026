@@ -20,6 +20,8 @@ export const Route = createFileRoute("/kava")({
         property: "og:description",
         content: "Studio MindZi programm päevade kaupa, 5.–9. oktoober 2026 Tartus.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { property: "og:url", content: "/kava" },
     ],
     links: [{ rel: "canonical", href: "/kava" }],
