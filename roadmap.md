@@ -18,3 +18,4 @@
 - [x] Koolitajate leht: kontaktid lihtsustatud — ainult koduleht ja LinkedIn tekstilinkidena; e-post, telefon, Facebook ja ikoon-nupud eemaldatud (Facebook/Instagram lisatakse ainult koolitaja soovil)
 - [x] Janika Mõru portree vahetatud uue pildi vastu (janika-hele-portree.jpg)
 - [x] Koolitajate leht: kaardid eesnime järgi tähestikus, Kiia Paal erandina kõige ees
+- [x] Studio MindZ tiim (Kiia, Janika): nimekirja alguses, roheka tausta ja rohelise „Studio MindZ tiim" märgiga (ainult koolitajate lehel)
