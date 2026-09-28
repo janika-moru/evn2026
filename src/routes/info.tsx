@@ -34,8 +34,8 @@ const STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   },
   {
     icon: Clock,
-    title: "Tule 10 minutit varem",
-    text: "Palun jõua kohale vähemalt 10 minutit enne algust, et jõuaksid end rahulikult sisse seada.",
+    title: "Tule 15 minutit varem",
+    text: "Palun jõua kohale vähemalt 15 minutit enne algust. Koolitus algab täpselt märgitud ajal.",
   },
 ];
 
@@ -53,6 +53,8 @@ export const Route = createFileRoute("/info")({
         property: "og:description",
         content: "Studio MindZ, Lutsu 3, Tartu, Antoniuse Õuemaja 2. korrus.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { property: "og:url", content: "/info" },
     ],
     links: [{ rel: "canonical", href: "/info" }],
@@ -92,9 +94,29 @@ function InfoPage() {
         {STEPS.map((st) => (
           <li key={st.title} className="flex gap-3 rounded-2xl border border-border bg-card p-4">
             <st.icon className="mt-0.5 size-5 shrink-0 text-primary" />
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-semibold">{st.title}</p>
               <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">{st.text}</p>
+              {st.title === "Parkimine" && (
+                <div className="mt-2 flex flex-col items-start gap-1.5">
+                  <a
+                    href="https://tartu.ee/et/parkimine"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm font-semibold text-primary underline underline-offset-2"
+                  >
+                    Tartu linna parkimiskord
+                  </a>
+                  <a
+                    href="https://gis.tartulv.ee/portal/apps/experiencebuilder/experience/?id=de369a00ca89413489cbb10fc794b93f"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm font-semibold text-primary underline underline-offset-2"
+                  >
+                    Vaata parkimisalade kaarti
+                  </a>
+                </div>
+              )}
             </div>
           </li>
         ))}

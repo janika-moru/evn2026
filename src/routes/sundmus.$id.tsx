@@ -13,7 +13,16 @@ export const Route = createFileRoute("/sundmus/$id")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Sündmus — Studio MindZ 2026" }] };
+      return {
+        meta: [
+          { title: "Sündmus — Studio MindZ 2026" },
+          { name: "description", content: "Studio MindZi sündmuse info." },
+          { property: "og:title", content: "Sündmus — Studio MindZ 2026" },
+          { property: "og:description", content: "Studio MindZi sündmuse info." },
+          { property: "og:type", content: "website" },
+          { name: "twitter:card", content: "summary" },
+        ],
+      };
     }
     const { event } = loaderData;
     return {
@@ -22,6 +31,8 @@ export const Route = createFileRoute("/sundmus/$id")({
         { name: "description", content: event.shortDescription },
         { property: "og:title", content: `${event.title} — Studio MindZ 2026` },
         { property: "og:description", content: event.shortDescription },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary" },
         { property: "og:url", content: `/sundmus/${event.id}` },
       ],
       links: [{ rel: "canonical", href: `/sundmus/${event.id}` }],

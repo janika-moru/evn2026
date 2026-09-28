@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CalendarCheck, LogOut, Mail, RefreshCw } from "lucide-react";
+import { CalendarCheck, FileText, LogOut, Mail, RefreshCw, UserRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { EventCard } from "@/components/EventCard";
-import { EVENTS, longDate, EVENT_DAYS } from "@/lib/events";
+import { EVENTS, longDate, EVENT_DAYS, speakersForEvent, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
 
 export const Route = createFileRoute("/minu-kava")({
@@ -20,6 +20,8 @@ export const Route = createFileRoute("/minu-kava")({
         property: "og:description",
         content: "Näe kõiki oma Studio MindZi registreeringuid ühes kohas.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { property: "og:url", content: "/minu-kava" },
     ],
     links: [{ rel: "canonical", href: "/minu-kava" }],
@@ -162,7 +164,7 @@ function SignedIn({ email }: { email: string }) {
                   .filter((e) => e.date === d.date)
                   .sort((a, b) => a.startTime.localeCompare(b.startTime))
                   .map((e) => (
-                    <EventCard key={e.id} event={e} />
+                    <MyScheduleEvent key={e.id} event={e} />
                   ))}
               </div>
             </section>
@@ -176,5 +178,50 @@ function SignedIn({ email }: { email: string }) {
         </>
       )}
     </>
+  );
+}
+
+function MyScheduleEvent({ event }: { event: EventItem }) {
+  const speakers = speakersForEvent(event.id);
+  const hasLinks = speakers.length > 0 || event.slidesUrl || event.materialsUrl;
+
+  return (
+    <div>
+      <EventCard event={event} />
+      {hasLinks && (
+        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 px-1">
+          {speakers.map((speaker) => (
+            <Link
+              key={speaker.id}
+              to="/koolitajad"
+              hash={speaker.id}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+            >
+              <UserRound className="size-4" /> {speaker.name}
+            </Link>
+          ))}
+          {event.slidesUrl && (
+            <a
+              href={event.slidesUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+            >
+              <FileText className="size-4" /> Vaata slaide
+            </a>
+          )}
+          {event.materialsUrl && (
+            <a
+              href={event.materialsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+            >
+              <FileText className="size-4" /> Materjalid
+            </a>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
