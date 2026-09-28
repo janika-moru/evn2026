@@ -7,6 +7,7 @@ import { useSession } from "@/hooks/use-my-registrations";
 import { EVENTS, getEventByFientaId } from "@/lib/events";
 import { importRegistrations } from "@/lib/admin.functions";
 import { adminSyncFienta } from "@/lib/sync.functions";
+import { FeedbackAdmin } from "@/components/FeedbackAdmin";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -50,6 +51,7 @@ function AdminPage() {
   return (
     <main className="space-y-8 px-4 pt-8">
       <h1 className="text-2xl font-bold">Admin</h1>
+      <FeedbackAdmin />
       <WebhookLogs />
       <CsvImport />
     </main>

@@ -16,25 +16,46 @@ export type Database = {
     Tables: {
       feedback: {
         Row: {
+          attachment_url: string | null
           comment: string | null
+          contact: string | null
+          contact_requested: boolean
           created_at: string
           event_id: string | null
+          feedback_type: string
           id: string
+          message: string | null
+          needs_help: boolean
           rating: number | null
+          status: string
         }
         Insert: {
+          attachment_url?: string | null
           comment?: string | null
+          contact?: string | null
+          contact_requested?: boolean
           created_at?: string
           event_id?: string | null
+          feedback_type?: string
           id?: string
+          message?: string | null
+          needs_help?: boolean
           rating?: number | null
+          status?: string
         }
         Update: {
+          attachment_url?: string | null
           comment?: string | null
+          contact?: string | null
+          contact_requested?: boolean
           created_at?: string
           event_id?: string | null
+          feedback_type?: string
           id?: string
+          message?: string | null
+          needs_help?: boolean
           rating?: number | null
+          status?: string
         }
         Relationships: []
       }
