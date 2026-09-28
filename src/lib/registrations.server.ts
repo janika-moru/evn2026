@@ -135,6 +135,7 @@ export async function syncFromFientaApi(
   const ids = [...new Set(EVENTS.map((e) => e.fientaEventId).filter(Boolean))] as string[];
   const errors: string[] = [];
   const rows: Record<string, unknown>[] = [];
+  const availabilityRows: Record<string, unknown>[] = [];
 
   await Promise.all(
     ids.map(async (id) => {
@@ -147,7 +148,22 @@ export async function syncFromFientaApi(
           return;
         }
         const body = (await res.json()) as { tickets?: Record<string, unknown>[] };
-        for (const t of body.tickets ?? []) {
+        const tickets = body.tickets ?? [];
+        const activeRegistrations = tickets.reduce((count, ticket) => {
+          const status = String(ticket["status"] ?? "active").toLowerCase();
+          const quantity = Number(ticket["qty"] ?? 1);
+          return /cancel|refund|tühist/.test(status)
+            ? count
+            : count + (Number.isFinite(quantity) && quantity > 0 ? quantity : 1);
+        }, 0);
+        availabilityRows.push({
+          fienta_event_id: id,
+          active_registrations: activeRegistrations,
+          capacity: 50,
+          available_spots: Math.max(0, 50 - activeRegistrations),
+          updated_at: new Date().toISOString(),
+        });
+        for (const t of tickets) {
           const email = normalizeEmail(t["order_email"]);
           if (!email || t["id"] == null) continue;
           rows.push({
@@ -176,6 +192,12 @@ export async function syncFromFientaApi(
       .upsert(chunk as never, { onConflict: "dedupe_key" });
     if (error) errors.push(`DB: ${error.message}`);
     else upserted += chunk.length;
+  }
+  if (availabilityRows.length) {
+    const { error } = await admin
+      .from("event_availability")
+      .upsert(availabilityRows as never, { onConflict: "fienta_event_id" });
+    if (error) errors.push(`Vabad kohad: ${error.message}`);
   }
   if (errors.length) {
     await admin

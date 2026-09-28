@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      event_availability: {
+        Row: {
+          active_registrations: number
+          available_spots: number
+          capacity: number
+          fienta_event_id: string
+          updated_at: string
+        }
+        Insert: {
+          active_registrations?: number
+          available_spots?: number
+          capacity?: number
+          fienta_event_id: string
+          updated_at?: string
+        }
+        Update: {
+          active_registrations?: number
+          available_spots?: number
+          capacity?: number
+          fienta_event_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       feedback: {
         Row: {
           attachment_url: string | null

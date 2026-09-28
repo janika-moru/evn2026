@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, CalendarPlus, Clock, MapPin, MessageSquareHeart, FileText } from "lucide-react";
 import { StatusBadge } from "@/components/EventCard";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
+import { useEventAvailability } from "@/hooks/use-event-availability";
 import { getEvent, longDate, dayLabel, type EventItem } from "@/lib/events";
 
 export const Route = createFileRoute("/sundmus/$id")({
@@ -52,8 +53,10 @@ function icsHref(event: EventItem): string {
 function EventDetailPage() {
   const { event } = Route.useLoaderData();
   const { ids } = useMyRegistrations();
+  const { availableSpots } = useEventAvailability(event.fientaEventId);
   const status = effectiveStatus(event, ids);
-  const open = status === "open";
+  const displayStatus = status === "open" && availableSpots === 0 ? "full" : status;
+  const open = displayStatus === "open";
 
   return (
     <main className="px-4 pt-6">
@@ -81,19 +84,24 @@ function EventDetailPage() {
       </div>
 
       <div className="mt-4">
-        <StatusBadge status={status} />
+        <StatusBadge status={displayStatus} />
       </div>
 
       <p className="mt-5 whitespace-pre-line leading-relaxed text-foreground/90">{event.description}</p>
 
       <div className="mt-6 space-y-3">
         {open && (
-          <a
-            href={event.registrationUrl}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
-          >
-            Registreeru
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href={event.registrationUrl}
+              className="flex min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
+            >
+              Registreeru
+            </a>
+            <span className="shrink-0 text-sm font-semibold text-primary">
+              Vabu kohti: {availableSpots ?? 50}
+            </span>
+          </div>
         )}
         {status === "registered" && (
           <p className="rounded-2xl border border-primary/40 bg-secondary/40 p-4 text-center text-sm font-semibold text-primary">
