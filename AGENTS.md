@@ -13,3 +13,4 @@
 - Fienta registrations primarily sync via official API (GET /api/v1/events/{id}/tickets, Bearer FIENTA_API) in syncFromFientaApi; triggered on Minu kava load (throttled 1/min via webhook_logs source='api-sync') and admin button — no cron/webhook dependency needed.
 - Public event availability is persisted in event_availability and computed during Fienta sync as 50 minus non-cancelled/refunded ticket quantities — keeps attendee data private while exposing counts.
 - Speaker contact and photo fields live on SPEAKERS, while slides and materials stay on EVENTS — profiles remain reusable and resources stay tied to the correct session.
+- Repeated sessions are tagged with seriesUrl on EVENTS and collapsed to one row by speakerEventRows() (src/lib/events.ts) — keeps the koolitajad list scannable and links to the Fienta series page instead of five near-duplicate events.
