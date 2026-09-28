@@ -4,6 +4,8 @@ import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } 
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 import ruumidBanner from "@/assets/ruumid-banner.png.asset.json";
+import { MeeskondCard } from "@/components/SpeakersTeamLinks";
+
 
 
 const validateSearch = (search: Record<string, unknown>): { sundmus?: string } =>
@@ -186,7 +188,10 @@ function FeedbackPage() {
           alt="Studio MindZi ruumid — registreerimine Fienta.com/studiomindz"
           className="mt-8 w-full rounded-2xl"
         />
+
+        <MeeskondCard />
       </main>
+
     );
 
   }
