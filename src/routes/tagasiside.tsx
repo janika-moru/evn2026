@@ -31,8 +31,8 @@ export const Route = createFileRoute("/tagasiside")({
 
 type FType = "training" | "keep" | "change";
 
-// Google'i arvustuse otselink (Studio MindZ ettevõtteprofiil)
-const GOOGLE_REVIEW_URL = "https://g.page/r/CcA2FXmeWHxzEBM/review";
+// Google'i arvustuse otselink (Studio MindZ) — avab otse arvustuse kirjutamise vormi
+const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJscTlJO8360YRwDYVeZ5YfHM";
 
 const TYPES: { id: FType; label: string; icon: typeof HeartHandshake; hint: string }[] = [
   { id: "training", label: "Jäta tagasisidet koolitusele", icon: GraduationCap, hint: "" },
