@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CalendarCheck, FileText, LogOut, Mail, RefreshCw, UserRound } from "lucide-react";
+import { CalendarCheck, FileText, LogOut, Mail, MessageSquareHeart, RefreshCw, UserRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { EventCard } from "@/components/EventCard";
 import { EVENTS, longDate, EVENT_DAYS, speakersForEvent, type EventItem } from "@/lib/events";
@@ -210,15 +210,22 @@ function MaterialsSection({ events }: { events: EventItem[] }) {
               {e.title}
             </Link>
             <p className="mt-0.5 text-xs text-muted-foreground">{e.speaker}</p>
-            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5">
+            <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1.5">
+              <Link
+                to="/tagasiside"
+                search={{ sundmus: e.id }}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
+              >
+                <MessageSquareHeart className="size-3.5" /> Anna tagasisidet
+              </Link>
               {e.slidesUrl && (
                 <a
                   href={e.slidesUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
                 >
-                  <FileText className="size-4" /> Vaata slaide
+                  <FileText className="size-3.5" /> Vaata slaide
                 </a>
               )}
               {e.materialsUrl && (
@@ -226,9 +233,9 @@ function MaterialsSection({ events }: { events: EventItem[] }) {
                   href={e.materialsUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
                 >
-                  <FileText className="size-4" /> Materjalid
+                  <FileText className="size-3.5" /> Materjalid
                 </a>
               )}
             </div>
@@ -241,45 +248,49 @@ function MaterialsSection({ events }: { events: EventItem[] }) {
 
 function MyScheduleEvent({ event }: { event: EventItem }) {
   const speakers = speakersForEvent(event.id);
-  const hasLinks = speakers.length > 0 || event.slidesUrl || event.materialsUrl;
 
   return (
     <div>
       <EventCard event={event} />
-      {hasLinks && (
-        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-2 px-1">
-          {speakers.map((speaker) => (
-            <Link
-              key={speaker.id}
-              to="/koolitajad"
-              hash={speaker.id}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
-            >
-              <UserRound className="size-4" /> {speaker.name}
-            </Link>
-          ))}
-          {event.slidesUrl && (
-            <a
-              href={event.slidesUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
-            >
-              <FileText className="size-4" /> Vaata slaide
-            </a>
-          )}
-          {event.materialsUrl && (
-            <a
-              href={event.materialsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
-            >
-              <FileText className="size-4" /> Materjalid
-            </a>
-          )}
-        </div>
-      )}
+      <div className="mt-2 flex flex-wrap gap-x-2 gap-y-2 px-1">
+        <Link
+          to="/tagasiside"
+          search={{ sundmus: event.id }}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
+        >
+          <MessageSquareHeart className="size-3.5" /> Anna tagasisidet
+        </Link>
+        {speakers.map((speaker) => (
+          <Link
+            key={speaker.id}
+            to="/koolitajad"
+            hash={speaker.id}
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
+          >
+            <UserRound className="size-3.5" /> {speaker.name}
+          </Link>
+        ))}
+        {event.slidesUrl && (
+          <a
+            href={event.slidesUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
+          >
+            <FileText className="size-3.5" /> Vaata slaide
+          </a>
+        )}
+        {event.materialsUrl && (
+          <a
+            href={event.materialsUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
+          >
+            <FileText className="size-3.5" /> Materjalid
+          </a>
+        )}
+      </div>
     </div>
   );
 }
