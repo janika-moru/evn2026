@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { CheckCircle2, Star } from "lucide-react";
 import { EVENTS, getEvent } from "@/lib/events";
+import { supabase } from "@/integrations/supabase/client";
 
 const validateSearch = (search: Record<string, unknown>) => ({
   sundmus: typeof search.sundmus === "string" ? search.sundmus : undefined,
@@ -37,6 +38,25 @@ function FeedbackPage() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+    const { error: dbError } = await supabase.from("feedback").insert({
+      event_id: target === "general" ? null : target,
+      rating: rating > 0 ? rating : null,
+      comment: comment.trim() || null,
+    });
+    setSending(false);
+    if (dbError) {
+      setError("Tagasiside saatmine ebaõnnestus. Proovi palun uuesti.");
+      return;
+    }
+    setSent(true);
+  }
 
   if (sent) {
     return (
@@ -63,13 +83,7 @@ function FeedbackPage() {
         Tagasiside võib olla anonüümne — nime ei pea lisama.
       </p>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          setSent(true);
-        }}
-        className="mt-5 space-y-5"
-      >
+      <form onSubmit={handleSubmit} className="mt-5 space-y-5">
         <div>
           <label htmlFor="target" className="text-sm font-semibold">
             Mille kohta tagasiside on?
@@ -124,11 +138,13 @@ function FeedbackPage() {
           />
         </div>
 
+        {error && <p className="text-sm text-destructive">{error}</p>}
         <button
           type="submit"
-          className="w-full rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
+          disabled={sending}
+          className="w-full rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground disabled:opacity-60"
         >
-          Saada tagasiside
+          {sending ? "Saadan…" : "Saada tagasiside"}
         </button>
       </form>
     </main>
