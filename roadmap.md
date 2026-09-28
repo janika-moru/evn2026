@@ -15,4 +15,5 @@
 - [x] Kuupäevad ja kellaajad kogu äpis eestikeelsesse kirjapilti (`9. okt`, `9.30`)
 - [x] Koolitajate leht: kuupäeva ja kellaaja vahelt eralduspunkt eemaldatud
 - [x] Kava leht: „5 koolitust" loendur päevade nuppudelt ja kuupäeva alt eemaldatud (puharam UI)
-- [x] Koolitajate leht: kontaktid lihtsustatud — ainult e-post, koduleht ja LinkedIn tekstilinkidena (telefon, Facebook, Instagram ja nupud eemaldatud)
+- [x] Koolitajate leht: kontaktid lihtsustatud — ainult koduleht ja LinkedIn tekstilinkidena; e-post, telefon, Facebook ja ikoon-nupud eemaldatud (Facebook/Instagram lisatakse ainult koolitaja soovil)
+- [x] Janika Mõru portree vahetatud uue pildi vastu (janika-hele-portree.jpg)
