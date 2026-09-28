@@ -96,7 +96,7 @@ function SpeakersPage() {
                           {row.event.title}
                         </Link>
                         <span className="block text-xs text-muted-foreground">
-                          {dayLabel(row.event.date)} · {displayTime(row.event.startTime)}
+                          {dayLabel(row.event.date)} {displayTime(row.event.startTime)}
                         </span>
                       </li>
                     ),
