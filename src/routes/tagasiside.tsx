@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Camera, HeartHandshake, LifeBuoy, Lightbulb, X } from "lucide-react";
+import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -29,20 +29,28 @@ export const Route = createFileRoute("/tagasiside")({
   component: FeedbackPage,
 });
 
-type FType = "keep" | "change" | "help";
+type FType = "training" | "keep" | "change";
+
+// TODO: asenda Studio MindZi otselingiga Google'i arvustuse kirjutamiseks
+const GOOGLE_REVIEW_URL = "https://www.google.com/maps/search/?api=1&query=Studio+MindZ+Lutsu+3+Tartu";
 
 const TYPES: { id: FType; label: string; icon: typeof HeartHandshake; hint: string }[] = [
-  { id: "keep", label: "Teeme samamoodi edasi", icon: HeartHandshake, hint: "Mis sulle meeldis?" },
-  { id: "change", label: "Teeksin midagi teisiti", icon: Lightbulb, hint: "Mida võiksime muuta?" },
-  { id: "help", label: "Mul on praegu abi vaja", icon: LifeBuoy, hint: "Mis juhtus? Kus sa oled?" },
+  { id: "training", label: "Jäta tagasisidet koolitusele", icon: GraduationCap, hint: "" },
+  { id: "keep", label: "Kiidan — tehke edaspidi samamoodi", icon: HeartHandshake, hint: "Mis tiimi, korralduse või ruumide juures meeldis?" },
+  { id: "change", label: "Laidan — tehke edaspidi teistmoodi", icon: Lightbulb, hint: "Mida tiimi, korralduse või ruumide juures muuta?" },
 ];
 
 function FeedbackPage() {
   const { sundmus } = Route.useSearch();
   const fromEvent = sundmus && getEvent(sundmus) ? sundmus : null;
 
-  const [type, setType] = useState<FType | null>(null);
-  const [target, setTarget] = useState(fromEvent ?? "general");
+  const [type, setType] = useState<FType | null>(fromEvent ? "training" : null);
+  const [target, setTarget] = useState(fromEvent ?? "");
+  const [rating, setRating] = useState<number | null>(null);
+  const [keepText, setKeepText] = useState("");
+  const [changeText, setChangeText] = useState("");
+  const [name, setName] = useState("");
+  const [field, setField] = useState("");
   const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [wantsContact, setWantsContact] = useState(false);
@@ -54,7 +62,10 @@ function FeedbackPage() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!type) return;
-    if (!message.trim() && !photo) {
+    if (type === "training") {
+      if (!target) return setError("Vali koolitus.");
+      if (!rating) return setError("Vali hinnang 1–10.");
+    } else if (!message.trim() && !photo) {
       setError("Kirjuta paar sõna või lisa foto.");
       return;
     }
@@ -74,11 +85,17 @@ function FeedbackPage() {
       }
       attachment = path;
     }
+    const training = type === "training";
     const { error: dbErr } = await supabase.from("feedback").insert({
-      event_id: target === "general" ? null : target,
+      event_id: training ? target : null,
       feedback_type: type,
-      message: message.trim() || null,
-      needs_help: type === "help",
+      message: training ? null : message.trim() || null,
+      rating: training ? rating : null,
+      keep_text: training ? keepText.trim() || null : null,
+      change_text: training ? changeText.trim() || null : null,
+      respondent_name: training ? name.trim() || null : null,
+      respondent_field: training ? field.trim() || null : null,
+      needs_help: false,
       contact_requested: wantsContact,
       contact: wantsContact ? contact.trim() || null : null,
       attachment_url: attachment,
@@ -96,21 +113,23 @@ function FeedbackPage() {
       <main className="px-4 pt-16 text-center">
         <p className="text-5xl">💚</p>
         <h1 className="mt-4 text-2xl font-bold">Aitäh! Saime su mõtte kätte.</h1>
-        {sent === "help" && (
-          <p className="mx-auto mt-3 max-w-xs rounded-2xl bg-secondary p-4 text-sm">
-            Kui asi vajab kohe lahendamist, kirjuta{" "}
-            <a href="mailto:info@mindz.ee" className="font-semibold text-primary underline">
-              info@mindz.ee
-            </a>
-            .
-          </p>
-        )}
+        <a
+          href={GOOGLE_REVIEW_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mx-auto mt-5 flex max-w-xs items-center justify-center gap-2 rounded-2xl bg-mindz-pink p-4 text-sm font-semibold"
+        >
+          <Star className="size-4" /> Jäta meile ka Google'i arvustus
+        </a>
         <div className="mt-6 flex flex-col items-center gap-3">
           <button
             onClick={() => {
               setSent(null);
               setType(null);
               setMessage("");
+              setRating(null);
+              setKeepText("");
+              setChangeText("");
               setPhoto(null);
               setWantsContact(false);
               setContact("");
@@ -135,18 +154,14 @@ function FeedbackPage() {
     return (
       <main className="px-4 pt-8">
         <h1 className="text-2xl font-bold">Mida tahad meile öelda?</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Võtab alla poole minuti. Anonüümne.
-        </p>
+
         <div className="mt-6 space-y-3">
           {TYPES.map((t) => (
             <button
               key={t.id}
               onClick={() => setType(t.id)}
               className={`flex w-full items-center gap-4 rounded-2xl border p-5 text-left text-base font-semibold transition active:scale-[0.98] ${
-                t.id === "help"
-                  ? "border-foreground/10 bg-secondary"
-                  : "border-border bg-card"
+                "border-border bg-card"
               }`}
             >
               <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -155,6 +170,17 @@ function FeedbackPage() {
               {t.label}
             </button>
           ))}
+          <a
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center gap-4 rounded-2xl border border-mindz-pink bg-mindz-pink p-5 text-left text-base font-semibold transition active:scale-[0.98]"
+          >
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <Star className="size-5" />
+            </span>
+            Jäta tagasisidet Google'i arvustuses
+          </a>
         </div>
       </main>
     );
@@ -173,31 +199,58 @@ function FeedbackPage() {
       </button>
 
       <form onSubmit={submit} className="mt-4 space-y-5">
-        {fixedEvent ? (
-          <p className="rounded-xl bg-secondary px-4 py-3 text-sm">
-            Sündmus: <span className="font-semibold">{fixedEvent.title}</span>
-          </p>
+        {type === "training" ? (
+          <>
+            {fixedEvent ? (
+              <p className="rounded-xl bg-secondary px-4 py-3 text-sm">
+                <span className="font-semibold">{fixedEvent.title}</span>
+              </p>
+            ) : (
+              <div>
+                <label htmlFor="target" className="text-sm font-semibold">Koolitus</label>
+                <select
+                  id="target"
+                  value={target}
+                  onChange={(e) => setTarget(e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
+                >
+                  <option value="">Vali koolitus</option>
+                  {EVENTS.map((ev) => (
+                    <option key={ev.id} value={ev.id}>
+                      {dayLabel(ev.date)} {displayTime(ev.startTime)} {ev.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+            <div>
+              <p className="text-sm font-semibold">Kuidas jäid koolitusega rahule?</p>
+              <div className="mt-2 grid grid-cols-5 gap-2">
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => setRating(n)}
+                    className={`rounded-xl border py-2.5 text-base font-semibold ${
+                      rating === n
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-card"
+                    }`}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <Field id="keep" label="Mis võiks koolituse kordamisel kindlasti samaks jääda?" value={keepText} onChange={setKeepText} />
+            <Field id="change" label="Mis võiks olla teistmoodi?" value={changeText} onChange={setChangeText} />
+            <div className="grid gap-3">
+              <input value={name} onChange={(e) => setName(e.target.value)} maxLength={200} placeholder="Sinu nimi" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base" />
+              <input value={field} onChange={(e) => setField(e.target.value)} maxLength={200} placeholder="Valdkond" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base" />
+            </div>
+          </>
         ) : (
-          <div>
-            <label htmlFor="target" className="text-sm font-semibold">
-              Millest jutt?
-            </label>
-            <select
-              id="target"
-              value={target}
-              onChange={(e) => setTarget(e.target.value)}
-              className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-            >
-              <option value="general">Üldine korraldus</option>
-              {EVENTS.map((ev) => (
-                <option key={ev.id} value={ev.id}>
-                  {dayLabel(ev.date)} {displayTime(ev.startTime)} · {ev.title}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
+          <>
         <div>
           <label htmlFor="msg" className="text-sm font-semibold">
             Kirjuta meile
@@ -265,6 +318,9 @@ function FeedbackPage() {
           )}
         </div>
 
+          </>
+        )}
+
         {error && <p className="text-sm text-destructive">{error}</p>}
 
         <button
@@ -276,5 +332,21 @@ function FeedbackPage() {
         </button>
       </form>
     </main>
+  );
+}
+
+function Field({ id, label, value, onChange }: { id: string; label: string; value: string; onChange: (v: string) => void }) {
+  return (
+    <div>
+      <label htmlFor={id} className="text-sm font-semibold">{label}</label>
+      <textarea
+        id={id}
+        rows={3}
+        maxLength={4000}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="mt-2 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+      />
+    </div>
   );
 }
