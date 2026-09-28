@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InfoRouteImport } from './routes/info'
 import { Route as KavaRouteImport } from './routes/kava'
+import { Route as KoolitajadRouteImport } from './routes/koolitajad'
+import { Route as MinuKavaRouteImport } from './routes/minu-kava'
+import { Route as TagasisideRouteImport } from './routes/tagasiside'
 import { Route as SundmusIdRouteImport } from './routes/sundmus.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +22,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InfoRoute = InfoRouteImport.update({
+  id: '/info',
+  path: '/info',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KavaRoute = KavaRouteImport.update({
   id: '/kava',
   path: '/kava',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoolitajadRoute = KoolitajadRouteImport.update({
+  id: '/koolitajad',
+  path: '/koolitajad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MinuKavaRoute = MinuKavaRouteImport.update({
+  id: '/minu-kava',
+  path: '/minu-kava',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TagasisideRoute = TagasisideRouteImport.update({
+  id: '/tagasiside',
+  path: '/tagasiside',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SundmusIdRoute = SundmusIdRouteImport.update({
@@ -31,31 +55,69 @@ const SundmusIdRoute = SundmusIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/info': typeof InfoRoute
   '/kava': typeof KavaRoute
+  '/koolitajad': typeof KoolitajadRoute
+  '/minu-kava': typeof MinuKavaRoute
+  '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/info': typeof InfoRoute
   '/kava': typeof KavaRoute
+  '/koolitajad': typeof KoolitajadRoute
+  '/minu-kava': typeof MinuKavaRoute
+  '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/info': typeof InfoRoute
   '/kava': typeof KavaRoute
+  '/koolitajad': typeof KoolitajadRoute
+  '/minu-kava': typeof MinuKavaRoute
+  '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kava' | '/sundmus/$id'
+  fullPaths:
+    | '/'
+    | '/info'
+    | '/kava'
+    | '/koolitajad'
+    | '/minu-kava'
+    | '/tagasiside'
+    | '/sundmus/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kava' | '/sundmus/$id'
-  id: '__root__' | '/' | '/kava' | '/sundmus/$id'
+  to:
+    | '/'
+    | '/info'
+    | '/kava'
+    | '/koolitajad'
+    | '/minu-kava'
+    | '/tagasiside'
+    | '/sundmus/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/info'
+    | '/kava'
+    | '/koolitajad'
+    | '/minu-kava'
+    | '/tagasiside'
+    | '/sundmus/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InfoRoute: typeof InfoRoute
   KavaRoute: typeof KavaRoute
+  KoolitajadRoute: typeof KoolitajadRoute
+  MinuKavaRoute: typeof MinuKavaRoute
+  TagasisideRoute: typeof TagasisideRoute
   SundmusIdRoute: typeof SundmusIdRoute
 }
 
@@ -68,11 +130,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/info': {
+      id: '/info'
+      path: '/info'
+      fullPath: '/info'
+      preLoaderRoute: typeof InfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kava': {
       id: '/kava'
       path: '/kava'
       fullPath: '/kava'
       preLoaderRoute: typeof KavaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/koolitajad': {
+      id: '/koolitajad'
+      path: '/koolitajad'
+      fullPath: '/koolitajad'
+      preLoaderRoute: typeof KoolitajadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/minu-kava': {
+      id: '/minu-kava'
+      path: '/minu-kava'
+      fullPath: '/minu-kava'
+      preLoaderRoute: typeof MinuKavaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tagasiside': {
+      id: '/tagasiside'
+      path: '/tagasiside'
+      fullPath: '/tagasiside'
+      preLoaderRoute: typeof TagasisideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sundmus/$id': {
@@ -87,7 +177,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InfoRoute: InfoRoute,
   KavaRoute: KavaRoute,
+  KoolitajadRoute: KoolitajadRoute,
+  MinuKavaRoute: MinuKavaRoute,
+  TagasisideRoute: TagasisideRoute,
   SundmusIdRoute: SundmusIdRoute,
 }
 export const routeTree = rootRouteImport

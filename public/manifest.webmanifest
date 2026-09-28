@@ -1,0 +1,31 @@
+{
+  "name": "Studio MindZ 2026 — Tartu ettevõtlusnädal",
+  "short_name": "Studio MindZ",
+  "description": "Studio MindZi ettevõtlusnädala programm, registreeringud ja info telefonis.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#009D97",
+  "lang": "et",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
