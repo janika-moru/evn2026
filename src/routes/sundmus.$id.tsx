@@ -81,7 +81,7 @@ function EventDetailPage() {
         <StatusBadge status={event.registrationStatus} />
       </div>
 
-      <p className="mt-5 leading-relaxed text-foreground/90">{event.description}</p>
+      <p className="mt-5 whitespace-pre-line leading-relaxed text-foreground/90">{event.description}</p>
 
       <div className="mt-6 space-y-3">
         {open && (
