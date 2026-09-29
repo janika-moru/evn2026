@@ -36,3 +36,4 @@
 - [x] Minu kava: sisselogimisnupu alla selgitus „Parooli ei ole vaja luua. Kliki postkastis oleval lingil ja see toob su tagasi äppi sisselogituna."
 - [ ] Avaldada uuesti, et muudatused jõuaksid aadressile evn2026.lovable.app
 - [x] Info leht: pealkiri eemaldatud, salvestuste teavitus, vahetusjalanõude märkus ning ruumide galerii, kirjeldused ja rendiinfo
+- [x] Info leht: ruumide rentimine eraldi esile tõstetud roheline kaart — tund alates 50 € + KM, päev alates 350 € + KM; laudade-toolade liigutamise lause toodud ruumide sissejuhatusesse

@@ -10,6 +10,7 @@ import {
   Mail,
   Camera,
   Building2,
+  Tag,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
