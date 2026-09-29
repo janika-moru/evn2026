@@ -519,7 +519,6 @@ export const SPEAKERS: Speaker[] = [
     "linkedinUrl": "https://www.linkedin.com/in/martinmarkest/",
     "facebookUrl": "",
     "instagramUrl": "",
-    "slidesUrl": "",
     "eventIds": [
       "202931"
     ]
