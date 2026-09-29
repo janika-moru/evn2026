@@ -49,28 +49,69 @@ export function MeeskondRow() {
   );
 }
 
-/** Koolitajate pallikeste rida — tähestiku järjekorras (Kiia, Janika ees), klikk avab profiili. */
-export function KoolitajadRow() {
+/** Koolitajate pallikeste rida — tähestiku järjekorras (Kiia, Janika ees).
+ *  `onSelect` korral avab klõps antud koolitaja vormi (Tagasiside leht),
+ *  muidu viib klikk koolitaja profiilile. */
+export function KoolitajadRow({
+  onSelect,
+  selectedId,
+}: {
+  onSelect?: (speaker: Speaker) => void;
+  selectedId?: string | null;
+} = {}) {
   return (
     <div className="grid grid-cols-4 gap-2">
-      {speakersInListOrder().map((speaker) => (
-        <Link key={speaker.id} to="/koolitajad" hash={speaker.id} className="flex flex-col items-center gap-1.5">
-          {speaker.imageUrl ? (
-            <img src={speaker.imageUrl} alt={speaker.name} className="size-14 rounded-full object-cover" />
-          ) : (
-            <div className="flex size-14 items-center justify-center rounded-full bg-background text-base font-semibold">
-              {initials(speaker.name)}
-            </div>
-          )}
-          <span className="text-xs font-medium">{firstName(speaker.name)}</span>
-        </Link>
-      ))}
+      {speakersInListOrder().map((speaker) => {
+        const ring = selectedId === speaker.id ? "ring-2 ring-primary" : "";
+        const cell = (
+          <>
+            {speaker.imageUrl ? (
+              <img
+                src={speaker.imageUrl}
+                alt={speaker.name}
+                className={`size-14 rounded-full object-cover ${ring}`}
+              />
+            ) : (
+              <div
+                className={`flex size-14 items-center justify-center rounded-full bg-background text-base font-semibold ${ring}`}
+              >
+                {initials(speaker.name)}
+              </div>
+            )}
+            <span className="text-xs font-medium">{firstName(speaker.name)}</span>
+          </>
+        );
+        const className = "flex flex-col items-center gap-1.5";
+        return onSelect ? (
+          <button
+            key={speaker.id}
+            type="button"
+            onClick={() => onSelect(speaker)}
+            aria-label={`Jäta tagasiside: ${speaker.name}`}
+            className={className}
+          >
+            {cell}
+          </button>
+        ) : (
+          <Link key={speaker.id} to="/koolitajad" hash={speaker.id} className={className}>
+            {cell}
+          </Link>
+        );
+      })}
     </div>
   );
 }
 
 /** Koolitajate pallikese rida roosas kaardis — Tagasiside lehel. */
-export function KoolitajadPills() {
+export function KoolitajadPills({
+  onSelect,
+  selectedId,
+  children,
+}: {
+  onSelect?: (speaker: Speaker) => void;
+  selectedId?: string | null;
+  children?: React.ReactNode;
+}) {
   return (
     <section className="mt-4 rounded-2xl border border-mindz-pink bg-mindz-pink p-4">
       <h2 className="text-base font-semibold">Jäta tagasiside koolitusele</h2>
@@ -78,8 +119,9 @@ export function KoolitajadPills() {
         Klõpsa koolitaja pildil ja täida tagasiside vorm.
       </p>
       <div className="mt-3">
-        <KoolitajadRow />
+        <KoolitajadRow onSelect={onSelect} selectedId={selectedId} />
       </div>
+      {children}
     </section>
   );
 }
