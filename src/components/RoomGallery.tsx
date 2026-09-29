@@ -51,7 +51,7 @@ export function RoomGallery({ images }: { images: RoomImage[] }) {
   return (
     <>
       <div className="mt-4 grid grid-cols-2 gap-2">
-        {images.map((image, index) => (
+        {visibleImages.map((image, index) => (
           <Button
             key={image.src}
             type="button"
@@ -69,6 +69,17 @@ export function RoomGallery({ images }: { images: RoomImage[] }) {
           </Button>
         ))}
       </div>
+
+      {images.length > PREVIEW_COUNT && (
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={() => setExpanded((prev) => !prev)}
+          className="mt-2 w-full text-sm text-muted-foreground"
+        >
+          {expanded ? "Näita vähem" : `Näita rohkem pilte (${images.length - PREVIEW_COUNT})`}
+        </Button>
+      )}
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="w-[calc(100vw-1rem)] max-w-5xl border-0 bg-background p-2 shadow-xl sm:rounded-xl sm:p-4 [&>button]:right-3 [&>button]:top-3 [&>button]:z-20 [&>button]:flex [&>button]:size-10 [&>button]:items-center [&>button]:justify-center [&>button]:rounded-full [&>button]:bg-background [&>button]:opacity-100 [&>button_svg]:size-5">
