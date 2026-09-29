@@ -68,19 +68,19 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
 
       <Dialog>
         <DialogTrigger className="block w-full pt-1 text-center text-xs text-muted-foreground underline underline-offset-2">
-          Loobu kohast
+          Pilet · QR-kood · loobumine
         </DialogTrigger>
         <DialogContent className="max-w-sm rounded-2xl">
           <DialogHeader>
-            <DialogTitle>Loobu kohast</DialogTitle>
+            <DialogTitle>Sinu pilet</DialogTitle>
             <DialogDescription>
-              Loobumine käib Fienta kaudu. Ava oma Fienta kinnitusmeil ja vajuta „Loobu“ – koht
-              vabaneb teistele.
+              Logi Fientasse sisse sama meiliga, millega registreerusid – sealt näed oma piletit ja
+              QR-koodi ning saad soovi korral kohast loobuda.
             </DialogDescription>
           </DialogHeader>
           <Button asChild className="rounded-full">
-            <a href={event.fientaUrl} target="_blank" rel="noreferrer">
-              Ava Fienta
+            <a href="https://fienta.com/auth/login" target="_blank" rel="noreferrer">
+              Ava Fienta konto
             </a>
           </Button>
         </DialogContent>
