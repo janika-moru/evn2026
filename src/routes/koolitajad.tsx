@@ -139,13 +139,6 @@ function SpeakersPage() {
                     LinkedIn
                   </a>
                 )}
-                {slidesUrl ? (
-                  <a href={slidesUrl} target="_blank" rel="noreferrer" className={contactLink}>
-                    Slaidid
-                  </a>
-                ) : (
-                  <span className={disabledLink}>Slaidid</span>
-                )}
                 {s.facebookUrl && (
                   <a href={s.facebookUrl} target="_blank" rel="noreferrer" className={contactLink}>
                     Facebook
@@ -155,6 +148,13 @@ function SpeakersPage() {
                   <a href={s.instagramUrl} target="_blank" rel="noreferrer" className={contactLink}>
                     Instagram
                   </a>
+                )}
+                {slidesUrl ? (
+                  <a href={slidesUrl} target="_blank" rel="noreferrer" className={contactLink}>
+                    Slaidid
+                  </a>
+                ) : (
+                  <span className={disabledLink}>Slaidid</span>
                 )}
               </div>
 

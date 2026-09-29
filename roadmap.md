@@ -50,3 +50,4 @@
 - [x] Epp Kärsin: profiilipilt, koduleht (eppkarsin.com) ja Instagram lisatud
 - [x] Birgit Ruunik: profiilipilt, koduleht (palgajutud.ee) ja LinkedIn lisatud
 - [x] Kadri Leppik: profiilipilt, koduleht (digistrateeg.ee) ja LinkedIn lisatud
+- [x] Kiia Paal: uus portree (kiia-paal.png), koduleht = Pehme Sünni Kool (hypnosynnitus.ee), Facebook = Studio MindZ; kontaktide reades jääb „Slaidid" paremale
