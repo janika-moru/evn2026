@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Clock, MapPin } from "lucide-react";
 import { StatusBadge, SoldOutPill } from "@/components/EventCard";
 import { RegisteredEventActions } from "@/components/RegisteredEventActions";
+import { SpeakerLinks } from "@/components/SpeakerLinks";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
 import { getEvent, longDate, dayLabel, displayTime } from "@/lib/events";
@@ -99,7 +100,7 @@ function EventDetailPage() {
         )}
         {displayStatus === "full" && <SoldOutPill className="w-full py-3.5 text-base" />}
         {status === "registered" && (
-          <p className="rounded-2xl border border-primary/40 bg-secondary/40 p-4 text-center text-sm font-semibold text-primary">
+          <p className="text-sm font-semibold text-primary">
             Oled sellele sündmusele registreerunud ✓
           </p>
         )}
