@@ -2,6 +2,7 @@
 // Päris andmed Fienta ametlikust avalikust API-st (organizer 33715), seisuga 28.09.2026.
 
 import anuTahemaaPhoto from "@/assets/anu-tahemaa.png.asset.json";
+import eppKarsinPhoto from "@/assets/epp-karsin.png.asset.json";
 import kiiaPaalPhoto from "@/assets/kiia-paal.jpg.asset.json";
 import liisiPhoto from "@/assets/liisi.jpg.asset.json";
 import seljePhoto from "@/assets/selje.jpg.asset.json";
@@ -621,6 +622,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Epp Kärsin",
     "role": "",
     "bio": "",
+    "imageUrl": eppKarsinPhoto.url,
+    "websiteUrl": "https://www.eppkarsin.com/",
+    "instagramUrl": "https://www.instagram.com/eppkarsin",
     "eventIds": [
       "202959"
     ]
