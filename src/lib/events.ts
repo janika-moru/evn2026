@@ -5,6 +5,7 @@ import anuTahemaaPhoto from "@/assets/anu-tahemaa.png.asset.json";
 import birgitRuunikPhoto from "@/assets/birgit-ruunik.png.asset.json";
 import eppKarsinPhoto from "@/assets/epp-karsin.png.asset.json";
 import kiiaPaalPhoto from "@/assets/kiia-paal.jpg.asset.json";
+import kadriLeppikPhoto from "@/assets/kadri-leppik.png.asset.json";
 import liisiPhoto from "@/assets/liisi.jpg.asset.json";
 import seljePhoto from "@/assets/selje.jpg.asset.json";
 
@@ -491,6 +492,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Kadri Leppik",
     "role": "",
     "bio": "",
+    "imageUrl": kadriLeppikPhoto.url,
+    "websiteUrl": "https://digistrateeg.ee/",
+    "linkedinUrl": "https://www.linkedin.com/in/kadri-leppik/",
     "eventIds": [
       "202930"
     ]
