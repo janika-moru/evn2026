@@ -186,6 +186,15 @@ function InfoPage() {
           </h2>
         </div>
 
+        <p className="mt-3 text-sm leading-relaxed text-foreground/80">
+          Studio MindZ-is usume, et tõeliselt väärtuslik kogemus sünnib hubases atmosfääris, mille
+          täidavad innustunud osalejad.
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+          Koolitusstuudio asub otse vanalinna südames – jalutuskäigu kaugusel kohvikutest, Raekoja
+          platsist ja Emajõest.
+        </p>
+
         <RoomGallery images={ROOM_IMAGES} />
 
         <p className="mt-4 text-sm leading-relaxed text-foreground/80">
