@@ -57,3 +57,4 @@
 - [x] Katrin Vilimaa-Otsing: profiilipilt, koduleht (turunduskoolitus.ee) ja LinkedIn lisatud
 - [x] Katrin Differt: profiilipilt, koduleht (360kogemus.ee) ja LinkedIn lisatud
 - [x] Ivar Raav: profiilipilt, koduleht (ivarraav.com) ja LinkedIn lisatud
+- [x] Kava ja Minu kava: koolitaja nime kõrval tema pilt (nimi + lingid pildi kõrval)
