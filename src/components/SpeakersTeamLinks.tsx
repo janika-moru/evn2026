@@ -58,7 +58,7 @@ export function KoolitajadRow() {
           {speaker.imageUrl ? (
             <img src={speaker.imageUrl} alt={speaker.name} className="size-14 rounded-full object-cover" />
           ) : (
-            <div className="flex size-14 items-center justify-center rounded-full bg-secondary text-base font-semibold">
+            <div className="flex size-14 items-center justify-center rounded-full bg-background text-base font-semibold">
               {initials(speaker.name)}
             </div>
           )}
@@ -69,11 +69,14 @@ export function KoolitajadRow() {
   );
 }
 
-/** Koolitajate pallikese rida rohelises kaardis — Tagasiside lehel. */
+/** Koolitajate pallikese rida roosas kaardis — Tagasiside lehel. */
 export function KoolitajadPills() {
   return (
-    <section className="mt-4 rounded-2xl border border-primary/25 bg-mindz-mint p-4">
-      <p className="text-sm font-semibold">Koolitajad</p>
+    <section className="mt-4 rounded-2xl border border-mindz-pink bg-mindz-pink p-4">
+      <h2 className="text-base font-semibold">Jäta tagasiside koolitusele</h2>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Klõpsa koolitaja pildil ja täida tagasiside vorm.
+      </p>
       <div className="mt-3">
         <KoolitajadRow />
       </div>
