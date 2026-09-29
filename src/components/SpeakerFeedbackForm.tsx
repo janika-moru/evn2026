@@ -114,24 +114,26 @@ export function SpeakerFeedbackForm({
         <p className="mt-1 text-sm text-muted-foreground">
           Aitäh! Koolitaja loeb seda ja see aitab järgmisi koolitusi paremini ette valmistada.
         </p>
-        <button
-          onClick={() => {
-            setSent(false);
-            setRating(null);
-            setMessage("");
-          }}
-          className="mt-2 text-sm font-semibold text-primary underline underline-offset-2"
-        >
-          Jäta veel üks tagasiside
-        </button>
-        {onClose && (
+        <div className="mt-3 flex flex-col items-center gap-1.5">
           <button
-            onClick={onClose}
-            className="mt-1 text-sm text-muted-foreground underline underline-offset-2"
+            onClick={() => {
+              setSent(false);
+              setRating(null);
+              setMessage("");
+            }}
+            className="text-sm font-semibold text-primary underline underline-offset-2"
           >
-            Sulge
+            Jäta veel üks tagasiside
           </button>
-        )}
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="text-sm text-muted-foreground underline underline-offset-2"
+            >
+              Sulge
+            </button>
+          )}
+        </div>
       </div>
     );
   }
