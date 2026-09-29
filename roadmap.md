@@ -38,5 +38,5 @@
 - [x] Info leht: pealkiri eemaldatud, salvestuste teavitus, vahetusjalanõude märkus ning ruumide galerii, kirjeldused ja rendiinfo
 - [x] Info leht: ruumide rentimine eraldi esile tõstetud roheline kaart — paigas hinnad 50 € + KM tund, 350 € + KM päev; laudade-toolade liigutamise lause toodud ruumide sissejuhatusesse
 - [x] Info leht: „Studio MindZ meeskond" kaardi sektsiooni all, vahetult „Ruumid" ees; aadressikaart kompaktsem — ikoon ja „Studio MindZ" ühel real
-- [ ] Minu kava sisselogitud vaade: üks kompaktne kaart iga registreeringu kohta, ilma eraldi materjalide sektsioonita
-- [ ] Sündmuse detailvaade: sama sisu Kava ja Minu kava kaudu, kalendrinupu asemel tagasiside, slaidid ja koolitaja profiil
+- [x] Minu kava sisselogitud vaade: üks kompaktne kaart iga registreeringu kohta, ilma eraldi materjalide sektsioonita
+- [x] Sündmuse detailvaade: sama sisu Kava ja Minu kava kaudu, kalendrinupu asemel tagasiside, slaidid ja koolitaja profiil

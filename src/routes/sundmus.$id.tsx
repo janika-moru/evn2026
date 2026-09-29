@@ -1,9 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, CalendarPlus, Clock, MapPin, MessageSquareHeart, FileText } from "lucide-react";
+import { ArrowLeft, Clock, MapPin } from "lucide-react";
 import { StatusBadge, SoldOutPill } from "@/components/EventCard";
+import { RegisteredEventActions } from "@/components/RegisteredEventActions";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
-import { getEvent, longDate, dayLabel, displayTime, type EventItem } from "@/lib/events";
+import { getEvent, longDate, dayLabel, displayTime } from "@/lib/events";
 
 export const Route = createFileRoute("/sundmus/$id")({
   loader: ({ params }) => {
@@ -40,26 +41,6 @@ export const Route = createFileRoute("/sundmus/$id")({
   },
   component: EventDetailPage,
 });
-
-function icsHref(event: EventItem): string {
-  const dt = (date: string, time: string) =>
-    `${date.replaceAll("-", "")}T${time.replace(":", "")}00`;
-  const ics = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//Studio MindZ 2026//ET",
-    "BEGIN:VEVENT",
-    `UID:${event.id}@studiomindz2026`,
-    `DTSTART:${dt(event.date, event.startTime)}`,
-    `DTEND:${dt(event.date, event.endTime)}`,
-    `SUMMARY:${event.title}`,
-    `LOCATION:${event.venue}`,
-    `DESCRIPTION:${event.speaker} — ${event.shortDescription}`,
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n");
-  return `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`;
-}
 
 function EventDetailPage() {
   const { event } = Route.useLoaderData();
@@ -120,40 +101,7 @@ function EventDetailPage() {
             Oled sellele sündmusele registreerunud ✓
           </p>
         )}
-        <a
-          href={icsHref(event)}
-          download={`${event.id}.ics`}
-          className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold"
-        >
-          <CalendarPlus className="size-4" /> Lisa kalendrisse
-        </a>
-        <Link
-          to="/tagasiside"
-          search={{ sundmus: event.id }}
-          className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold"
-        >
-          <MessageSquareHeart className="size-4" /> Anna tagasisidet
-        </Link>
-        {event.slidesUrl && (
-          <a
-            href={event.slidesUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold"
-          >
-            <FileText className="size-4" /> Vaata slaide
-          </a>
-        )}
-        {event.materialsUrl && (
-          <a
-            href={event.materialsUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold"
-          >
-            <FileText className="size-4" /> Materjalid
-          </a>
-        )}
+        <RegisteredEventActions event={event} />
       </div>
     </main>
   );
