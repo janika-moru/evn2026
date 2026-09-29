@@ -648,6 +648,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Anu Tähemaa",
     "role": "",
     "bio": "",
+    "imageUrl": anuTahemaaPhoto.url,
+    "websiteUrl": "https://corporatemaestro.com/et/",
+    "linkedinUrl": "https://www.linkedin.com/in/anu-tahemaa/",
     "eventIds": [
       "202953"
     ]
