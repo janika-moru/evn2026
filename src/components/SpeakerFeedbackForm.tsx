@@ -58,6 +58,7 @@ export function SpeakerFeedbackForm({
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
   const msgRef = useRef<HTMLTextAreaElement>(null);
+  const sentRef = useRef<HTMLDivElement>(null);
 
   // Eeltäide: 1) seadmesse salvestatud varasem tagasiside, 2) sisse logitud e-post
   useEffect(() => {
