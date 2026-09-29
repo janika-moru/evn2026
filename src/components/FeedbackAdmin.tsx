@@ -136,6 +136,9 @@ export function FeedbackAdmin() {
             {r.contact_requested && (
               <p className="mt-2 font-medium">📞 Soovib ühendust: {r.contact ?? "—"}</p>
             )}
+            {r.photo_promise && (
+              <p className="mt-2 font-medium">📷 Saadab pildi hiljem — tuleta meelde: {r.contact ?? "meiliaadress puudub"}</p>
+            )}
             <div className="mt-2 flex gap-4">
               {r.attachment_url && (
                 <button
