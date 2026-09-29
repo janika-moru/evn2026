@@ -49,3 +49,4 @@
 - [x] Kava leht: registreerunud osaleja „Oled registreerunud" märk liigutatud paremale (kuskohale „Registreeru" nupp oli) ja selle kõrvale jääb „Vabu kohti: xx"
 - [x] Epp Kärsin: profiilipilt, koduleht (eppkarsin.com) ja Instagram lisatud
 - [x] Birgit Ruunik: profiilipilt, koduleht (palgajutud.ee) ja LinkedIn lisatud
+- [x] Kadri Leppik: profiilipilt, koduleht (digistrateeg.ee) ja LinkedIn lisatud
