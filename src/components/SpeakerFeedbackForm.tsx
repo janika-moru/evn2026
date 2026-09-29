@@ -144,11 +144,10 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
     }
     // Jäta seadmesse meelde järgmiseks korraks (ainult kasutaja oma seade)
     try {
-      const saved: SavedProfile = {
-        name: name.trim() || undefined,
-        field: field.trim() || undefined,
-        contact: contact.trim() || undefined,
-      };
+      const saved: SavedProfile = {};
+      if (name.trim()) saved.name = name.trim();
+      if (field.trim()) saved.field = field.trim();
+      if (contact.trim()) saved.contact = contact.trim();
       if (photo && photo.size <= PHOTO_PREFILL_MAX) {
         saved.photoName = photo.name;
         saved.photoDataUrl = await new Promise<string>((resolve, reject) => {
