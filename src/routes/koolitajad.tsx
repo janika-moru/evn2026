@@ -8,6 +8,7 @@ import {
   displayTime,
 } from "@/lib/events";
 import koolitajadBanner from "@/assets/koolitajad-programm-banner.png.asset.json";
+import { SpeakerFeedbackForm } from "@/components/SpeakerFeedbackForm";
 
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
@@ -148,6 +149,8 @@ function SpeakersPage() {
                   )}
                 </div>
               )}
+
+              <SpeakerFeedbackForm speaker={s} />
             </article>
           );
         })}
