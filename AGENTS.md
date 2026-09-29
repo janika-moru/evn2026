@@ -11,7 +11,7 @@
 - Fienta registrations are keyed by email_normalized (not auth user id); participants read their own rows via RLS on auth.jwt() email — registrations can exist before the account does.
 - Fienta webhook lives at /api/public/fienta-webhook, guarded by ?token= matching FIENTA_WEBHOOK_TOKEN; parsing/upsert shared with CSV import in src/lib/registrations.server.ts — one dedupe path.
 - Fienta registrations primarily sync via official API (GET /api/v1/events/{id}/tickets, Bearer FIENTA_API) in syncFromFientaApi; triggered on Minu kava load (throttled 1/min via webhook_logs source='api-sync') and admin button — no cron/webhook dependency needed.
-- Public event availability is persisted in event_availability and computed during Fienta sync as 50 minus non-cancelled/refunded ticket quantities — keeps attendee data private while exposing counts.
+- Public event availability is persisted in event_availability and computed during Fienta sync as each event's optional capacity (default 50) minus non-cancelled/refunded ticket quantities — Morning Mindset sessions use 25 while attendee data stays private.
 - Speaker contact and photo fields live on SPEAKERS, while slides and materials stay on EVENTS — profiles remain reusable and resources stay tied to the correct session.
 - Repeated sessions are tagged with seriesUrl on EVENTS and collapsed to one row by speakerEventRows() (src/lib/events.ts) — keeps the koolitajad list scannable and links to the Fienta series page instead of five near-duplicate events.
 - Event dates and times stay in ISO/Fienta format internally and are localized only for display through helpers in src/lib/events.ts — preserves sorting, comparisons, and calendar exports.
