@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { EventCard } from "@/components/EventCard";
 import kavaBanner from "@/assets/kava-banner.png.asset.json";
-import ruumidBanner from "@/assets/ruumid-banner.png.asset.json";
 import { EVENT_DAYS, eventsForDate, longDate, todayEventDate } from "@/lib/events";
 
 const validateSearch = (search: Record<string, unknown>): { paev?: string } =>
@@ -116,12 +115,6 @@ function SchedulePage() {
           events.map((e) => <EventCard key={e.id} event={e} />)
         )}
       </div>
-
-      <img
-        src={ruumidBanner.url}
-        alt="Studio MindZi ruumid — registreerimine Fienta.com/studiomindz"
-        className="mt-8 w-full rounded-2xl"
-      />
     </main>
   );
 }
