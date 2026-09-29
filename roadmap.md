@@ -29,4 +29,5 @@
 - [x] Tagasisidevorm: tekstikast kasvab kirjutades, "(valikuline)" märgused lahtritest eemaldatud, "meil" sõnastus, linnuke „saadan pildi hiljem — tuleta meiliga meelde“ (feedback.photo_promise, nähtab Adminis)
 - [x] Tagasiside leht: koolitajale klõpsates avaneb tema tagasisidevorm kohe samal lehel (profiili avamine ära)
 - [x] Koolitajate pallikese nimed: perekonnanimi alati teisele reale (eesnimi 1. real), pikk hüüdnimeline ei katkekeskelt
+- [x] Tagasisidevormid: selge kinnitus pärast saatmist — „Sinu tagasiside jõudis meieni" + roheline märk (mõlemad vormid: koolitajavorm ja tiimi vormid)
 - [ ] Avaldada uuesti, et muudatused jõuaksid aadressile evn2026.lovable.app
