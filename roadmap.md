@@ -33,4 +33,5 @@
 - [x] Kava leht: pealkiri „Kava" ja „Studio MindZi programm · 5.–9. oktoober" eemaldatud — tekst tuleb nähtavale ainult siis, kui bänneri pilt ei laadi
 - [x] Kava leht: alumine ruumide bänner eemaldatud
 - [x] Minu kava: koolitajate ja meeskonna osa eemaldatud; ainult sisselogimine + oma registreeringud; pikemad juhised ja „Sisse logides saad" loend
+- [x] Minu kava: sisselogimisnupu alla selgitus „Parooli ei ole vaja luua. Kliki postkastis oleval lingil ja see toob su tagasi äppi sisselogituna."
 - [ ] Avaldada uuesti, et muudatused jõuaksid aadressile evn2026.lovable.app

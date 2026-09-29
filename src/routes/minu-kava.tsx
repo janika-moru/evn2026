@@ -119,7 +119,10 @@ function SignInCard() {
           <Mail className="size-4" />
           {status === "sending" ? "Saadan…" : "Saada sisselogimislink"}
         </button>
-        <p className="mt-2 text-xs text-muted-foreground">Parooli ei ole vaja luua.</p>
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+          Parooli ei ole vaja luua. Kliki postkastis oleval lingil ja see toob su tagasi
+          äppi sisselogituna.
+        </p>
         {message && (
           <p
             className={`mt-3 text-sm ${status === "error" ? "text-destructive" : "text-primary"}`}
