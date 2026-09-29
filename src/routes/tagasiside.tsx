@@ -4,7 +4,7 @@ import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } 
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 import koolitajadBanner from "@/assets/koolitajad-programm-banner.png.asset.json";
-import { MeeskondCard } from "@/components/SpeakersTeamLinks";
+import { MeeskondRow } from "@/components/SpeakersTeamLinks";
 
 
 
@@ -155,10 +155,38 @@ function FeedbackPage() {
   if (!type) {
     return (
       <main className="px-4 pt-6 pb-8">
+        <section className="rounded-3xl border border-primary/25 bg-mindz-mint p-4">
+          <p className="text-sm font-semibold">Studio MindZ meeskond</p>
+          <div className="mt-3">
+            <MeeskondRow />
+          </div>
+
+          <div className="mt-4 grid gap-2">
+            {TYPES.filter((item) => item.id !== "training").map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setType(item.id)}
+                className="flex items-center gap-3 rounded-2xl border border-primary/20 bg-background/70 px-4 py-3.5 text-left text-sm font-semibold transition active:scale-[0.98]"
+              >
+                <item.icon className="size-5 shrink-0 text-primary" />
+                {item.id === "keep" ? "Kiidan korraldust, ruume või tiimi" : "Parandusettepanek korraldusele, ruumidele või tiimile"}
+              </button>
+            ))}
+          </div>
+
+          <a
+            href={GOOGLE_REVIEW_URL}
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-mindz-pink p-4 text-sm font-semibold transition active:scale-[0.98]"
+          >
+            <Star className="size-5 text-primary" />
+            Lisa Google arvustus
+          </a>
+        </section>
+
         <img
           src={koolitajadBanner.url}
           alt="Tartu Ettevõtlusnädala koolitajad Studio MindZis"
-          className="w-full rounded-2xl"
+          className="mt-6 w-full rounded-2xl"
         />
         <button
           onClick={() => setType("training")}
@@ -167,33 +195,8 @@ function FeedbackPage() {
           <GraduationCap className="size-5" />
           Jäta tagasiside koolitusele
         </button>
-
-        <MeeskondCard />
-
-        <div className="mt-3 grid grid-cols-2 gap-3">
-          {TYPES.filter((item) => item.id !== "training").map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setType(item.id)}
-              className="flex min-h-24 flex-col items-start justify-between rounded-2xl border border-border bg-card p-4 text-left text-sm font-semibold transition active:scale-[0.98]"
-            >
-              <item.icon className="size-5 text-primary" />
-              {item.id === "keep" ? "Kiidan" : "Parandusettepanek"}
-            </button>
-          ))}
-        </div>
-
-        <a
-          href={GOOGLE_REVIEW_URL}
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl border border-mindz-pink bg-mindz-pink p-4 text-sm font-semibold transition active:scale-[0.98]"
-        >
-          <Star className="size-5 text-primary" />
-          Lisa Google arvustus
-        </a>
       </main>
-
     );
-
   }
 
   const current = TYPES.find((t) => t.id === type);
