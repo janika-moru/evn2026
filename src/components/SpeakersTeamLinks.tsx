@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Users } from "lucide-react";
-import { firstName, initials, teamMembers } from "@/lib/events";
+import { firstName, initials, teamMembers, speakersInListOrder } from "@/lib/events";
 
 /** Roosa kaart, mis viib koolitajate ja materjalide lehele. */
 export function KoolitajadCard() {

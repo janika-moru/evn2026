@@ -3,8 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
-import koolitajadBanner from "@/assets/koolitajad-programm-banner.png.asset.json";
-import { MeeskondRow } from "@/components/SpeakersTeamLinks";
+import { MeeskondRow, KoolitajadPills } from "@/components/SpeakersTeamLinks";
 
 
 
