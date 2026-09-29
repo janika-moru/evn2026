@@ -37,4 +37,4 @@
 - [ ] Avaldada uuesti, et muudatused jõuaksid aadressile evn2026.lovable.app
 - [x] Info leht: pealkiri eemaldatud, salvestuste teavitus, vahetusjalanõude märkus ning ruumide galerii, kirjeldused ja rendiinfo
 - [x] Info leht: ruumide rentimine eraldi esile tõstetud roheline kaart — paigas hinnad 50 € + KM tund, 350 € + KM päev; laudade-toolade liigutamise lause toodud ruumide sissejuhatusesse
-- [x] Info leht: „Studio MindZ meeskond" toodud koha kaardi alla (pealkirja järele), aadressikaart kompaktsem — ikoon ja „Studio MindZ" ühel real
+- [x] Info leht: „Studio MindZ meeskond" kaardi sektsiooni all, vahetult „Ruumid" ees; aadressikaart kompaktsem — ikoon ja „Studio MindZ" ühel real
