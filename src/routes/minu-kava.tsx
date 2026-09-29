@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CalendarCheck, Check, FileText, LogOut, Mail, MessageSquareHeart, RefreshCw, UserRound } from "lucide-react";
+import { CalendarCheck, Check, LogOut, Mail, RefreshCw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { EventCard } from "@/components/EventCard";
-import { EVENTS, longDate, EVENT_DAYS, speakersForEvent, displayTime, type EventItem } from "@/lib/events";
+import { Button } from "@/components/ui/button";
+import { RegisteredEventActions } from "@/components/RegisteredEventActions";
+import { EVENTS, longDate, displayTime, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
 
 const BENEFITS = [
@@ -143,12 +144,14 @@ function SignedIn({ email }: { email: string }) {
     <>
       <div className="mt-2 flex items-center justify-between gap-3">
         <p className="truncate text-sm text-muted-foreground">{email}</p>
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={() => supabase.auth.signOut()}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-semibold"
+          className="shrink-0 rounded-full"
         >
           <LogOut className="size-3.5" /> Logi välja
-        </button>
+        </Button>
       </div>
 
       {query.isLoading ? (
@@ -163,158 +166,53 @@ function SignedIn({ email }: { email: string }) {
             Kui registreerusid teise e-posti aadressiga, logi sisse selle aadressiga.
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
-            <button
+            <Button
+              variant="outline"
               onClick={() => query.refetch()}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border px-5 py-2.5 text-sm font-semibold"
+              className="rounded-full"
             >
               <RefreshCw className="size-4" /> Värskenda registreeringuid
-            </button>
-            <Link
-              to="/kava"
-              search={{}}
-              className="inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
-            >
-              Vaata kava
-            </Link>
+            </Button>
+            <Button asChild className="rounded-full">
+              <Link to="/kava" search={{}}>
+                Vaata kava
+              </Link>
+            </Button>
           </div>
         </div>
       ) : (
         <>
-          {EVENT_DAYS.filter((d) => mine.some((e) => e.date === d.date)).map((d) => (
-            <section key={d.date} className="mt-6">
-              <h2 className="text-base font-semibold first-letter:uppercase">{longDate(d.date)}</h2>
-              <div className="mt-3 space-y-3">
-                {mine
-                  .filter((e) => e.date === d.date)
-                  .sort((a, b) => a.startTime.localeCompare(b.startTime))
-                  .map((e) => (
-                    <MyScheduleEvent key={e.id} event={e} />
-                  ))}
-              </div>
-            </section>
-          ))}
-          <MaterialsSection events={mine.filter((e) => e.slidesUrl || e.materialsUrl)} />
-          <button
+          <div className="mt-6 space-y-3">
+            {[...mine]
+              .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
+              .map((event) => (
+                <MyScheduleEvent key={event.id} event={event} />
+              ))}
+          </div>
+          <Button
+            variant="ghost"
             onClick={() => query.refetch()}
-            className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+            className="mt-4 px-0 text-primary"
           >
             <RefreshCw className="size-4" /> Värskenda registreeringuid
-          </button>
+          </Button>
         </>
       )}
     </>
   );
 }
 
-function MaterialsSection({ events }: { events: EventItem[] }) {
-  if (events.length === 0) return null;
-  const sorted = [...events].sort((a, b) => {
-    if (a.date !== b.date) return a.date.localeCompare(b.date);
-    return a.startTime.localeCompare(b.startTime);
-  });
-
-  return (
-    <section className="mt-8 rounded-2xl border border-border bg-card p-4">
-      <h2 className="text-base font-semibold">Koolitajate slaidid ja materjalid</h2>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Siin on kõigi sinu koolituste materjalid ühes kohas. Kui slaidid pole veel lisatud,
-        palun tule hiljem tagasi — need ilmuvad siia niipea, kui koolitajad need jagavad.
-      </p>
-      <div className="mt-3 space-y-3">
-        {sorted.map((e) => (
-          <div key={e.id} className="rounded-xl border border-border bg-background p-3">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              {longDate(e.date)} · {displayTime(e.startTime)}–{displayTime(e.endTime)}
-            </p>
-            <Link
-              to="/sundmus/$id"
-              params={{ id: e.id }}
-              className="mt-0.5 block text-sm font-semibold leading-snug"
-            >
-              {e.title}
-            </Link>
-            <p className="mt-0.5 text-xs text-muted-foreground">{e.speaker}</p>
-            <div className="mt-2 flex flex-wrap gap-x-2 gap-y-1.5">
-              <Link
-                to="/tagasiside"
-                search={{ sundmus: e.id }}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
-              >
-                <MessageSquareHeart className="size-3.5" /> Anna tagasisidet
-              </Link>
-              {e.slidesUrl && (
-                <a
-                  href={e.slidesUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
-                >
-                  <FileText className="size-3.5" /> Vaata slaide
-                </a>
-              )}
-              {e.materialsUrl && (
-                <a
-                  href={e.materialsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
-                >
-                  <FileText className="size-3.5" /> Materjalid
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function MyScheduleEvent({ event }: { event: EventItem }) {
-  const speakers = speakersForEvent(event.id);
-
   return (
-    <div>
-      <EventCard event={event} />
-      <div className="mt-2 flex flex-wrap gap-x-2 gap-y-2 px-1">
-        <Link
-          to="/tagasiside"
-          search={{ sundmus: event.id }}
-          className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
-        >
-          <MessageSquareHeart className="size-3.5" /> Anna tagasisidet
-        </Link>
-        {speakers.map((speaker) => (
-          <Link
-            key={speaker.id}
-            to="/koolitajad"
-            hash={speaker.id}
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
-          >
-            <UserRound className="size-3.5" /> {speaker.name}
-          </Link>
-        ))}
-        {event.slidesUrl && (
-          <a
-            href={event.slidesUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
-          >
-            <FileText className="size-3.5" /> Vaata slaide
-          </a>
-        )}
-        {event.materialsUrl && (
-          <a
-            href={event.materialsUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold"
-          >
-            <FileText className="size-3.5" /> Materjalid
-          </a>
-        )}
-      </div>
-    </div>
+    <article className="rounded-xl border border-border bg-card p-4">
+      <p className="text-xs font-semibold uppercase text-muted-foreground">
+        {longDate(event.date)} {displayTime(event.startTime)}–{displayTime(event.endTime)}
+      </p>
+      <Link to="/sundmus/$id" params={{ id: event.id }} className="mt-1 block">
+        <h2 className="text-base font-semibold leading-snug">{event.title}</h2>
+        <p className="mt-0.5 text-sm text-muted-foreground">{event.speaker}</p>
+      </Link>
+      <RegisteredEventActions event={event} />
+    </article>
   );
 }

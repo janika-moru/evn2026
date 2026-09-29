@@ -16,3 +16,4 @@
 - Repeated sessions are tagged with seriesUrl on EVENTS and collapsed to one row by speakerEventRows() (src/lib/events.ts) — keeps the koolitajad list scannable and links to the Fienta series page instead of five near-duplicate events.
 - Event dates and times stay in ISO/Fienta format internally and are localized only for display through helpers in src/lib/events.ts — preserves sorting, comparisons, and calendar exports.
 - Brand tints are semantic tokens in src/styles.css (@theme --color-mindz-*), e.g. --color-mindz-mint for the light-green team card — never hardcode hex in components, so theming and dark mode keep working.
+- Registered-event actions are shared through RegisteredEventActions in both Minu kava and the event detail — keeps feedback, slides, and speaker contacts identical on both paths.
