@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Users } from "lucide-react";
+import type { ReactNode } from "react";
+import type { Speaker } from "@/lib/events";
 import { firstName, initials, teamMembers, speakersInListOrder } from "@/lib/events";
 
 /** Roosa kaart, mis viib koolitajate ja materjalide lehele. */
@@ -110,7 +112,7 @@ export function KoolitajadPills({
 }: {
   onSelect?: (speaker: Speaker) => void;
   selectedId?: string | null;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }) {
   return (
     <section className="mt-4 rounded-2xl border border-mindz-pink bg-mindz-pink p-4">

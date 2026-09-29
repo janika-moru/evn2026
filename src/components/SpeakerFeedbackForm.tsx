@@ -201,10 +201,12 @@ export function SpeakerFeedbackForm({
       className="mt-4 space-y-4 rounded-2xl border border-border bg-background/70 p-4"
     >
       <div className="flex items-center justify-between gap-2">
-        <p className="text-sm font-semibold">Saada tagasiside koolitajale</p>
+        <p className="text-sm font-semibold">
+          {onClose ? `Tagasiside — ${speaker.name}` : "Saada tagasiside koolitajale"}
+        </p>
         <button
           type="button"
-          onClick={() => setOpen(false)}
+          onClick={() => (onClose ? onClose() : setOpen(false))}
           aria-label="Sulge vorm"
           className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
