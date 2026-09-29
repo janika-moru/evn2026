@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CalendarCheck, Check, LogOut, Mail, RefreshCw } from "lucide-react";
+import { CalendarCheck, Check, LogOut, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { RegisteredEventActions } from "@/components/RegisteredEventActions";
@@ -165,14 +165,7 @@ function SignedIn({ email }: { email: string }) {
           <p className="mt-1 text-sm text-muted-foreground">
             Kui registreerusid teise e-posti aadressiga, logi sisse selle aadressiga.
           </p>
-          <div className="mt-4 flex flex-wrap justify-center gap-2">
-            <Button
-              variant="outline"
-              onClick={() => query.refetch()}
-              className="rounded-full"
-            >
-              <RefreshCw className="size-4" /> Värskenda registreeringuid
-            </Button>
+          <div className="mt-4 flex justify-center">
             <Button asChild className="rounded-full">
               <Link to="/kava" search={{}}>
                 Vaata kava
@@ -189,13 +182,6 @@ function SignedIn({ email }: { email: string }) {
                 <MyScheduleEvent key={event.id} event={event} />
               ))}
           </div>
-          <Button
-            variant="ghost"
-            onClick={() => query.refetch()}
-            className="mt-4 px-0 text-primary"
-          >
-            <RefreshCw className="size-4" /> Värskenda registreeringuid
-          </Button>
         </>
       )}
     </>
