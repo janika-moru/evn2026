@@ -182,7 +182,17 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
       onSubmit={submit}
       className="mt-4 space-y-4 rounded-2xl border border-border bg-background/70 p-4"
     >
-      <p className="text-sm font-semibold">Saada tagasiside koolitajale</p>
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-sm font-semibold">Saada tagasiside koolitajale</p>
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          aria-label="Sulge vorm"
+          className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
         Sinu tagasiside aitab järgmisi koolitusi paremini ette valmistada.
         <br />
