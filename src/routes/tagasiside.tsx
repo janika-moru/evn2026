@@ -161,15 +161,15 @@ function FeedbackPage() {
             <MeeskondRow />
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-3">
+          <div className="mt-4 grid gap-2">
             {TYPES.filter((item) => item.id !== "training").map((item) => (
               <button
                 key={item.id}
                 onClick={() => setType(item.id)}
-                className="flex min-h-24 flex-col items-start justify-between rounded-2xl border border-primary/20 bg-background/70 p-4 text-left text-sm font-semibold transition active:scale-[0.98]"
+                className="flex items-center gap-3 rounded-2xl border border-primary/20 bg-background/70 px-4 py-3.5 text-left text-sm font-semibold transition active:scale-[0.98]"
               >
-                <item.icon className="size-5 text-primary" />
-                {item.id === "keep" ? "Kiidan" : "Parandusettepanek"}
+                <item.icon className="size-5 shrink-0 text-primary" />
+                {item.id === "keep" ? "Kiidan korraldust, ruume või tiimi" : "Parandusettepanek korraldusele, ruumidele või tiimile"}
               </button>
             ))}
           </div>
