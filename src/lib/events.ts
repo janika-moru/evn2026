@@ -4,6 +4,7 @@
 import anuTahemaaPhoto from "@/assets/anu-tahemaa.png.asset.json";
 import birgitRuunikPhoto from "@/assets/birgit-ruunik.png.asset.json";
 import eppKarsinPhoto from "@/assets/epp-karsin.png.asset.json";
+import janikaMoruPhoto from "@/assets/janika-moru.png.asset.json";
 import kiiaPaalPhoto from "@/assets/kiia-paal.png.asset.json";
 import kadriLeppikPhoto from "@/assets/kadri-leppik.png.asset.json";
 import liisiPhoto from "@/assets/liisi.jpg.asset.json";
@@ -519,7 +520,7 @@ export const SPEAKERS: Speaker[] = [
     "name": "Janika Mõru",
     "role": "",
     "bio": "",
-    "imageUrl": "/__l5e/assets-v1/cc3a7c71-0e00-4a78-b819-41b01ac98a4f/janika-hele-portree.jpg",
+    "imageUrl": janikaMoruPhoto.url,
     "email": "janika@assisto.ee",
     "phone": "5358 3234",
     "websiteUrl": "https://janikamoru.ee",
