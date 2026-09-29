@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { EventCard } from "@/components/EventCard";
 import { EVENTS, longDate, EVENT_DAYS, speakersForEvent, displayTime, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
+
 const BENEFITS = [
   "näha ja tühistada oma registreerimisi",
   "ligipääsu slaidele ja lisamaterjalidele",
