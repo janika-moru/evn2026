@@ -84,13 +84,17 @@ export function EventCard({
 
       {(!hideRegisteredBadge || !registered) && (
         <div className="mt-3 flex items-center justify-between gap-2">
-          <StatusBadge status={displayStatus} />
-          {displayStatus === "open" && (
+          {displayStatus === "closed" && <StatusBadge status={displayStatus} />}
+          {(displayStatus === "open" || registered) && (
             <span className="ml-auto flex items-center gap-3">
               <span className="text-sm text-primary">Vabu kohti: {availableSpots ?? 50}</span>
-              <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
-                Registreeru
-              </span>
+              {registered ? (
+                <StatusBadge status="registered" />
+              ) : (
+                <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+                  Registreeru
+                </span>
+              )}
             </span>
           )}
           {displayStatus === "full" && <SoldOutPill className="ml-auto" />}
