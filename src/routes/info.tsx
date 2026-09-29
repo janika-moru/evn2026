@@ -25,6 +25,11 @@ import room2 from "@/assets/MindZ_stuudioruumid_Tartu_009.jpg.asset.json";
 import room3 from "@/assets/MindZ_stuudioruumid_Tartu_011.jpg.asset.json";
 import room4 from "@/assets/MindZ_stuudioruumid_Tartu_016.jpg.asset.json";
 import room5 from "@/assets/MindZ_stuudioruumid_Tartu_031.jpg.asset.json";
+import ettn2025Timo from "@/assets/ettn2025-timo-porval.jpg.asset.json";
+import ettn2025Mariliis from "@/assets/ettn2025-mariliis-piikar.jpg.asset.json";
+import ettn2025Anu from "@/assets/ettn2025-anu-tahemaa.jpg.asset.json";
+import ettn2025AnuHetk from "@/assets/ettn2025-anu-tahemaa-elamus.jpg.asset.json";
+import ettn2025Janika from "@/assets/ettn2025-janika-moru.jpg.asset.json";
 
 /** Kohale tuleku juhise pilt. */
 const DIRECTIONS_IMAGE_URL: string | null = directionsImage.url;
@@ -34,13 +39,21 @@ const MAPS_URL =
 
 const ROOM_IMAGES = [
   { src: room5.url, alt: "Studio MindZi koolitusruum roheliste tugitoolidega" },
-  { src: largeRoomFront.url, alt: "Studio MindZi suur koolitusruum" },
-  { src: largeRoomCircle.url, alt: "Studio MindZi suur koolitusruum ringis toolidega" },
+  { src: room2.url, alt: "Studio MindZi koolitusruum taimede ja valgustitega" },
   { src: meetingRoom.url, alt: "Studio MindZi väike koosolekuruum" },
   { src: kitchen.url, alt: "Studio MindZi köök" },
-  { src: room2.url, alt: "Studio MindZi koolitusruum taimede ja valgustitega" },
+  { src: largeRoomFront.url, alt: "Studio MindZi suur koolitusruum" },
+  { src: largeRoomCircle.url, alt: "Studio MindZi suur koolitusruum ringis toolidega" },
   { src: room3.url, alt: "Studio MindZi koolitusruum pabertahvli ja istmetega" },
   { src: room4.url, alt: "Studio MindZi koolitusruumi vaade köögivanni poolt" },
+  { src: ettn2025Timo.url, alt: "Ettevõtlusnädal 2025: Timo Porval esinemas Studio MindZi ruumis" },
+  {
+    src: ettn2025Mariliis.url,
+    alt: "Ettevõtlusnädal 2025: Mariliis Piikar rääkimas osalejatele",
+  },
+  { src: ettn2025Anu.url, alt: "Ettevõtlusnädal 2025: Anu Tähemaa trummitund osalejatega" },
+  { src: ettn2025AnuHetk.url, alt: "Ettevõtlusnädal 2025: Anu Tähemaa hetk osalejatega" },
+  { src: ettn2025Janika.url, alt: "Ettevõtlusnädal 2025: Janika Mõru juhendamas rühmatööd" },
 ];
 
 const STEPS: { icon: LucideIcon; title: string; text: string }[] = [
