@@ -123,8 +123,13 @@ function FeedbackPage() {
   if (sent) {
     return (
       <main className="px-4 pt-16 text-center">
-        <p className="text-5xl">💚</p>
-        <h1 className="mt-4 text-2xl font-bold">Aitäh! Saime su mõtte kätte.</h1>
+        <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-primary">
+          <CheckCircle2 className="size-8 text-primary-foreground" />
+        </div>
+        <h1 className="mt-4 text-2xl font-bold">Sinu tagasiside jõudis meieni</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Aitäh! Loeme seda kindlasti — ja täname, et võtsid aja.
+        </p>
         <a
           href={GOOGLE_REVIEW_URL}
           className="mx-auto mt-5 flex max-w-xs items-center justify-center gap-2 rounded-2xl bg-mindz-pink p-4 text-sm font-semibold"
