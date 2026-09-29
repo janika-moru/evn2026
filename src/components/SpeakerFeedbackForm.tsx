@@ -35,8 +35,18 @@ function dataUrlToFile(dataUrl: string, name: string): File | null {
 // Tagasisidevorm koolitaja profiili all — hinnang 1–10, tekst, nimi, valdkond,
 // e-post ja valikuline foto. Kõik isikuandmed on vabatahtlikud; varem sisestatud
 // andmed täidetakse seadmest vaikimisi (sisse loginul e-post kontolt).
-export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
-  const [open, setOpen] = useState(false);
+// `startOpen` + `onClose` võimaldavad vormi kasutada ka otse Tagasiside lehel,
+// kus koolitajale klõpsates avaneb vorm kohe ja sulgemisel vormi lihtsalt eemaldatakse.
+export function SpeakerFeedbackForm({
+  speaker,
+  startOpen = false,
+  onClose,
+}: {
+  speaker: Speaker;
+  startOpen?: boolean;
+  onClose?: () => void;
+}) {
+  const [open, setOpen] = useState(startOpen);
   const [rating, setRating] = useState<number | null>(null);
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
@@ -102,6 +112,14 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
         >
           Jäta veel üks tagasiside
         </button>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="mt-1 text-sm text-muted-foreground underline underline-offset-2"
+          >
+            Sulge
+          </button>
+        )}
       </div>
     );
   }
@@ -183,10 +201,12 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
       className="mt-4 space-y-4 rounded-2xl border border-border bg-background/70 p-4"
     >
       <div className="flex items-center justify-between gap-2">
-        <p className="text-sm font-semibold">Saada tagasiside koolitajale</p>
+        <p className="text-sm font-semibold">
+          {onClose ? `Tagasiside — ${speaker.name}` : "Saada tagasiside koolitajale"}
+        </p>
         <button
           type="button"
-          onClick={() => setOpen(false)}
+          onClick={() => (onClose ? onClose() : setOpen(false))}
           aria-label="Sulge vorm"
           className="rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
