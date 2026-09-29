@@ -480,11 +480,14 @@ export const SPEAKERS: Speaker[] = [
       "202938"
     ]
   },
-  {
-    "id": "mikk-orglaan",
-    "name": "Mikk Orglaan",
-    "role": "",
-    "bio": "",
+   {
+     "id": "mikk-orglaan",
+     "name": "Mikk Orglaan",
+     "imageUrl": mikkOrglaanPhoto.url,
+     "websiteUrl": "https://sparkly.hr/et",
+     "linkedinUrl": "https://www.linkedin.com/in/mikkorglaan/",
+     "role": "",
+     "bio": "",
     "eventIds": [
       "202928"
     ]
