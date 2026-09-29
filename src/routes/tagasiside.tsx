@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
+import type { Speaker } from "@/lib/events";
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 import { MeeskondRow, KoolitajadPills } from "@/components/SpeakersTeamLinks";
+import { SpeakerFeedbackForm } from "@/components/SpeakerFeedbackForm";
 
 
 
@@ -61,6 +63,13 @@ function FeedbackPage() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState<FType | null>(null);
+
+  // Koolitajale klõpsates avaneb tema tagasisidevorm kohe siinsamas lehel
+  const [speaker, setSpeaker] = useState<Speaker | null>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (speaker) formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [speaker]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
