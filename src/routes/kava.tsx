@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { EventCard } from "@/components/EventCard";
 import kavaBanner from "@/assets/kava-banner.png.asset.json";
 import ruumidBanner from "@/assets/ruumid-banner.png.asset.json";
@@ -38,6 +38,9 @@ function SchedulePage() {
   const selected = EVENT_DAYS.some((d) => d.date === paev) ? paev! : todayEventDate();
   const events = eventsForDate(selected);
   const dayStartRef = useRef<HTMLDivElement>(null);
+  // Bänner on lehe pealkiri — tekst tuleb nähtavale ainult siis,
+  // kui pilt ei lahenud (nt nõrk internet).
+  const [bannerFailed, setBannerFailed] = useState(false);
 
   function selectDay(date: string) {
     if (date !== selected) {
@@ -52,15 +55,24 @@ function SchedulePage() {
 
   return (
     <main className="px-4 pt-8">
-      <img
-        src={kavaBanner.url}
-        alt="Tartu Ettevõtlusnädal 5.–9. oktoober Studio MindZis, Lutsu 3"
-        className="w-full rounded-2xl"
-      />
-      <h1 className="mt-4 text-2xl font-bold">Kava</h1>
-      <p className="mt-1 text-sm text-muted-foreground">
-        Studio MindZi programm · 5.–9. oktoober
-      </p>
+      {bannerFailed ? (
+        <div className="rounded-2xl bg-secondary px-4 py-4">
+          <h1 className="text-2xl font-bold">Kava</h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Studio MindZi programm · 5.–9. oktoober
+          </p>
+        </div>
+      ) : (
+        <>
+          <h1 className="sr-only">Kava</h1>
+          <img
+            src={kavaBanner.url}
+            alt="Tartu Ettevõtlusnädal 5.–9. oktoober Studio MindZis, Lutsu 3"
+            className="w-full rounded-2xl"
+            onError={() => setBannerFailed(true)}
+          />
+        </>
+      )}
 
       <div role="tablist" aria-label="Vali päev" className="mt-4 grid grid-cols-5 gap-1.5">
         {EVENT_DAYS.map((d) => {
