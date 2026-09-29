@@ -58,8 +58,8 @@ export function KoolitajadRow({
   onSelect,
   selectedId,
 }: {
-  onSelect?: (speaker: Speaker) => void;
-  selectedId?: string | null;
+  onSelect?: ((speaker: Speaker) => void) | undefined;
+  selectedId?: string | null | undefined;
 } = {}) {
   return (
     <div className="grid grid-cols-4 gap-2">
@@ -110,8 +110,8 @@ export function KoolitajadPills({
   selectedId,
   children,
 }: {
-  onSelect?: (speaker: Speaker) => void;
-  selectedId?: string | null;
+  onSelect?: ((speaker: Speaker) => void) | undefined;
+  selectedId?: string | null | undefined;
   children?: ReactNode;
 }) {
   return (
