@@ -47,3 +47,4 @@
 - [x] Koolitajad: kontaktide rida jaotatud kogu kaardi laiusele — Koduleht vasakul, LinkedIn keskel, Slaidid paremal
 - [x] Minu kava puhtamaks: „Oled registreerunud" märk ja „Koolitaja kontaktid" silt eemaldatud — koolitaja nimi paksus, all Kodulehe ja LinkedIni lingid
 - [x] Kava leht: registreerunud osaleja „Oled registreerunud" märk liigutatud paremale (kuskohale „Registreeru" nupp oli) ja selle kõrvale jääb „Vabu kohti: xx"
+- [x] Epp Kärsin: profiilipilt, koduleht (eppkarsin.com) ja Instagram lisatud
