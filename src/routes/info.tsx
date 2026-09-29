@@ -205,10 +205,10 @@ function InfoPage() {
           </p>
           <div className="mt-3 space-y-1.5">
             <p className="text-sm">
-              <span className="font-semibold">Tund</span> — hind alates 50 € + KM
+              <span className="font-semibold">Tund</span> — 50 € + KM
             </p>
             <p className="text-sm">
-              <span className="font-semibold">Päev</span> — hind alates 350 € + KM
+              <span className="font-semibold">Päev</span> — 350 € + KM
             </p>
           </div>
           <p className="mt-3 text-sm leading-relaxed text-foreground/80">
