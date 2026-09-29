@@ -225,7 +225,7 @@ function InfoPage() {
         </div>
       </section>
 
-      <SpeakersTeamLinks />
+      <KoolitajadCard />
     </main>
   );
 }
