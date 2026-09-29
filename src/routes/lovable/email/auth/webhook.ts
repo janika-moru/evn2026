@@ -12,7 +12,9 @@ import { ReauthenticationEmail } from '@/lib/email-templates/reauthentication'
 const SITE_NAME = "Studio MindZ"
 const SENDER_DOMAIN = "notify.mindz.ee"
 const ROOT_DOMAIN = "mindz.ee"
-const FROM_DOMAIN = "notify.mindz.ee"
+// Displayed sender is info@mindz.ee; actual sending (SPF/DKIM) goes through
+// the verified sending subdomain notify.mindz.ee, so deliverability stays intact.
+const FROM_DOMAIN = "mindz.ee"
 const SITE_URL = "https://tartu.mindz.ee"
 
 // The SDK handler owns verification, dispatch, and retry semantics; this file
@@ -23,7 +25,7 @@ export const Route = createFileRoute("/lovable/email/auth/webhook")({
       POST: ({ request }) => {
         const handler = createAuthEmailHandler({
           apiKey: process.env['LOVABLE_API_KEY']!,
-          from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
+          from: `Studio MindZ <info@${FROM_DOMAIN}>`,
           senderDomain: SENDER_DOMAIN,
           sendUrl: process.env['LOVABLE_SEND_URL'],
           emails: {
