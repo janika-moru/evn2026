@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EventCard } from "@/components/EventCard";
 import kavaBanner from "@/assets/kava-banner.png.asset.json";
 import ruumidBanner from "@/assets/ruumid-banner.png.asset.json";
@@ -38,9 +38,16 @@ function SchedulePage() {
   const selected = EVENT_DAYS.some((d) => d.date === paev) ? paev! : todayEventDate();
   const events = eventsForDate(selected);
   const dayStartRef = useRef<HTMLDivElement>(null);
+  const bannerRef = useRef<HTMLImageElement>(null);
   // Bänner on lehe pealkiri — tekst tuleb nähtavale ainult siis,
   // kui pilt ei lahenud (nt nõrk internet).
   const [bannerFailed, setBannerFailed] = useState(false);
+
+  useEffect(() => {
+    // Pilt võib olla juba katkenud enne, kui React veateate kuulajaga liitub.
+    const img = bannerRef.current;
+    if (img && img.complete && img.naturalWidth === 0) setBannerFailed(true);
+  }, []);
 
   function selectDay(date: string) {
     if (date !== selected) {
@@ -66,6 +73,7 @@ function SchedulePage() {
         <>
           <h1 className="sr-only">Kava</h1>
           <img
+            ref={bannerRef}
             src={kavaBanner.url}
             alt="Tartu Ettevõtlusnädal 5.–9. oktoober Studio MindZis, Lutsu 3"
             className="w-full rounded-2xl"
