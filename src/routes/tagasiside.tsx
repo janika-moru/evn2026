@@ -85,8 +85,15 @@ function FeedbackPage() {
     setError("");
     let attachment: string | null = null;
     if (photo) {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const userId = sessionData.session?.user.id;
+      if (!userId) {
+        setSending(false);
+        setError("Foto lisamiseks logi palun sisse — või saada tagasiside ilma pildita.");
+        return;
+      }
       const ext = (photo.name.split(".").pop() || "jpg").toLowerCase().slice(0, 5);
-      const path = `${new Date().toISOString().slice(0, 10)}/${crypto.randomUUID()}.${ext}`;
+      const path = `${userId}/${crypto.randomUUID()}.${ext}`;
       const { error: upErr } = await supabase.storage
         .from("feedback")
         .upload(path, photo, { contentType: photo.type || "image/jpeg" });
