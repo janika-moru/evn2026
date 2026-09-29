@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Camera, GraduationCap, X } from "lucide-react";
+import { Camera, CheckCircle2, GraduationCap, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Speaker } from "@/lib/events";
 import { speakerEventRows } from "@/lib/events";
