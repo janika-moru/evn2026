@@ -183,11 +183,7 @@ function FeedbackPage() {
           </a>
         </section>
 
-        <img
-          src={koolitajadBanner.url}
-          alt="Tartu Ettevõtlusnädala koolitajad Studio MindZis"
-          className="mt-6 w-full rounded-2xl"
-        />
+        <KoolitajadPills />
         <button
           onClick={() => setType("training")}
           className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground transition active:scale-[0.98]"
