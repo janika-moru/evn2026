@@ -181,15 +181,15 @@ function InfoPage() {
           vajadusel tubade vahel liigutada vastavalt soovile.
         </p>
 
-        <div className="mt-4 space-y-3">
-          <div className="rounded-lg border border-border bg-card p-4">
+        <div className="mt-5 space-y-5">
+          <div>
             <h3 className="font-semibold">Suur koolitusruum · 70 m²</h3>
             <p className="mt-1 text-sm leading-relaxed text-foreground/80">
               Diivanid ja tugitoolid 20–25 osalejale, esitlustehnika, pabertahvel ja markerid,
               kõlarid, kohvinurk, väike külmik ning garderoob. Tualett asub eesruumis.
             </p>
           </div>
-          <div className="rounded-lg border border-border bg-card p-4">
+          <div>
             <h3 className="font-semibold">Väike koosolekuruum / kohvikutuba · 35 m²</h3>
             <p className="mt-1 text-sm leading-relaxed text-foreground/80">
               Kohvikulauad või suur koosolekulaud ja toolid 8–10 osalejale, esitlusteler,
