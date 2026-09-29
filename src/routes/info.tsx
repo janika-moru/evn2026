@@ -21,6 +21,11 @@ import largeRoomFront from "@/assets/ruum-suur-eest.jpg.asset.json";
 import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
 import meetingRoom from "@/assets/ruum-koosolek.jpg.asset.json";
 import kitchen from "@/assets/ruum-kook.jpg.asset.json";
+import room1 from "@/assets/MindZ_stuudioruumid_Tartu_001-2.jpg.asset.json";
+import room2 from "@/assets/MindZ_stuudioruumid_Tartu_009.jpg.asset.json";
+import room3 from "@/assets/MindZ_stuudioruumid_Tartu_011.jpg.asset.json";
+import room4 from "@/assets/MindZ_stuudioruumid_Tartu_016.jpg.asset.json";
+import room5 from "@/assets/MindZ_stuudioruumid_Tartu_031.jpg.asset.json";
 
 /** Kohale tuleku juhise pilt. */
 const DIRECTIONS_IMAGE_URL: string | null = directionsImage.url;
@@ -33,6 +38,11 @@ const ROOM_IMAGES = [
   { src: largeRoomCircle.url, alt: "Studio MindZi suur koolitusruum ringis toolidega" },
   { src: meetingRoom.url, alt: "Studio MindZi väike koosolekuruum" },
   { src: kitchen.url, alt: "Studio MindZi köök" },
+  { src: room1.url, alt: "Studio MindZi suur koolitusruum diivanite ja tugitoolidega" },
+  { src: room2.url, alt: "Studio MindZi koolitusruum taimede ja valgustitega" },
+  { src: room3.url, alt: "Studio MindZi koolitusruum pabertahvli ja istmetega" },
+  { src: room4.url, alt: "Studio MindZi koolitusruumi vaade köögivanni poolt" },
+  { src: room5.url, alt: "Studio MindZi koolitusruumi laiusvaade" },
 ];
 
 const STEPS: { icon: LucideIcon; title: string; text: string }[] = [
