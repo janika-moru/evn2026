@@ -52,6 +52,7 @@ export type Database = {
           keep_text: string | null
           message: string | null
           needs_help: boolean
+          photo_promise: boolean
           rating: number | null
           respondent_field: string | null
           respondent_name: string | null
@@ -70,6 +71,7 @@ export type Database = {
           keep_text?: string | null
           message?: string | null
           needs_help?: boolean
+          photo_promise?: boolean
           rating?: number | null
           respondent_field?: string | null
           respondent_name?: string | null
@@ -88,6 +90,7 @@ export type Database = {
           keep_text?: string | null
           message?: string | null
           needs_help?: boolean
+          photo_promise?: boolean
           rating?: number | null
           respondent_field?: string | null
           respondent_name?: string | null

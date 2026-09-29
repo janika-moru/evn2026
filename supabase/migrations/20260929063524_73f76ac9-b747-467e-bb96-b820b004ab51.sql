@@ -1,0 +1,1 @@
+ALTER TABLE public.feedback ADD COLUMN IF NOT EXISTS photo_promise boolean NOT NULL DEFAULT false;
