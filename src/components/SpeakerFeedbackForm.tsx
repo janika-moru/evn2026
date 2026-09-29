@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Camera, GraduationCap, X } from "lucide-react";
+import { Camera, CheckCircle2, GraduationCap, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Speaker } from "@/lib/events";
 import { speakerEventRows } from "@/lib/events";
@@ -58,6 +58,7 @@ export function SpeakerFeedbackForm({
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
   const msgRef = useRef<HTMLTextAreaElement>(null);
+  const sentRef = useRef<HTMLDivElement>(null);
 
   // Eeltäide: 1) seadmesse salvestatud varasem tagasiside, 2) sisse logitud e-post
   useEffect(() => {
@@ -90,6 +91,11 @@ export function SpeakerFeedbackForm({
     el.style.height = `${el.scrollHeight}px`;
   }, [message, open]);
 
+  // Kinnitus tuhil pärast saatmist ekraanile, et osaleja näeks kindlalt selle kätte
+  useEffect(() => {
+    if (sent) sentRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [sent]);
+
   const rows = speakerEventRows(speaker);
   const eventOptions = rows.flatMap((row) =>
     row.kind === "series" ? row.events : [row.event],
@@ -97,29 +103,37 @@ export function SpeakerFeedbackForm({
 
   if (sent) {
     return (
-      <div className="mt-4 rounded-2xl border border-primary/25 bg-mindz-mint p-4 text-center">
-        <p className="text-2xl">💚</p>
-        <p className="mt-1 text-sm font-semibold">
-          Aitäh! Sinu tagasiside jõuab koolitajani.
+      <div
+        ref={sentRef}
+        className="mt-4 scroll-mt-4 rounded-2xl border border-primary/25 bg-mindz-mint p-5 text-center"
+      >
+        <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-primary">
+          <CheckCircle2 className="size-7 text-primary-foreground" />
+        </div>
+        <p className="mt-3 text-lg font-bold">Sinu tagasiside jõudis meieni</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Aitäh! Koolitaja loeb seda ja see aitab järgmisi koolitusi paremini ette valmistada.
         </p>
-        <button
-          onClick={() => {
-            setSent(false);
-            setRating(null);
-            setMessage("");
-          }}
-          className="mt-2 text-sm font-semibold text-primary underline underline-offset-2"
-        >
-          Jäta veel üks tagasiside
-        </button>
-        {onClose && (
+        <div className="mt-3 flex flex-col items-center gap-1.5">
           <button
-            onClick={onClose}
-            className="mt-1 text-sm text-muted-foreground underline underline-offset-2"
+            onClick={() => {
+              setSent(false);
+              setRating(null);
+              setMessage("");
+            }}
+            className="text-sm font-semibold text-primary underline underline-offset-2"
           >
-            Sulge
+            Jäta veel üks tagasiside
           </button>
-        )}
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="text-sm text-muted-foreground underline underline-offset-2"
+            >
+              Sulge
+            </button>
+          )}
+        </div>
       </div>
     );
   }
