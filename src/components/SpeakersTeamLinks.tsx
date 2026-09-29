@@ -83,7 +83,7 @@ export function KoolitajadRow({
             )}
             <span className="text-center text-xs font-medium leading-tight">
               {nameLines(pillName).map((line) => (
-                <span key={line} className="block">
+                <span key={line} className="block whitespace-nowrap">
                   {line}
                 </span>
               ))}
