@@ -65,6 +65,7 @@ export function KoolitajadRow({
     <div className="grid grid-cols-4 gap-2">
       {speakersInListOrder().map((speaker) => {
         const ring = selectedId === speaker.id ? "ring-2 ring-primary" : "";
+        const pillName = speaker.displayName ?? firstName(speaker.name);
         const cell = (
           <>
             {speaker.imageUrl ? (
@@ -77,10 +78,10 @@ export function KoolitajadRow({
               <div
                 className={`flex size-14 items-center justify-center rounded-full bg-background text-base font-semibold ${ring}`}
               >
-                {initials(speaker.name)}
+                {initials(pillName)}
               </div>
             )}
-            <span className="text-xs font-medium">{firstName(speaker.name)}</span>
+            <span className="text-xs font-medium">{pillName}</span>
           </>
         );
         const className = "flex flex-col items-center gap-1.5";
