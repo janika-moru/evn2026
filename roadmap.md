@@ -9,7 +9,7 @@
 - [x] Info lehele „Kohale tulek“ alla Studio MindZi sissepääsu pilt
 - [x] Minu kava: eraldi sektsioon „Koolitajate slaidid ja materjalid" (ainult registreeritud sündmused, lingid jäävad ka sündmuse alla)
 - [x] Janika Mõru pilt ja kontaktid lisatud (e-post, telefon, koduleht, LinkedIn, Facebook, slaidid)
-- [ ] Koolitajate kontaktid/pildid — ülejäänud koolitajad (andmed kasutajalt)
+- [x] Koolitajate kontaktid/pildid — kõik koolitajad saanud pildi ja lingid
 - [x] Info leht: „Koolitajad & materjalid“ menüü roosaks, „Anna tagasisidet“ eemaldatud
 - [x] Koolitajate leht: hommikune Morning Mindset koondatud üheks realelingiks seeria juurde
 - [x] Kuupäevad ja kellaajad kogu äpis eestikeelsesse kirjapilti (`9. okt`, `9.30`)
@@ -54,3 +54,6 @@
 - [x] Mikk Orglaan: profiilipilt, koduleht (sparkly.hr/et) ja LinkedIn lisatud
 - [x] Janika Mõru portree vahetatud uue pildi vastu (janika-moru.png)
 - [x] Martin Mark: profiilipilt, koduleht (introverdid.ee) ja LinkedIn lisatud
+- [x] Katrin Vilimaa-Otsing: profiilipilt, koduleht (turunduskoolitus.ee) ja LinkedIn lisatud
+- [x] Katrin Differt: profiilipilt, koduleht (360kogemus.ee) ja LinkedIn lisatud
+- [x] Ivar Raav: profiilipilt, koduleht (ivarraav.com) ja LinkedIn lisatud

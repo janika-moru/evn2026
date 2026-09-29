@@ -20,6 +20,9 @@ import rolandPhoto from "@/assets/roland.png.asset.json";
 import mariPhoto from "@/assets/mari.png.asset.json";
 import marikaPhoto from "@/assets/marika.png.asset.json";
 import papsidPhoto from "@/assets/papsid.png.asset.json";
+import katrinVilimaaPhoto from "@/assets/katrin-vilimaa-otsing.png.asset.json";
+import katrinDiffertPhoto from "@/assets/katrin-differt.png.asset.json";
+import ivarRaavPhoto from "@/assets/ivar-raav.png.asset.json";
 
 
 export type RegistrationStatus =
@@ -612,6 +615,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Katrin Vilimaa-Otsing",
     "role": "",
     "bio": "",
+    "imageUrl": katrinVilimaaPhoto.url,
+    "websiteUrl": "https://turunduskoolitus.ee/",
+    "linkedinUrl": "https://www.linkedin.com/in/katrinvilimaa/",
     "eventIds": [
       "202949"
     ]
@@ -633,6 +639,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Ivar Raav",
     "role": "",
     "bio": "",
+    "imageUrl": ivarRaavPhoto.url,
+    "websiteUrl": "https://ivarraav.com/",
+    "linkedinUrl": "https://www.linkedin.com/in/ivarraav/",
     "eventIds": [
       "202958"
     ]
@@ -642,6 +651,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Katrin Differt",
     "role": "",
     "bio": "",
+    "imageUrl": katrinDiffertPhoto.url,
+    "websiteUrl": "https://360kogemus.ee/",
+    "linkedinUrl": "https://www.linkedin.com/in/katrin-differt-bb9194216/",
     "eventIds": [
       "202936"
     ]
