@@ -615,6 +615,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Katrin Vilimaa-Otsing",
     "role": "",
     "bio": "",
+    "imageUrl": katrinVilimaaPhoto.url,
+    "websiteUrl": "https://turunduskoolitus.ee/",
+    "linkedinUrl": "https://www.linkedin.com/in/katrinvilimaa/",
     "eventIds": [
       "202949"
     ]
