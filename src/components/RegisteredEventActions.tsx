@@ -52,7 +52,7 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
             </DialogDescription>
           </DialogHeader>
           <Button asChild className="rounded-full">
-            <a href="https://fienta.com/auth/login" target="_blank" rel="noreferrer">
+            <a href="https://fienta.com/u/tickets" target="_blank" rel="noreferrer">
               Ava Fienta konto
             </a>
           </Button>

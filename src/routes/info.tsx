@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { KoolitajadCard, MeeskondCard } from "@/components/SpeakersTeamLinks";
+import { MeeskondCard } from "@/components/SpeakersTeamLinks";
 import directionsImage from "@/assets/studio-mindz-sissepaas.jpg.asset.json";
 import largeRoomFront from "@/assets/ruum-suur-eest.jpg.asset.json";
 import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
@@ -224,8 +224,6 @@ function InfoPage() {
           </p>
         </div>
       </section>
-
-      <KoolitajadCard />
     </main>
   );
 }

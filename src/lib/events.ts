@@ -23,6 +23,7 @@ import papsidPhoto from "@/assets/papsid.png.asset.json";
 import katrinVilimaaPhoto from "@/assets/katrin-vilimaa-otsing.png.asset.json";
 import katrinDiffertPhoto from "@/assets/katrin-differt.png.asset.json";
 import ivarRaavPhoto from "@/assets/ivar-raav.png.asset.json";
+import kullikeKuberPhoto from "@/assets/kullike-kuber.jpg.asset.json";
 
 
 export type RegistrationStatus =
@@ -781,8 +782,9 @@ export type TeamMember = {
 export const TEAM: TeamMember[] = [
   { id: "kiia", name: "Kiia Paal", speakerId: "kiia-paal" },
   { id: "janika", name: "Janika Mõru", speakerId: "janika-moru" },
-  { id: "selje", name: "Selje", imageUrl: seljePhoto.url },
-  { id: "liisi", name: "Liisi", imageUrl: liisiPhoto.url },
+  { id: "selje", name: "Selje Perez", imageUrl: seljePhoto.url },
+  { id: "liisi", name: "Liisi Kaal", imageUrl: liisiPhoto.url },
+  { id: "kullike", name: "Küllike Kuber", imageUrl: kullikeKuberPhoto.url },
 ];
 
 /** Tiimi liikmed koos piltidega, kui need on olemas. */

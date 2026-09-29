@@ -11,7 +11,7 @@ import { SpeakerLinks } from "@/components/SpeakerLinks";
 export function SoldOutPill({ className = "" }: { className?: string }) {
   return (
     <span
-      className={`inline-flex items-center justify-center rounded-full border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground ${className}`}
+      className={`inline-flex items-center justify-center rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground ${className}`}
     >
       Välja müüdud
     </span>
@@ -56,7 +56,7 @@ export function EventCard({
   actions?: ReactNode;
   hideRegisteredBadge?: boolean;
 }) {
-  const { ids } = useMyRegistrations();
+  const { session, ids } = useMyRegistrations();
   const { availableSpots } = useEventAvailability(event.fientaEventId);
   const status = effectiveStatus(event, ids);
   const displayStatus = status === "open" && availableSpots === 0 ? "full" : status;
@@ -101,7 +101,9 @@ export function EventCard({
               )}
             </span>
           )}
-          {displayStatus === "full" && <SoldOutPill className="ml-auto" />}
+          {displayStatus === "full" && (
+            <SoldOutPill className={`ml-auto ${session ? "bg-background" : "bg-mindz-pink"}`} />
+          )}
         </div>
       )}
       {actions}
