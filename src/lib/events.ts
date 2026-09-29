@@ -17,7 +17,7 @@ import ulviPhoto from "@/assets/ulvi.png.asset.json";
 import timoPhoto from "@/assets/timo.png.asset.json";
 import tambetPhoto from "@/assets/tambet.png.asset.json";
 import rolandPhoto from "@/assets/roland.png.asset.json";
-import mariPhoto from "@/assets/mari.png.asset.json";
+import mariPhoto from "@/assets/mari-maekivi.png.asset.json";
 import marikaPhoto from "@/assets/marika.png.asset.json";
 import papsidPhoto from "@/assets/papsid.png.asset.json";
 import katrinVilimaaPhoto from "@/assets/katrin-vilimaa-otsing.png.asset.json";
