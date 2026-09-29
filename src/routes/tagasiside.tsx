@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
+import { ArrowLeft, Camera, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import type { Speaker } from "@/lib/events";
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
