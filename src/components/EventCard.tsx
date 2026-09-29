@@ -41,15 +41,19 @@ export function StatusBadge({ status }: { status: EventItem["registrationStatus"
  * Kaart nagu Kavas. showDate lisab kellaaja ette kuupäeva (Minu kava jaoks,
  * kus päevi eraldi ei rühmitata). actions renderdatakse kaardi allsammas,
  * linki kõrval — nupud jäävad lingi sisse pesastamata.
+ * hideRegisteredBadge jätab "Oled registreerunud" märgi välja (Minu kava,
+ * kus iga rida on niigi registreering).
  */
 export function EventCard({
   event,
   showDate = false,
   actions,
+  hideRegisteredBadge = false,
 }: {
   event: EventItem;
   showDate?: boolean;
   actions?: ReactNode;
+  hideRegisteredBadge?: boolean;
 }) {
   const { ids } = useMyRegistrations();
   const { availableSpots } = useEventAvailability(event.fientaEventId);
@@ -82,18 +86,20 @@ export function EventCard({
             </p>
           </div>
         </div>
-        <div className="mt-3 flex items-center justify-between gap-2">
-          <StatusBadge status={displayStatus} />
-          {displayStatus === "open" && (
-            <span className="ml-auto flex items-center gap-3">
-              <span className="text-sm text-primary">Vabu kohti: {availableSpots ?? 50}</span>
-              <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
-                Registreeru
+        {(!hideRegisteredBadge || !registered) && (
+          <div className="mt-3 flex items-center justify-between gap-2">
+            <StatusBadge status={displayStatus} />
+            {displayStatus === "open" && (
+              <span className="ml-auto flex items-center gap-3">
+                <span className="text-sm text-primary">Vabu kohti: {availableSpots ?? 50}</span>
+                <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+                  Registreeru
+                </span>
               </span>
-            </span>
-          )}
-          {displayStatus === "full" && <SoldOutPill className="ml-auto" />}
-        </div>
+            )}
+            {displayStatus === "full" && <SoldOutPill className="ml-auto" />}
+          </div>
+        )}
       </Link>
       {actions}
     </div>
