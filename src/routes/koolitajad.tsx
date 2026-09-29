@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   speakersInListOrder,
   speakerEventRows,
+  speakerSlidesUrl,
   isTeamSpeaker,
   initials,
   dayLabel,
@@ -36,6 +37,7 @@ export const Route = createFileRoute("/koolitajad")({
 
 const contactLink =
   "text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground";
+const disabledLink = "text-muted-foreground/45";
 
 function SpeakersPage() {
   return (
@@ -54,6 +56,7 @@ function SpeakersPage() {
         {speakersInListOrder().map((s) => {
           const rows = speakerEventRows(s);
           const team = isTeamSpeaker(s);
+          const slidesUrl = speakerSlidesUrl(s);
           return (
             <article
               id={s.id}
@@ -125,30 +128,35 @@ function SpeakersPage() {
                 </ul>
               )}
 
-              {(s.websiteUrl || s.linkedinUrl || s.facebookUrl || s.instagramUrl) && (
-                <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-                  {s.websiteUrl && (
-                    <a href={s.websiteUrl} target="_blank" rel="noreferrer" className={contactLink}>
-                      Koduleht
-                    </a>
-                  )}
-                  {s.linkedinUrl && (
-                    <a href={s.linkedinUrl} target="_blank" rel="noreferrer" className={contactLink}>
-                      LinkedIn
-                    </a>
-                  )}
-                  {s.facebookUrl && (
-                    <a href={s.facebookUrl} target="_blank" rel="noreferrer" className={contactLink}>
-                      Facebook
-                    </a>
-                  )}
-                  {s.instagramUrl && (
-                    <a href={s.instagramUrl} target="_blank" rel="noreferrer" className={contactLink}>
-                      Instagram
-                    </a>
-                  )}
-                </div>
-              )}
+              <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+                {s.websiteUrl && (
+                  <a href={s.websiteUrl} target="_blank" rel="noreferrer" className={contactLink}>
+                    Koduleht
+                  </a>
+                )}
+                {s.linkedinUrl && (
+                  <a href={s.linkedinUrl} target="_blank" rel="noreferrer" className={contactLink}>
+                    LinkedIn
+                  </a>
+                )}
+                {slidesUrl ? (
+                  <a href={slidesUrl} target="_blank" rel="noreferrer" className={contactLink}>
+                    Slaidid
+                  </a>
+                ) : (
+                  <span className={disabledLink}>Slaidid</span>
+                )}
+                {s.facebookUrl && (
+                  <a href={s.facebookUrl} target="_blank" rel="noreferrer" className={contactLink}>
+                    Facebook
+                  </a>
+                )}
+                {s.instagramUrl && (
+                  <a href={s.instagramUrl} target="_blank" rel="noreferrer" className={contactLink}>
+                    Instagram
+                  </a>
+                )}
+              </div>
 
               <SpeakerFeedbackForm speaker={s} />
             </article>
