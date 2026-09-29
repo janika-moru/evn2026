@@ -11,6 +11,15 @@ import liisiPhoto from "@/assets/liisi.jpg.asset.json";
 import martinPhoto from "@/assets/martin.png.asset.json";
 import mikkOrglaanPhoto from "@/assets/mikk-orglaan.png.asset.json";
 import seljePhoto from "@/assets/selje.jpg.asset.json";
+import kukkumiskaitsePhoto from "@/assets/kukkumiskaitse.png.asset.json";
+import urmoPhoto from "@/assets/urmo.png.asset.json";
+import ulviPhoto from "@/assets/ulvi.png.asset.json";
+import timoPhoto from "@/assets/timo.png.asset.json";
+import tambetPhoto from "@/assets/tambet.png.asset.json";
+import rolandPhoto from "@/assets/roland.png.asset.json";
+import mariPhoto from "@/assets/mari.png.asset.json";
+import marikaPhoto from "@/assets/marika.png.asset.json";
+import papsidPhoto from "@/assets/papsid.png.asset.json";
 
 
 export type RegistrationStatus =
@@ -538,46 +547,62 @@ export const SPEAKERS: Speaker[] = [
     ]
   },
   {
-    "id": "urmo-keskel",
-    "name": "Urmo Keskel",
-    "role": "",
-    "bio": "",
+     "id": "urmo-keskel",
+     "name": "Urmo Keskel",
+     "role": "",
+     "bio": "",
+     "imageUrl": urmoPhoto.url,
+     "websiteUrl": "https://phishbite.com/et/",
+     "linkedinUrl": "https://www.linkedin.com/in/urmokeskel/",
     "eventIds": [
       "202955"
     ]
   },
   {
-    "id": "papsid",
-    "name": "Papsid",
-    "role": "",
-    "bio": "",
+     "id": "papsid",
+     "name": "Kristo Tuurmann ja Illimar Pilt",
+     "displayName": "Papsid.ee",
+     "role": "",
+     "bio": "",
+     "imageUrl": papsidPhoto.url,
+     "websiteUrl": "https://papsid.ee/",
+     "instagramUrl": "https://www.instagram.com/papsid.ee/",
     "eventIds": [
       "202946"
     ]
   },
   {
-    "id": "timo-porval",
-    "name": "Timo Porval",
-    "role": "",
-    "bio": "",
+     "id": "timo-porval",
+     "name": "Timo Porval",
+     "role": "",
+     "bio": "",
+     "imageUrl": timoPhoto.url,
+     "websiteUrl": "https://turunduslabor.ee/",
+     "linkedinUrl": "https://www.linkedin.com/in/timoporval/",
     "eventIds": [
       "202947"
     ]
   },
   {
-    "id": "ulvi-kala",
-    "name": "Ulvi Kala",
-    "role": "",
-    "bio": "",
+     "id": "ulvi-kala",
+     "name": "Ulvi Kala",
+     "role": "",
+     "bio": "",
+     "imageUrl": ulviPhoto.url,
+     "websiteUrl": "https://www.balticintertex.ee/",
+     "linkedinUrl": "https://www.linkedin.com/in/ulvi-kala/",
     "eventIds": [
       "202945"
     ]
   },
   {
-    "id": "roland-kivitare",
-    "name": "Roland Kivitare",
-    "role": "",
-    "bio": "",
+     "id": "roland-kivitare",
+     "name": "Roland Kivitare",
+     "role": "",
+     "bio": "",
+     "imageUrl": rolandPhoto.url,
+     "websiteUrl": "https://rolevents.ee/",
+     "linkedinUrl": "https://www.linkedin.com/in/rolandkivitare/",
     "eventIds": [
       "202948"
     ]
@@ -592,10 +617,13 @@ export const SPEAKERS: Speaker[] = [
     ]
   },
   {
-    "id": "marika-juusu",
-    "name": "Marika Juusu",
-    "role": "",
-    "bio": "",
+     "id": "marika-juusu",
+     "name": "Marika Juusu",
+     "role": "",
+     "bio": "",
+     "imageUrl": marikaPhoto.url,
+     "websiteUrl": "https://veebikool.ee/",
+     "linkedinUrl": "https://www.linkedin.com/in/marika-juusu/",
     "eventIds": [
       "202952"
     ]
@@ -620,19 +648,25 @@ export const SPEAKERS: Speaker[] = [
   },
   {
     "id": "taavi-lukas-ja-anders-veetamm",
-    "name": "Taavi Lukas ja Anders Veetamm",
-    "displayName": "Kukkumiskaitse",
-    "role": "",
-    "bio": "",
+     "name": "Taavi Lukas ja Anders Veetamm",
+     "displayName": "Kukkumiskaitse",
+     "role": "",
+     "bio": "",
+     "imageUrl": kukkumiskaitsePhoto.url,
+     "websiteUrl": "https://kukkumiskaitse.ee/",
+     "facebookUrl": "https://www.facebook.com/Kukkumiskaitse.ee/",
     "eventIds": [
       "202957"
     ]
   },
   {
-    "id": "tambet-tallo",
-    "name": "Tambet Tallo",
-    "role": "",
-    "bio": "",
+     "id": "tambet-tallo",
+     "name": "Tambet Tallo",
+     "role": "",
+     "bio": "",
+     "imageUrl": tambetPhoto.url,
+     "websiteUrl": "https://combatready.eu/",
+     "linkedinUrl": "https://www.linkedin.com/in/tambet-tallo-sales-leadership-coach-speaker/",
     "eventIds": [
       "202954"
     ]
@@ -650,10 +684,13 @@ export const SPEAKERS: Speaker[] = [
     ]
   },
   {
-    "id": "mari-maekivi",
-    "name": "Mari Mäekivi",
-    "role": "",
-    "bio": "",
+     "id": "mari-maekivi",
+     "name": "Mari Mäekivi",
+     "role": "",
+     "bio": "",
+     "imageUrl": mariPhoto.url,
+     "websiteUrl": "https://marimaekivi.ee/",
+     "linkedinUrl": "https://www.linkedin.com/in/marimaekivi/",
     "eventIds": [
       "202950"
     ]
