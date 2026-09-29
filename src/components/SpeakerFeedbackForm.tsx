@@ -103,10 +103,16 @@ export function SpeakerFeedbackForm({
 
   if (sent) {
     return (
-      <div className="mt-4 rounded-2xl border border-primary/25 bg-mindz-mint p-4 text-center">
-        <p className="text-2xl">💚</p>
-        <p className="mt-1 text-sm font-semibold">
-          Aitäh! Sinu tagasiside jõuab koolitajani.
+      <div
+        ref={sentRef}
+        className="mt-4 scroll-mt-4 rounded-2xl border border-primary/25 bg-mindz-mint p-5 text-center"
+      >
+        <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-primary">
+          <CheckCircle2 className="size-7 text-primary-foreground" />
+        </div>
+        <p className="mt-3 text-lg font-bold">Sinu tagasiside jõudis meieni</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Aitäh! Koolitaja loeb seda ja see aitab järgmisi koolitusi paremini ette valmistada.
         </p>
         <button
           onClick={() => {
