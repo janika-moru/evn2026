@@ -36,6 +36,7 @@
 - [x] Minu kava: sisselogimisnupu alla selgitus „Parooli ei ole vaja luua. Kliki postkastis oleval lingil ja see toob su tagasi äppi sisselogituna."
 - [x] Minu kava: „Värskenda registreeringuid" nupp eemaldatud — registreeringud värskenevad juba lehe avamisel
 - [x] Info leht: Ruumid — koolitusruumide kirjeldused ilma kastita, lõikudena (pealkiri + tekst), rendi roheline kaart alles
+- [x] Koolitajad: iga koolitaja juures „Slaidid" link Kodulehe ja LinkedIni kõrval; kui slaide pole, on hall ja kliki-mittesobiv tekst
 - [ ] Avaldada uuesti, et muudatused jõuaksid aadressile evn2026.lovable.app
 - [x] Info leht: pealkiri eemaldatud, salvestuste teavitus, vahetusjalanõude märkus ning ruumide galerii, kirjeldused ja rendiinfo
 - [x] Info leht: ruumide rentimine eraldi esile tõstetud roheline kaart — paigas hinnad 50 € + KM tund, 350 € + KM päev; laudade-toolade liigutamise lause toodud ruumide sissejuhatusesse

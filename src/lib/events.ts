@@ -794,6 +794,20 @@ export function speakerEventRows(speaker: Speaker): SpeakerEventRow[] {
   });
 }
 
+/** Koolitaja slaidid või lisamaterjalid — vanim sündmus, millel need on olemas. */
+export function speakerSlidesUrl(speaker: Speaker): string | undefined {
+  const events = speaker.eventIds
+    .map((id) => getEvent(id))
+    .filter((event): event is EventItem => Boolean(event))
+    .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`));
+
+  for (const event of events) {
+    const url = event.slidesUrl ?? event.materialsUrl;
+    if (url) return url;
+  }
+  return undefined;
+}
+
 /** Päeva label, nt "E 5. okt" */
 export function dayLabel(date: string): string {
   const day = EVENT_DAYS.find((d) => d.date === date);
