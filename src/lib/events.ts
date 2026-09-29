@@ -20,6 +20,9 @@ import rolandPhoto from "@/assets/roland.png.asset.json";
 import mariPhoto from "@/assets/mari.png.asset.json";
 import marikaPhoto from "@/assets/marika.png.asset.json";
 import papsidPhoto from "@/assets/papsid.png.asset.json";
+import katrinVilimaaPhoto from "@/assets/katrin-vilimaa-otsing.png.asset.json";
+import katrinDiffertPhoto from "@/assets/katrin-differt.png.asset.json";
+import ivarRaavPhoto from "@/assets/ivar-raav.png.asset.json";
 
 
 export type RegistrationStatus =
