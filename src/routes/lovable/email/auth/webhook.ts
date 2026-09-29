@@ -9,11 +9,11 @@ import { EmailChangeEmail } from '@/lib/email-templates/email-change'
 import { ReauthenticationEmail } from '@/lib/email-templates/reauthentication'
 
 // Configuration
-const SITE_NAME = "Tartu ettevõtlusnädal Studi MindZis"
+const SITE_NAME = "Studio MindZ"
 const SENDER_DOMAIN = "notify.mindz.ee"
 const ROOT_DOMAIN = "mindz.ee"
 const FROM_DOMAIN = "notify.mindz.ee"
-const SITE_URL = `https://${ROOT_DOMAIN}`
+const SITE_URL = "https://tartu.mindz.ee"
 
 // The SDK handler owns verification, dispatch, and retry semantics; this file
 // owns only the email decisions: subjects, templates, and per-type props.
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/lovable/email/auth/webhook")({
           sendUrl: process.env['LOVABLE_SEND_URL'],
           emails: {
             signup: {
-              subject: 'Confirm your email',
+              subject: "Logi sisse ettevõtlusnädal Studio Mindzis keskkonda",
               render: (data) =>
                 React.createElement(SignupEmail, {
                   siteName: SITE_NAME,
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/lovable/email/auth/webhook")({
                 }),
             },
             magiclink: {
-              subject: 'Your login link',
+              subject: "Logi sisse ettevõtlusnädal Studio Mindzis keskkonda",
               render: (data) =>
                 React.createElement(MagicLinkEmail, {
                   siteName: SITE_NAME,
@@ -74,7 +74,7 @@ export const Route = createFileRoute("/lovable/email/auth/webhook")({
                 }),
             },
             reauthentication: {
-              subject: 'Your verification code',
+              subject: "Sinu kinnituskood",
               render: (data) =>
                 React.createElement(ReauthenticationEmail, { token: data.token ?? '' }),
             },
