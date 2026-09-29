@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { initials, speakersForEvent } from "@/lib/events";
 
 const contactLink =
-  "text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground";
+  "text-muted-foreground underline decoration-current underline-offset-4 transition-colors hover:text-foreground";
 
 /**
  * Koolitaja pilt, tema profiilile viiv nimi ja selle all kontaktlingid

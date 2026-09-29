@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Users } from "lucide-react";
 import type { ReactNode } from "react";
 import type { Speaker } from "@/lib/events";
-import { firstName, initials, nameLines, teamMembers, speakersInListOrder } from "@/lib/events";
+import { initials, nameLines, teamMembers, speakersInListOrder } from "@/lib/events";
 
 /** Roosa kaart, mis viib koolitajate ja materjalide lehele. */
 export function KoolitajadCard() {
@@ -22,7 +22,7 @@ export function KoolitajadCard() {
 /** Meeskonna pallikeste rida ilma kaardita — kasutamiseks rohelise bloki sees. */
 export function MeeskondRow() {
   return (
-    <div className="grid grid-cols-4 gap-2">
+    <div className="grid grid-cols-5 gap-2">
       {teamMembers().map((member) => {
         const cell = (
           <>
@@ -33,7 +33,13 @@ export function MeeskondRow() {
                 {initials(member.name)}
               </div>
             )}
-            <span className="text-xs font-medium">{firstName(member.name)}</span>
+            <span className="text-center text-xs font-medium leading-tight">
+              {nameLines(member.name).map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </span>
           </>
         );
         const className = "flex flex-col items-center gap-1.5";
