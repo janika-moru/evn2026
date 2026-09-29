@@ -32,7 +32,7 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
             </a>
           </Button>
         ) : (
-          <Button disabled variant="secondary" className="h-10 rounded-full px-2 text-xs">
+          <Button disabled variant="outline" className="h-10 rounded-full px-2 text-xs">
             <FileText />
             Slaide veel pole
           </Button>
