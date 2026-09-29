@@ -11,7 +11,7 @@ import { SpeakerLinks } from "@/components/SpeakerLinks";
 export function SoldOutPill({ className = "" }: { className?: string }) {
   return (
     <span
-      className={`inline-flex items-center justify-center rounded-full bg-mindz-pink px-4 py-2 text-sm font-semibold text-foreground ${className}`}
+      className={`inline-flex items-center justify-center rounded-full border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground ${className}`}
     >
       Välja müüdud
     </span>
@@ -66,7 +66,11 @@ export function EventCard({
     "block rounded-xl transition-colors active:bg-secondary/60";
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-4">
+    <div
+      className={`rounded-2xl border border-border p-4 ${
+        registered ? "bg-mindz-pink" : "bg-card"
+      }`}
+    >
       <Link to="/sundmus/$id" params={{ id: event.id }} className={eventLink}>
         <p className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
           <Clock className="size-4 shrink-0" />
