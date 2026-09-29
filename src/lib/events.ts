@@ -34,6 +34,7 @@ export type RegistrationStatus =
 export interface EventItem {
   id: string;
   fientaEventId?: string;
+  capacity?: number;
   title: string;
   speaker: string;
   description: string;
@@ -82,6 +83,7 @@ export const EVENTS: EventItem[] = [
   {
     "id": "202940",
     "fientaEventId": "202940",
+    "capacity": 25,
     "title": "Morning Mindset: alusta päeva selgema pea ja parema fookusega",
     "speaker": "Kiia Paal",
     "shortDescription": "Enne kohtumisi, koolitusi ja päeva kiiremat tempot võta 45 minutit, et korraks peatuda, mõtted selgemaks saada ning tähelepanu teadlikult eesootavale päevale suunata.",
@@ -159,6 +161,7 @@ export const EVENTS: EventItem[] = [
   {
     "id": "202965",
     "fientaEventId": "202965",
+    "capacity": 25,
     "title": "Morning Mindset: alusta päeva selgema pea ja parema fookusega",
     "speaker": "Kiia Paal",
     "shortDescription": "Enne kohtumisi, koolitusi ja päeva kiiremat tempot võta 45 minutit, et korraks peatuda, mõtted selgemaks saada ning tähelepanu teadlikult eesootavale päevale suunata.",
@@ -235,6 +238,7 @@ export const EVENTS: EventItem[] = [
   {
     "id": "202966",
     "fientaEventId": "202966",
+    "capacity": 25,
     "title": "Morning Mindset: alusta päeva selgema pea ja parema fookusega",
     "speaker": "Kiia Paal",
     "shortDescription": "Enne kohtumisi, koolitusi ja päeva kiiremat tempot võta 45 minutit, et korraks peatuda, mõtted selgemaks saada ning tähelepanu teadlikult eesootavale päevale suunata.",
@@ -311,6 +315,7 @@ export const EVENTS: EventItem[] = [
   {
     "id": "202967",
     "fientaEventId": "202967",
+    "capacity": 25,
     "title": "Morning Mindset: alusta päeva selgema pea ja parema fookusega",
     "speaker": "Kiia Paal",
     "shortDescription": "Enne kohtumisi, koolitusi ja päeva kiiremat tempot võta 45 minutit, et korraks peatuda, mõtted selgemaks saada ning tähelepanu teadlikult eesootavale päevale suunata.",
@@ -387,6 +392,7 @@ export const EVENTS: EventItem[] = [
   {
     "id": "202968",
     "fientaEventId": "202968",
+    "capacity": 25,
     "title": "Morning Mindset: alusta päeva selgema pea ja parema fookusega",
     "speaker": "Kiia Paal",
     "shortDescription": "Enne kohtumisi, koolitusi ja päeva kiiremat tempot võta 45 minutit, et korraks peatuda, mõtted selgemaks saada ning tähelepanu teadlikult eesootavale päevale suunata.",

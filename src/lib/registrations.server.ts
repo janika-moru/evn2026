@@ -156,11 +156,12 @@ export async function syncFromFientaApi(
             ? count
             : count + (Number.isFinite(quantity) && quantity > 0 ? quantity : 1);
         }, 0);
+        const capacity = getEventByFientaId(id)?.capacity ?? 50;
         availabilityRows.push({
           fienta_event_id: id,
           active_registrations: activeRegistrations,
-          capacity: 50,
-          available_spots: Math.max(0, 50 - activeRegistrations),
+          capacity,
+          available_spots: Math.max(0, capacity - activeRegistrations),
           updated_at: new Date().toISOString(),
         });
         for (const t of tickets) {
