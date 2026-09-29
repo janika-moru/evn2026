@@ -7,6 +7,7 @@ import eppKarsinPhoto from "@/assets/epp-karsin.png.asset.json";
 import kiiaPaalPhoto from "@/assets/kiia-paal.png.asset.json";
 import kadriLeppikPhoto from "@/assets/kadri-leppik.png.asset.json";
 import liisiPhoto from "@/assets/liisi.jpg.asset.json";
+import mikkOrglaanPhoto from "@/assets/mikk-orglaan.png.asset.json";
 import seljePhoto from "@/assets/selje.jpg.asset.json";
 
 
@@ -480,11 +481,14 @@ export const SPEAKERS: Speaker[] = [
       "202938"
     ]
   },
-  {
-    "id": "mikk-orglaan",
-    "name": "Mikk Orglaan",
-    "role": "",
-    "bio": "",
+   {
+     "id": "mikk-orglaan",
+     "name": "Mikk Orglaan",
+     "imageUrl": mikkOrglaanPhoto.url,
+     "websiteUrl": "https://sparkly.hr/et",
+     "linkedinUrl": "https://www.linkedin.com/in/mikkorglaan/",
+     "role": "",
+     "bio": "",
     "eventIds": [
       "202928"
     ]
