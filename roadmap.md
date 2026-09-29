@@ -28,4 +28,5 @@
 - [x] Tagasiside avaleht: roheline Studio plokk kõige ees (meeskond + „Kiidan"/„Parandusettepanek" + „Lisa Google arvustus"), koolitajate tagasiside toodud alla
 - [x] Tagasisidevorm: tekstikast kasvab kirjutades, "(valikuline)" märgused lahtritest eemaldatud, "meil" sõnastus, linnuke „saadan pildi hiljem — tuleta meiliga meelde“ (feedback.photo_promise, nähtab Adminis)
 - [x] Tagasiside leht: koolitajale klõpsates avaneb tema tagasisidevorm kohe samal lehel (profiili avamine ära)
+- [x] Koolitajate pallikese nimed: perekonnanimi alati teisele reale (eesnimi 1. real), pikk hüüdnimeline ei katkekeskelt
 - [ ] Avaldada uuesti, et muudatused jõuaksid aadressile evn2026.lovable.app
