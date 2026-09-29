@@ -4,8 +4,37 @@ import { supabase } from "@/integrations/supabase/client";
 import type { Speaker } from "@/lib/events";
 import { speakerEventRows } from "@/lib/events";
 
+// Varem antud tagasiside andmed hoitakse ainult kasutaja oma seadmes
+// (localStorage) — serverisse neid eelnevalt ei saadeta.
+const PROFILE_KEY = "smz-feedback-profile";
+const PHOTO_PREFILL_MAX = 1_500_000; // baiti — suuremat pilti eeltäitena ei hoia
+
+type SavedProfile = {
+  name?: string;
+  field?: string;
+  contact?: string;
+  photoDataUrl?: string;
+  photoName?: string;
+};
+
+function dataUrlToFile(dataUrl: string, name: string): File | null {
+  try {
+    const parts = dataUrl.split(",");
+    const head = parts[0] ?? "";
+    const b64 = parts[1] ?? "";
+    const mime = head.match(/data:(.*?);/)?.[1] || "image/jpeg";
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new File([bytes], name, { type: mime });
+  } catch {
+    return null;
+  }
+}
+
 // Tagasisidevorm koolitaja profiili all — hinnang 1–10, tekst, nimi, valdkond,
-// valikuline foto ja kontakt (sisse logituna eeltäidetud e-postiga, muudetav).
+// e-post ja valikuline foto. Kõik isikuandmed on vabatahtlikud; varem sisestatud
+// andmed täidetakse seadmest vaikimisi (sisse loginul e-post kontolt).
 export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState<number | null>(null);
@@ -18,8 +47,23 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
 
-  // Sisse loginud kasutaja e-post vaikimisi kontaktiks (jääb muudetavaks)
+  // Eeltäide: 1) seadmesse salvestatud varasem tagasiside, 2) sisse logitud e-post
   useEffect(() => {
+    try {
+      const raw = localStorage.getItem(PROFILE_KEY);
+      if (raw) {
+        const saved = JSON.parse(raw) as SavedProfile;
+        if (saved.name) setName(saved.name);
+        if (saved.field) setField(saved.field);
+        if (saved.contact) setContact(saved.contact);
+        if (saved.photoDataUrl) {
+          const f = dataUrlToFile(saved.photoDataUrl, saved.photoName || "foto.jpg");
+          if (f) setPhoto(f);
+        }
+      }
+    } catch {
+      // vigane salvestus — ignoreeri
+    }
     supabase.auth.getSession().then(({ data }) => {
       const email = data.session?.user?.email;
       if (email) setContact((prev) => prev || email);
@@ -43,7 +87,6 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
             setSent(false);
             setRating(null);
             setMessage("");
-            setPhoto(null);
           }}
           className="mt-2 text-sm font-semibold text-primary underline underline-offset-2"
         >
@@ -101,6 +144,25 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
       setError("Saatmine ebaõnnestus. Proovi palun uuesti.");
       return;
     }
+    // Jäta seadmesse meelde järgmiseks korraks (ainult kasutaja oma seade)
+    try {
+      const saved: SavedProfile = {};
+      if (name.trim()) saved.name = name.trim();
+      if (field.trim()) saved.field = field.trim();
+      if (contact.trim()) saved.contact = contact.trim();
+      if (photo && photo.size <= PHOTO_PREFILL_MAX) {
+        saved.photoName = photo.name;
+        saved.photoDataUrl = await new Promise<string>((resolve, reject) => {
+          const r = new FileReader();
+          r.onload = () => resolve(r.result as string);
+          r.onerror = reject;
+          r.readAsDataURL(photo);
+        });
+      }
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(saved));
+    } catch {
+      // salvestus ei õnnestunud — tagasiside on ikkagi saadetud
+    }
     setSent(true);
   }
 
@@ -111,7 +173,10 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
     >
       <p className="text-sm font-semibold">Saada tagasiside koolitajale</p>
       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-        Sinu sõnum jõuab koolitajani ja aitab järgmistel osalejatel paremat valikut teha.
+        Sinu sõnum jõuab koolitajani ja aitab järgmistel osalejatel paremat
+        valikut teha. Kui soovid jätta tagasiside anonüümselt, jäta enda kohta
+        käivad andmed täitmata. Kui soovid, et tagasisidet võiks kasutada
+        kodulehel või sotsiaalmeedias, lisa ka foto.
       </p>
 
       <div>
@@ -139,7 +204,7 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
         maxLength={4000}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Mis jäi hästi meelde ja mida võiks järgmine kord teha teisiti?"
+        placeholder="Mis koolituse juures meeldis ja mida võiks järgmine kord lahendada teisiti?"
         className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
       />
 
@@ -148,14 +213,23 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           maxLength={200}
-          placeholder="Sinu nimi"
+          placeholder="Sinu nimi (valikuline)"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
         />
         <input
           value={field}
           onChange={(e) => setField(e.target.value)}
           maxLength={200}
-          placeholder="Roll / valdkond"
+          placeholder="Roll / valdkond (valikuline)"
+          className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
+        />
+        <input
+          id={`contact-${speaker.id}`}
+          type="email"
+          maxLength={300}
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
+          placeholder="E-post (valikuline)"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
         />
       </div>
@@ -173,35 +247,25 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
           </button>
         </div>
       ) : (
-        <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold">
-          <Camera className="size-4" /> Lisa foto (valikuline)
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(e) => {
-              const f = e.target.files?.[0];
-              if (f && f.size > 10 * 1024 * 1024) setError("Foto on liiga suur (max 10 MB).");
-              else if (f) setPhoto(f);
-            }}
-          />
-        </label>
+        <div>
+          <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold">
+            <Camera className="size-4" /> Lisa foto (valikuline)
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f && f.size > 10 * 1024 * 1024) setError("Foto on liiga suur (max 10 MB).");
+                else if (f) setPhoto(f);
+              }}
+            />
+          </label>
+          <p className="mt-1.5 text-xs text-muted-foreground">
+            Saadan pildi hiljem — tuleta e-postiga meelde.
+          </p>
+        </div>
       )}
-
-      <div>
-        <label htmlFor={`contact-${speaker.id}`} className="text-sm font-semibold">
-          Kontakt (e-post)
-        </label>
-        <input
-          id={`contact-${speaker.id}`}
-          type="email"
-          maxLength={300}
-          value={contact}
-          onChange={(e) => setContact(e.target.value)}
-          placeholder="sinu@email.ee"
-          className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-        />
-      </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}
 
