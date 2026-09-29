@@ -15,11 +15,16 @@ type RoomImage = {
   alt: string;
 };
 
+const PREVIEW_COUNT = 4;
+
 export function RoomGallery({ images }: { images: RoomImage[] }) {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [initialIndex, setInitialIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
+
+  const visibleImages = expanded ? images : images.slice(0, PREVIEW_COUNT);
 
   useEffect(() => {
     if (!api) return;
