@@ -19,7 +19,9 @@ type SavedProfile = {
 
 function dataUrlToFile(dataUrl: string, name: string): File | null {
   try {
-    const [head, b64] = dataUrl.split(",");
+    const parts = dataUrl.split(",");
+    const head = parts[0] ?? "";
+    const b64 = parts[1] ?? "";
     const mime = head.match(/data:(.*?);/)?.[1] || "image/jpeg";
     const bin = atob(b64);
     const bytes = new Uint8Array(bin.length);
