@@ -44,3 +44,4 @@
 - [x] Minu kava sisselogitud vaade: üks kompaktne kaart iga registreeringu kohta, ilma eraldi materjalide sektsioonita
 - [x] Sündmuse detailvaade: sama sisu Kava ja Minu kava kaudu, kalendrinupu asemel tagasiside, slaidid ja koolitaja profiil
 - [x] Minu kava: käsitsi „Värskenda registreeringuid" nupud eemaldatud — registreeringud sünkroonitakse lehe avamisel automaatselt
+- [x] Koolitajad: kontaktide rida jaotatud kogu kaardi laiusele — Koduleht vasakul, LinkedIn keskel, Slaidid paremal

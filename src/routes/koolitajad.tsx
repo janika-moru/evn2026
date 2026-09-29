@@ -128,7 +128,7 @@ function SpeakersPage() {
                 </ul>
               )}
 
-              <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">
                 {s.websiteUrl && (
                   <a href={s.websiteUrl} target="_blank" rel="noreferrer" className={contactLink}>
                     Koduleht
