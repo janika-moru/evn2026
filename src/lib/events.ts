@@ -37,6 +37,8 @@ export interface EventItem {
 export interface Speaker {
   id: string;
   name: string;
+  /** Kuvatav lühinimi pallikese all, nt „Kukkumiskaitse" duokoolitajate asemel. */
+  displayName?: string;
   role: string;
   bio: string;
   imageUrl?: string;
@@ -597,6 +599,7 @@ export const SPEAKERS: Speaker[] = [
   {
     "id": "taavi-lukas-ja-anders-veetamm",
     "name": "Taavi Lukas ja Anders Veetamm",
+    "displayName": "Kukkumiskaitse",
     "role": "",
     "bio": "",
     "eventIds": [
