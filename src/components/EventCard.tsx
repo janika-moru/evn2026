@@ -95,9 +95,13 @@ export function EventCard({
               {registered ? (
                 <StatusBadge status="registered" />
               ) : (
-                <span className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+                <Link
+                  to="/sundmus/$id"
+                  params={{ id: event.id }}
+                  className="inline-flex items-center justify-center rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+                >
                   Registreeru
-                </span>
+                </Link>
               )}
             </span>
           )}

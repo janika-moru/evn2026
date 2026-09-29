@@ -1,18 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { getAvailableSpots } from "@/lib/availability.functions";
+import { getAllAvailableSpots } from "@/lib/availability.functions";
 
 export function useEventAvailability(fientaEventId?: string) {
-  const fetchSpots = useServerFn(getAvailableSpots);
+  const fetchAll = useServerFn(getAllAvailableSpots);
   const query = useQuery({
-    queryKey: ["event-availability", fientaEventId],
-    enabled: Boolean(fientaEventId),
+    queryKey: ["event-availability-all"],
     staleTime: 60_000,
-    queryFn: async () => {
-      if (!fientaEventId) return null;
-      return fetchSpots({ data: { id: fientaEventId } });
-    },
+    queryFn: () => fetchAll(),
   });
-
-  return { availableSpots: query.data ?? null, query };
+  const availableSpots =
+    fientaEventId && query.data && fientaEventId in query.data ? query.data[fientaEventId] : null;
+  return { availableSpots, query };
 }
