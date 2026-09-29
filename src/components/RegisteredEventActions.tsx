@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/dialog";
 import { speakersForEvent, type EventItem } from "@/lib/events";
 
+const contactLink =
+  "text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground";
+
 export function RegisteredEventActions({ event }: { event: EventItem }) {
   const speakers = speakersForEvent(event.id);
   const slidesUrl = event.slidesUrl ?? event.materialsUrl;

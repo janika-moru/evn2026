@@ -194,6 +194,7 @@ function MyScheduleEvent({ event }: { event: EventItem }) {
     <EventCard
       event={event}
       showDate
+      hideRegisteredBadge
       actions={<RegisteredEventActions event={event} />}
     />
   );
