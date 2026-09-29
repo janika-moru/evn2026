@@ -4,7 +4,7 @@ import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } 
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 import koolitajadBanner from "@/assets/koolitajad-programm-banner.png.asset.json";
-import { MeeskondCard } from "@/components/SpeakersTeamLinks";
+import { MeeskondRow } from "@/components/SpeakersTeamLinks";
 
 
 
