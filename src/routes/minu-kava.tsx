@@ -1,11 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CalendarCheck, FileText, LogOut, Mail, MessageSquareHeart, RefreshCw, UserRound } from "lucide-react";
+import { CalendarCheck, Check, FileText, LogOut, Mail, MessageSquareHeart, RefreshCw, UserRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { EventCard } from "@/components/EventCard";
 import { EVENTS, longDate, EVENT_DAYS, speakersForEvent, displayTime, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
-import { SpeakersTeamLinks } from "@/components/SpeakersTeamLinks";
+
+const BENEFITS = [
+  "näha ja tühistada oma registreerimisi",
+  "ligipääsu slaididele ja lisamaterjalidele",
+  "lingid koolitaja kontaktidele",
+  "jätta tagasisidet koolitajale",
+];
 
 
 export const Route = createFileRoute("/minu-kava")({
@@ -45,8 +51,6 @@ function MySchedulePage() {
       ) : (
         <SignInCard />
       )}
-
-      <SpeakersTeamLinks />
     </main>
   );
 
@@ -80,6 +84,18 @@ function SignInCard() {
       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
         Logi sisse sama e-posti aadressiga, mida kasutasid Fientas registreerumisel.
       </p>
+
+      <div className="mt-5">
+        <p className="text-sm font-semibold">Sisse logides saad:</p>
+        <ul className="mt-2 space-y-1.5">
+          {BENEFITS.map((item) => (
+            <li key={item} className="flex gap-2 text-sm text-muted-foreground">
+              <Check className="mt-0.5 size-4 shrink-0 text-primary" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <form onSubmit={handleSubmit} className="mt-5 rounded-2xl bg-secondary p-4">
         <label htmlFor="email" className="text-sm font-semibold">
