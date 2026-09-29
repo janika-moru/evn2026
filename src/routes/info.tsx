@@ -15,6 +15,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 
 import { MeeskondCard } from "@/components/SpeakersTeamLinks";
+import { RoomGallery } from "@/components/RoomGallery";
 import directionsImage from "@/assets/studio-mindz-sissepaas.jpg.asset.json";
 import largeRoomFront from "@/assets/ruum-suur-eest.jpg.asset.json";
 import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
@@ -164,17 +165,7 @@ function InfoPage() {
           </h2>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          {ROOM_IMAGES.map((image) => (
-            <img
-              key={image.src}
-              src={image.src}
-              alt={image.alt}
-              loading="lazy"
-              className="aspect-square w-full rounded-lg object-cover"
-            />
-          ))}
-        </div>
+        <RoomGallery images={ROOM_IMAGES} />
 
         <p className="mt-4 text-sm leading-relaxed text-foreground/80">
           Tartu stuudios on kaks kõrvutiasetsevat, uksega ühendatud ruumi. Laudu ja toole saame
