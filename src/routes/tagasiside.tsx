@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, Camera, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
-import ruumidBanner from "@/assets/ruumid-banner.png.asset.json";
+import koolitajadBanner from "@/assets/koolitajad-programm-banner.png.asset.json";
 import { MeeskondCard } from "@/components/SpeakersTeamLinks";
 
 
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/tagasiside")({
 type FType = "training" | "keep" | "change";
 
 // Google'i arvustuse otselink (Studio MindZ) — avab otse arvustuse kirjutamise vormi
-const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJscTlJO8360YRwDYVeZ5YfHM";
+const GOOGLE_REVIEW_URL = "https://g.page/r/CcA2FXmeWHxzEBM/review";
 
 const TYPES: { id: FType; label: string; short: string; icon: typeof HeartHandshake; hint: string }[] = [
   { id: "training", label: "Jäta tagasiside koolitusele", short: "Koolitus", icon: GraduationCap, hint: "" },
@@ -154,49 +154,50 @@ function FeedbackPage() {
 
   if (!type) {
     return (
-      <main className="px-4 pt-8">
-        <h1 className="text-2xl font-bold">Mida tahad meile öelda?</h1>
-
-        <div className="mt-6 space-y-3">
-          {TYPES.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setType(t.id)}
-              className={`flex w-full items-center gap-4 rounded-2xl border p-5 text-left text-base font-semibold transition active:scale-[0.98] ${
-                "border-border bg-card"
-              }`}
-            >
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                <t.icon className="size-5" />
-              </span>
-              {t.label}
-            </button>
-          ))}
-          <a
-            href={GOOGLE_REVIEW_URL}
-            className="flex w-full items-center gap-4 rounded-2xl border border-mindz-pink bg-mindz-pink p-5 text-left text-base font-semibold transition active:scale-[0.98]"
-          >
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <Star className="size-5" />
-            </span>
-            Lisa Google arvustus
-          </a>
-        </div>
-
+      <main className="px-4 pt-6 pb-8">
         <img
-          src={ruumidBanner.url}
-          alt="Studio MindZi ruumid — registreerimine Fienta.com/studiomindz"
-          className="mt-8 w-full rounded-2xl"
+          src={koolitajadBanner.url}
+          alt="Tartu Ettevõtlusnädala koolitajad Studio MindZis"
+          className="w-full rounded-2xl"
         />
+        <button
+          onClick={() => setType("training")}
+          className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground transition active:scale-[0.98]"
+        >
+          <GraduationCap className="size-5" />
+          Jäta tagasiside koolitusele
+        </button>
 
         <MeeskondCard />
+
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          {TYPES.filter((item) => item.id !== "training").map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setType(item.id)}
+              className="flex min-h-24 flex-col items-start justify-between rounded-2xl border border-border bg-card p-4 text-left text-sm font-semibold transition active:scale-[0.98]"
+            >
+              <item.icon className="size-5 text-primary" />
+              {item.id === "keep" ? "Kiidan" : "Parandusettepanek"}
+            </button>
+          ))}
+        </div>
+
+        <a
+          href={GOOGLE_REVIEW_URL}
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl border border-mindz-pink bg-mindz-pink p-4 text-sm font-semibold transition active:scale-[0.98]"
+        >
+          <Star className="size-5 text-primary" />
+          Lisa Google arvustus
+        </a>
       </main>
 
     );
 
   }
 
-  const current = TYPES.find((t) => t.id === type)!;
+  const current = TYPES.find((t) => t.id === type);
+  if (!current) return null;
   const fixedEvent = fromEvent ? getEvent(fromEvent) : null;
 
   return (
