@@ -1,6 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { FileText, MessageSquareHeart, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { speakersForEvent, type EventItem } from "@/lib/events";
 
 export function RegisteredEventActions({ event }: { event: EventItem }) {
@@ -57,6 +65,26 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
           </Link>
         </Button>
       ))}
+
+      <Dialog>
+        <DialogTrigger className="block w-full pt-1 text-center text-xs text-muted-foreground underline underline-offset-2">
+          Loobu kohast
+        </DialogTrigger>
+        <DialogContent className="max-w-sm rounded-2xl">
+          <DialogHeader>
+            <DialogTitle>Loobu kohast</DialogTitle>
+            <DialogDescription>
+              Loobumine käib Fienta kaudu. Ava oma Fienta kinnitusmeil ja vajuta „Loobu“ – koht
+              vabaneb teistele.
+            </DialogDescription>
+          </DialogHeader>
+          <Button asChild className="rounded-full">
+            <a href={event.fientaUrl} target="_blank" rel="noreferrer">
+              Ava Fienta
+            </a>
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
