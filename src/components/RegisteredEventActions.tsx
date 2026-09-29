@@ -68,7 +68,7 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
 
       <Dialog>
         <DialogTrigger className="block w-full pt-1 text-center text-xs text-muted-foreground underline underline-offset-2">
-          Loobu kohast
+          Pilet · QR-kood · loobumine
         </DialogTrigger>
         <DialogContent className="max-w-sm rounded-2xl">
           <DialogHeader>
