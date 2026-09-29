@@ -173,10 +173,11 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
     >
       <p className="text-sm font-semibold">Saada tagasiside koolitajale</p>
       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-        Sinu sõnum jõuab koolitajani ja aitab järgmistel osalejatel paremat
-        valikut teha. Kui soovid jätta tagasiside anonüümselt, jäta enda kohta
-        käivad andmed täitmata. Kui soovid, et tagasisidet võiks kasutada
-        kodulehel või sotsiaalmeedias, lisa ka foto.
+        Sinu tagasiside aitab järgmisi koolitusi paremini ette valmistada.
+        <br />
+        Anonüümselt vastamiseks jäta enda kohta käivad andmed täitmata.
+        <br />
+        Kui soovid, et tagasisidet võiks kasutada kodulehel või sotsiaalmeedias, lisa ka foto.
       </p>
 
       <div>
