@@ -645,6 +645,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Katrin Differt",
     "role": "",
     "bio": "",
+    "imageUrl": katrinDiffertPhoto.url,
+    "websiteUrl": "https://360kogemus.ee/",
+    "linkedinUrl": "https://www.linkedin.com/in/katrin-differt-bb9194216/",
     "eventIds": [
       "202936"
     ]
