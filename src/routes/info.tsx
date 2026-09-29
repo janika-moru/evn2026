@@ -110,8 +110,6 @@ function InfoPage() {
         </a>
       </section>
 
-      <MeeskondCard />
-
       <ul className="mt-4 space-y-3">
         {STEPS.map((st) => (
           <li key={st.title} className="flex gap-3 rounded-2xl border border-border bg-card p-4">
@@ -155,6 +153,8 @@ function InfoPage() {
           </div>
         </li>
       </ul>
+
+      <MeeskondCard />
 
       <section className="mt-8" aria-labelledby="rooms-heading">
         <div className="flex items-center gap-2">
