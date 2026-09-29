@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Clock, MapPin } from "lucide-react";
 import { StatusBadge, SoldOutPill } from "@/components/EventCard";
 import { RegisteredEventActions } from "@/components/RegisteredEventActions";
+import { SpeakerLinks } from "@/components/SpeakerLinks";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
 import { getEvent, longDate, dayLabel, displayTime } from "@/lib/events";
@@ -64,7 +65,9 @@ function EventDetailPage() {
         {dayLabel(event.date)} · {longDate(event.date)}
       </p>
       <h1 className="mt-1 text-2xl font-bold leading-tight">{event.title}</h1>
-      <p className="mt-2 text-base text-muted-foreground">{event.speaker}</p>
+      <div className="mt-2">
+        <SpeakerLinks eventId={event.id} fallback={event.speaker} />
+      </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-sm font-medium">
@@ -97,7 +100,7 @@ function EventDetailPage() {
         )}
         {displayStatus === "full" && <SoldOutPill className="w-full py-3.5 text-base" />}
         {status === "registered" && (
-          <p className="rounded-2xl border border-primary/40 bg-secondary/40 p-4 text-center text-sm font-semibold text-primary">
+          <p className="text-sm font-semibold text-primary">
             Oled sellele sündmusele registreerunud ✓
           </p>
         )}
