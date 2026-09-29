@@ -35,3 +35,4 @@
 - [x] Minu kava: koolitajate ja meeskonna osa eemaldatud; ainult sisselogimine + oma registreeringud; pikemad juhised ja „Sisse logides saad" loend
 - [x] Minu kava: sisselogimisnupu alla selgitus „Parooli ei ole vaja luua. Kliki postkastis oleval lingil ja see toob su tagasi äppi sisselogituna."
 - [ ] Avaldada uuesti, et muudatused jõuaksid aadressile evn2026.lovable.app
+- [x] Info leht: pealkiri eemaldatud, salvestuste teavitus, vahetusjalanõude märkus ning ruumide galerii, kirjeldused ja rendiinfo

@@ -4,15 +4,21 @@ import {
   Navigation,
   Footprints,
   Car,
-  Sparkles,
+  CircleAlert,
   Backpack,
   Clock,
   Mail,
+  Camera,
+  Building2,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { SpeakersTeamLinks } from "@/components/SpeakersTeamLinks";
 import directionsImage from "@/assets/studio-mindz-sissepaas.jpg.asset.json";
+import largeRoomFront from "@/assets/ruum-suur-eest.jpg.asset.json";
+import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
+import meetingRoom from "@/assets/ruum-koosolek.jpg.asset.json";
+import kitchen from "@/assets/ruum-kook.jpg.asset.json";
 
 /** Kohale tuleku juhise pilt. */
 const DIRECTIONS_IMAGE_URL: string | null = directionsImage.url;
@@ -20,12 +26,19 @@ const DIRECTIONS_IMAGE_URL: string | null = directionsImage.url;
 const MAPS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=Lutsu+t%C3%A4nav+3%2C+51005+Tartu%2C+Tartu+maakond%2C+Eesti";
 
+const ROOM_IMAGES = [
+  { src: largeRoomFront.url, alt: "Studio MindZi suur koolitusruum" },
+  { src: largeRoomCircle.url, alt: "Studio MindZi suur koolitusruum ringis toolidega" },
+  { src: meetingRoom.url, alt: "Studio MindZi väike koosolekuruum" },
+  { src: kitchen.url, alt: "Studio MindZi köök" },
+];
+
 const STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: Footprints, title: "Saabumine", text: "Hoovis liigu puittrepi juurde ja tule üles 2. korrusele." },
   { icon: Car, title: "Parkimine", text: "Parkimine toimub linna üldkorra alusel." },
   {
-    icon: Sparkles,
-    title: "Jalanõud",
+    icon: CircleAlert,
+    title: "Vahetusjalanõud!",
     text: "Puitpõranda kaitseks võib ruumis viibida sokkides või ilma terava kontsata vahetusjalanõudes.",
   },
   {
@@ -37,6 +50,11 @@ const STEPS: { icon: LucideIcon; title: string; text: string }[] = [
     icon: Clock,
     title: "Tule 15 minutit varem",
     text: "Palun jõua kohale vähemalt 15 minutit enne algust. Koolitus algab täpselt märgitud ajal.",
+  },
+  {
+    icon: Camera,
+    title: "Video- ja fotosalvestused",
+    text: "Koolitustest tehakse video- ja fotosalvestusi koolitaja ja Studio MindZi kasutuseks.",
   },
 ];
 
@@ -66,13 +84,11 @@ export const Route = createFileRoute("/info")({
 function InfoPage() {
   return (
     <main className="px-4 pt-8">
-      <h1 className="text-2xl font-bold">Kohale tulek</h1>
-
       {DIRECTIONS_IMAGE_URL && (
         <img
           src={DIRECTIONS_IMAGE_URL}
           alt="Studio MindZ sissepääs: Lutsu 3, Tartu, Antoniuse õuemaja 2. korrus"
-          className="mt-4 w-full rounded-2xl object-cover"
+          className="w-full rounded-2xl object-cover"
         />
       )}
 
@@ -134,6 +150,61 @@ function InfoPage() {
           </div>
         </li>
       </ul>
+
+      <section className="mt-8" aria-labelledby="rooms-heading">
+        <div className="flex items-center gap-2">
+          <Building2 className="size-6 text-primary" />
+          <h2 id="rooms-heading" className="text-xl font-bold">
+            Ruumid
+          </h2>
+        </div>
+
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          {ROOM_IMAGES.map((image) => (
+            <img
+              key={image.src}
+              src={image.src}
+              alt={image.alt}
+              loading="lazy"
+              className="aspect-square w-full rounded-lg object-cover"
+            />
+          ))}
+        </div>
+
+        <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+          Tartu stuudios on kaks kõrvutiasetsevat, uksega ühendatud ruumi.
+        </p>
+
+        <div className="mt-4 space-y-3">
+          <div className="rounded-lg border border-border bg-card p-4">
+            <h3 className="font-semibold">Suur koolitusruum · 70 m²</h3>
+            <p className="mt-1 text-sm leading-relaxed text-foreground/80">
+              Diivanid ja tugitoolid 20–25 osalejale, esitlustehnika, pabertahvel ja markerid,
+              kõlarid, kohvinurk, väike külmik ning garderoob. Tualett asub eesruumis.
+            </p>
+          </div>
+          <div className="rounded-lg border border-border bg-card p-4">
+            <h3 className="font-semibold">Väike koosolekuruum / kohvikutuba · 35 m²</h3>
+            <p className="mt-1 text-sm leading-relaxed text-foreground/80">
+              Kohvikulauad või suur koosolekulaud ja toolid 8–10 osalejale, esitlusteler,
+              pabertahvel, täisvarustuses köök, külmik ja nõudepesumasin. Tualett asub samas
+              ruumis.
+            </p>
+          </div>
+        </div>
+
+        <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+          Laudu ja toole saame vajadusel tubade vahel liigutada vastavalt soovile.
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-foreground/80">
+          Ruume on võimalik rentida endale sobivaks sündmuseks. Hind alates 50 €/h, hinnad
+          ilma käibemaksuta. Täpsema pakkumise jaoks saada meil aadressile{" "}
+          <a href="mailto:info@mindz.ee" className="font-semibold text-primary underline">
+            info@mindz.ee
+          </a>
+          .
+        </p>
+      </section>
 
       <SpeakersTeamLinks />
     </main>
