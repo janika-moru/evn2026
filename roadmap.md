@@ -54,3 +54,6 @@
 - [x] Mikk Orglaan: profiilipilt, koduleht (sparkly.hr/et) ja LinkedIn lisatud
 - [x] Janika Mõru portree vahetatud uue pildi vastu (janika-moru.png)
 - [x] Martin Mark: profiilipilt, koduleht (introverdid.ee) ja LinkedIn lisatud
+- [x] Katrin Vilimaa-Otsing: profiilipilt, koduleht (turunduskoolitus.ee) ja LinkedIn lisatud
+- [x] Katrin Differt: profiilipilt, koduleht (360kogemus.ee) ja LinkedIn lisatud
+- [x] Ivar Raav: profiilipilt, koduleht (ivarraav.com) ja LinkedIn lisatud
