@@ -31,4 +31,6 @@
 - [x] Koolitajate pallikese nimed: perekonnanimi alati teisele reale (eesnimi 1. real), pikk hüüdnimeline ei katkekeskelt
 - [x] Tagasisidevormid: selge kinnitus pärast saatmist — „Sinu tagasiside jõudis meieni" + roheline märk (mõlemad vormid: koolitajavorm ja tiimi vormid)
 - [x] Kava leht: pealkiri „Kava" ja „Studio MindZi programm · 5.–9. oktoober" eemaldatud — tekst tuleb nähtavale ainult siis, kui bänneri pilt ei laadi
+- [x] Kava leht: alumine ruumide bänner eemaldatud
+- [x] Minu kava: koolitajate ja meeskonna osa eemaldatud; ainult sisselogimine + oma registreeringud; pikemad juhised ja „Sisse logides saad" loend
 - [ ] Avaldada uuesti, et muudatused jõuaksid aadressile evn2026.lovable.app
