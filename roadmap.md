@@ -24,3 +24,4 @@
 - [ ] Selje ja Liisi: sihtkohad nimede klõpsamiseks (oodab kasutajalt)
 - [x] Googlei arvustuse otselink (kasutaja g.page link) — avab otse arvustuse vormi, apa sees
 - [x] Tagasiside menüü sõnastused: „Jäta tagasiside koolitusele", „Kiidan korraldust/ruume/tiimi", „Parandusettepanek korraldusele/ruumidele/tiimile", „Lisa Google arvustus"
+- [x] Tagasiside avaleht: pealkiri ja ruumide bänner eemaldatud; koolitajate pilt ja koolituse nupp, meeskond koos kiituse/parandusettepaneku nuppudega ning Google'i arvustus
