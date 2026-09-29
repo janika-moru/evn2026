@@ -191,15 +191,10 @@ function SignedIn({ email }: { email: string }) {
 
 function MyScheduleEvent({ event }: { event: EventItem }) {
   return (
-    <article className="rounded-xl border border-border bg-card p-4">
-      <p className="text-xs font-semibold uppercase text-muted-foreground">
-        {longDate(event.date)} {displayTime(event.startTime)}–{displayTime(event.endTime)}
-      </p>
-      <Link to="/sundmus/$id" params={{ id: event.id }} className="mt-1 block">
-        <h2 className="text-base font-semibold leading-snug">{event.title}</h2>
-        <p className="mt-0.5 text-sm text-muted-foreground">{event.speaker}</p>
-      </Link>
-      <RegisteredEventActions event={event} />
-    </article>
+    <EventCard
+      event={event}
+      showDate
+      actions={<RegisteredEventActions event={event} />}
+    />
   );
 }
