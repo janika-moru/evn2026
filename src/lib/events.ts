@@ -512,6 +512,14 @@ export const SPEAKERS: Speaker[] = [
     "name": "Martin Mark",
     "role": "",
     "bio": "",
+    "imageUrl": martinPhoto.url,
+    "email": "",
+    "phone": "",
+    "websiteUrl": "https://introverdid.ee/",
+    "linkedinUrl": "https://www.linkedin.com/in/martinmarkest/",
+    "facebookUrl": "",
+    "instagramUrl": "",
+    "slidesUrl": "",
     "eventIds": [
       "202931"
     ]
