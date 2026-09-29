@@ -64,7 +64,9 @@ function EventDetailPage() {
         {dayLabel(event.date)} · {longDate(event.date)}
       </p>
       <h1 className="mt-1 text-2xl font-bold leading-tight">{event.title}</h1>
-      <p className="mt-2 text-base text-muted-foreground">{event.speaker}</p>
+      <div className="mt-2">
+        <SpeakerLinks eventId={event.id} fallback={event.speaker} />
+      </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-sm font-medium">
