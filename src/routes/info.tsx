@@ -10,6 +10,7 @@ import {
   Mail,
   Camera,
   Building2,
+  Tag,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -172,7 +173,8 @@ function InfoPage() {
         </div>
 
         <p className="mt-4 text-sm leading-relaxed text-foreground/80">
-          Tartu stuudios on kaks kõrvutiasetsevat, uksega ühendatud ruumi.
+          Tartu stuudios on kaks kõrvutiasetsevat, uksega ühendatud ruumi. Laudu ja toole saame
+          vajadusel tubade vahel liigutada vastavalt soovile.
         </p>
 
         <div className="mt-4 space-y-3">
@@ -193,17 +195,30 @@ function InfoPage() {
           </div>
         </div>
 
-        <p className="mt-4 text-sm leading-relaxed text-foreground/80">
-          Laudu ja toole saame vajadusel tubade vahel liigutada vastavalt soovile.
-        </p>
-        <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-          Ruume on võimalik rentida endale sobivaks sündmuseks. Hind alates 50 €/h, hinnad
-          ilma käibemaksuta. Täpsema pakkumise jaoks saada meil aadressile{" "}
-          <a href="mailto:info@mindz.ee" className="font-semibold text-primary underline">
-            info@mindz.ee
-          </a>
-          .
-        </p>
+        <div className="mt-6 rounded-2xl bg-mindz-mint p-5">
+          <div className="flex items-center gap-2">
+            <Tag className="size-5 text-primary" />
+            <h3 className="text-base font-bold">Ruumide rentimine</h3>
+          </div>
+          <p className="mt-1.5 text-sm leading-relaxed text-foreground/80">
+            Ruume on võimalik rentida endale sobivaks sündmuseks.
+          </p>
+          <div className="mt-3 space-y-1.5">
+            <p className="text-sm">
+              <span className="font-semibold">Tund</span> — hind alates 50 € + KM
+            </p>
+            <p className="text-sm">
+              <span className="font-semibold">Päev</span> — hind alates 350 € + KM
+            </p>
+          </div>
+          <p className="mt-3 text-sm leading-relaxed text-foreground/80">
+            Täpsema pakkumise jaoks saada meil aadressile{" "}
+            <a href="mailto:info@mindz.ee" className="font-semibold text-primary underline">
+              info@mindz.ee
+            </a>
+            .
+          </p>
+        </div>
       </section>
 
       <SpeakersTeamLinks />
