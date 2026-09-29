@@ -191,7 +191,18 @@ function FeedbackPage() {
           </a>
         </section>
 
-        <KoolitajadPills />
+        <KoolitajadPills onSelect={setSpeaker} selectedId={speaker?.id ?? null}>
+          {speaker && (
+            <div ref={formRef} className="scroll-mt-2">
+              <SpeakerFeedbackForm
+                key={speaker.id}
+                speaker={speaker}
+                startOpen
+                onClose={() => setSpeaker(null)}
+              />
+            </div>
+          )}
+        </KoolitajadPills>
       </main>
     );
   }
