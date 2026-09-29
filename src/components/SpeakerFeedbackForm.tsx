@@ -35,7 +35,9 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
     return (
       <div className="mt-4 rounded-2xl border border-primary/25 bg-mindz-mint p-4 text-center">
         <p className="text-2xl">💚</p>
-        <p className="mt-1 text-sm font-semibold">Aitäh! Saime su tagasiside kätte.</p>
+        <p className="mt-1 text-sm font-semibold">
+          Aitäh! Sinu tagasiside jõuab koolitajani.
+        </p>
         <button
           onClick={() => {
             setSent(false);
@@ -58,7 +60,7 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
         className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition active:scale-[0.98]"
       >
         <GraduationCap className="size-4" />
-        Anna tagasisidet koolitusele
+        Saada tagasiside koolitajale
       </button>
     );
   }
@@ -107,7 +109,10 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
       onSubmit={submit}
       className="mt-4 space-y-4 rounded-2xl border border-border bg-background/70 p-4"
     >
-      <p className="text-sm font-semibold">Anna tagasisidet koolitusele</p>
+      <p className="text-sm font-semibold">Saada tagasiside koolitajale</p>
+      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+        Sinu sõnum jõuab koolitajani ja aitab järgmistel osalejatel paremat valikut teha.
+      </p>
 
       <div>
         <p className="text-sm font-semibold">Kuidas jäid koolitusega rahule?</p>
@@ -134,7 +139,7 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
         maxLength={4000}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Sinu tagasiside koolitusele"
+        placeholder="Mis jäi hästi meelde ja mida võiks järgmine kord teha teisiti?"
         className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
       />
 
@@ -205,7 +210,7 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
         disabled={sending}
         className="w-full rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground disabled:opacity-60"
       >
-        {sending ? "Saadan…" : "Saada tagasiside"}
+        {sending ? "Saadan…" : "Saada koolitajale"}
       </button>
     </form>
   );
