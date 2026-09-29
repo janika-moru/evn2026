@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { EmblaCarouselType } from "embla-carousel";
 import { Button } from "@/components/ui/button";
 import {
+  type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -19,7 +19,7 @@ export function RoomGallery({ images }: { images: RoomImage[] }) {
   const [open, setOpen] = useState(false);
   const [initialIndex, setInitialIndex] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [api, setApi] = useState<EmblaCarouselType>();
+  const [api, setApi] = useState<CarouselApi>();
 
   useEffect(() => {
     if (!api) return;
