@@ -636,6 +636,9 @@ export const SPEAKERS: Speaker[] = [
     "name": "Ivar Raav",
     "role": "",
     "bio": "",
+    "imageUrl": ivarRaavPhoto.url,
+    "websiteUrl": "https://ivarraav.com/",
+    "linkedinUrl": "https://www.linkedin.com/in/ivarraav/",
     "eventIds": [
       "202958"
     ]
