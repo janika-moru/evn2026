@@ -715,6 +715,14 @@ export function firstName(name: string): string {
   return name.split(" ")[0] ?? name;
 }
 
+/** Nime read pallikese alla: eesnimi esimesele reale, perekonnanimed teisele.
+ *  Ühe sõnaga nimed (nt „Kukkumiskaitse") jäävad ühele reale. */
+export function nameLines(name: string): string[] {
+  const space = name.indexOf(" ");
+  if (space === -1) return [name];
+  return [name.slice(0, space), name.slice(space + 1)];
+}
+
 /** Algustähed, nt „Kiia Paal" → „KP". */
 export function initials(name: string): string {
   return name
