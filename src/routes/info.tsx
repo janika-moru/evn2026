@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { SpeakersTeamLinks } from "@/components/SpeakersTeamLinks";
+import { KoolitajadCard, MeeskondCard } from "@/components/SpeakersTeamLinks";
 import directionsImage from "@/assets/studio-mindz-sissepaas.jpg.asset.json";
 import largeRoomFront from "@/assets/ruum-suur-eest.jpg.asset.json";
 import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
@@ -93,20 +93,24 @@ function InfoPage() {
         />
       )}
 
-      <section className="mt-4 rounded-2xl bg-secondary p-5">
-        <MapPin className="size-6 text-primary" />
-        <p className="mt-2 text-lg font-semibold leading-snug">Studio MindZ</p>
-        <p className="text-base">Lutsu 3, Tartu</p>
+      <section className="mt-4 rounded-2xl bg-secondary p-4">
+        <div className="flex items-center gap-2">
+          <MapPin className="size-5 shrink-0 text-primary" />
+          <p className="text-lg font-semibold leading-snug">Studio MindZ</p>
+        </div>
+        <p className="mt-1 text-base">Lutsu 3, Tartu</p>
         <p className="text-base">Antoniuse Õuemaja, 2. korrus</p>
         <a
           href={MAPS_URL}
           target="_blank"
           rel="noreferrer"
-          className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
+          className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
         >
           <Navigation className="size-5" /> Ava Google Mapsis
         </a>
       </section>
+
+      <MeeskondCard />
 
       <ul className="mt-4 space-y-3">
         {STEPS.map((st) => (
@@ -221,7 +225,7 @@ function InfoPage() {
         </div>
       </section>
 
-      <SpeakersTeamLinks />
+      <KoolitajadCard />
     </main>
   );
 }
