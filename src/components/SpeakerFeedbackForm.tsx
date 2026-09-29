@@ -91,6 +91,11 @@ export function SpeakerFeedbackForm({
     el.style.height = `${el.scrollHeight}px`;
   }, [message, open]);
 
+  // Kinnitus tuhil pärast saatmist ekraanile, et osaleja näeks kindlalt selle kätte
+  useEffect(() => {
+    if (sent) sentRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [sent]);
+
   const rows = speakerEventRows(speaker);
   const eventOptions = rows.flatMap((row) =>
     row.kind === "series" ? row.events : [row.event],
