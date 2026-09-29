@@ -199,10 +199,6 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      get_available_spots: {
-        Args: { _fienta_event_id: string }
-        Returns: number
-      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
