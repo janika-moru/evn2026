@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Users } from "lucide-react";
-import { firstName, initials, teamMembers } from "@/lib/events";
+import { firstName, initials, teamMembers, speakersInListOrder } from "@/lib/events";
 
 /** Roosa kaart, mis viib koolitajate ja materjalide lehele. */
 export function KoolitajadCard() {
@@ -46,6 +46,38 @@ export function MeeskondRow() {
         );
       })}
     </div>
+  );
+}
+
+/** Koolitajate pallikeste rida — tähestiku järjekorras (Kiia, Janika ees), klikk avab profiili. */
+export function KoolitajadRow() {
+  return (
+    <div className="grid grid-cols-4 gap-2">
+      {speakersInListOrder().map((speaker) => (
+        <Link key={speaker.id} to="/koolitajad" hash={speaker.id} className="flex flex-col items-center gap-1.5">
+          {speaker.imageUrl ? (
+            <img src={speaker.imageUrl} alt={speaker.name} className="size-14 rounded-full object-cover" />
+          ) : (
+            <div className="flex size-14 items-center justify-center rounded-full bg-secondary text-base font-semibold">
+              {initials(speaker.name)}
+            </div>
+          )}
+          <span className="text-xs font-medium">{firstName(speaker.name)}</span>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+/** Koolitajate pallikese rida rohelises kaardis — Tagasiside lehel. */
+export function KoolitajadPills() {
+  return (
+    <section className="mt-4 rounded-2xl border border-primary/25 bg-mindz-mint p-4">
+      <p className="text-sm font-semibold">Koolitajad</p>
+      <div className="mt-3">
+        <KoolitajadRow />
+      </div>
+    </section>
   );
 }
 
