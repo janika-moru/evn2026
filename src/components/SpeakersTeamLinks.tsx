@@ -81,7 +81,13 @@ export function KoolitajadRow({
                 {initials(pillName)}
               </div>
             )}
-            <span className="text-xs font-medium">{pillName}</span>
+            <span className="text-center text-xs font-medium leading-tight">
+              {nameLines(pillName).map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </span>
           </>
         );
         const className = "flex flex-col items-center gap-1.5";
