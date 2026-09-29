@@ -8,6 +8,7 @@ import janikaMoruPhoto from "@/assets/janika-moru.png.asset.json";
 import kiiaPaalPhoto from "@/assets/kiia-paal.png.asset.json";
 import kadriLeppikPhoto from "@/assets/kadri-leppik.png.asset.json";
 import liisiPhoto from "@/assets/liisi.jpg.asset.json";
+import martinPhoto from "@/assets/martin.png.asset.json";
 import mikkOrglaanPhoto from "@/assets/mikk-orglaan.png.asset.json";
 import seljePhoto from "@/assets/selje.jpg.asset.json";
 
