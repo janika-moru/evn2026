@@ -65,7 +65,7 @@ export function KoolitajadRow({
     <div className="grid grid-cols-4 gap-2">
       {speakersInListOrder().map((speaker) => {
         const ring = selectedId === speaker.id ? "ring-2 ring-primary" : "";
-        const pillName = speaker.displayName ?? firstName(speaker.name);
+        const pillName = speaker.displayName ?? speaker.name;
         const cell = (
           <>
             {speaker.imageUrl ? (
