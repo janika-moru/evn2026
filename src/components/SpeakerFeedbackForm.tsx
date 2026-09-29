@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Camera, GraduationCap, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Speaker } from "@/lib/events";
@@ -43,9 +43,11 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
   const [field, setField] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [contact, setContact] = useState("");
+  const [photoPromise, setPhotoPromise] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
+  const msgRef = useRef<HTMLTextAreaElement>(null);
 
   // Eeltäide: 1) seadmesse salvestatud varasem tagasiside, 2) sisse logitud e-post
   useEffect(() => {
@@ -69,6 +71,14 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
       if (email) setContact((prev) => prev || email);
     });
   }, []);
+
+  // Tekstikast kasvab kirjutades koos tekstiga, et seda oleks mugav üle lugeda
+  useEffect(() => {
+    const el = msgRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }, [message, open]);
 
   const rows = speakerEventRows(speaker);
   const eventOptions = rows.flatMap((row) =>
@@ -135,9 +145,10 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
       respondent_name: name.trim() || null,
       respondent_field: field.trim() || null,
       needs_help: false,
-      contact_requested: !!contact.trim(),
+      contact_requested: !!contact.trim() || photoPromise,
       contact: contact.trim() || null,
       attachment_url: attachment,
+      photo_promise: photoPromise,
     });
     setSending(false);
     if (dbErr) {
@@ -201,12 +212,12 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
       </div>
 
       <textarea
-        rows={3}
+        ref={msgRef}
         maxLength={4000}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Mis koolituse juures meeldis ja mida võiks järgmine kord lahendada teisiti?"
-        className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+        className="max-h-[70vh] min-h-32 w-full resize-none overflow-y-auto rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
       />
 
       <div className="grid gap-3">
@@ -214,14 +225,14 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           maxLength={200}
-          placeholder="Sinu nimi (valikuline)"
+          placeholder="Sinu nimi"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
         />
         <input
           value={field}
           onChange={(e) => setField(e.target.value)}
           maxLength={200}
-          placeholder="Roll / valdkond (valikuline)"
+          placeholder="Roll / valdkond"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
         />
         <input
@@ -230,7 +241,7 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
           maxLength={300}
           value={contact}
           onChange={(e) => setContact(e.target.value)}
-          placeholder="E-post (valikuline)"
+          placeholder="Meiliaadress"
           className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
         />
       </div>
@@ -250,7 +261,7 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
       ) : (
         <div>
           <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold">
-            <Camera className="size-4" /> Lisa foto (valikuline)
+            <Camera className="size-4" /> Lisa foto
             <input
               type="file"
               accept="image/*"
@@ -262,9 +273,15 @@ export function SpeakerFeedbackForm({ speaker }: { speaker: Speaker }) {
               }}
             />
           </label>
-          <p className="mt-1.5 text-xs text-muted-foreground">
-            Saadan pildi hiljem — tuleta e-postiga meelde.
-          </p>
+          <label className="mt-2 flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={photoPromise}
+              onChange={(e) => setPhotoPromise(e.target.checked)}
+              className="mt-0.5 size-4 shrink-0 accent-primary"
+            />
+            Saadan pildi hiljem — tuleta meiliga meelde
+          </label>
         </div>
       )}
 
