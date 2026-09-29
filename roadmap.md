@@ -52,3 +52,4 @@
 - [x] Kadri Leppik: profiilipilt, koduleht (digistrateeg.ee) ja LinkedIn lisatud
 - [x] Kiia Paal: uus portree (kiia-paal.png), koduleht = Pehme Sünni Kool (hypnosynnitus.ee), Facebook = Studio MindZ; kontaktide reades jääb „Slaidid" paremale
 - [x] Mikk Orglaan: profiilipilt, koduleht (sparkly.hr/et) ja LinkedIn lisatud
+- [x] Janika Mõru portree vahetatud uue pildi vastu (janika-moru.png)
