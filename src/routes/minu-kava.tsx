@@ -8,7 +8,7 @@ import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
 
 const BENEFITS = [
   "näha ja tühistada oma registreerimisi",
-  "ligipääsu slaidele ja lisamaterjalidele",
+  "ligipääsu slaididele ja lisamaterjalidele",
   "lingid koolitaja kontaktidele",
   "jätta tagasisidet koolitajale",
 ];
