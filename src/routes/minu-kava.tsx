@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { CalendarCheck, Check, LogOut, Mail } from "lucide-react";
+import { Check, LogOut, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { RegisteredEventActions } from "@/components/RegisteredEventActions";
-import { EVENTS, longDate, displayTime, type EventItem } from "@/lib/events";
+import { EventCard } from "@/components/EventCard";
+import { EVENTS, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
 
 const BENEFITS = [
