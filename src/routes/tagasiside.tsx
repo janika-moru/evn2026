@@ -155,7 +155,7 @@ function FeedbackPage() {
     return (
       <main className="px-4 pt-6 pb-8">
         <section className="rounded-3xl border border-primary/25 bg-mindz-mint p-4">
-          <p className="text-sm font-semibold">Studio MindZ meeskond</p>
+          <h2 className="text-base font-semibold">Jäta tagasiside tiimile</h2>
           <div className="mt-3">
             <MeeskondRow />
           </div>
@@ -183,13 +183,6 @@ function FeedbackPage() {
         </section>
 
         <KoolitajadPills />
-        <button
-          onClick={() => setType("training")}
-          className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground transition active:scale-[0.98]"
-        >
-          <GraduationCap className="size-5" />
-          Jäta tagasiside koolitusele
-        </button>
       </main>
     );
   }
