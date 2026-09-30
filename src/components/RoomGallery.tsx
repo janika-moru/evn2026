@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 type RoomImage = {
   src: string;
   alt: string;
+  thumb?: string;
 };
 
 const PREVIEW_COUNT = 4;
@@ -61,11 +62,15 @@ export function RoomGallery({ images }: { images: RoomImage[] }) {
             aria-label={`Ava suurelt: ${image.alt}`}
           >
             <img
-              src={image.src}
+              src={image.thumb ?? image.src}
               alt={image.alt}
               loading="lazy"
+              decoding="async"
+              width={400}
+              height={400}
               className="aspect-square w-full object-cover transition-transform duration-200 hover:scale-[1.02] motion-reduce:transition-none"
             />
+
           </Button>
         ))}
       </div>
@@ -90,18 +95,23 @@ export function RoomGallery({ images }: { images: RoomImage[] }) {
             className="w-full"
           >
             <CarouselContent className="-ml-2">
-              {images.map((image) => (
-                <CarouselItem key={image.src} className="pl-2">
-                  <div className="flex h-[min(78vh,760px)] items-center justify-center">
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="max-h-full w-auto max-w-full select-none object-contain"
-                      draggable={false}
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
+              {images.map((image, index) => {
+                // Täissuuruses pilt laaditakse alles siis, kui see on vaates või kohe kõrval.
+                const near = Math.abs(index - selectedIndex) <= 1;
+                return (
+                  <CarouselItem key={image.src} className="pl-2">
+                    <div className="flex h-[min(78vh,760px)] items-center justify-center">
+                      <img
+                        src={near ? image.src : (image.thumb ?? image.src)}
+                        alt={image.alt}
+                        decoding="async"
+                        className="max-h-full w-auto max-w-full select-none object-contain"
+                        draggable={false}
+                      />
+                    </div>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
             <CarouselPrevious className="left-2 size-11 border-border bg-background shadow-md sm:left-4" />
             <CarouselNext className="right-2 size-11 border-border bg-background shadow-md sm:right-4" />
