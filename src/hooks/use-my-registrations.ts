@@ -24,7 +24,6 @@ export function useSession() {
 export function useMyRegistrations() {
   const { session, ready } = useSession();
   const email = session?.user.email ?? null;
-  const sync = useServerFn(syncMyRegistrations);
   const q = useQuery({
     queryKey: ["my-registrations", email],
     enabled: !!email,
@@ -41,6 +40,17 @@ export function useMyRegistrations() {
       );
     },
   });
+  return { session, ready, ids: q.data ?? new Set<string>(), query: q };
+}
+
+export function effectiveStatus(event: EventItem, ids: Set<string>): RegistrationStatus {
+  return event.fientaEventId && ids.has(event.fientaEventId) ? "registered" : event.registrationStatus;
+}
+
+/** Ainult Minu kavas: Fienta sünk taustal (server lukustab 1x minutis). Leht näitab kohe
+ *  salvestatud andmeid ja Fienta tõrke korral jäävad need alles. */
+export function useFientaBackgroundSync(email: string | null) {
+  const sync = useServerFn(syncMyRegistrations);
   // Fienta sünk taustal (server lukustab 1x minutis); leht näitab kohe salvestatud andmeid
   // ja Fienta tõrke korral jäävad need alles.
   const qc = useQueryClient();
@@ -56,9 +66,4 @@ export function useMyRegistrations() {
       cancelled = true;
     };
   }, [email, sync, qc]);
-  return { session, ready, ids: q.data ?? new Set<string>(), query: q };
-}
-
-export function effectiveStatus(event: EventItem, ids: Set<string>): RegistrationStatus {
-  return event.fientaEventId && ids.has(event.fientaEventId) ? "registered" : event.registrationStatus;
 }

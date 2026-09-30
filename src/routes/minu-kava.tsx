@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarCheck, Check, LogOut, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { RegisteredEventActions } from "@/components/RegisteredEventActions";
 import { EventCard } from "@/components/EventCard";
 import { EVENTS, type EventItem } from "@/lib/events";
-import { useSession, useMyRegistrations } from "@/hooks/use-my-registrations";
+import { useSession, useMyRegistrations, useFientaBackgroundSync } from "@/hooks/use-my-registrations";
 
 const BENEFITS = [
   "näha ja tühistada oma registreerimisi",
@@ -60,6 +60,13 @@ function SignInCard() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [cooldown, setCooldown] = useState(0);
+
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const t = setTimeout(() => setCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [cooldown]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -71,9 +78,16 @@ function SignInCard() {
     });
     if (error) {
       setStatus("error");
-      setMessage("Kirja saatmine ebaõnnestus. Kontrolli meiliaadressi ja proovi uuesti.");
+      const limited = error.status === 429 || /rate limit|security purposes/i.test(error.message);
+      if (limited) setCooldown(60);
+      setMessage(
+        limited
+          ? "Liiga palju katseid. Proovi mõne minuti pärast uuesti."
+          : "Kirja saatmine ebaõnnestus. Kontrolli meiliaadressi ja proovi uuesti.",
+      );
       return;
     }
+    setCooldown(60);
     setStatus("sent");
     setMessage(`Saatsime sisselogimise lingi aadressile ${clean}. Ava kiri ja vajuta lingil.`);
   }
@@ -113,11 +127,15 @@ function SignInCard() {
         />
         <button
           type="submit"
-          disabled={status === "sending"}
+          disabled={status === "sending" || cooldown > 0}
           className="mt-4 flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-primary px-5 text-[17px] font-semibold text-primary-foreground disabled:opacity-60"
         >
           <Mail className="size-5" />
-          {status === "sending" ? "Saadan…" : "Saada sisselogimislink"}
+          {status === "sending"
+            ? "Saadan…"
+            : cooldown > 0
+              ? `Uue lingi saad küsida ${cooldown} s pärast`
+              : "Saada sisselogimislink"}
         </button>
         <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
           Parooli ei ole vaja luua. Kliki postkastis oleval lingil ja see toob su tagasi
@@ -137,6 +155,7 @@ function SignInCard() {
 
 function SignedIn({ email }: { email: string }) {
   const { ids, query } = useMyRegistrations();
+  useFientaBackgroundSync(email || null);
   const mine = EVENTS.filter((e) => e.fientaEventId && ids.has(e.fientaEventId));
 
   return (
