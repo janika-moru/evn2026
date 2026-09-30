@@ -59,3 +59,5 @@
 - [x] Ivar Raav: profiilipilt, koduleht (ivarraav.com) ja LinkedIn lisatud
 - [x] Kava ja Minu kava: koolitaja nime kõrval tema pilt (nimi + lingid pildi kõrval)
 - [x] Kava ja Minu kava: kasutaja registreeritud koolitused roosa taustaga; „Välja müüdud” märk valge
+- [x] Minu kava: kalendrinupud pikka tekstiga („Lisa Google kalendrisse” jne) ja valge 2px äärejoonega; Fienta üks suur nupp „Ava Fienta: QR-kood ja loobumine”
+- [x] Minu kava: koolitaja pilt, nimi ja lingid ühe tiheda plokina — nimi joondub pildi ülemise, lingid pildi alumise äärega
