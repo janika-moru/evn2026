@@ -22,7 +22,7 @@ export function AddToCalendar({
     // Minu kava: iga kalender oma nupuna, valge äärejoon roosa kaardi taustal —
     // madal ja tihedam, et kast mahuks telefoni ekraanile algusest lõpuni.
     const big =
-      "min-h-[40px] w-full rounded-full border-2 border-background bg-transparent px-4 text-sm shadow-none";
+      "min-h-[40px] w-full rounded-full border border-background bg-transparent px-4 text-[14px] shadow-none";
     return (
       <div className={`grid grid-cols-1 gap-1.5 ${className}`}>
         <Button asChild variant="outline" className={big}>
