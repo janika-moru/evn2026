@@ -712,7 +712,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": kukkumiskaitsePhoto.url,
-     "thumbUrl": kukkumiskaitsePhoto.url,
+     "thumbUrl": kukkumiskaitseThumb.url,
      "websiteUrl": "https://kukkumiskaitse.ee/",
      "facebookUrl": "https://www.facebook.com/Kukkumiskaitse.ee/",
     "eventIds": [
