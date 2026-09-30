@@ -52,7 +52,33 @@ function MySchedulePage() {
       ) : (
         <SignInCard />
       )}
+
+      <SpecialOffer />
     </main>
+  );
+}
+
+function SpecialOffer() {
+  return (
+    <section className="mt-8 rounded-2xl bg-mindz-pink p-5">
+      <h2 className="text-[17px] font-semibold">Ettevõtlusnädala eripakkumine!</h2>
+      <p className="mt-2 text-[17px] leading-relaxed">
+        Ettevõtlusnädala külalisena saad oma esimeselt ruumirendilt −20% soodustust.
+      </p>
+      <p className="mt-3 text-[17px] leading-relaxed">
+        Pakkumine kehtib broneeringutele kuni 31.12.2026.
+        <br />
+        Broneerimisel lisa märksõna <span className="whitespace-nowrap">Ettevõtlusnädal2026</span>.
+      </p>
+      <a
+        href="https://www.mindz.ee"
+        target="_blank"
+        rel="noreferrer"
+        className="mt-3 inline-block text-[17px] underline underline-offset-2"
+      >
+        www.mindz.ee
+      </a>
+    </section>
   );
 }
 
