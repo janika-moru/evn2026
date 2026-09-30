@@ -19,7 +19,7 @@ function stampUtc(d: Date): string {
 }
 
 function locationOf(event: EventItem): string {
-  return `${event.venue}, Lutsu 3, Tartu`;
+  return event.venue;
 }
 
 export function googleCalendarUrl(event: EventItem): string {
