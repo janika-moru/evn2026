@@ -16,7 +16,7 @@ export function BottomNav() {
       aria-label="Põhinavigatsioon"
       className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background pb-[env(safe-area-inset-bottom)]"
     >
-      <div className="mx-auto grid max-w-md grid-cols-4">
+      <div className="mx-auto grid max-w-md grid-cols-4 md:max-w-2xl lg:max-w-3xl">
         {ITEMS.map(({ to, label, icon: Icon }) => {
           const active = pathname.startsWith(to);
           return (
