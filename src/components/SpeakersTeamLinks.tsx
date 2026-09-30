@@ -40,7 +40,7 @@ export function MeeskondRow() {
                 {initials(member.name)}
               </div>
             )}
-            <span className="text-center text-xs font-medium leading-tight">
+            <span className="text-center text-[12px] font-medium leading-tight">
               {nameLines(member.name).map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -98,7 +98,7 @@ export function KoolitajadRow({
                 {initials(pillName)}
               </div>
             )}
-            <span className="text-center text-xs font-medium leading-tight">
+            <span className="text-center text-[12px] font-medium leading-tight">
               {nameLines(pillName).map((line) => (
                 <span key={line} className="block whitespace-nowrap">
                   {line}
