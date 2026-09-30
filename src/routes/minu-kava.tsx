@@ -13,6 +13,7 @@ const BENEFITS = [
   "ligipääsu slaididele ja lisamaterjalidele",
   "lingid koolitaja kontaktidele",
   "jätta tagasisidet koolitajale",
+  "eripakkumise Studio MindZilt",
 ];
 
 export const Route = createFileRoute("/minu-kava")({

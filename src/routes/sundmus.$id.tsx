@@ -102,11 +102,13 @@ function EventDetailPage() {
         )}
         {displayStatus === "full" && <SoldOutPill className="w-full py-3.5 text-base" />}
         {status === "registered" && (
-          <p className="text-sm font-semibold text-primary">
-            Oled sellele sündmusele registreerunud ✓
-          </p>
+          <>
+            <p className="text-sm font-semibold text-primary">
+              Oled sellele sündmusele registreerunud ✓
+            </p>
+            <RegisteredEventActions event={event} />
+          </>
         )}
-        <RegisteredEventActions event={event} />
       </div>
     </main>
   );
