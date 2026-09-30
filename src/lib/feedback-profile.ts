@@ -5,7 +5,11 @@ const LEGACY_KEY = "smz-feedback-profile";
 const KEY = "smz-feedback-profile-v2";
 const EXPIRES_AT = new Date("2026-10-10T00:00:00+03:00").getTime();
 
-export type FeedbackProfile = { name?: string; field?: string; contact?: string };
+export type FeedbackProfile = {
+  name?: string | undefined;
+  field?: string | undefined;
+  contact?: string | undefined;
+};
 
 export function loadFeedbackProfile(): FeedbackProfile | null {
   try {
