@@ -293,14 +293,18 @@ function InfoPage() {
           <span className="inline-flex items-center rounded-lg border border-primary/15 bg-background/80 px-1.5 py-1 align-middle">
             <MoreVertical className="size-3.5 text-primary" />
           </span>{" "}
-          →{" "}
-          <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 align-middle text-[13px] font-semibold">
-            Installi ja loo otsetee
-          </span>{" "}
-          <span className="inline-flex items-center gap-1.5 whitespace-nowrap align-middle">
-            <span aria-hidden="true">→</span>
-            <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
-              Installi
+          <span className="inline-flex flex-wrap items-center gap-x-1.5 gap-y-1 align-middle">
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden="true">→</span>
+              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+                Installi ja loo otsetee
+              </span>
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden="true">→</span>
+              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+                Installi
+              </span>
             </span>
           </span>
         </p>
