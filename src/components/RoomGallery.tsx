@@ -62,11 +62,15 @@ export function RoomGallery({ images }: { images: RoomImage[] }) {
             aria-label={`Ava suurelt: ${image.alt}`}
           >
             <img
-              src={image.src}
+              src={image.thumb ?? image.src}
               alt={image.alt}
               loading="lazy"
+              decoding="async"
+              width={400}
+              height={400}
               className="aspect-square w-full object-cover transition-transform duration-200 hover:scale-[1.02] motion-reduce:transition-none"
             />
+
           </Button>
         ))}
       </div>
