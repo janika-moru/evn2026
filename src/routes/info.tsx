@@ -293,7 +293,7 @@ function InfoPage() {
           <li>
             <p className="font-semibold">iPhone</p>
             <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1">
-              <span>Brauseris kolm täppi all paremas nurgas</span>
+              <span>Brauseris kolm täppi all paremal</span>
               <span aria-hidden="true">→</span>
               <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
                 <Share className="size-3.5" /> Jaga
@@ -315,7 +315,7 @@ function InfoPage() {
           <li>
             <p className="font-semibold">Android</p>
             <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1">
-              <span>Brauseris kolm täppi üleval paremas nurgas</span>
+              <span>Brauseris kolm täppi üleval paremal</span>
               <span aria-hidden="true">→</span>
               <span className="inline-flex items-center gap-1 text-foreground/70">
                 <ChevronDown className="size-3.5" /> keri veidi alla
