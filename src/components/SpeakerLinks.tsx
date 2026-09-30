@@ -68,7 +68,7 @@ export function SpeakerLinks({
               to="/koolitajad"
               hash={speaker.id}
               className={`block font-semibold text-foreground underline-offset-4 hover:underline ${
-                large ? "text-[17px] leading-[1.2]" : "text-sm"
+                large ? "-mt-[2px] text-[17px] leading-[1.2]" : "text-sm"
               }`}
             >
               {speaker.name}
