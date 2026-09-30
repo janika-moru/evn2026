@@ -61,7 +61,7 @@ export function RegisteredEventActions({
         {large ? (
           <Button
             variant="outline"
-            className="min-h-[52px] w-full rounded-full border-2 border-background bg-transparent px-4 text-[15px] shadow-none"
+            className="min-h-[52px] w-full rounded-full border-2 border-background bg-transparent px-4 text-center text-[15px] leading-snug shadow-none whitespace-normal"
           >
             <Ticket className="size-5" />
             Ava Fienta: Pilet · QR-kood · loobumine
