@@ -19,8 +19,9 @@ export function AddToCalendar({
   large?: boolean;
 }) {
   if (large) {
-    // Minu kava: iga kalender oma suure nupuna, valge äärejoon roosa kaardi taustal.
-    const big = "min-h-[48px] w-full rounded-full border-background bg-transparent px-4 text-[15px]";
+    // Minu kava: iga kalender oma suure nupuna, selge valge äärejoon roosa kaardi taustal.
+    const big =
+      "min-h-[48px] w-full rounded-full border-2 border-background bg-transparent px-4 text-[15px] shadow-none";
     return (
       <div className={`grid grid-cols-1 gap-2.5 ${className}`}>
         <Button asChild variant="outline" className={big}>
