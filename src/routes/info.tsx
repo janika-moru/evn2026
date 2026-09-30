@@ -14,8 +14,10 @@ import {
   ShieldCheck,
   Smartphone,
   Share,
-  ChevronDown,
-} from "lucide-react";
+    ChevronDown,
+    Instagram,
+    Facebook,
+  } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { MeeskondCard } from "@/components/SpeakersTeamLinks";
@@ -280,7 +282,7 @@ function InfoPage() {
       </section>
 
       <section
-        className="mt-8 mb-8 rounded-2xl border border-mindz-pink bg-mindz-pink p-4"
+        className="mt-8 rounded-2xl border border-mindz-pink bg-mindz-pink p-4"
         aria-labelledby="install-heading"
       >
         <div className="flex items-center gap-2">
@@ -326,6 +328,32 @@ function InfoPage() {
         <p className="mt-3 text-sm leading-relaxed text-foreground/80">
           See loob sinu telefoni otsetee Studio MindZ ettevõtlusnädala veebilehele.
         </p>
+      </section>
+
+      <section className="mt-8 mb-8" aria-labelledby="social-heading">
+        <h2 id="social-heading" className="text-base font-bold">
+          Jälgi ettevõtlusnädala melu sotsiaalmeediast
+        </h2>
+        <div className="mt-3 flex gap-3">
+          <a
+            href="https://www.instagram.com/studiomindz/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Studio MindZ Instagramis"
+            className="flex size-12 items-center justify-center rounded-full bg-secondary text-primary"
+          >
+            <Instagram className="size-6" />
+          </a>
+          <a
+            href="https://www.facebook.com/studiomindztartu/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Studio MindZ Facebookis"
+            className="flex size-12 items-center justify-center rounded-full bg-secondary text-primary"
+          >
+            <Facebook className="size-6" />
+          </a>
+        </div>
       </section>
     </main>
   );
