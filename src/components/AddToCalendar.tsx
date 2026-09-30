@@ -5,12 +5,29 @@ import { googleCalendarUrl, outlookCalendarUrl, icalDataUrl } from "@/lib/calend
 /**
  * Diskreetne kalendrilinkide rida: Google · Outlook · Apple (.ics).
  * .ics koostatakse brauseris lennult — serverisse ei salvestata midagi.
+ *
+ * large (Minu kava) = 15px tekst ja iga lingi tabamisala vähemalt 44px kõrge.
  */
-export function AddToCalendar({ event, className = "" }: { event: EventItem; className?: string }) {
-  const linkCls = "underline underline-offset-2";
+export function AddToCalendar({
+  event,
+  className = "",
+  large = false,
+}: {
+  event: EventItem;
+  className?: string;
+  large?: boolean;
+}) {
+  const linkCls = large
+    ? "inline-flex min-h-[44px] items-center underline underline-offset-4"
+    : "underline underline-offset-2";
+
   return (
-    <p className={`flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-muted-foreground ${className}`}>
-      <CalendarPlus className="size-3.5 shrink-0" />
+    <p
+      className={`flex flex-wrap items-center text-muted-foreground ${
+        large ? "gap-x-3 text-[15px]" : "gap-x-1.5 gap-y-1 text-xs"
+      } ${className}`}
+    >
+      <CalendarPlus className={`shrink-0 ${large ? "size-5" : "size-3.5"}`} />
       <span>Lisa kalendrisse:</span>
       <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer" className={linkCls}>
         Google
