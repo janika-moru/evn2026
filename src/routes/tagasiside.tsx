@@ -70,6 +70,8 @@ function FeedbackPage() {
   const [photo, setPhoto] = useState<File | null>(null);
   const [wantsContact, setWantsContact] = useState(false);
   const [contact, setContact] = useState("");
+  const [publishConsent, setPublishConsent] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState<FType | null>(null);
@@ -86,6 +88,23 @@ function FeedbackPage() {
   // Robotilõks: nähtamatu väli + vormi täitmise aeg
   const hpRef = useRef<HTMLInputElement>(null);
   const startedAt = useRef(Date.now());
+  // Eeltäide: kasutaja nõusolekul seadmesse jäetud meiliaadress/telefon
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("smz-feedback-profile");
+      if (raw) {
+        const saved = JSON.parse(raw) as { contact?: string };
+        if (saved.contact) {
+          setContact(saved.contact);
+          setWantsContact(true);
+          setRemember(true);
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
   useEffect(() => {
     if (!speaker) return;
     if (fromEventSpeaker && speaker.id === fromEventSpeaker.id) {
@@ -143,6 +162,7 @@ function FeedbackPage() {
           respondent_field: training ? field.trim() || null : null,
           contact_requested: wantsContact,
           contact: wantsContact ? contact.trim() || null : null,
+          publish_consent: publishConsent,
           attachment_url: attachment,
           website: hpRef.current?.value || "",
           elapsed_ms: Date.now() - startedAt.current,
@@ -156,6 +176,19 @@ function FeedbackPage() {
     if (dbErr) {
       setError("Saatmine ebaõnnestus. Proovi palun uuesti.");
       return;
+    }
+    // Ainult kasutaja nõusolekul: meil/telefon selles seadmes (fotot ei hoita)
+    try {
+      if (remember && wantsContact && contact.trim()) {
+        localStorage.setItem(
+          "smz-feedback-profile",
+          JSON.stringify({ contact: contact.trim() }),
+        );
+      } else {
+        localStorage.removeItem("smz-feedback-profile");
+      }
+    } catch {
+      // salvestus ei õnnestunud — tagasiside on ikkagi saadetud
     }
     setSent(type);
   }
@@ -427,6 +460,28 @@ function FeedbackPage() {
               className="mt-3 w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
             />
           )}
+        </div>
+
+        <div className="space-y-2">
+          <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={publishConsent}
+              onChange={(e) => setPublishConsent(e.target.checked)}
+              className="mt-0.5 size-4 shrink-0 accent-primary"
+            />
+            Luban Studio MindZil avaldada minu tagasiside koos nime ja fotoga kodulehel või
+            sotsiaalmeedias
+          </label>
+          <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              className="mt-0.5 size-4 shrink-0 accent-primary"
+            />
+            Jäta meiliaadress selles seadmes meelde
+          </label>
         </div>
 
           </>
