@@ -18,6 +18,7 @@ import { Route as MinuKavaRouteImport } from './routes/minu-kava'
 import { Route as TagasisideRouteImport } from './routes/tagasiside'
 import { Route as SundmusIdRouteImport } from './routes/sundmus.$id'
 import { Route as ApiPublicFientaWebhookRouteImport } from './routes/api/public/fienta-webhook'
+import { Route as ApiPublicHooksEvnCleanupRouteImport } from './routes/api/public/hooks/evn-cleanup'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -67,6 +68,12 @@ const ApiPublicFientaWebhookRoute = ApiPublicFientaWebhookRouteImport.update({
   path: '/api/public/fienta-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksEvnCleanupRoute =
+  ApiPublicHooksEvnCleanupRouteImport.update({
+    id: '/api/public/hooks/evn-cleanup',
+    path: '/api/public/hooks/evn-cleanup',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   id: '/lovable/email/auth/preview',
   path: '/lovable/email/auth/preview',
@@ -94,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
+  '/api/public/hooks/evn-cleanup': typeof ApiPublicHooksEvnCleanupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -108,6 +116,7 @@ export interface FileRoutesByTo {
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
+  '/api/public/hooks/evn-cleanup': typeof ApiPublicHooksEvnCleanupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -123,6 +132,7 @@ export interface FileRoutesById {
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
+  '/api/public/hooks/evn-cleanup': typeof ApiPublicHooksEvnCleanupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/tagasiside'
     | '/sundmus/$id'
     | '/api/public/fienta-webhook'
+    | '/api/public/hooks/evn-cleanup'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/tagasiside'
     | '/sundmus/$id'
     | '/api/public/fienta-webhook'
+    | '/api/public/hooks/evn-cleanup'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -167,6 +179,7 @@ export interface FileRouteTypes {
     | '/tagasiside'
     | '/sundmus/$id'
     | '/api/public/fienta-webhook'
+    | '/api/public/hooks/evn-cleanup'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/transactional/preview'
@@ -182,6 +195,7 @@ export interface RootRouteChildren {
   TagasisideRoute: typeof TagasisideRoute
   SundmusIdRoute: typeof SundmusIdRoute
   ApiPublicFientaWebhookRoute: typeof ApiPublicFientaWebhookRoute
+  ApiPublicHooksEvnCleanupRoute: typeof ApiPublicHooksEvnCleanupRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -252,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicFientaWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/evn-cleanup': {
+      id: '/api/public/hooks/evn-cleanup'
+      path: '/api/public/hooks/evn-cleanup'
+      fullPath: '/api/public/hooks/evn-cleanup'
+      preLoaderRoute: typeof ApiPublicHooksEvnCleanupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/auth/preview': {
       id: '/lovable/email/auth/preview'
       path: '/lovable/email/auth/preview'
@@ -286,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   TagasisideRoute: TagasisideRoute,
   SundmusIdRoute: SundmusIdRoute,
   ApiPublicFientaWebhookRoute: ApiPublicFientaWebhookRoute,
+  ApiPublicHooksEvnCleanupRoute: ApiPublicHooksEvnCleanupRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,

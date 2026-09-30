@@ -14,6 +14,21 @@ export type Database = {
   }
   public: {
     Tables: {
+      cleanup_tokens: {
+        Row: {
+          created_at: string
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          token: string
+        }
+        Update: {
+          created_at?: string
+          token?: string
+        }
+        Relationships: []
+      }
       event_availability: {
         Row: {
           active_registrations: number
@@ -209,6 +224,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      run_evn_cleanup: { Args: never; Returns: undefined }
       try_start_fienta_sync: {
         Args: { _min_interval_seconds: number }
         Returns: boolean
