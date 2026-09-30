@@ -71,6 +71,11 @@ function FeedbackPage() {
 
   // Koolitajale klõpsates avaneb tema tagasisidevorm kohe siinsamas lehel
   const [speaker, setSpeaker] = useState<Speaker | null>(fromEventSpeaker);
+  // URL-i parameeter jõuab kohale alles pärast esmast renderdust —
+  // seadista koolitaja siis, kui ta kättesaadavaks saab.
+  useEffect(() => {
+    if (fromEventSpeaker) setSpeaker((prev) => prev ?? fromEventSpeaker);
+  }, [fromEventSpeaker]);
   const formRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (speaker) formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
