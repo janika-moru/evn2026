@@ -18,7 +18,6 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
 
   return (
     <div className="mt-3 space-y-2">
-      <AddToCalendar event={event} />
       <div className="grid grid-cols-2 gap-2">
         <Button asChild variant="outline" className="h-10 rounded-full px-2 text-xs">
           <Link to="/tagasiside" search={{ sundmus: event.id }}>
@@ -40,6 +39,8 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
           </Button>
         )}
       </div>
+
+      <AddToCalendar event={event} />
 
       <Dialog>
         <DialogTrigger className="block w-full pt-1 text-center text-xs text-muted-foreground underline underline-offset-2">
