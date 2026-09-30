@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import type { EventItem } from "@/lib/events";
+import { AddToCalendar } from "@/components/AddToCalendar";
 
 /** Koolitaja nimi ja kontaktlingid on kaardi pealkirja all (SpeakerLinks). */
 export function RegisteredEventActions({ event }: { event: EventItem }) {

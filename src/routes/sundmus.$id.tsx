@@ -80,6 +80,8 @@ function EventDetailPage() {
       </div>
 
       <AddToCalendar event={event} className="mt-3" />
+
+      {displayStatus !== "full" && (
         <div className="mt-4">
           <StatusBadge status={displayStatus} />
         </div>
