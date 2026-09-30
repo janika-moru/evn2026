@@ -15,7 +15,6 @@ const BENEFITS = [
   "jätta tagasisidet koolitajale",
 ];
 
-
 export const Route = createFileRoute("/minu-kava")({
   head: () => ({
     meta: [
@@ -23,7 +22,7 @@ export const Route = createFileRoute("/minu-kava")({
       {
         name: "description",
         content:
-          "Näe kõiki oma Studio MindZi registreeringuid ühes kohas. Logi sisse sama e-posti aadressiga, mida kasutasid Fientas.",
+          "Näe kõiki oma Studio MindZi registreeringuid ühes kohas. Logi sisse sama meiliaadressiga, mida kasutasid Fientas.",
       },
       { property: "og:title", content: "Minu kava — Studio MindZ 2026" },
       {
@@ -47,7 +46,7 @@ function MySchedulePage() {
       <h1 className="text-2xl font-bold">Minu kava</h1>
 
       {!ready ? (
-        <p className="mt-4 text-sm text-muted-foreground">Laen…</p>
+        <p className="mt-4 text-[15px] text-muted-foreground">Laen…</p>
       ) : session ? (
         <SignedIn email={session.user.email ?? ""} />
       ) : (
@@ -55,7 +54,6 @@ function MySchedulePage() {
       )}
     </main>
   );
-
 }
 
 function SignInCard() {
@@ -73,7 +71,7 @@ function SignInCard() {
     });
     if (error) {
       setStatus("error");
-      setMessage("Kirja saatmine ebaõnnestus. Kontrolli e-posti aadressi ja proovi uuesti.");
+      setMessage("Kirja saatmine ebaõnnestus. Kontrolli meiliaadressi ja proovi uuesti.");
       return;
     }
     setStatus("sent");
@@ -82,26 +80,26 @@ function SignInCard() {
 
   return (
     <>
-      <h2 className="mt-4 text-lg font-semibold">Vaata oma kava</h2>
-      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-        Logi sisse sama e-posti aadressiga, mida kasutasid Fientas registreerumisel.
+      <h2 className="mt-4 text-xl font-semibold">Vaata oma kava</h2>
+      <p className="mt-2 text-[17px] leading-relaxed text-muted-foreground">
+        Logi sisse sama meiliaadressiga, mida kasutasid Fientas registreerumisel.
       </p>
 
-      <div className="mt-5">
-        <p className="text-sm font-semibold">Sisse logides saad:</p>
-        <ul className="mt-2 space-y-1.5">
+      <div className="mt-6">
+        <p className="text-[17px] font-semibold">Sisse logides saad:</p>
+        <ul className="mt-2.5 space-y-2">
           {BENEFITS.map((item) => (
-            <li key={item} className="flex gap-2 text-sm text-muted-foreground">
-              <Check className="mt-0.5 size-4 shrink-0 text-primary" />
+            <li key={item} className="flex gap-2.5 text-[17px] text-muted-foreground">
+              <Check className="mt-1 size-5 shrink-0 text-primary" />
               <span>{item}</span>
             </li>
           ))}
         </ul>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-5 rounded-2xl bg-secondary p-4">
-        <label htmlFor="email" className="text-sm font-semibold">
-          E-post
+      <form onSubmit={handleSubmit} className="mt-6 rounded-2xl bg-secondary p-5">
+        <label htmlFor="email" className="text-[17px] font-semibold">
+          Meiliaadress
         </label>
         <input
           id="email"
@@ -111,23 +109,23 @@ function SignInCard() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="sinu@email.ee"
-          className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+          className="mt-2 min-h-[52px] w-full rounded-xl border border-border bg-background px-4 text-[17px] outline-none focus:ring-2 focus:ring-ring"
         />
         <button
           type="submit"
           disabled={status === "sending"}
-          className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground disabled:opacity-60"
+          className="mt-4 flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-primary px-5 text-[17px] font-semibold text-primary-foreground disabled:opacity-60"
         >
-          <Mail className="size-4" />
+          <Mail className="size-5" />
           {status === "sending" ? "Saadan…" : "Saada sisselogimislink"}
         </button>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
           Parooli ei ole vaja luua. Kliki postkastis oleval lingil ja see toob su tagasi
           äppi sisselogituna.
         </p>
         {message && (
           <p
-            className={`mt-3 text-sm ${status === "error" ? "text-destructive" : "text-primary"}`}
+            className={`mt-3 text-[15px] ${status === "error" ? "text-destructive" : "text-primary"}`}
           >
             {message}
           </p>
@@ -143,31 +141,30 @@ function SignedIn({ email }: { email: string }) {
 
   return (
     <>
-      <div className="mt-2 flex items-center justify-between gap-3">
-        <p className="truncate text-sm text-muted-foreground">{email}</p>
+      <div className="mt-3 flex items-center justify-between gap-3">
+        <p className="truncate text-[15px] text-muted-foreground">{email}</p>
         <Button
           variant="outline"
-          size="sm"
           onClick={() => supabase.auth.signOut()}
-          className="shrink-0 rounded-full"
+          className="min-h-[44px] shrink-0 rounded-full px-4 text-[15px]"
         >
-          <LogOut className="size-3.5" /> Logi välja
+          <LogOut className="size-4" /> Logi välja
         </Button>
       </div>
 
       {query.isLoading ? (
-        <p className="mt-6 text-sm text-muted-foreground">Otsin sinu registreeringuid…</p>
+        <p className="mt-6 text-[15px] text-muted-foreground">Otsin sinu registreeringuid…</p>
       ) : mine.length === 0 ? (
-        <div className="mt-6 rounded-2xl border border-border bg-card p-5 text-center">
-          <CalendarCheck className="mx-auto size-8 text-primary" />
-          <p className="mt-2 font-semibold">
-            Me ei leidnud selle e-posti aadressiga registreeringuid.
+        <div className="mt-6 rounded-2xl border border-border bg-card p-6 text-center">
+          <CalendarCheck className="mx-auto size-9 text-primary" />
+          <p className="mt-3 text-[17px] font-semibold">
+            Me ei leidnud selle meiliaadressiga registreeringuid.
           </p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Kui registreerusid teise e-posti aadressiga, logi sisse selle aadressiga.
+          <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+            Kui registreerusid teise meiliaadressiga, logi sisse selle aadressiga.
           </p>
-          <div className="mt-4 flex justify-center">
-            <Button asChild className="rounded-full">
+          <div className="mt-5 flex justify-center">
+            <Button asChild className="min-h-[52px] rounded-full px-6 text-[17px]">
               <Link to="/kava" search={{}}>
                 Vaata kava
               </Link>
@@ -175,15 +172,13 @@ function SignedIn({ email }: { email: string }) {
           </div>
         </div>
       ) : (
-        <>
-          <div className="mt-6 space-y-3">
-            {[...mine]
-              .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
-              .map((event) => (
-                <MyScheduleEvent key={event.id} event={event} />
-              ))}
-          </div>
-        </>
+        <div className="mt-6 space-y-4">
+          {[...mine]
+            .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
+            .map((event) => (
+              <MyScheduleEvent key={event.id} event={event} />
+            ))}
+        </div>
       )}
     </>
   );
@@ -195,7 +190,8 @@ function MyScheduleEvent({ event }: { event: EventItem }) {
       event={event}
       showDate
       hideRegisteredBadge
-      actions={<RegisteredEventActions event={event} />}
+      large
+      actions={<RegisteredEventActions event={event} large />}
     />
   );
 }

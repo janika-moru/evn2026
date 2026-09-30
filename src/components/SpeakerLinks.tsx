@@ -8,34 +8,47 @@ const contactLink =
  * Koolitaja pilt, tema profiilile viiv nimi ja selle all kontaktlingid
  * (koduleht, sotsmeedia). Kui sündmusel pole koolitajat andmebaasis,
  * kuvatakse fallback-tekst ligita.
+ *
+ * large (Minu kava) = suurem pilt, nimi ja lingid ning iga lingi tabamisala
+ * vähemalt 44px kõrge, et väiksemaid linkedine ei saa kogemata puutuda.
  */
 export function SpeakerLinks({
   eventId,
   fallback,
+  large = false,
 }: {
   eventId: string;
   fallback?: string;
+  large?: boolean;
 }) {
   const speakers = speakersForEvent(eventId);
 
   if (speakers.length === 0) {
     return fallback ? (
-      <p className="mt-1 text-sm text-muted-foreground">{fallback}</p>
+      <p className={`mt-1 text-muted-foreground ${large ? "text-[17px]" : "text-sm"}`}>
+        {fallback}
+      </p>
     ) : null;
   }
 
   return (
-    <div className="mt-2 space-y-2.5">
+    <div className={large ? "mt-3 space-y-3" : "mt-2 space-y-2.5"}>
       {speakers.map((speaker) => (
-        <div key={speaker.id} className="flex items-center gap-3">
+        <div key={speaker.id} className={`flex items-center ${large ? "gap-4" : "gap-3"}`}>
           {speaker.imageUrl ? (
             <img
               src={speaker.imageUrl}
               alt={speaker.name}
-              className="size-10 shrink-0 rounded-full object-cover"
+              loading="lazy"
+              decoding="async"
+              className={`shrink-0 rounded-full object-cover ${large ? "size-12" : "size-10"}`}
             />
           ) : (
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold">
+            <div
+              className={`flex shrink-0 items-center justify-center rounded-full bg-secondary font-semibold ${
+                large ? "size-12 text-sm" : "size-10 text-xs"
+              }`}
+            >
               {initials(speaker.name)}
             </div>
           )}
@@ -43,17 +56,25 @@ export function SpeakerLinks({
             <Link
               to="/koolitajad"
               hash={speaker.id}
-              className="text-sm font-semibold text-foreground underline-offset-4 hover:underline"
+              className={`block font-semibold text-foreground underline-offset-4 hover:underline ${
+                large ? "text-[17px]" : "text-sm"
+              }`}
             >
               {speaker.name}
             </Link>
-            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs">
+            <div
+              className={`flex flex-wrap ${
+                large ? "mt-1.5 gap-x-6 gap-y-1 text-[15px]" : "mt-1 gap-x-3 gap-y-0.5 text-xs"
+              }`}
+            >
               {speaker.websiteUrl && (
                 <a
                   href={speaker.websiteUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className={contactLink}
+                  className={`${contactLink} ${
+                    large ? "inline-flex min-h-[44px] items-center" : ""
+                  }`}
                 >
                   Koduleht
                 </a>
@@ -63,7 +84,9 @@ export function SpeakerLinks({
                   href={speaker.linkedinUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className={contactLink}
+                  className={`${contactLink} ${
+                    large ? "inline-flex min-h-[44px] items-center" : ""
+                  }`}
                 >
                   LinkedIn
                 </a>
@@ -73,7 +96,9 @@ export function SpeakerLinks({
                   href={speaker.facebookUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className={contactLink}
+                  className={`${contactLink} ${
+                    large ? "inline-flex min-h-[44px] items-center" : ""
+                  }`}
                 >
                   Facebook
                 </a>
@@ -83,7 +108,9 @@ export function SpeakerLinks({
                   href={speaker.instagramUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className={contactLink}
+                  className={`${contactLink} ${
+                    large ? "inline-flex min-h-[44px] items-center" : ""
+                  }`}
                 >
                   Instagram
                 </a>
