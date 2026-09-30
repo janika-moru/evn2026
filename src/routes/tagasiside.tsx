@@ -9,8 +9,12 @@ import { SpeakerFeedbackForm } from "@/components/SpeakerFeedbackForm";
 
 
 
-const validateSearch = (search: Record<string, unknown>): { sundmus?: string } =>
-  typeof search["sundmus"] === "string" ? { sundmus: search["sundmus"] as string } : {};
+const validateSearch = (search: Record<string, unknown>): { sundmus?: string } => {
+  const raw = search["sundmus"];
+  if (typeof raw === "string") return { sundmus: raw };
+  if (typeof raw === "number") return { sundmus: String(raw) };
+  return {};
+};
 
 export const Route = createFileRoute("/tagasiside")({
   validateSearch,
