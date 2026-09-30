@@ -58,30 +58,24 @@ function PrivacyPage() {
       </p>
 
       <Section title="1. Vastutav ja volitatud töötleja">
-        <p>
-          <span className="font-semibold text-foreground">Vastutav töötleja: Studio MindZ OÜ</span>
-          <br />
-          Telliskivi tn 57/1,&nbsp;Tallinn,&nbsp;10412,&nbsp;Harjumaa
-          <br />
-          Registrikood&nbsp;14545246
-          <br />
-          mindz.ee
-          <br />
-          info@mindz.ee
-        </p>
-        <p>
-          <span className="font-semibold text-foreground">
+        <div>
+          <span className="block font-semibold text-foreground">
+            Vastutav töötleja: Studio MindZ OÜ
+          </span>
+          <span className="block">Telliskivi tn 57/1, Tallinn, 10412, Harjumaa</span>
+          <span className="block">Registrikood 14545246</span>
+          <span className="block">mindz.ee</span>
+          <span className="block">info@mindz.ee</span>
+        </div>
+        <div>
+          <span className="block font-semibold text-foreground">
             Volitatud töötleja: OÜ E-Assisto
           </span>
-          <br />
-          A. Haava tn 11, Tartu linn, 50409, Tartumaa
-          <br />
-          Registrikood 16696788
-          <br />
-          assisto.ee
-          <br />
-          janika@assisto.ee
-        </p>
+          <span className="block">A. Haava tn 11, Tartu linn, 50409, Tartumaa</span>
+          <span className="block">Registrikood 16696788</span>
+          <span className="block">assisto.ee</span>
+          <span className="block">janika@assisto.ee</span>
+        </div>
         <p>
           OÜ E-Assisto on Studio MindZ OÜ partner ettevõtlusnädala korraldamisel: täidab
           programmijuhi rolli Studio MindZi ruumides toimuva programmi planeerimisel,
