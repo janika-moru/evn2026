@@ -68,7 +68,7 @@ export function dedupeKey(r: ParsedRegistration): string {
 export async function upsertRegistration(
   admin: SupabaseClient,
   r: ParsedRegistration,
-  raw: Json,
+  _raw: Json,
   source: "webhook" | "csv",
 ): Promise<{ ok: boolean; error?: string }> {
   let error: string | null = null;
@@ -81,12 +81,11 @@ export async function upsertRegistration(
         dedupe_key: dedupeKey(r),
         fienta_event_id: r.fienta_event_id!,
         email_normalized: r.email_normalized!,
-        attendee_name: r.attendee_name,
+        attendee_name: null,
         fienta_order_id: r.fienta_order_id,
         fienta_ticket_id: r.fienta_ticket_id,
         status: r.status,
         source,
-        raw_payload: raw as never,
       },
       { onConflict: "dedupe_key" },
     );
@@ -99,7 +98,6 @@ export async function upsertRegistration(
     email_normalized: r.email_normalized,
     event_found: r.fienta_event_id ? !!getEventByFientaId(r.fienta_event_id) : false,
     error,
-    raw_payload: raw as never,
   });
   if (error) console.error("[fienta]", error);
   return error ? { ok: false, error } : { ok: true };
@@ -117,19 +115,14 @@ export async function syncFromFientaApi(
   if (!key) return { skipped: true, upserted: 0, errors: ["FIENTA_API puudub"] };
 
   if (minIntervalMs > 0) {
-    const { data: last } = await admin
-      .from("webhook_logs")
-      .select("received_at")
-      .eq("source", "api-sync")
-      .order("received_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-    if (last && Date.now() - new Date(last.received_at).getTime() < minIntervalMs) {
-      return { skipped: true, upserted: 0, errors: [] };
-    }
+    // Aatomiline lukk andmebaasis: korraga alustab sünki vaid üks päring.
+    const { data: started, error: lockErr } = await admin.rpc("try_start_fienta_sync" as never, {
+      _min_interval_seconds: Math.round(minIntervalMs / 1000),
+    } as never);
+    if (lockErr || !started) return { skipped: true, upserted: 0, errors: [] };
+  } else {
+    await admin.from("webhook_logs").insert({ source: "api-sync", error: null });
   }
-  // Märgi sünk alanuks kohe, et paralleelsed päringud ei dubleeriks.
-  await admin.from("webhook_logs").insert({ source: "api-sync", error: null });
 
   const { EVENTS } = await import("@/lib/events");
   const ids = [...new Set(EVENTS.map((e) => e.fientaEventId).filter(Boolean))] as string[];
@@ -176,7 +169,6 @@ export async function syncFromFientaApi(
             fienta_ticket_id: String(t["id"]),
             status: String(t["status"] ?? "active").toLowerCase(),
             source: "api",
-            raw_payload: t,
           });
         }
       } catch (e) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import type { Session } from "@supabase/supabase-js";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,13 +24,10 @@ export function useSession() {
 export function useMyRegistrations() {
   const { session, ready } = useSession();
   const email = session?.user.email ?? null;
-  const sync = useServerFn(syncMyRegistrations);
   const q = useQuery({
     queryKey: ["my-registrations", email],
     enabled: !!email,
     queryFn: async () => {
-      // Värskenda Fientast (server piirab max 1x minutis); viga ei takista olemasolevate näitamist.
-      await sync().catch((e) => console.warn("[sync]", e));
       const { data, error } = await supabase
         .from("registrations")
         .select("fienta_event_id, status")
@@ -48,4 +45,25 @@ export function useMyRegistrations() {
 
 export function effectiveStatus(event: EventItem, ids: Set<string>): RegistrationStatus {
   return event.fientaEventId && ids.has(event.fientaEventId) ? "registered" : event.registrationStatus;
+}
+
+/** Ainult Minu kavas: Fienta sünk taustal (server lukustab 1x minutis). Leht näitab kohe
+ *  salvestatud andmeid ja Fienta tõrke korral jäävad need alles. */
+export function useFientaBackgroundSync(email: string | null) {
+  const sync = useServerFn(syncMyRegistrations);
+  const qc = useQueryClient();
+  useEffect(() => {
+    if (!email) return;
+    let cancelled = false;
+    sync()
+      .then((r) => {
+        if (cancelled || !r || r.skipped) return;
+        qc.invalidateQueries({ queryKey: ["my-registrations", email] });
+        qc.invalidateQueries({ queryKey: ["event-availability-all"] });
+      })
+      .catch((e) => console.warn("[sync]", e));
+    return () => {
+      cancelled = true;
+    };
+  }, [email, sync, qc]);
 }

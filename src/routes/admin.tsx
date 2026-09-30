@@ -61,7 +61,6 @@ function AdminPage() {
 }
 
 function WebhookLogs() {
-  const [open, setOpen] = useState<string | null>(null);
   const q = useQuery({
     queryKey: ["webhook-logs"],
     queryFn: async () => {
@@ -97,17 +96,6 @@ function WebhookLogs() {
             <p>Event ID: {l.fienta_event_id ?? "—"} · sündmus leitud: {l.event_found ? "jah" : "ei"}</p>
             <p>E-post: {l.email_normalized ?? "—"}</p>
             {l.error && <p className="text-destructive">Viga: {l.error}</p>}
-            <button
-              onClick={() => setOpen(open === l.id ? null : l.id)}
-              className="mt-1 font-semibold text-primary"
-            >
-              {open === l.id ? "Peida payload" : "Näita payload"}
-            </button>
-            {open === l.id && (
-              <pre className="mt-2 max-h-80 overflow-auto rounded bg-muted p-2">
-                {JSON.stringify(l.raw_payload, null, 2)}
-              </pre>
-            )}
           </div>
         ))}
       </div>

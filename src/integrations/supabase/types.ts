@@ -206,6 +206,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      try_start_fienta_sync: {
+        Args: { _min_interval_seconds: number }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role: "admin" | "user"
