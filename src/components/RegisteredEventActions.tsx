@@ -31,56 +31,79 @@ export function RegisteredEventActions({
     ? "inline-flex min-h-[44px] items-center underline underline-offset-4"
     : "underline underline-offset-2";
 
-  return (
-    <div className={large ? "mt-4 space-y-3" : "mt-3 space-y-2"}>
-      <div className={large ? "grid grid-cols-1 gap-3 sm:grid-cols-2" : "grid grid-cols-2 gap-2"}>
+  const actionButtons = (
+    <div className={large ? "grid grid-cols-1 gap-3 sm:grid-cols-2" : "grid grid-cols-2 gap-2"}>
+      <Button asChild variant="outline" className={btn}>
+        <Link to="/tagasiside" search={{ sundmus: event.id }}>
+          <MessageSquareHeart />
+          Anna tagasisidet
+        </Link>
+      </Button>
+      {slidesUrl ? (
         <Button asChild variant="outline" className={btn}>
-          <Link to="/tagasiside" search={{ sundmus: event.id }}>
-            <MessageSquareHeart />
-            Anna tagasisidet
-          </Link>
+          <a href={slidesUrl} target="_blank" rel="noreferrer">
+            <FileText />
+            Vaata slaide
+          </a>
         </Button>
-        {slidesUrl ? (
-          <Button asChild variant="outline" className={btn}>
-            <a href={slidesUrl} target="_blank" rel="noreferrer">
-              <FileText />
-              Vaata slaide
-            </a>
+      ) : (
+        <Button disabled variant="outline" className={btn}>
+          <FileText />
+          Slaide veel pole
+        </Button>
+      )}
+    </div>
+  );
+
+  const fientaDialog = (
+    <Dialog>
+      <DialogTrigger asChild>
+        {large ? (
+          <Button variant="outline" className="min-h-[52px] w-full bg-transparent px-4 text-[15px]">
+            <Ticket className="size-5" />
+            Ava Fienta: Pilet · QR-kood · loobumine
           </Button>
         ) : (
-          <Button disabled variant="outline" className={btn}>
-            <FileText />
-            Slaide veel pole
-          </Button>
+          <button className={link}>Pilet · QR-kood · loobumine</button>
         )}
+      </DialogTrigger>
+      <DialogContent className="max-w-sm rounded-2xl">
+        <DialogHeader>
+          <DialogTitle>Sinu pilet</DialogTitle>
+          <DialogDescription>
+            Logi Fientasse sisse sama meiliga, millega registreerusid – sealt näed oma piletit ja
+            QR-koodi ning saad soovi korral kohast loobuda.
+          </DialogDescription>
+        </DialogHeader>
+        <Button asChild className="min-h-[52px] rounded-full px-6 text-[17px]">
+          <a href="https://fienta.com/et/u/tickets" target="_blank" rel="noreferrer">
+            Ava Fienta konto
+          </a>
+        </Button>
+      </DialogContent>
+    </Dialog>
+  );
+
+  if (large) {
+    return (
+      <div className="mt-5 space-y-4">
+        <AddToCalendar event={event} large />
+        {fientaDialog}
+        {actionButtons}
       </div>
+    );
+  }
 
-      <AddToCalendar event={event} large={large} />
+  return (
+    <div className="mt-3 space-y-2">
+      {actionButtons}
 
-      <p
-        className={`flex flex-wrap items-center text-muted-foreground ${
-          large ? "gap-x-3 text-[15px]" : "gap-x-1.5 gap-y-1 text-xs"
-        }`}
-      >
-        <Ticket className={`shrink-0 ${large ? "size-5" : "size-3.5"}`} />
+      <AddToCalendar event={event} />
+
+      <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-muted-foreground">
+        <Ticket className="size-3.5 shrink-0" />
         <span>Ava Fienta:</span>
-        <Dialog>
-          <DialogTrigger className={link}>Pilet · QR-kood · loobumine</DialogTrigger>
-          <DialogContent className="max-w-sm rounded-2xl">
-            <DialogHeader>
-              <DialogTitle>Sinu pilet</DialogTitle>
-              <DialogDescription>
-                Logi Fientasse sisse sama meiliga, millega registreerusid – sealt näed oma piletit ja
-                QR-koodi ning saad soovi korral kohast loobuda.
-              </DialogDescription>
-            </DialogHeader>
-            <Button asChild className="min-h-[52px] rounded-full px-6 text-[17px]">
-              <a href="https://fienta.com/et/u/tickets" target="_blank" rel="noreferrer">
-                Ava Fienta konto
-              </a>
-            </Button>
-          </DialogContent>
-        </Dialog>
+        {fientaDialog}
       </p>
     </div>
   );

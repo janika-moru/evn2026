@@ -108,7 +108,9 @@ export function EventCard({
           {showDate && <span className="uppercase">{longDate(event.date)}</span>}
           {displayTime(event.startTime)}–{displayTime(event.endTime)}
         </p>
-        <h3 className={`mt-1 font-semibold leading-snug ${large ? "text-xl" : "text-base"}`}>
+        <h3
+          className={`font-semibold leading-snug ${large ? "mt-4 text-xl" : "mt-1 text-base"}`}
+        >
           {event.title}
         </h3>
       </Link>

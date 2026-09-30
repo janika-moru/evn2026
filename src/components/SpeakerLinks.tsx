@@ -34,19 +34,19 @@ export function SpeakerLinks({
   return (
     <div className={large ? "mt-3 space-y-3" : "mt-2 space-y-2.5"}>
       {speakers.map((speaker) => (
-        <div key={speaker.id} className={`flex items-center ${large ? "gap-4" : "gap-3"}`}>
+        <div key={speaker.id} className={`flex items-center ${large ? "gap-3" : "gap-3"}`}>
           {speaker.imageUrl ? (
             <img
               src={speaker.imageUrl}
               alt={speaker.name}
               loading="lazy"
               decoding="async"
-              className={`shrink-0 rounded-full object-cover ${large ? "size-12" : "size-10"}`}
+              className={`shrink-0 rounded-full object-cover ${large ? "size-14" : "size-10"}`}
             />
           ) : (
             <div
               className={`flex shrink-0 items-center justify-center rounded-full bg-secondary font-semibold ${
-                large ? "size-12 text-sm" : "size-10 text-xs"
+                 large ? "size-14 text-sm" : "size-10 text-xs"
               }`}
             >
               {initials(speaker.name)}
@@ -64,7 +64,7 @@ export function SpeakerLinks({
             </Link>
             <div
               className={`flex flex-wrap ${
-                large ? "mt-1.5 gap-x-6 gap-y-1 text-[15px]" : "mt-1 gap-x-3 gap-y-0.5 text-xs"
+                large ? "gap-x-5 text-[15px] leading-none" : "mt-1 gap-x-3 gap-y-0.5 text-xs"
               }`}
             >
               {speaker.websiteUrl && (
