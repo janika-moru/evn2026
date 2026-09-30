@@ -15,6 +15,7 @@ import { Route as InfoRouteImport } from './routes/info'
 import { Route as KavaRouteImport } from './routes/kava'
 import { Route as KoolitajadRouteImport } from './routes/koolitajad'
 import { Route as MinuKavaRouteImport } from './routes/minu-kava'
+import { Route as PrivaatsusRouteImport } from './routes/privaatsus'
 import { Route as TagasisideRouteImport } from './routes/tagasiside'
 import { Route as SundmusIdRouteImport } from './routes/sundmus.$id'
 import { Route as ApiPublicFientaWebhookRouteImport } from './routes/api/public/fienta-webhook'
@@ -51,6 +52,11 @@ const KoolitajadRoute = KoolitajadRouteImport.update({
 const MinuKavaRoute = MinuKavaRouteImport.update({
   id: '/minu-kava',
   path: '/minu-kava',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivaatsusRoute = PrivaatsusRouteImport.update({
+  id: '/privaatsus',
+  path: '/privaatsus',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TagasisideRoute = TagasisideRouteImport.update({
@@ -98,6 +104,7 @@ export interface FileRoutesByFullPath {
   '/kava': typeof KavaRoute
   '/koolitajad': typeof KoolitajadRoute
   '/minu-kava': typeof MinuKavaRoute
+  '/privaatsus': typeof PrivaatsusRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/kava': typeof KavaRoute
   '/koolitajad': typeof KoolitajadRoute
   '/minu-kava': typeof MinuKavaRoute
+  '/privaatsus': typeof PrivaatsusRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
@@ -129,6 +137,7 @@ export interface FileRoutesById {
   '/kava': typeof KavaRoute
   '/koolitajad': typeof KoolitajadRoute
   '/minu-kava': typeof MinuKavaRoute
+  '/privaatsus': typeof PrivaatsusRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
@@ -146,6 +155,7 @@ export interface FileRouteTypes {
     | '/kava'
     | '/koolitajad'
     | '/minu-kava'
+    | '/privaatsus'
     | '/tagasiside'
     | '/sundmus/$id'
     | '/api/public/fienta-webhook'
@@ -161,6 +171,7 @@ export interface FileRouteTypes {
     | '/kava'
     | '/koolitajad'
     | '/minu-kava'
+    | '/privaatsus'
     | '/tagasiside'
     | '/sundmus/$id'
     | '/api/public/fienta-webhook'
@@ -176,6 +187,7 @@ export interface FileRouteTypes {
     | '/kava'
     | '/koolitajad'
     | '/minu-kava'
+    | '/privaatsus'
     | '/tagasiside'
     | '/sundmus/$id'
     | '/api/public/fienta-webhook'
@@ -192,6 +204,7 @@ export interface RootRouteChildren {
   KavaRoute: typeof KavaRoute
   KoolitajadRoute: typeof KoolitajadRoute
   MinuKavaRoute: typeof MinuKavaRoute
+  PrivaatsusRoute: typeof PrivaatsusRoute
   TagasisideRoute: typeof TagasisideRoute
   SundmusIdRoute: typeof SundmusIdRoute
   ApiPublicFientaWebhookRoute: typeof ApiPublicFientaWebhookRoute
@@ -243,6 +256,13 @@ declare module '@tanstack/react-router' {
       path: '/minu-kava'
       fullPath: '/minu-kava'
       preLoaderRoute: typeof MinuKavaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privaatsus': {
+      id: '/privaatsus'
+      path: '/privaatsus'
+      fullPath: '/privaatsus'
+      preLoaderRoute: typeof PrivaatsusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tagasiside': {
@@ -304,6 +324,7 @@ const rootRouteChildren: RootRouteChildren = {
   KavaRoute: KavaRoute,
   KoolitajadRoute: KoolitajadRoute,
   MinuKavaRoute: MinuKavaRoute,
+  PrivaatsusRoute: PrivaatsusRoute,
   TagasisideRoute: TagasisideRoute,
   SundmusIdRoute: SundmusIdRoute,
   ApiPublicFientaWebhookRoute: ApiPublicFientaWebhookRoute,
