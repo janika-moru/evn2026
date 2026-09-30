@@ -294,14 +294,13 @@ function InfoPage() {
             <MoreVertical className="size-3.5 text-primary" />
           </span>{" "}
           →{" "}
-          <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+          <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 align-middle text-[13px] font-semibold">
             Installi ja loo otsetee
           </span>{" "}
           →{" "}
-          <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+          <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 align-middle text-[13px] font-semibold">
             Installi
           </span>
-          .
         </p>
         <p className="mt-2 text-sm leading-relaxed text-foreground/80">
           See loob sinu telefoni otsetee Studio MindZ ettevõtlusnädala veebilehele.
