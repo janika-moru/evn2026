@@ -462,6 +462,28 @@ function FeedbackPage() {
           )}
         </div>
 
+        <div className="space-y-2">
+          <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={publishConsent}
+              onChange={(e) => setPublishConsent(e.target.checked)}
+              className="mt-0.5 size-4 shrink-0 accent-primary"
+            />
+            Luban Studio MindZil avaldada minu tagasiside koos nime ja fotoga kodulehel või
+            sotsiaalmeedias
+          </label>
+          <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              className="mt-0.5 size-4 shrink-0 accent-primary"
+            />
+            Jäta meiliaadress selles seadmes meelde
+          </label>
+        </div>
+
           </>
         )}
 
