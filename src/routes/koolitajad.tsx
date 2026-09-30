@@ -68,8 +68,12 @@ function SpeakersPage() {
               <div className="flex items-center gap-3">
                 {s.imageUrl ? (
                   <img
-                    src={s.imageUrl}
+                    src={s.thumbUrl ?? s.imageUrl}
                     alt={s.name}
+                    loading="lazy"
+                    decoding="async"
+                    width={64}
+                    height={64}
                     className="size-16 shrink-0 rounded-full object-cover"
                   />
                 ) : (

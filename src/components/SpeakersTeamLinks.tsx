@@ -27,7 +27,14 @@ export function MeeskondRow() {
         const cell = (
           <>
             {member.imageUrl ? (
-              <img src={member.imageUrl} alt={member.name} className="size-14 rounded-full object-cover" />
+              <img
+                src={member.thumbUrl ?? member.imageUrl}
+                alt={member.name}
+                decoding="async"
+                width={56}
+                height={56}
+                className="size-14 rounded-full object-cover"
+              />
             ) : (
               <div className="flex size-14 items-center justify-center rounded-full bg-secondary text-base font-semibold">
                 {initials(member.name)}
@@ -76,8 +83,12 @@ export function KoolitajadRow({
           <>
             {speaker.imageUrl ? (
               <img
-                src={speaker.imageUrl}
+                src={speaker.thumbUrl ?? speaker.imageUrl}
                 alt={speaker.name}
+                loading="lazy"
+                decoding="async"
+                width={56}
+                height={56}
                 className={`size-14 rounded-full object-cover ${ring}`}
               />
             ) : (
