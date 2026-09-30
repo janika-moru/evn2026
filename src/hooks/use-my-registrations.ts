@@ -51,15 +51,15 @@ export function effectiveStatus(event: EventItem, ids: Set<string>): Registratio
  *  salvestatud andmeid ja Fienta tõrke korral jäävad need alles. */
 export function useFientaBackgroundSync(email: string | null) {
   const sync = useServerFn(syncMyRegistrations);
-  // Fienta sünk taustal (server lukustab 1x minutis); leht näitab kohe salvestatud andmeid
-  // ja Fienta tõrke korral jäävad need alles.
   const qc = useQueryClient();
   useEffect(() => {
     if (!email) return;
     let cancelled = false;
     sync()
       .then((r) => {
-        if (!cancelled && r && !r.skipped) qc.invalidateQueries({ queryKey: ["my-registrations", email] });
+        if (cancelled || !r || r.skipped) return;
+        qc.invalidateQueries({ queryKey: ["my-registrations", email] });
+        qc.invalidateQueries({ queryKey: ["event-availability-all"] });
       })
       .catch((e) => console.warn("[sync]", e));
     return () => {
