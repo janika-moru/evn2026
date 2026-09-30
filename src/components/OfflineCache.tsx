@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 /** Registreerib kerge offline-vahemälu (Service Worker) pärast lehe laadimist. */
-export function ServiceWorkerRegistration() {
+export function OfflineCache() {
   useEffect(() => {
     if (typeof window === "undefined" || !("serviceWorker" in navigator)) return;
     const register = () => {

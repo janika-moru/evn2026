@@ -12,7 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { BottomNav } from "../components/BottomNav";
-import { ServiceWorkerRegistration } from "../components/ServiceWorkerRegistration";
+import { OfflineCache } from "../components/OfflineCache";
 
 function NotFoundComponent() {
   return (
@@ -139,7 +139,7 @@ function RootComponent() {
         <Outlet />
       </div>
       <BottomNav />
-      <ServiceWorkerRegistration />
+      <OfflineCache />
     </QueryClientProvider>
   );
 }
