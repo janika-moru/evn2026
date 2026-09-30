@@ -13,7 +13,6 @@ import {
   Tag,
   ShieldCheck,
   Smartphone,
-  Share,
   MoreVertical,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -289,37 +288,29 @@ function InfoPage() {
             Lisa äpp oma telefoni
           </h2>
         </div>
-        <p className="mt-1 text-sm leading-relaxed text-foreground/80">
-          Siis avaneb see ikoonilt otse, nagu õige rakendus.
+        <p className="mt-2 text-sm leading-relaxed">
+          <span className="font-semibold">Kliki oma veebibrauseri paremas nurgas</span>, vali{" "}
+          <span className="ml-0.5 inline-flex items-center gap-1.5 align-middle">
+            <span className="inline-flex items-center rounded-lg border border-primary/15 bg-background/80 px-1.5 py-1">
+              <MoreVertical className="size-3.5 text-primary" />
+            </span>
+            <span aria-hidden="true">→</span>
+          </span>
+          <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+            <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+              Installi ja loo otsetee
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden="true">→</span>
+              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+                Installi
+              </span>
+            </span>
+          </span>
         </p>
-        <ul className="mt-3 space-y-2.5">
-          <li className="flex items-start gap-2.5">
-            <Share className="mt-1.5 size-4 shrink-0 text-primary" />
-            <p className="text-sm leading-relaxed">
-              <span className="font-semibold">iPhone:</span>{" "}
-              <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
-                Jaga
-              </span>{" "}
-              →{" "}
-              <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
-                Lisa avaekraanile
-              </span>
-            </p>
-          </li>
-          <li className="flex items-start gap-2.5">
-            <MoreVertical className="mt-1.5 size-4 shrink-0 text-primary" />
-            <p className="text-sm leading-relaxed">
-              <span className="font-semibold">Android:</span>{" "}
-              <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
-                Menüü
-              </span>{" "}
-              →{" "}
-              <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
-                Lisa avalehele
-              </span>
-            </p>
-          </li>
-        </ul>
+        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+          See loob sinu telefoni otsetee Studio MindZ ettevõtlusnädala veebilehele.
+        </p>
       </section>
     </main>
   );
