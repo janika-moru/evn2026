@@ -19,29 +19,26 @@ export function AddToCalendar({
   large?: boolean;
 }) {
   if (large) {
+    // Minu kava: iga kalender oma suure nupuna, selge valge äärejoon roosa kaardi taustal.
+    const big =
+      "min-h-[48px] w-full rounded-full border-2 border-background bg-transparent px-4 text-[15px] shadow-none";
     return (
-      <div className={`space-y-2.5 ${className}`}>
-        <p className="flex items-center justify-center gap-2 text-center text-[15px] text-muted-foreground">
-          <CalendarPlus className="size-5 shrink-0" />
-          <span>Lisa kalendrisse</span>
-        </p>
-        <div className="grid grid-cols-3 gap-2">
-          <Button asChild variant="outline" className="min-h-[48px] bg-transparent px-2 text-sm">
-            <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer">
-              Google
-            </a>
-          </Button>
-          <Button asChild variant="outline" className="min-h-[48px] bg-transparent px-2 text-sm">
-            <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer">
-              Outlook
-            </a>
-          </Button>
-          <Button asChild variant="outline" className="min-h-[48px] bg-transparent px-2 text-sm">
-            <a href={icalDataUrl(event)} download={`${event.id}.ics`}>
-              Apple (.ics)
-            </a>
-          </Button>
-        </div>
+      <div className={`grid grid-cols-1 gap-2.5 ${className}`}>
+        <Button asChild variant="outline" className={big}>
+          <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer">
+            Lisa Google kalendrisse
+          </a>
+        </Button>
+        <Button asChild variant="outline" className={big}>
+          <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer">
+            Lisa Outlook'i kalendrisse
+          </a>
+        </Button>
+        <Button asChild variant="outline" className={big}>
+          <a href={icalDataUrl(event)} download={`${event.id}.ics`}>
+            Lisa Apple kalendrisse
+          </a>
+        </Button>
       </div>
     );
   }
