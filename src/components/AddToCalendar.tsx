@@ -19,11 +19,12 @@ export function AddToCalendar({
   large?: boolean;
 }) {
   if (large) {
-    // Minu kava: iga kalender oma suure nupuna, selge valge äärejoon roosa kaardi taustal.
+    // Minu kava: iga kalender oma nupuna, valge äärejoon roosa kaardi taustal —
+    // madal ja tihedam, et kast mahuks telefoni ekraanile algusest lõpuni.
     const big =
-      "min-h-[48px] w-full rounded-full border-2 border-background bg-transparent px-4 text-[15px] shadow-none";
+      "min-h-[40px] w-full rounded-full border border-background bg-transparent px-4 text-[14px] shadow-none";
     return (
-      <div className={`grid grid-cols-1 gap-2.5 ${className}`}>
+      <div className={`grid grid-cols-1 gap-1.5 ${className}`}>
         <Button asChild variant="outline" className={big}>
           <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer">
             Lisa Google kalendrisse
