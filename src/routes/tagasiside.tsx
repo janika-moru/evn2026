@@ -402,6 +402,9 @@ function FeedbackPage() {
             />
             Soovin, et minuga võetaks ühendust.
           </label>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+            Meiliaadress on vabatahtlik ning mõeldud vaid tiimile vastamiseks.
+          </p>
           {wantsContact && (
             <input
               type="text"
@@ -409,7 +412,7 @@ function FeedbackPage() {
               maxLength={300}
               value={contact}
               onChange={(e) => setContact(e.target.value)}
-              placeholder="E-post või telefon"
+              placeholder="Meiliaadress või telefon"
               className="mt-3 w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
             />
           )}

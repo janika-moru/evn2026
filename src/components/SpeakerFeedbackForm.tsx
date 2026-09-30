@@ -259,7 +259,8 @@ export function SpeakerFeedbackForm({
       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
         Sinu tagasiside aitab järgmisi koolitusi paremini ette valmistada.
         <br />
-        Anonüümselt vastamiseks jäta enda kohta käivad andmed täitmata.
+        Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
+        vastamiseks — anonüümselt vastamiseks jäta need täitmata.
         <br />
         Kui soovid, et tagasisidet võiks kasutada kodulehel või sotsiaalmeedias, lisa ka foto.
       </p>
