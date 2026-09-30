@@ -13,7 +13,8 @@ import {
   Tag,
   ShieldCheck,
   Smartphone,
-  MoreVertical,
+  Share,
+  ChevronDown,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -288,27 +289,49 @@ function InfoPage() {
             Lisa äpp oma telefoni
           </h2>
         </div>
-        <p className="mt-2 text-sm leading-relaxed">
-          <span className="font-semibold">Kliki oma veebibrauseri paremas nurgas</span>, vali{" "}
-          <span className="ml-0.5 inline-flex items-center gap-1.5 align-middle">
-            <span className="inline-flex items-center rounded-lg border border-primary/15 bg-background/80 px-1.5 py-1">
-              <MoreVertical className="size-3.5 text-primary" />
-            </span>
-            <span aria-hidden="true">→</span>
-          </span>
-          <span className="mt-1.5 flex flex-wrap items-center gap-x-1.5 gap-y-1">
-            <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-sm font-semibold">
-              Installi ja loo otsetee
-            </span>
-            <span className="inline-flex items-center gap-1.5">
+        <ol className="mt-2 space-y-3">
+          <li>
+            <p className="font-semibold">iPhone</p>
+            <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+              <span>Brauseris kolm täppi all paremal</span>
               <span aria-hidden="true">→</span>
-              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-sm font-semibold">
+              <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
+                <Share className="size-3.5" /> Jaga
+              </span>
+              <span aria-hidden="true">→</span>
+              <span className="inline-flex items-center gap-1 text-foreground/70">
+                <ChevronDown className="size-3.5" /> keri veidi alla
+              </span>
+              <span aria-hidden="true">→</span>
+              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
+                Add to Home screen
+              </span>
+              <span aria-hidden="true">→</span>
+              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
+                Add
+              </span>
+            </p>
+          </li>
+          <li>
+            <p className="font-semibold">Android</p>
+            <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+              <span>Brauseris kolm täppi üleval paremal</span>
+              <span aria-hidden="true">→</span>
+              <span className="inline-flex items-center gap-1 text-foreground/70">
+                <ChevronDown className="size-3.5" /> keri veidi alla
+              </span>
+              <span aria-hidden="true">→</span>
+              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
+                Installi ja loo otsetee
+              </span>
+              <span aria-hidden="true">→</span>
+              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
                 Installi
               </span>
-            </span>
-          </span>
-        </p>
-        <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+            </p>
+          </li>
+        </ol>
+        <p className="mt-3 text-sm leading-relaxed text-foreground/80">
           See loob sinu telefoni otsetee Studio MindZ ettevõtlusnädala veebilehele.
         </p>
       </section>
