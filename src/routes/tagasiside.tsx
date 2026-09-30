@@ -270,6 +270,13 @@ function FeedbackPage() {
             </div>
           )}
         </KoolitajadPills>
+
+        {!speaker && (
+          <p className="mt-4 text-center text-xs leading-relaxed text-muted-foreground">
+            Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
+            vastamiseks.
+          </p>
+        )}
       </main>
     );
   }
@@ -344,6 +351,10 @@ function FeedbackPage() {
             <div className="grid gap-3">
               <input value={name} onChange={(e) => setName(e.target.value)} maxLength={200} placeholder="Sinu nimi" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base" />
               <input value={field} onChange={(e) => setField(e.target.value)} maxLength={200} placeholder="Valdkond" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base" />
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Nimi ja valdkond on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
+                vastamiseks.
+              </p>
             </div>
           </>
         ) : (
