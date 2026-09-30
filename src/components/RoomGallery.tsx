@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 type RoomImage = {
   src: string;
   alt: string;
+  thumb?: string;
 };
 
 const PREVIEW_COUNT = 4;
