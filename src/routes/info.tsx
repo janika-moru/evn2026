@@ -12,6 +12,9 @@ import {
   Building2,
   Tag,
   ShieldCheck,
+  Smartphone,
+  Share,
+  MoreVertical,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -274,6 +277,49 @@ function InfoPage() {
             .
           </p>
         </div>
+      </section>
+
+      <section
+        className="mt-8 mb-8 rounded-2xl border border-mindz-pink bg-mindz-pink p-4"
+        aria-labelledby="install-heading"
+      >
+        <div className="flex items-center gap-2">
+          <Smartphone className="size-5 shrink-0 text-primary" />
+          <h2 id="install-heading" className="text-base font-bold">
+            Lisa äpp oma telefoni
+          </h2>
+        </div>
+        <p className="mt-1 text-sm leading-relaxed text-foreground/80">
+          Siis avaneb see ikoonilt otse, nagu õige rakendus.
+        </p>
+        <ul className="mt-3 space-y-2.5">
+          <li className="flex items-start gap-2.5">
+            <Share className="mt-1.5 size-4 shrink-0 text-primary" />
+            <p className="text-sm leading-relaxed">
+              <span className="font-semibold">iPhone:</span>{" "}
+              <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+                Jaga
+              </span>{" "}
+              →{" "}
+              <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+                Lisa avaekraanile
+              </span>
+            </p>
+          </li>
+          <li className="flex items-start gap-2.5">
+            <MoreVertical className="mt-1.5 size-4 shrink-0 text-primary" />
+            <p className="text-sm leading-relaxed">
+              <span className="font-semibold">Android:</span>{" "}
+              <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+                Menüü
+              </span>{" "}
+              →{" "}
+              <span className="rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 text-[13px] font-semibold">
+                Lisa avalehele
+              </span>
+            </p>
+          </li>
+        </ul>
       </section>
     </main>
   );
