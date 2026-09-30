@@ -177,6 +177,19 @@ function FeedbackPage() {
       setError("Saatmine ebaõnnestus. Proovi palun uuesti.");
       return;
     }
+    // Ainult kasutaja nõusolekul: meil/telefon selles seadmes (fotot ei hoita)
+    try {
+      if (remember && wantsContact && contact.trim()) {
+        localStorage.setItem(
+          "smz-feedback-profile",
+          JSON.stringify({ contact: contact.trim() }),
+        );
+      } else {
+        localStorage.removeItem("smz-feedback-profile");
+      }
+    } catch {
+      // salvestus ei õnnestunud — tagasiside on ikkagi saadetud
+    }
     setSent(type);
   }
 
