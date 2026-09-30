@@ -162,6 +162,7 @@ function FeedbackPage() {
           respondent_field: training ? field.trim() || null : null,
           contact_requested: wantsContact,
           contact: wantsContact ? contact.trim() || null : null,
+          publish_consent: publishConsent,
           attachment_url: attachment,
           website: hpRef.current?.value || "",
           elapsed_ms: Date.now() - startedAt.current,
