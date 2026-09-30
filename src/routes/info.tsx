@@ -20,7 +20,7 @@ import type { LucideIcon } from "lucide-react";
 
 import { MeeskondCard } from "@/components/SpeakersTeamLinks";
 import { RoomGallery } from "@/components/RoomGallery";
-import directionsImage from "@/assets/studio-mindz-sissepaas.jpg.asset.json";
+import directionsImage from "@/assets/studio-mindz-asukoht.jpg.asset.json";
 import largeRoomFront from "@/assets/ruum-suur-eest.jpg.asset.json";
 import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
 import meetingRoom from "@/assets/ruum-koosolek.jpg.asset.json";
@@ -128,7 +128,7 @@ function InfoPage() {
       {DIRECTIONS_IMAGE_URL && (
         <img
           src={DIRECTIONS_IMAGE_URL}
-          alt="Studio MindZ sissepääs: Lutsu 3, Tartu, Antoniuse õuemaja 2. korrus"
+          alt="Studio MindZ asukoht: Lutsu 3, Tartu, Antoniuse õuemaja — puittrepp viib teisele korrusele"
           className="w-full rounded-2xl object-cover"
         />
       )}
