@@ -17,6 +17,7 @@ interface Props {
   contactRequested?: boolean
   photoPromise?: boolean
   photoUrl?: string | null
+  publishConsent?: boolean
 }
 
 const KIND_LABEL = {
@@ -59,6 +60,7 @@ const FeedbackNotification = (p: Props) => {
             <Row label="Meiliaadress" value={p.contact} />
             <Row label="Soovib vastust" value={p.contactRequested ? 'jah' : undefined} />
             <Row label="Foto" value={p.photoPromise ? 'saadab pildi hiljem' : undefined} />
+            <Row label="Avaldamine" value={p.publishConsent ? 'lubab tagasisidet koos nime ja fotoga avaldada' : 'avaldamiseks nõusolekut ei andnud'} />
             {p.photoUrl ? (
               <Text style={row}>
                 <span style={labelStyle}>Lisatud foto</span>
