@@ -195,11 +195,13 @@ function InfoPage() {
         <li className="flex gap-3 rounded-2xl border border-border bg-card p-4">
           <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" />
           <div>
-            <p className="text-sm font-semibold">Andmete hoidmine</p>
+            <p className="text-sm font-semibold">Andmetöötlus</p>
             <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
               Registreeringuid, tagasisidet ja fotosid hoiame 1 aasta järgmise aasta programmi
-              koostamiseks. 10. oktoobril 2027 kustutatakse need koos kasutajakontodega
-              automaatselt. Tehnilised logid kustuvad 30 päeva pärast.
+              koostamiseks.{"\u00a0"}10. oktoobril 2027 kustutatakse need koos kasutajakontodega
+              automaatselt.{"\u00a0"}
+              <br />
+              Tehnilised logid kustuvad automaatselt 30 päeva pärast.
             </p>
             <p className="mt-2 text-sm leading-relaxed text-foreground/80">
               Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
@@ -248,14 +250,14 @@ function InfoPage() {
 
         <div className="mt-5 space-y-5">
           <div>
-            <h3 className="font-semibold">Suur koolitusruum · 70 m²</h3>
+            <h3 className="font-semibold">Suur koolitusruum 70 m²</h3>
             <p className="mt-1 text-sm leading-relaxed text-foreground/80">
               Diivanid ja tugitoolid 20–25 osalejale, esitlustehnika, pabertahvel ja markerid,
               kõlarid, kohvinurk, väike külmik ning garderoob. Tualett asub eesruumis.
             </p>
           </div>
           <div>
-            <h3 className="font-semibold">Väike koosolekuruum / kohvikutuba · 35 m²</h3>
+            <h3 className="font-semibold">Väike koosolekuruum / kohvikutuba{"\u00a0"} 35 m²</h3>
             <p className="mt-1 text-sm leading-relaxed text-foreground/80">
               Kohvikulauad või suur koosolekulaud ja toolid 8–10 osalejale, esitlusteler,
               pabertahvel, täisvarustuses köök, külmik ja nõudepesumasin. Tualett asub samas
@@ -297,14 +299,14 @@ function InfoPage() {
         <div className="flex items-center gap-2">
           <Smartphone className="size-5 shrink-0 text-primary" />
           <h2 id="install-heading" className="text-base font-bold">
-            Lisa äpp oma telefoni
+            Lisa veebiäpp oma telefoni
           </h2>
         </div>
         <ol className="mt-2 space-y-3">
           <li>
             <p>iPhone</p>
             <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 leading-relaxed">
-              <span>Brauseris kolm täppi all paremal</span>
+              <span>Ava link brauseris. Kliki all paremas nurgas kolme täpi peal</span>
               <span aria-hidden="true">→</span>
               <span className="inline-flex items-center gap-1">
                 <Share className="size-3.5" /> Jaga
@@ -322,7 +324,7 @@ function InfoPage() {
           <li>
             <p>Android</p>
             <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 leading-relaxed">
-              <span>Brauseris kolm täppi üleval paremal</span>
+              <span>Ava link brauseris. Kliki üleval paremas nurgas kolme täpi peal</span>
               <span aria-hidden="true">→</span>
               <span className="inline-flex items-center gap-1 text-foreground/70">
                 <ChevronDown className="size-3.5" /> keri veidi alla
@@ -335,7 +337,7 @@ function InfoPage() {
           </li>
         </ol>
         <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-          See loob sinu telefoni otsetee Studio MindZ ettevõtlusnädala veebilehele.
+          Nii lood oma telefoni otsetee Studio MindZ ettevõtlusnädala veebilehele.
         </p>
       </section>
     </main>
