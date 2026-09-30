@@ -13,6 +13,7 @@ const BENEFITS = [
   "ligipääsu slaididele ja lisamaterjalidele",
   "lingid koolitaja kontaktidele",
   "jätta tagasisidet koolitajale",
+  "eripakkumise Studio MindZilt",
 ];
 
 export const Route = createFileRoute("/minu-kava")({
@@ -52,8 +53,6 @@ function MySchedulePage() {
       ) : (
         <SignInCard />
       )}
-
-      <SpecialOffer />
     </main>
   );
 }
@@ -225,6 +224,8 @@ function SignedIn({ email }: { email: string }) {
             ))}
         </div>
       )}
+
+      {mine.length > 0 && <SpecialOffer />}
     </>
   );
 }
