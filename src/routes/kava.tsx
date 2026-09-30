@@ -103,7 +103,7 @@ function SchedulePage() {
                   : "bg-secondary text-secondary-foreground"
               }`}
             >
-              <span className="block text-[13px] font-semibold leading-tight">{d.label}</span>
+              <span className="block text-[14px] font-semibold leading-tight">{d.label}</span>
             </button>
           );
         })}
