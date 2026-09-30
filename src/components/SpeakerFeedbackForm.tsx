@@ -60,6 +60,9 @@ export function SpeakerFeedbackForm({
   const [sent, setSent] = useState(false);
   const msgRef = useRef<HTMLTextAreaElement>(null);
   const sentRef = useRef<HTMLDivElement>(null);
+  // Robotilõks: nähtamatu väli + vormi täitmise aeg
+  const hpRef = useRef<HTMLInputElement>(null);
+  const startedAt = useRef(Date.now());
 
   // Eeltäide: 1) seadmesse salvestatud varasem tagasiside, 2) sisse logitud e-post
   useEffect(() => {
@@ -192,6 +195,8 @@ export function SpeakerFeedbackForm({
           contact: contact.trim() || null,
           attachment_url: attachment,
           photo_promise: photoPromise,
+          website: hpRef.current?.value || "",
+          elapsed_ms: Date.now() - startedAt.current,
         },
       });
       dbErr = !res.ok;
@@ -228,8 +233,16 @@ export function SpeakerFeedbackForm({
   return (
     <form
       onSubmit={submit}
-      className="mt-4 space-y-4 rounded-2xl border border-border bg-background/70 p-4"
+      className="relative mt-4 space-y-4 rounded-2xl border border-border bg-background/70 p-4"
     >
+      <input
+        ref={hpRef}
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
       <div className="flex items-center justify-between gap-2">
         <p className="text-sm font-semibold">
           {onClose ? `Tagasiside — ${speaker.name}` : "Saada tagasiside koolitajale"}

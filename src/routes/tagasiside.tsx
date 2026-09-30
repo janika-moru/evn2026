@@ -83,6 +83,9 @@ function FeedbackPage() {
   }, [fromEventSpeaker]);
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
+  // Robotilõks: nähtamatu väli + vormi täitmise aeg
+  const hpRef = useRef<HTMLInputElement>(null);
+  const startedAt = useRef(Date.now());
   useEffect(() => {
     if (!speaker) return;
     if (fromEventSpeaker && speaker.id === fromEventSpeaker.id) {
@@ -141,6 +144,8 @@ function FeedbackPage() {
           contact_requested: wantsContact,
           contact: wantsContact ? contact.trim() || null : null,
           attachment_url: attachment,
+          website: hpRef.current?.value || "",
+          elapsed_ms: Date.now() - startedAt.current,
         },
       });
       dbErr = !res.ok;
@@ -283,6 +288,14 @@ function FeedbackPage() {
       </button>
 
       <form onSubmit={submit} className="mt-4 space-y-5">
+        <input
+          ref={hpRef}
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute -left-[9999px] h-0 w-0 opacity-0"
+        />
         {type === "training" ? (
           <>
             {fixedEvent ? (

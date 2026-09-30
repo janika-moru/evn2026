@@ -21,13 +21,32 @@ const schema = z.object({
     .string()
     .regex(/^[0-9a-f-]{36}\/[0-9a-f-]{36}\.[a-z0-9]{1,5}$/)
     .nullish(),
+  // Robotilõks: inimene jätab selle tühjaks
+  website: z.string().max(500).optional(),
+  elapsed_ms: z.number().int().optional(),
 });
+
+const MIN_FILL_MS = 3000; // kiiremini täidetud vorm = robot
+const WINDOW_MIN = 10;
+const MAX_PER_WINDOW = 30; // kogu äpi peale 10 minuti jooksul
 
 // Salvestab tagasiside ja saadab teavituse info@mindz.ee postkasti.
 export const submitFeedback = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => schema.parse(d))
   .handler(async ({ data }) => {
+    // Robot: vasta "ok", aga ära salvesta ega saada kirja
+    if (data.website || (data.elapsed_ms !== undefined && data.elapsed_ms < MIN_FILL_MS)) {
+      return { ok: true as const };
+    }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const since = new Date(Date.now() - WINDOW_MIN * 60_000).toISOString();
+    const { count } = await supabaseAdmin
+      .from("feedback")
+      .select("id", { count: "exact", head: true })
+      .gte("created_at", since);
+    if ((count ?? 0) >= MAX_PER_WINDOW) {
+      return { ok: false as const, rateLimited: true };
+    }
     const { data: row, error } = await supabaseAdmin
       .from("feedback")
       .insert({
