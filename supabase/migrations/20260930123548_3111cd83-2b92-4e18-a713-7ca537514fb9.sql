@@ -1,0 +1,1 @@
+ALTER TABLE public.feedback ADD COLUMN IF NOT EXISTS publish_consent boolean NOT NULL DEFAULT false;
