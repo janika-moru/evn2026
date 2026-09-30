@@ -198,8 +198,8 @@ function InfoPage() {
             <p className="text-sm font-semibold">Andmete hoidmine</p>
             <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
               Registreeringuid, tagasisidet ja fotosid hoiame 1 aasta järgmise aasta programmi
-              koostamiseks ning kustutame need 10. oktoobril 2027. Tehnilised logid kustuvad 30
-              päeva pärast.
+              koostamiseks. 10. oktoobril 2027 kustutatakse need koos kasutajakontodega
+              automaatselt. Tehnilised logid kustuvad 30 päeva pärast.
             </p>
             <p className="mt-2 text-sm leading-relaxed text-foreground/80">
               Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
