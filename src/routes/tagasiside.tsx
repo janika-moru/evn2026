@@ -70,7 +70,7 @@ function FeedbackPage() {
   const [sent, setSent] = useState<FType | null>(null);
 
   // Koolitajale klõpsates avaneb tema tagasisidevorm kohe siinsamas lehel
-  const [speaker, setSpeaker] = useState<Speaker | null>(null);
+  const [speaker, setSpeaker] = useState<Speaker | null>(fromEventSpeaker);
   const formRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (speaker) formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
