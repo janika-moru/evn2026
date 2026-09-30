@@ -61,7 +61,7 @@ export function RegisteredEventActions({
         {large ? (
           <Button
             variant="outline"
-            className="min-h-[52px] w-full rounded-full border-2 border-background bg-transparent px-3 text-center text-[15px] leading-snug shadow-none whitespace-normal"
+            className="min-h-[40px] w-full rounded-full border-2 border-background bg-transparent px-3 text-center text-sm leading-snug shadow-none whitespace-normal"
           >
             Ava Fienta: QR-kood ja loobumine
           </Button>
