@@ -71,7 +71,7 @@ export const submitFeedback = createServerFn({ method: "POST" })
       const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
       await sendTemplateEmail("feedback-notification", "info@mindz.ee", {
         idempotencyKey: `feedback-notification-${row.id}`,
-        replyTo: contact && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) ? contact : undefined,
+        ...(contact && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) ? { replyTo: contact } : {}),
         templateData: {
           kind: data.feedback_type,
           speakerName: speaker?.name,
