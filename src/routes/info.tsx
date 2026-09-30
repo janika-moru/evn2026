@@ -181,7 +181,8 @@ function InfoPage() {
             <p className="text-sm font-semibold">Andmete hoidmine</p>
             <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
               Registreeringuid, tagasisidet ja fotosid hoiame 1 aasta järgmise aasta programmi
-              koostamiseks. Tehnilised logid kustuvad 30 päeva pärast.
+              koostamiseks ning kustutame need 10. oktoobril 2027. Tehnilised logid kustuvad 30
+              päeva pärast.
             </p>
           </div>
         </li>
