@@ -5,10 +5,9 @@ import { submitFeedback } from "@/lib/feedback.functions";
 import type { Speaker } from "@/lib/events";
 import { speakerEventRows } from "@/lib/events";
 
-// Varem antud tagasiside andmed hoitakse ainult kasutaja oma seadmes
-// (localStorage) — serverisse neid eelnevalt ei saadeta.
+// Nimi, roll ja meil jäetakse seadmesse (localStorage) ainult siis, kui kasutaja
+// märgib „jäta selles seadmes meelde". Fotot seadmesse ei salvestata.
 const PROFILE_KEY = "smz-feedback-profile";
-const PHOTO_PREFILL_MAX = 1_500_000; // baiti — suuremat pilti eeltäitena ei hoia
 
 type SavedProfile = {
   name?: string;
@@ -17,21 +16,6 @@ type SavedProfile = {
   photoDataUrl?: string;
   photoName?: string;
 };
-
-function dataUrlToFile(dataUrl: string, name: string): File | null {
-  try {
-    const parts = dataUrl.split(",");
-    const head = parts[0] ?? "";
-    const b64 = parts[1] ?? "";
-    const mime = head.match(/data:(.*?);/)?.[1] || "image/jpeg";
-    const bin = atob(b64);
-    const bytes = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    return new File([bytes], name, { type: mime });
-  } catch {
-    return null;
-  }
-}
 
 // Tagasisidevorm koolitaja profiili all — hinnang 1–10, tekst, nimi, valdkond,
 // e-post ja valikuline foto. Kõik isikuandmed on vabatahtlikud; varem sisestatud
@@ -55,6 +39,8 @@ export function SpeakerFeedbackForm({
   const [photo, setPhoto] = useState<File | null>(null);
   const [contact, setContact] = useState("");
   const [photoPromise, setPhotoPromise] = useState(false);
+  const [publishConsent, setPublishConsent] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
@@ -64,19 +50,22 @@ export function SpeakerFeedbackForm({
   const hpRef = useRef<HTMLInputElement>(null);
   const startedAt = useRef(Date.now());
 
-  // Eeltäide: 1) seadmesse salvestatud varasem tagasiside, 2) sisse logitud e-post
+  // Eeltäide: 1) kasutaja nõusolekul seadmesse jäetud andmed, 2) sisse logitud meil
   useEffect(() => {
     try {
       const raw = localStorage.getItem(PROFILE_KEY);
       if (raw) {
         const saved = JSON.parse(raw) as SavedProfile;
+        if (saved.photoDataUrl) {
+          // vanem versioon hoidis ka fotot — eemalda see
+          delete saved.photoDataUrl;
+          delete saved.photoName;
+          localStorage.setItem(PROFILE_KEY, JSON.stringify(saved));
+        }
         if (saved.name) setName(saved.name);
         if (saved.field) setField(saved.field);
         if (saved.contact) setContact(saved.contact);
-        if (saved.photoDataUrl) {
-          const f = dataUrlToFile(saved.photoDataUrl, saved.photoName || "foto.jpg");
-          if (f) setPhoto(f);
-        }
+        setRemember(true);
       }
     } catch {
       // vigane salvestus — ignoreeri
@@ -195,6 +184,7 @@ export function SpeakerFeedbackForm({
           contact: contact.trim() || null,
           attachment_url: attachment,
           photo_promise: photoPromise,
+          publish_consent: publishConsent,
           website: hpRef.current?.value || "",
           elapsed_ms: Date.now() - startedAt.current,
         },
@@ -208,22 +198,17 @@ export function SpeakerFeedbackForm({
       setError("Saatmine ebaõnnestus. Proovi palun uuesti.");
       return;
     }
-    // Jäta seadmesse meelde järgmiseks korraks (ainult kasutaja oma seade)
+    // Ainult kasutaja nõusolekul: nimi, roll ja meil selles seadmes (fotot ei hoita)
     try {
-      const saved: SavedProfile = {};
-      if (name.trim()) saved.name = name.trim();
-      if (field.trim()) saved.field = field.trim();
-      if (contact.trim()) saved.contact = contact.trim();
-      if (photo && photo.size <= PHOTO_PREFILL_MAX) {
-        saved.photoName = photo.name;
-        saved.photoDataUrl = await new Promise<string>((resolve, reject) => {
-          const r = new FileReader();
-          r.onload = () => resolve(r.result as string);
-          r.onerror = reject;
-          r.readAsDataURL(photo);
-        });
+      if (remember) {
+        const saved: SavedProfile = {};
+        if (name.trim()) saved.name = name.trim();
+        if (field.trim()) saved.field = field.trim();
+        if (contact.trim()) saved.contact = contact.trim();
+        localStorage.setItem(PROFILE_KEY, JSON.stringify(saved));
+      } else {
+        localStorage.removeItem(PROFILE_KEY);
       }
-      localStorage.setItem(PROFILE_KEY, JSON.stringify(saved));
     } catch {
       // salvestus ei õnnestunud — tagasiside on ikkagi saadetud
     }
@@ -261,8 +246,6 @@ export function SpeakerFeedbackForm({
         <br />
         Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
         vastamiseks — anonüümselt vastamiseks jäta need täitmata.
-        <br />
-        Kui soovid, et tagasisidet võiks kasutada kodulehel või sotsiaalmeedias, lisa ka foto.
       </p>
 
       <div>
@@ -358,6 +341,28 @@ export function SpeakerFeedbackForm({
           </label>
         </div>
       )}
+
+      <div className="space-y-2">
+        <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+          <input
+            type="checkbox"
+            checked={publishConsent}
+            onChange={(e) => setPublishConsent(e.target.checked)}
+            className="mt-0.5 size-4 shrink-0 accent-primary"
+          />
+          Luban Studio MindZil avaldada minu tagasiside koos nime ja fotoga kodulehel või
+          sotsiaalmeedias
+        </label>
+        <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+          <input
+            type="checkbox"
+            checked={remember}
+            onChange={(e) => setRemember(e.target.checked)}
+            className="mt-0.5 size-4 shrink-0 accent-primary"
+          />
+          Jäta nimi, roll ja meiliaadress selles seadmes meelde
+        </label>
+      </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}
 
