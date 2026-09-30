@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import type { Session } from "@supabase/supabase-js";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
@@ -29,8 +29,6 @@ export function useMyRegistrations() {
     queryKey: ["my-registrations", email],
     enabled: !!email,
     queryFn: async () => {
-      // Värskenda Fientast (server piirab max 1x minutis); viga ei takista olemasolevate näitamist.
-      await sync().catch((e) => console.warn("[sync]", e));
       const { data, error } = await supabase
         .from("registrations")
         .select("fienta_event_id, status")
@@ -43,6 +41,21 @@ export function useMyRegistrations() {
       );
     },
   });
+  // Fienta sünk taustal (server lukustab 1x minutis); leht näitab kohe salvestatud andmeid
+  // ja Fienta tõrke korral jäävad need alles.
+  const qc = useQueryClient();
+  useEffect(() => {
+    if (!email) return;
+    let cancelled = false;
+    sync()
+      .then((r) => {
+        if (!cancelled && r && !r.skipped) qc.invalidateQueries({ queryKey: ["my-registrations", email] });
+      })
+      .catch((e) => console.warn("[sync]", e));
+    return () => {
+      cancelled = true;
+    };
+  }, [email, sync, qc]);
   return { session, ready, ids: q.data ?? new Set<string>(), query: q };
 }
 

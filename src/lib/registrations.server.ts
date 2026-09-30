@@ -68,7 +68,7 @@ export function dedupeKey(r: ParsedRegistration): string {
 export async function upsertRegistration(
   admin: SupabaseClient,
   r: ParsedRegistration,
-  raw: Json,
+  _raw: Json,
   source: "webhook" | "csv",
 ): Promise<{ ok: boolean; error?: string }> {
   let error: string | null = null;
