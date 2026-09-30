@@ -61,4 +61,4 @@
 - [x] Kava ja Minu kava: kasutaja registreeritud koolitused roosa taustaga; „Välja müüdud” märk valge
 - [x] Minu kava: kalendrinupud pikka tekstiga („Lisa Google kalendrisse” jne) ja valge 2px äärejoonega; Fienta üks suur nupp „Ava Fienta: QR-kood ja loobumine”
 - [x] Minu kava: koolitaja pilt, nimi ja lingid ühe tiheda plokina — nimi joondub pildi ülemise, lingid pildi alumise äärega
-- [x] Info leht: „Jälgi ettevõtlusnädala melu sotsiaalmeediast" — Instagram ja Facebook ikoonidena lehe all
+- [x] Sotsiaalmeedia: „Jälgi ettevõtlusnädala melu sotsiaalmeediast" — Instagram ja Facebook ikoonidena Kava lehe all (tekst vasakul, ikoonid paremal)
