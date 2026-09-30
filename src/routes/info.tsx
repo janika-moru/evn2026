@@ -11,6 +11,7 @@ import {
   Camera,
   Building2,
   Tag,
+  ShieldCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -77,7 +78,7 @@ const STEPS: { icon: LucideIcon; title: string; text: string }[] = [
   {
     icon: Camera,
     title: "Video- ja fotosalvestused",
-    text: "Koolitustest tehakse video- ja fotosalvestusi koolitaja ja Studio MindZi kasutuseks.",
+    text: "Koolitustest tehakse video- ja fotosalvestusi koolitaja ja Studio MindZi kasutuseks. Kui Sa ei soovi pildile jääda, anna sellest enne koolituse algust korraldajale teada.",
   },
 ];
 
@@ -171,6 +172,16 @@ function InfoPage() {
               <a href="mailto:info@mindz.ee" className="font-semibold text-primary underline">
                 info@mindz.ee
               </a>
+            </p>
+          </div>
+        </li>
+        <li className="flex gap-3 rounded-2xl border border-border bg-card p-4">
+          <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" />
+          <div>
+            <p className="text-sm font-semibold">Andmete hoidmine</p>
+            <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
+              Registreeringuid, tagasisidet ja fotosid hoiame 1 aasta järgmise aasta programmi
+              koostamiseks. Tehnilised logid kustuvad 30 päeva pärast.
             </p>
           </div>
         </li>
