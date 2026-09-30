@@ -132,9 +132,11 @@ export function EventCard({
           {displayStatus === "closed" && <StatusBadge status={displayStatus} large={large} />}
           {(displayStatus === "open" || registered) && (
             <span className="ml-auto flex items-center gap-3">
-              <span className={`text-primary ${large ? "text-base" : "text-sm"}`}>
-                Vabu kohti: {availableSpots ?? 50}
-              </span>
+              {availableSpots !== null && (
+                <span className={`text-primary ${large ? "text-base" : "text-sm"}`}>
+                  Vabu kohti: {availableSpots}
+                </span>
+              )}
               {registered ? (
                 <StatusBadge status="registered" large={large} />
               ) : (

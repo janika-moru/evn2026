@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { EventCard } from "@/components/EventCard";
 import kavaBanner from "@/assets/kava-banner.png.asset.json";
 import { EVENT_DAYS, eventsForDate, longDate, todayEventDate } from "@/lib/events";
+import { availabilityQueryOptions } from "@/hooks/use-event-availability";
 
 const validateSearch = (search: Record<string, unknown>): { paev?: string } =>
   typeof search["paev"] === "string" ? { paev: search["paev"] as string } : {};
@@ -27,7 +28,13 @@ export const Route = createFileRoute("/kava")({
     ],
     links: [{ rel: "canonical", href: "/kava" }],
   }),
+  loader: async ({ context }) => {
+    // Ainult andmebaasist loetud seis — Fienta API-t siin ei kutsuta.
+    await context.queryClient.ensureQueryData(availabilityQueryOptions).catch(() => undefined);
+  },
   component: SchedulePage,
+  errorComponent: () => <p className="p-4">Kava laadimine ebaõnnestus.</p>,
+  notFoundComponent: () => <p className="p-4">Lehte ei leitud.</p>,
 });
 
 

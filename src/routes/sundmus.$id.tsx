@@ -95,7 +95,9 @@ function EventDetailPage() {
             >
               Registreeru
             </a>
-            <span className="shrink-0 text-sm text-primary">Vabu kohti: {availableSpots ?? 50}</span>
+            {availableSpots !== null && (
+              <span className="shrink-0 text-sm text-primary">Vabu kohti: {availableSpots}</span>
+            )}
           </div>
         )}
         {displayStatus === "full" && <SoldOutPill className="w-full py-3.5 text-base" />}
