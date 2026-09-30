@@ -291,11 +291,11 @@ function InfoPage() {
         </div>
         <ol className="mt-2 space-y-3">
           <li>
-            <p className="font-semibold">iPhone</p>
+            <p>iPhone</p>
             <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 leading-relaxed">
               <span>Brauseris kolm täppi all paremal</span>
               <span aria-hidden="true">→</span>
-              <span className="inline-flex items-center gap-1 font-semibold">
+              <span className="inline-flex items-center gap-1">
                 <Share className="size-3.5" /> Jaga
               </span>
               <span aria-hidden="true">→</span>
@@ -303,13 +303,13 @@ function InfoPage() {
                 <ChevronDown className="size-3.5" /> keri veidi alla
               </span>
               <span aria-hidden="true">→</span>
-              <span className="font-semibold">Add to Home screen</span>
+              <span>Add to Home screen</span>
               <span aria-hidden="true">→</span>
-              <span className="font-semibold">Add</span>
+              <span>Add</span>
             </p>
           </li>
           <li>
-            <p className="font-semibold">Android</p>
+            <p>Android</p>
             <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 leading-relaxed">
               <span>Brauseris kolm täppi üleval paremal</span>
               <span aria-hidden="true">→</span>
@@ -317,9 +317,9 @@ function InfoPage() {
                 <ChevronDown className="size-3.5" /> keri veidi alla
               </span>
               <span aria-hidden="true">→</span>
-              <span className="font-semibold">Installi ja loo otsetee</span>
+              <span>Installi ja loo otsetee</span>
               <span aria-hidden="true">→</span>
-              <span className="font-semibold">Installi</span>
+              <span>Installi</span>
             </p>
           </li>
         </ol>
