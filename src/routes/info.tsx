@@ -14,8 +14,10 @@ import {
   ShieldCheck,
   Smartphone,
   Share,
-  ChevronDown,
-} from "lucide-react";
+    ChevronDown,
+    Instagram,
+    Facebook,
+  } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { MeeskondCard } from "@/components/SpeakersTeamLinks";
