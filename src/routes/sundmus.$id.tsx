@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Clock, MapPin } from "lucide-react";
 import { StatusBadge, SoldOutPill } from "@/components/EventCard";
 import { RegisteredEventActions } from "@/components/RegisteredEventActions";
+import { AddToCalendar } from "@/components/AddToCalendar";
 import { SpeakerLinks } from "@/components/SpeakerLinks";
 import { useMyRegistrations, effectiveStatus } from "@/hooks/use-my-registrations";
 import { useEventAvailability } from "@/hooks/use-event-availability";
@@ -78,7 +79,7 @@ function EventDetailPage() {
         </span>
       </div>
 
-      {displayStatus !== "full" && (
+      <AddToCalendar event={event} className="mt-3" />
         <div className="mt-4">
           <StatusBadge status={displayStatus} />
         </div>
