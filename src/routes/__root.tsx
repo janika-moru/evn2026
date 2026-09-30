@@ -138,6 +138,7 @@ function RootComponent() {
         <Outlet />
       </div>
       <BottomNav />
+      <ServiceWorkerRegistration />
     </QueryClientProvider>
   );
 }
