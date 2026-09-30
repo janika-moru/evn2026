@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { FileText, MessageSquareHeart } from "lucide-react";
+import { FileText, MessageSquareHeart, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -42,25 +42,29 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
 
       <AddToCalendar event={event} />
 
-      <Dialog>
-        <DialogTrigger className="block w-full pt-1 text-center text-xs text-muted-foreground underline underline-offset-2">
-          Pilet · QR-kood · loobumine
-        </DialogTrigger>
-        <DialogContent className="max-w-sm rounded-2xl">
-          <DialogHeader>
-            <DialogTitle>Sinu pilet</DialogTitle>
-            <DialogDescription>
-              Logi Fientasse sisse sama meiliga, millega registreerusid – sealt näed oma piletit ja
-              QR-koodi ning saad soovi korral kohast loobuda.
-            </DialogDescription>
-          </DialogHeader>
-          <Button asChild className="rounded-full">
-            <a href="https://fienta.com/u/tickets" target="_blank" rel="noreferrer">
-              Ava Fienta konto
-            </a>
-          </Button>
-        </DialogContent>
-      </Dialog>
+      <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-muted-foreground">
+        <Ticket className="size-3.5 shrink-0" />
+        <span>Ava Fienta:</span>
+        <Dialog>
+          <DialogTrigger className="underline underline-offset-2">
+            Pilet · QR-kood · loobumine
+          </DialogTrigger>
+          <DialogContent className="max-w-sm rounded-2xl">
+            <DialogHeader>
+              <DialogTitle>Sinu pilet</DialogTitle>
+              <DialogDescription>
+                Logi Fientasse sisse sama meiliga, millega registreerusid – sealt näed oma piletit ja
+                QR-koodi ning saad soovi korral kohast loobuda.
+              </DialogDescription>
+            </DialogHeader>
+            <Button asChild className="rounded-full">
+              <a href="https://fienta.com/et/u/tickets" target="_blank" rel="noreferrer">
+                Ava Fienta konto
+              </a>
+            </Button>
+          </DialogContent>
+        </Dialog>
+      </p>
     </div>
   );
 }
