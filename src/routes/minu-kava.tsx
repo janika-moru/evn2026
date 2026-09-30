@@ -60,7 +60,7 @@ function MySchedulePage() {
 
 function SpecialOffer() {
   return (
-    <section className="mt-8 rounded-2xl bg-mindz-pink p-5">
+    <section className="mt-8 rounded-2xl bg-mindz-mint p-5">
       <h2 className="text-[17px] font-semibold">Ettevõtlusnädala eripakkumine!</h2>
       <p className="mt-2 text-[17px] leading-relaxed">
         Ettevõtlusnädala külalisena saad oma esimeselt ruumirendilt −20% soodustust.
