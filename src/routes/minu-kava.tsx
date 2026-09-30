@@ -53,8 +53,6 @@ function MySchedulePage() {
       ) : (
         <SignInCard />
       )}
-
-      <SpecialOffer />
     </main>
   );
 }
