@@ -17,3 +17,5 @@
 - Event dates and times stay in ISO/Fienta format internally and are localized only for display through helpers in src/lib/events.ts — preserves sorting, comparisons, and calendar exports.
 - Brand tints are semantic tokens in src/styles.css (@theme --color-mindz-*), e.g. --color-mindz-mint for the light-green team card — never hardcode hex in components, so theming and dark mode keep working.
 - Registered-event actions are shared through RegisteredEventActions in both Minu kava and the event detail — keeps feedback, slides, and speaker contacts identical on both paths.
+- Fienta sync throttling uses DB function try_start_fienta_sync (advisory lock) called only from server; runs in background from Minu kava only — atomic, avoids parallel syncs.
+- Fienta raw payloads are never persisted (registrations/webhook_logs); webhook_logs purged after 30 days via pg_cron — GDPR data minimisation.
