@@ -1,6 +1,7 @@
 import { CalendarPlus } from "lucide-react";
 import type { EventItem } from "@/lib/events";
 import { googleCalendarUrl, outlookCalendarUrl, icalDataUrl } from "@/lib/calendar";
+import { Button } from "@/components/ui/button";
 
 /**
  * Diskreetne kalendrilinkide rida: Google · Outlook · Apple (.ics).
@@ -17,6 +18,34 @@ export function AddToCalendar({
   className?: string;
   large?: boolean;
 }) {
+  if (large) {
+    return (
+      <div className={`space-y-2.5 ${className}`}>
+        <p className="flex items-center justify-center gap-2 text-center text-[15px] text-muted-foreground">
+          <CalendarPlus className="size-5 shrink-0" />
+          <span>Lisa kalendrisse</span>
+        </p>
+        <div className="grid grid-cols-3 gap-2">
+          <Button asChild variant="outline" className="min-h-[48px] bg-transparent px-2 text-sm">
+            <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer">
+              Google
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="min-h-[48px] bg-transparent px-2 text-sm">
+            <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer">
+              Outlook
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="min-h-[48px] bg-transparent px-2 text-sm">
+            <a href={icalDataUrl(event)} download={`${event.id}.ics`}>
+              Apple (.ics)
+            </a>
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   const linkCls = large
     ? "inline-flex min-h-[44px] items-center underline underline-offset-4"
     : "underline underline-offset-2";
