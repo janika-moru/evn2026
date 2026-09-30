@@ -1,0 +1,1 @@
+DROP POLICY "Anyone can submit valid feedback" ON public.feedback;
