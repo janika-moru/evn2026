@@ -4,6 +4,7 @@ import { ArrowLeft, Camera, CheckCircle2, GraduationCap, HeartHandshake, Lightbu
 import type { Speaker } from "@/lib/events";
 import { EVENTS, getEvent, dayLabel, displayTime, speakersForEvent } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
+import { submitFeedback } from "@/lib/feedback.functions";
 import { MeeskondRow, KoolitajadPills } from "@/components/SpeakersTeamLinks";
 import { SpeakerFeedbackForm } from "@/components/SpeakerFeedbackForm";
 
@@ -125,20 +126,27 @@ function FeedbackPage() {
       attachment = path;
     }
     const training = type === "training";
-    const { error: dbErr } = await supabase.from("feedback").insert({
-      event_id: training ? target : null,
-      feedback_type: type,
-      message: training ? null : message.trim() || null,
-      rating: training ? rating : null,
-      keep_text: training ? keepText.trim() || null : null,
-      change_text: training ? changeText.trim() || null : null,
-      respondent_name: training ? name.trim() || null : null,
-      respondent_field: training ? field.trim() || null : null,
-      needs_help: false,
-      contact_requested: wantsContact,
-      contact: wantsContact ? contact.trim() || null : null,
-      attachment_url: attachment,
-    });
+    let dbErr = false;
+    try {
+      const res = await submitFeedback({
+        data: {
+          event_id: training ? target : null,
+          feedback_type: type,
+          message: training ? null : message.trim() || null,
+          rating: training ? rating : null,
+          keep_text: training ? keepText.trim() || null : null,
+          change_text: training ? changeText.trim() || null : null,
+          respondent_name: training ? name.trim() || null : null,
+          respondent_field: training ? field.trim() || null : null,
+          contact_requested: wantsContact,
+          contact: wantsContact ? contact.trim() || null : null,
+          attachment_url: attachment,
+        },
+      });
+      dbErr = !res.ok;
+    } catch {
+      dbErr = true;
+    }
     setSending(false);
     if (dbErr) {
       setError("Saatmine ebaõnnestus. Proovi palun uuesti.");

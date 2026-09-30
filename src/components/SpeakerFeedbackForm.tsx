@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Camera, CheckCircle2, GraduationCap, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { submitFeedback } from "@/lib/feedback.functions";
 import type { Speaker } from "@/lib/events";
 import { speakerEventRows } from "@/lib/events";
 
@@ -176,19 +177,27 @@ export function SpeakerFeedbackForm({
       }
       attachment = path;
     }
-    const { error: dbErr } = await supabase.from("feedback").insert({
-      event_id: eventOptions[0]?.id ?? null,
-      feedback_type: "training",
-      message: message.trim() || null,
-      rating,
-      respondent_name: name.trim() || null,
-      respondent_field: field.trim() || null,
-      needs_help: false,
-      contact_requested: !!contact.trim() || photoPromise,
-      contact: contact.trim() || null,
-      attachment_url: attachment,
-      photo_promise: photoPromise,
-    });
+    let dbErr = false;
+    try {
+      const res = await submitFeedback({
+        data: {
+          event_id: eventOptions[0]?.id ?? null,
+          speaker_id: speaker.id,
+          feedback_type: "training",
+          message: message.trim() || null,
+          rating,
+          respondent_name: name.trim() || null,
+          respondent_field: field.trim() || null,
+          contact_requested: !!contact.trim() || photoPromise,
+          contact: contact.trim() || null,
+          attachment_url: attachment,
+          photo_promise: photoPromise,
+        },
+      });
+      dbErr = !res.ok;
+    } catch {
+      dbErr = true;
+    }
     setSending(false);
     if (dbErr) {
       setError("Saatmine ebaõnnestus. Proovi palun uuesti.");
