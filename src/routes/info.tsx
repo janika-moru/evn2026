@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   MapPin,
   Navigation,
@@ -205,7 +205,18 @@ function InfoPage() {
               Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
               vastamiseks.
             </p>
+            <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+              Koolitusele registreerunu meiliaadressi jagame koolitajaga, et ta saaks koolituseks
+              valmistuda ja saata lisamaterjale.
+            </p>
+            <Link
+              to="/privaatsus"
+              className="mt-2 inline-block text-sm font-semibold text-primary underline underline-offset-2"
+            >
+              Privaatsus- ja andmetöötlustingimused
+            </Link>
           </div>
+
         </li>
       </ul>
 
