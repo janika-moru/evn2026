@@ -44,10 +44,12 @@ export function SpeakerLinks({
         <div key={speaker.id} className={`flex gap-3 ${large ? "items-start" : "items-center"}`}>
           {speaker.imageUrl ? (
             <img
-              src={speaker.imageUrl}
+              src={speaker.thumbUrl ?? speaker.imageUrl}
               alt={speaker.name}
               loading="lazy"
               decoding="async"
+              width={large ? 52 : 40}
+              height={large ? 52 : 40}
               className={`shrink-0 rounded-full object-cover ${large ? "size-13" : "size-10"}`}
             />
           ) : (

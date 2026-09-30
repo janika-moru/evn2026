@@ -24,6 +24,30 @@ import katrinVilimaaPhoto from "@/assets/katrin-vilimaa-otsing.png.asset.json";
 import katrinDiffertPhoto from "@/assets/katrin-differt.png.asset.json";
 import ivarRaavPhoto from "@/assets/ivar-raav.png.asset.json";
 import kullikeKuberPhoto from "@/assets/kullike-kuber.jpg.asset.json";
+import anuTahemaaThumb from "@/assets/thumbs/anu-tahemaa.webp.asset.json";
+import birgitRuunikThumb from "@/assets/thumbs/birgit-ruunik.webp.asset.json";
+import eppKarsinThumb from "@/assets/thumbs/epp-karsin.webp.asset.json";
+import janikaMoruThumb from "@/assets/thumbs/janika-moru.webp.asset.json";
+import kiiaPaalThumb from "@/assets/thumbs/kiia-paal.webp.asset.json";
+import kadriLeppikThumb from "@/assets/thumbs/kadri-leppik.webp.asset.json";
+import liisiThumb from "@/assets/thumbs/liisi.webp.asset.json";
+import martinThumb from "@/assets/thumbs/martin.webp.asset.json";
+import mikkOrglaanThumb from "@/assets/thumbs/mikk-orglaan.webp.asset.json";
+import seljeThumb from "@/assets/thumbs/selje.webp.asset.json";
+import kukkumiskaitseThumb from "@/assets/thumbs/kukkumiskaitse.webp.asset.json";
+import urmoThumb from "@/assets/thumbs/urmo.webp.asset.json";
+import ulviThumb from "@/assets/thumbs/ulvi.webp.asset.json";
+import timoThumb from "@/assets/thumbs/timo.webp.asset.json";
+import tambetThumb from "@/assets/thumbs/tambet.webp.asset.json";
+import rolandThumb from "@/assets/thumbs/roland.webp.asset.json";
+import mariThumb from "@/assets/thumbs/mari-maekivi.webp.asset.json";
+import marikaThumb from "@/assets/thumbs/marika.webp.asset.json";
+import papsidThumb from "@/assets/thumbs/papsid.webp.asset.json";
+import katrinVilimaaThumb from "@/assets/thumbs/katrin-vilimaa-otsing.webp.asset.json";
+import katrinDiffertThumb from "@/assets/thumbs/katrin-differt.webp.asset.json";
+import ivarRaavThumb from "@/assets/thumbs/ivar-raav.webp.asset.json";
+import kullikeKuberThumb from "@/assets/thumbs/kullike-kuber.webp.asset.json";
+
 
 
 export type RegistrationStatus =
@@ -63,6 +87,8 @@ export interface Speaker {
   role: string;
   bio: string;
   imageUrl?: string;
+  /** 128px WebP pisipilt pallikeste ja nimekirjade jaoks. */
+  thumbUrl?: string;
   email?: string;
   phone?: string;
   websiteUrl?: string;
@@ -489,6 +515,7 @@ export const SPEAKERS: Speaker[] = [
      "id": "kiia-paal",
      "name": "Kiia Paal",
      "imageUrl": kiiaPaalPhoto.url,
+     "thumbUrl": kiiaPaalThumb.url,
      "websiteUrl": "https://www.hypnosynnitus.ee/",
      "facebookUrl": "https://www.facebook.com/studiomindZ",
      "role": "",
@@ -506,6 +533,7 @@ export const SPEAKERS: Speaker[] = [
      "id": "mikk-orglaan",
      "name": "Mikk Orglaan",
      "imageUrl": mikkOrglaanPhoto.url,
+     "thumbUrl": mikkOrglaanThumb.url,
      "websiteUrl": "https://sparkly.hr/et",
      "linkedinUrl": "https://www.linkedin.com/in/mikkorglaan/",
      "role": "",
@@ -520,6 +548,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": kadriLeppikPhoto.url,
+     "thumbUrl": kadriLeppikThumb.url,
     "websiteUrl": "https://digistrateeg.ee/",
     "linkedinUrl": "https://www.linkedin.com/in/kadri-leppik/",
     "eventIds": [
@@ -532,6 +561,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": martinPhoto.url,
+     "thumbUrl": martinThumb.url,
     "email": "",
     "phone": "",
     "websiteUrl": "https://introverdid.ee/",
@@ -548,6 +578,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": janikaMoruPhoto.url,
+     "thumbUrl": janikaMoruThumb.url,
     "email": "janika@assisto.ee",
     "phone": "5358 3234",
     "websiteUrl": "https://janikamoru.ee",
@@ -562,6 +593,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": urmoPhoto.url,
+     "thumbUrl": urmoThumb.url,
      "websiteUrl": "https://phishbite.com/et/",
      "linkedinUrl": "https://www.linkedin.com/in/urmokeskel/",
     "eventIds": [
@@ -575,6 +607,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": papsidPhoto.url,
+     "thumbUrl": papsidThumb.url,
      "websiteUrl": "https://papsid.ee/",
      "instagramUrl": "https://www.instagram.com/papsid.ee/",
     "eventIds": [
@@ -587,6 +620,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": timoPhoto.url,
+     "thumbUrl": timoThumb.url,
      "websiteUrl": "https://turunduslabor.ee/",
      "linkedinUrl": "https://www.linkedin.com/in/timoporval/",
     "eventIds": [
@@ -599,6 +633,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": ulviPhoto.url,
+     "thumbUrl": ulviThumb.url,
      "websiteUrl": "https://www.balticintertex.ee/",
      "linkedinUrl": "https://www.linkedin.com/in/ulvi-kala/",
     "eventIds": [
@@ -611,6 +646,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": rolandPhoto.url,
+     "thumbUrl": rolandThumb.url,
      "websiteUrl": "https://rolevents.ee/",
      "linkedinUrl": "https://www.linkedin.com/in/rolandkivitare/",
     "eventIds": [
@@ -623,6 +659,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": katrinVilimaaPhoto.url,
+     "thumbUrl": katrinVilimaaThumb.url,
     "websiteUrl": "https://turunduskoolitus.ee/",
     "linkedinUrl": "https://www.linkedin.com/in/katrinvilimaa/",
     "eventIds": [
@@ -635,6 +672,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": marikaPhoto.url,
+     "thumbUrl": marikaThumb.url,
      "websiteUrl": "https://veebikool.ee/",
      "linkedinUrl": "https://www.linkedin.com/in/marika-juusu/",
     "eventIds": [
@@ -647,6 +685,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": ivarRaavPhoto.url,
+     "thumbUrl": ivarRaavThumb.url,
     "websiteUrl": "https://ivarraav.com/",
     "linkedinUrl": "https://www.linkedin.com/in/ivarraav/",
     "eventIds": [
@@ -659,6 +698,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": katrinDiffertPhoto.url,
+     "thumbUrl": katrinDiffertThumb.url,
     "websiteUrl": "https://360kogemus.ee/",
     "linkedinUrl": "https://www.linkedin.com/in/katrin-differt-bb9194216/",
     "eventIds": [
@@ -672,6 +712,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": kukkumiskaitsePhoto.url,
+     "thumbUrl": kukkumiskaitseThumb.url,
      "websiteUrl": "https://kukkumiskaitse.ee/",
      "facebookUrl": "https://www.facebook.com/Kukkumiskaitse.ee/",
     "eventIds": [
@@ -684,6 +725,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": tambetPhoto.url,
+     "thumbUrl": tambetThumb.url,
      "websiteUrl": "https://combatready.eu/",
      "linkedinUrl": "https://www.linkedin.com/in/tambet-tallo-sales-leadership-coach-speaker/",
     "eventIds": [
@@ -696,6 +738,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": eppKarsinPhoto.url,
+     "thumbUrl": eppKarsinThumb.url,
     "websiteUrl": "https://www.eppkarsin.com/",
     "instagramUrl": "https://www.instagram.com/eppkarsin",
     "eventIds": [
@@ -708,6 +751,7 @@ export const SPEAKERS: Speaker[] = [
      "role": "",
      "bio": "",
      "imageUrl": mariPhoto.url,
+     "thumbUrl": mariThumb.url,
      "websiteUrl": "https://marimaekivi.ee/",
      "linkedinUrl": "https://www.linkedin.com/in/marimaekivi/",
     "eventIds": [
@@ -720,6 +764,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": birgitRuunikPhoto.url,
+     "thumbUrl": birgitRuunikThumb.url,
     "websiteUrl": "https://palgajutud.ee/",
     "linkedinUrl": "https://www.linkedin.com/in/birgit-ruunik/",
     "eventIds": [
@@ -732,6 +777,7 @@ export const SPEAKERS: Speaker[] = [
     "role": "",
     "bio": "",
     "imageUrl": anuTahemaaPhoto.url,
+     "thumbUrl": anuTahemaaThumb.url,
     "websiteUrl": "https://corporatemaestro.com/et/",
     "linkedinUrl": "https://www.linkedin.com/in/anu-tahemaa/",
     "eventIds": [
@@ -777,24 +823,28 @@ export type TeamMember = {
   speakerId?: string;
   /** oma pilt, kui inimesel pole koolitaja profiili */
   imageUrl?: string;
+  thumbUrl?: string;
 };
 
 export const TEAM: TeamMember[] = [
   { id: "kiia", name: "Kiia Paal", speakerId: "kiia-paal" },
   { id: "janika", name: "Janika Mõru", speakerId: "janika-moru" },
-  { id: "selje", name: "Selje Perez", imageUrl: seljePhoto.url },
-  { id: "liisi", name: "Liisi Kaal", imageUrl: liisiPhoto.url },
-  { id: "kullike", name: "Küllike Kuber", imageUrl: kullikeKuberPhoto.url },
+  { id: "selje", name: "Selje Perez", imageUrl: seljePhoto.url, thumbUrl: seljeThumb.url },
+  { id: "liisi", name: "Liisi Kaal", imageUrl: liisiPhoto.url, thumbUrl: liisiThumb.url },
+  { id: "kullike", name: "Küllike Kuber", imageUrl: kullikeKuberPhoto.url, thumbUrl: kullikeKuberThumb.url },
 ];
 
 /** Tiimi liikmed koos piltidega, kui need on olemas. */
-export function teamMembers(): (TeamMember & { imageUrl?: string })[] {
+export function teamMembers(): (TeamMember & { imageUrl?: string; thumbUrl?: string })[] {
   return TEAM.map((member) => {
     const speaker = member.speakerId
       ? SPEAKERS.find((s) => s.id === member.speakerId)
       : undefined;
     const imageUrl = member.imageUrl ?? speaker?.imageUrl;
-    return imageUrl ? { ...member, imageUrl } : member;
+    const thumbUrl = member.thumbUrl ?? speaker?.thumbUrl;
+    return imageUrl
+      ? { ...member, imageUrl, ...(thumbUrl ? { thumbUrl } : {}) }
+      : member;
   });
 }
 
