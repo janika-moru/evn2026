@@ -135,7 +135,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="mx-auto min-h-screen w-full max-w-md bg-background pb-24">
+      <div className="mx-auto min-h-screen w-full max-w-md bg-background pb-24 md:max-w-2xl lg:max-w-3xl">
         <Outlet />
       </div>
       <BottomNav />
