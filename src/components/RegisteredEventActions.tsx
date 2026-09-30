@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { FileText, MessageSquareHeart } from "lucide-react";
+import { FileText, MessageSquareHeart, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
