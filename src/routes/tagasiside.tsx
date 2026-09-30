@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Camera, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import type { Speaker } from "@/lib/events";
-import { EVENTS, getEvent, dayLabel, displayTime, speakersForEvent } from "@/lib/events";
+import { EVENTS, getEvent, dayLabel, displayTime, trainingSpeakerForEvent } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 import { submitFeedback } from "@/lib/feedback.functions";
 import { MeeskondRow, KoolitajadPills } from "@/components/SpeakersTeamLinks";
@@ -55,7 +55,7 @@ function FeedbackPage() {
   const fromEvent = sundmus && getEvent(sundmus) ? sundmus : null;
   // Minu kava „Anna tagasisidet" avab sama koolitaja vormi, mis koolitaja
   // pallikesel klõpsates — sündmuse kaudu leitakse tema koolitaja.
-  const fromEventSpeaker = fromEvent ? (speakersForEvent(fromEvent)[0] ?? null) : null;
+  const fromEventSpeaker = fromEvent ? (trainingSpeakerForEvent(fromEvent) ?? null) : null;
 
   const [type, setType] = useState<FType | null>(
     fromEvent && !fromEventSpeaker ? "training" : null,
