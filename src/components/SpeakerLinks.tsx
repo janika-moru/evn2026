@@ -66,15 +66,25 @@ export function SpeakerLinks({
               large ? "flex min-h-13 min-w-0 flex-col justify-between" : "min-w-0"
             }
           >
-            <Link
-              to="/koolitajad"
-              hash={speaker.id}
-              className={`block font-semibold text-foreground underline-offset-4 hover:underline ${
-                large ? "-mt-[2px] text-[17px] leading-[1.2]" : "text-sm"
-              }`}
-            >
-              {speaker.name}
-            </Link>
+            {speaker.isOrganizer ? (
+              <p
+                className={`font-semibold text-foreground ${
+                  large ? "-mt-[2px] text-[17px] leading-[1.2]" : "text-sm"
+                }`}
+              >
+                {speaker.name}
+              </p>
+            ) : (
+              <Link
+                to="/koolitajad"
+                hash={speaker.id}
+                className={`block font-semibold text-foreground underline-offset-4 hover:underline ${
+                  large ? "-mt-[2px] text-[17px] leading-[1.2]" : "text-sm"
+                }`}
+              >
+                {speaker.name}
+              </Link>
+            )}
             <div
               className={`flex flex-wrap ${
                 large ? "gap-x-5 text-[15px] leading-[1.3]" : "mt-1 gap-x-3 gap-y-0.5 text-xs"

@@ -47,6 +47,8 @@ import katrinVilimaaThumb from "@/assets/thumbs/katrin-vilimaa-otsing.webp.asset
 import katrinDiffertThumb from "@/assets/thumbs/katrin-differt.webp.asset.json";
 import ivarRaavThumb from "@/assets/thumbs/ivar-raav.webp.asset.json";
 import kullikeKuberThumb from "@/assets/thumbs/kullike-kuber.webp.asset.json";
+import lopupeguPhoto from "@/assets/lopupegu-studio-mindz.webp.asset.json";
+import lopupeguThumb from "@/assets/thumbs/lopupegu-studio-mindz.webp.asset.json";
 
 
 
@@ -96,6 +98,8 @@ export interface Speaker {
   instagramUrl?: string;
   facebookUrl?: string;
   eventIds: string[];
+  /** Korraldaja (nt Studio MindZ) — ei ilmu koolitajate nimekirja ega tagasiside koolitaja valikusse. */
+  isOrganizer?: boolean;
 }
 
 export const EVENT_DAYS = [
@@ -497,7 +501,7 @@ export const EVENTS: EventItem[] = [
     "id": "202960",
     "fientaEventId": "202960",
     "title": "Ettevõtlusnädala lõpuõhtu Studio MindZis",
-    "speaker": "",
+    "speaker": "Studio MindZ",
     "shortDescription": "Ettevõtlusnädala jooksul on Studio MindZis kohtunud ettevõtjad, juhid ja tegijad väga erinevate teemade ümber. Enne kui nädal päriselt seljataha jätta, tuleme veel üheks õhtuks kokku, et jagada nädala jooksul tekkinud mõtteid, luua uusi kontakte ja lihtsalt mõnusalt koos aega veeta.",
     "description": "Ettevõtlusnädala jooksul on Studio MindZis kohtunud ettevõtjad, juhid ja tegijad väga erinevate teemade ümber. Enne kui nädal päriselt seljataha jätta, tuleme veel üheks õhtuks kokku, et jagada nädala jooksul tekkinud mõtteid, luua uusi kontakte ja lihtsalt mõnusalt koos aega veeta.\n\nKellele?\n\nOodatud on kõik ettevõtlikud inimesed, kes soovivad ettevõtlusnädala jooksul kogetut teistega arutada, uusi inimesi tundma õppida ja leida kontakte, kellega võiks suhtlus jätkuda ka pärast ettevõtlusnädalat.\n\nSa ei pea olema osalenud Studio MindZi teistel sündmustel. Võid tulla ka lihtsalt selleks, et kohtuda teiste ettevõtjate ja tegijatega.\n\nMis toimub?\n\nÕhtu keskmes on vaba suhtlus ja networkimine. Saab jagada nädala jooksul tekkinud ideid, arutada ärivõimalusi, leida uusi koostööpartnereid või lihtsalt kohtuda inimestega, kellega tekib hea klapp.\n\nEelmisel aastal sündis sellel õhtul uusi tutvusi ja koostöömõtteid ning vestlused jätkusid veel pikalt pärast ametliku programmi lõppu. Sel aastal loome taas ruumi, kus ei ole enam järgmist koolitust, kuhu kiirustada, vaid aega päriselt inimestega rääkida.\n\nPakume õhtu jooksul ka midagi head süüa ja juua.\n\nTartu Ettevõtlusnädal toimub 5.–9. oktoobril 2026. See sündmus lõpetab Studio MindZi ruumides toimuva ettevõtlusnädala programmi.\n\nTule ja võta nädal kokku koos inimestega, kellega võib mõni hea mõte alles päriselt alguse saada.\n\nNB! Ürituse korraldajal on õigus sündmusele mitte lubada inimesi, kes segavad teisi osalejaid või ei järgi ruumi kodukorda.",
     "date": "2026-10-09",
@@ -786,6 +790,22 @@ export const SPEAKERS: Speaker[] = [
   }
 ];
 
+/** Ürituste korraldajad — samasugused kaardid kui koolitajad, aga oma sotsmeediaga. */
+export const ORGANIZERS: Speaker[] = [
+  {
+    id: "studio-mindz",
+    name: "Studio MindZ",
+    role: "",
+    bio: "",
+    imageUrl: lopupeguPhoto.url,
+    thumbUrl: lopupeguThumb.url,
+    instagramUrl: "https://www.instagram.com/studiomindz/",
+    facebookUrl: "https://www.facebook.com/studiomindztartu/",
+    eventIds: ["202960"],
+    isOrganizer: true,
+  },
+];
+
 
 export function getEvent(id: string): EventItem | undefined {
   return EVENTS.find((e) => e.id === id);
@@ -802,7 +822,12 @@ export function getEventByFientaId(fientaId: string): EventItem | undefined {
 }
 
 export function speakersForEvent(eventId: string): Speaker[] {
-  return SPEAKERS.filter((speaker) => speaker.eventIds.includes(eventId));
+  return [...SPEAKERS, ...ORGANIZERS].filter((speaker) => speaker.eventIds.includes(eventId));
+}
+
+/** Tagasiside koolitaja — korraldajat (Studio MindZ) siin ei pakuta. */
+export function trainingSpeakerForEvent(eventId: string): Speaker | undefined {
+  return speakersForEvent(eventId).find((speaker) => !speaker.isOrganizer);
 }
 
 /** Koolitajate lehe järjekord: eesnime järgi, erandina kõige ees Studio MindZ tiim (Kiia, Janika). */

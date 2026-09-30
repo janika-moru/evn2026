@@ -74,11 +74,11 @@ export const submitFeedback = createServerFn({ method: "POST" })
 
     // Teavituskiri — ebaõnnestumine ei tohi osaleja jaoks tagasisidet katki teha
     try {
-      const { getEvent, speakersForEvent, SPEAKERS, dayLabel, displayTime } = await import("@/lib/events");
+      const { getEvent, trainingSpeakerForEvent, SPEAKERS, dayLabel, displayTime } = await import("@/lib/events");
       const ev = data.event_id ? getEvent(data.event_id) : undefined;
       const speaker =
         (data.speaker_id && SPEAKERS.find((s) => s.id === data.speaker_id)) ||
-        (ev ? speakersForEvent(ev.id)[0] : undefined);
+        (ev ? trainingSpeakerForEvent(ev.id) : undefined);
       let photoUrl: string | null = null;
       if (data.attachment_url) {
         const { data: signed } = await supabaseAdmin.storage
