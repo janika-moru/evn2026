@@ -54,34 +54,33 @@ function PrivacyPage() {
       </p>
       <p className="mt-3 text-sm leading-relaxed text-foreground/80">
         Need tingimused kirjeldavad, kuidas Studio MindZ OÜ kogub, töötleb ja kaitseb Sinu
-        isikuandmeid Tartu ettevõtlusnädala 2026 veebiäpis aadressil tartu.mindz.ee.
+        isikuandmeid Tartu ettevõtlusnädala 2026 veebiäpis (edaspidi äpis) aadressil tartu.mindz.ee.
       </p>
 
       <Section title="1. Vastutav ja volitatud töötleja">
         <p>
           <span className="font-semibold text-foreground">Vastutav töötleja: Studio MindZ OÜ</span>
           <br />
-          Lutsu 3, 51006 Tartu (Antoniuse õuemaja)
+          Telliskivi tn 57/1,&nbsp;Tallinn,&nbsp;10412,&nbsp;Harjumaa
           <br />
-          <a href="mailto:info@mindz.ee" className="text-primary underline">
-            info@mindz.ee
-          </a>{" "}
-          · mindz.ee
+          Registrikood&nbsp;14545246
+          <br />
+          mindz.ee
+          <br />
+          info@mindz.ee
         </p>
         <p>
           <span className="font-semibold text-foreground">
             Volitatud töötleja: OÜ E-Assisto
           </span>
           <br />
+          A. Haava tn 11, Tartu linn, 50409, Tartumaa
+          <br />
           Registrikood 16696788
           <br />
-          A. Haava tn 11, Tartu linn, 50409 Tartu maakond
+          assisto.ee
           <br />
-          Juhatuse liige: Janika Mõru
-          <br />
-          KMKR EE102837427 (käibemaksukohuslane alates 08.03.2025)
-          <br />
-          Põhitegevusala: büroohaldus ja selle abitegevused (EMTAK 82101)
+          janika@assisto.ee
         </p>
         <p>
           OÜ E-Assisto on Studio MindZ OÜ partner ettevõtlusnädala korraldamisel: täidab
@@ -92,10 +91,10 @@ function PrivacyPage() {
         </p>
       </Section>
 
-      <Section title="2. Millised andmed ja mis eesmärgil">
+      <Section title="2. Millised andmed ja mis eesmärgil kogume">
         <p>
           Kogume ainult neid andmeid, mis on teenuse toimimiseks vajalikud. Fienta toorandmeid
-          (makseinfo, aadress, IP-aadress) ega osalejate nimesid äpi andmebaasis ei säilitata.
+          (makseinfo, aadress, IP-aadress) ega osalejate nimesid veebiäpi andmebaasis ei säilitata.
         </p>
         <p>
           <span className="font-semibold text-foreground">Registreerumine ja osalemine.</span>{" "}
