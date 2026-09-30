@@ -19,3 +19,7 @@
 - Registered-event actions are shared through RegisteredEventActions in both Minu kava and the event detail — keeps feedback, slides, and speaker contacts identical on both paths.
 - Fienta sync throttling uses DB function try_start_fienta_sync (advisory lock) called only from server; runs in background from Minu kava only — atomic, avoids parallel syncs.
 - Fienta raw payloads are never persisted (registrations/webhook_logs); webhook_logs purged after 30 days via pg_cron — GDPR data minimisation.
+
+- Poppins on ise majutatud (public/fonts + @font-face src/styles.css), Google Fontsi linki ei kasutata — kiirem esmalaadimine ja vähem väliseid päringuid.
+- Offline-vahemälu: public/sw.js (staatika cache-first, lehed network-first) registreeritakse src/components/OfflineCache.tsx kaudu — äpp töötab nõrga levi korral.
+- Galerii pisipildid on 400px WebP src/assets/room-thumbs/, täissuuruses pilt laaditakse alles suures vaates — Info leht avaneb kiiresti.
