@@ -70,6 +70,8 @@ function FeedbackPage() {
   const [photo, setPhoto] = useState<File | null>(null);
   const [wantsContact, setWantsContact] = useState(false);
   const [contact, setContact] = useState("");
+  const [publishConsent, setPublishConsent] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [sent, setSent] = useState<FType | null>(null);
@@ -86,6 +88,23 @@ function FeedbackPage() {
   // Robotilõks: nähtamatu väli + vormi täitmise aeg
   const hpRef = useRef<HTMLInputElement>(null);
   const startedAt = useRef(Date.now());
+  // Eeltäide: kasutaja nõusolekul seadmesse jäetud meiliaadress/telefon
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("smz-feedback-profile");
+      if (raw) {
+        const saved = JSON.parse(raw) as { contact?: string };
+        if (saved.contact) {
+          setContact(saved.contact);
+          setWantsContact(true);
+          setRemember(true);
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
   useEffect(() => {
     if (!speaker) return;
     if (fromEventSpeaker && speaker.id === fromEventSpeaker.id) {
