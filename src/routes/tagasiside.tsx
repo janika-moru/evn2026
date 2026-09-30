@@ -270,6 +270,13 @@ function FeedbackPage() {
             </div>
           )}
         </KoolitajadPills>
+
+        {!speaker && (
+          <p className="mt-4 text-center text-xs leading-relaxed text-muted-foreground">
+            Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
+            vastamiseks.
+          </p>
+        )}
       </main>
     );
   }
@@ -344,6 +351,10 @@ function FeedbackPage() {
             <div className="grid gap-3">
               <input value={name} onChange={(e) => setName(e.target.value)} maxLength={200} placeholder="Sinu nimi" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base" />
               <input value={field} onChange={(e) => setField(e.target.value)} maxLength={200} placeholder="Valdkond" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base" />
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Nimi ja valdkond on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
+                vastamiseks.
+              </p>
             </div>
           </>
         ) : (
@@ -402,6 +413,9 @@ function FeedbackPage() {
             />
             Soovin, et minuga võetaks ühendust.
           </label>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+            Meiliaadress on vabatahtlik ning mõeldud vaid tiimile vastamiseks.
+          </p>
           {wantsContact && (
             <input
               type="text"
@@ -409,7 +423,7 @@ function FeedbackPage() {
               maxLength={300}
               value={contact}
               onChange={(e) => setContact(e.target.value)}
-              placeholder="E-post või telefon"
+              placeholder="Meiliaadress või telefon"
               className="mt-3 w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
             />
           )}
