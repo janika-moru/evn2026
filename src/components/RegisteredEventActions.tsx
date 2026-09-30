@@ -63,10 +63,10 @@ export function RegisteredEventActions({
             variant="outline"
             className="min-h-[52px] w-full rounded-full border-2 border-background bg-transparent px-3 text-center text-[15px] leading-snug shadow-none whitespace-normal"
           >
-            Ava Fienta: Pilet · QR-kood · loobumine
+            Ava Fienta: QR-kood ja loobumine
           </Button>
         ) : (
-          <button className={link}>Pilet · QR-kood · loobumine</button>
+          <button className={link}>QR-kood ja loobumine</button>
         )}
       </DialogTrigger>
       <DialogContent className="max-w-sm rounded-2xl">
