@@ -2,15 +2,19 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Camera, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import type { Speaker } from "@/lib/events";
-import { EVENTS, getEvent, dayLabel, displayTime } from "@/lib/events";
+import { EVENTS, getEvent, dayLabel, displayTime, speakersForEvent } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 import { MeeskondRow, KoolitajadPills } from "@/components/SpeakersTeamLinks";
 import { SpeakerFeedbackForm } from "@/components/SpeakerFeedbackForm";
 
 
 
-const validateSearch = (search: Record<string, unknown>): { sundmus?: string } =>
-  typeof search["sundmus"] === "string" ? { sundmus: search["sundmus"] as string } : {};
+const validateSearch = (search: Record<string, unknown>): { sundmus?: string } => {
+  const raw = search["sundmus"];
+  if (typeof raw === "string") return { sundmus: raw };
+  if (typeof raw === "number") return { sundmus: String(raw) };
+  return {};
+};
 
 export const Route = createFileRoute("/tagasiside")({
   validateSearch,
@@ -48,8 +52,13 @@ const TYPES: { id: FType; label: string; short: string; icon: typeof HeartHandsh
 function FeedbackPage() {
   const { sundmus } = Route.useSearch();
   const fromEvent = sundmus && getEvent(sundmus) ? sundmus : null;
+  // Minu kava „Anna tagasisidet" avab sama koolitaja vormi, mis koolitaja
+  // pallikesel klõpsates — sündmuse kaudu leitakse tema koolitaja.
+  const fromEventSpeaker = fromEvent ? (speakersForEvent(fromEvent)[0] ?? null) : null;
 
-  const [type, setType] = useState<FType | null>(fromEvent ? "training" : null);
+  const [type, setType] = useState<FType | null>(
+    fromEvent && !fromEventSpeaker ? "training" : null,
+  );
   const [target, setTarget] = useState(fromEvent ?? "");
   const [rating, setRating] = useState<number | null>(null);
   const [keepText, setKeepText] = useState("");
@@ -65,7 +74,12 @@ function FeedbackPage() {
   const [sent, setSent] = useState<FType | null>(null);
 
   // Koolitajale klõpsates avaneb tema tagasisidevorm kohe siinsamas lehel
-  const [speaker, setSpeaker] = useState<Speaker | null>(null);
+  const [speaker, setSpeaker] = useState<Speaker | null>(fromEventSpeaker);
+  // URL-i parameeter jõuab kohale alles pärast esmast renderdust —
+  // seadista koolitaja siis, kui ta kättesaadavaks saab.
+  useEffect(() => {
+    if (fromEventSpeaker) setSpeaker((prev) => prev ?? fromEventSpeaker);
+  }, [fromEventSpeaker]);
   const formRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (speaker) formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
