@@ -16,6 +16,7 @@ const schema = z.object({
   contact: text(320),
   contact_requested: z.boolean().default(false),
   photo_promise: z.boolean().default(false),
+  publish_consent: z.boolean().default(false),
   // Foto on üles laaditud kasutaja oma kausta: <uuid>/<uuid>.<ext>
   attachment_url: z
     .string()
@@ -61,6 +62,7 @@ export const submitFeedback = createServerFn({ method: "POST" })
         contact: data.contact || null,
         contact_requested: data.contact_requested,
         photo_promise: data.photo_promise,
+        publish_consent: data.publish_consent,
         attachment_url: data.attachment_url ?? null,
         needs_help: false,
         status: "new",
@@ -105,6 +107,7 @@ export const submitFeedback = createServerFn({ method: "POST" })
           contact,
           contactRequested: data.contact_requested,
           photoPromise: data.photo_promise,
+          publishConsent: data.publish_consent,
           photoUrl,
         },
       });

@@ -53,6 +53,7 @@ export type Database = {
           message: string | null
           needs_help: boolean
           photo_promise: boolean
+          publish_consent: boolean
           rating: number | null
           respondent_field: string | null
           respondent_name: string | null
@@ -72,6 +73,7 @@ export type Database = {
           message?: string | null
           needs_help?: boolean
           photo_promise?: boolean
+          publish_consent?: boolean
           rating?: number | null
           respondent_field?: string | null
           respondent_name?: string | null
@@ -91,6 +93,7 @@ export type Database = {
           message?: string | null
           needs_help?: boolean
           photo_promise?: boolean
+          publish_consent?: boolean
           rating?: number | null
           respondent_field?: string | null
           respondent_name?: string | null
