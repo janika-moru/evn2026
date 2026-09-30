@@ -48,12 +48,12 @@ export function SpeakerLinks({
               alt={speaker.name}
               loading="lazy"
               decoding="async"
-              className={`shrink-0 rounded-full object-cover ${large ? "size-14" : "size-10"}`}
+              className={`shrink-0 rounded-full object-cover ${large ? "size-12" : "size-10"}`}
             />
           ) : (
             <div
               className={`flex shrink-0 items-center justify-center rounded-full bg-secondary font-semibold ${
-                large ? "size-14 text-sm" : "size-10 text-xs"
+                large ? "size-12 text-sm" : "size-10 text-xs"
               }`}
             >
               {initials(speaker.name)}
@@ -61,7 +61,7 @@ export function SpeakerLinks({
           )}
           <div
             className={
-              large ? "flex min-h-14 min-w-0 flex-col justify-between" : "min-w-0"
+              large ? "flex min-h-12 min-w-0 flex-col justify-between" : "min-w-0"
             }
           >
             <Link
