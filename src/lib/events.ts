@@ -47,6 +47,8 @@ import katrinVilimaaThumb from "@/assets/thumbs/katrin-vilimaa-otsing.webp.asset
 import katrinDiffertThumb from "@/assets/thumbs/katrin-differt.webp.asset.json";
 import ivarRaavThumb from "@/assets/thumbs/ivar-raav.webp.asset.json";
 import kullikeKuberThumb from "@/assets/thumbs/kullike-kuber.webp.asset.json";
+import lopupeguPhoto from "@/assets/lopupegu-studio-mindz.webp.asset.json";
+import lopupeguThumb from "@/assets/thumbs/lopupegu-studio-mindz.webp.asset.json";
 
 
 
@@ -96,6 +98,8 @@ export interface Speaker {
   instagramUrl?: string;
   facebookUrl?: string;
   eventIds: string[];
+  /** Korraldaja (nt Studio MindZ) — ei ilmu koolitajate nimekirja ega tagasiside koolitaja valikusse. */
+  isOrganizer?: boolean;
 }
 
 export const EVENT_DAYS = [
@@ -786,6 +790,22 @@ export const SPEAKERS: Speaker[] = [
   }
 ];
 
+/** Ürituste korraldajad — samasugused kaardid kui koolitajad, aga oma sotsmeediaga. */
+export const ORGANIZERS: Speaker[] = [
+  {
+    id: "studio-mindz",
+    name: "Studio MindZ",
+    role: "",
+    bio: "",
+    imageUrl: lopupeguPhoto.url,
+    thumbUrl: lopupeguThumb.url,
+    instagramUrl: "https://www.instagram.com/studiomindz/",
+    facebookUrl: "https://www.facebook.com/studiomindztartu/",
+    eventIds: ["202960"],
+    isOrganizer: true,
+  },
+];
+
 
 export function getEvent(id: string): EventItem | undefined {
   return EVENTS.find((e) => e.id === id);
@@ -802,7 +822,12 @@ export function getEventByFientaId(fientaId: string): EventItem | undefined {
 }
 
 export function speakersForEvent(eventId: string): Speaker[] {
-  return SPEAKERS.filter((speaker) => speaker.eventIds.includes(eventId));
+  return [...SPEAKERS, ...ORGANIZERS].filter((speaker) => speaker.eventIds.includes(eventId));
+}
+
+/** Tagasiside koolitaja — korraldajat (Studio MindZ) siin ei pakuta. */
+export function trainingSpeakerForEvent(eventId: string): Speaker | undefined {
+  return speakersForEvent(eventId).find((speaker) => !speaker.isOrganizer);
 }
 
 /** Koolitajate lehe järjekord: eesnime järgi, erandina kõige ees Studio MindZ tiim (Kiia, Janika). */
