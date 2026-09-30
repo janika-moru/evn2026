@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { loadFeedbackProfile, saveFeedbackProfile } from "@/lib/feedback-profile";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Camera, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import type { Speaker } from "@/lib/events";
@@ -90,18 +91,11 @@ function FeedbackPage() {
   const startedAt = useRef(Date.now());
   // Eeltäide: kasutaja nõusolekul seadmesse jäetud meiliaadress/telefon
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("smz-feedback-profile");
-      if (raw) {
-        const saved = JSON.parse(raw) as { contact?: string };
-        if (saved.contact) {
-          setContact(saved.contact);
-          setWantsContact(true);
-          setRemember(true);
-        }
-      }
-    } catch {
-      // ignore
+    const saved = loadFeedbackProfile();
+    if (saved?.contact) {
+      setContact(saved.contact);
+      setWantsContact(true);
+      setRemember(true);
     }
   }, []);
 
@@ -178,18 +172,7 @@ function FeedbackPage() {
       return;
     }
     // Ainult kasutaja nõusolekul: meil/telefon selles seadmes (fotot ei hoita)
-    try {
-      if (remember && wantsContact && contact.trim()) {
-        localStorage.setItem(
-          "smz-feedback-profile",
-          JSON.stringify({ contact: contact.trim() }),
-        );
-      } else {
-        localStorage.removeItem("smz-feedback-profile");
-      }
-    } catch {
-      // salvestus ei õnnestunud — tagasiside on ikkagi saadetud
-    }
+    saveFeedbackProfile(remember && wantsContact, { contact });
     setSent(type);
   }
 

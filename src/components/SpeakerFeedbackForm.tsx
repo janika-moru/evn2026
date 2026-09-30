@@ -5,17 +5,8 @@ import { submitFeedback } from "@/lib/feedback.functions";
 import type { Speaker } from "@/lib/events";
 import { speakerEventRows } from "@/lib/events";
 
-// Nimi, roll ja meil jäetakse seadmesse (localStorage) ainult siis, kui kasutaja
-// märgib „jäta selles seadmes meelde". Fotot seadmesse ei salvestata.
-const PROFILE_KEY = "smz-feedback-profile";
-
-type SavedProfile = {
-  name?: string;
-  field?: string;
-  contact?: string;
-  photoDataUrl?: string;
-  photoName?: string;
-};
+// Nimi, roll ja meil jäetakse seadmesse ainult „jäta meelde" nõusolekul (vt feedback-profile).
+import { loadFeedbackProfile, saveFeedbackProfile } from "@/lib/feedback-profile";
 
 // Tagasisidevorm koolitaja profiili all — hinnang 1–10, tekst, nimi, valdkond,
 // e-post ja valikuline foto. Kõik isikuandmed on vabatahtlikud; varem sisestatud
@@ -52,23 +43,12 @@ export function SpeakerFeedbackForm({
 
   // Eeltäide: 1) kasutaja nõusolekul seadmesse jäetud andmed, 2) sisse logitud meil
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(PROFILE_KEY);
-      if (raw) {
-        const saved = JSON.parse(raw) as SavedProfile;
-        if (saved.photoDataUrl) {
-          // vanem versioon hoidis ka fotot — eemalda see
-          delete saved.photoDataUrl;
-          delete saved.photoName;
-          localStorage.setItem(PROFILE_KEY, JSON.stringify(saved));
-        }
-        if (saved.name) setName(saved.name);
-        if (saved.field) setField(saved.field);
-        if (saved.contact) setContact(saved.contact);
-        setRemember(true);
-      }
-    } catch {
-      // vigane salvestus — ignoreeri
+    const saved = loadFeedbackProfile();
+    if (saved) {
+      if (saved.name) setName(saved.name);
+      if (saved.field) setField(saved.field);
+      if (saved.contact) setContact(saved.contact);
+      setRemember(true);
     }
     supabase.auth.getSession().then(({ data }) => {
       const email = data.session?.user?.email;
@@ -199,19 +179,7 @@ export function SpeakerFeedbackForm({
       return;
     }
     // Ainult kasutaja nõusolekul: nimi, roll ja meil selles seadmes (fotot ei hoita)
-    try {
-      if (remember) {
-        const saved: SavedProfile = {};
-        if (name.trim()) saved.name = name.trim();
-        if (field.trim()) saved.field = field.trim();
-        if (contact.trim()) saved.contact = contact.trim();
-        localStorage.setItem(PROFILE_KEY, JSON.stringify(saved));
-      } else {
-        localStorage.removeItem(PROFILE_KEY);
-      }
-    } catch {
-      // salvestus ei õnnestunud — tagasiside on ikkagi saadetud
-    }
+    saveFeedbackProfile(remember, { name, field, contact });
     setSent(true);
   }
 
