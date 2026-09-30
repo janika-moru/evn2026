@@ -74,7 +74,7 @@ function SpecialOffer() {
         href="https://www.mindz.ee"
         target="_blank"
         rel="noreferrer"
-        className="mt-3 inline-block text-[17px] underline underline-offset-2"
+        className="mt-3 inline-block text-[17px] text-mindz-green underline underline-offset-2"
       >
         www.mindz.ee
       </a>
