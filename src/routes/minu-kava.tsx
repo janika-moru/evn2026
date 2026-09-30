@@ -224,6 +224,8 @@ function SignedIn({ email }: { email: string }) {
             ))}
         </div>
       )}
+
+      {mine.length > 0 && <SpecialOffer />}
     </>
   );
 }
