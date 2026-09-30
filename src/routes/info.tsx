@@ -292,10 +292,10 @@ function InfoPage() {
         <ol className="mt-2 space-y-3">
           <li>
             <p className="font-semibold">iPhone</p>
-            <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+            <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 leading-relaxed">
               <span>Brauseris kolm täppi all paremal</span>
               <span aria-hidden="true">→</span>
-              <span className="inline-flex items-center gap-1 whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
+              <span className="inline-flex items-center gap-1 font-semibold">
                 <Share className="size-3.5" /> Jaga
               </span>
               <span aria-hidden="true">→</span>
@@ -303,31 +303,23 @@ function InfoPage() {
                 <ChevronDown className="size-3.5" /> keri veidi alla
               </span>
               <span aria-hidden="true">→</span>
-              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
-                Add to Home screen
-              </span>
+              <span className="font-semibold">Add to Home screen</span>
               <span aria-hidden="true">→</span>
-              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
-                Add
-              </span>
+              <span className="font-semibold">Add</span>
             </p>
           </li>
           <li>
             <p className="font-semibold">Android</p>
-            <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1">
+            <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 leading-relaxed">
               <span>Brauseris kolm täppi üleval paremal</span>
               <span aria-hidden="true">→</span>
               <span className="inline-flex items-center gap-1 text-foreground/70">
                 <ChevronDown className="size-3.5" /> keri veidi alla
               </span>
               <span aria-hidden="true">→</span>
-              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
-                Installi ja loo otsetee
-              </span>
+              <span className="font-semibold">Installi ja loo otsetee</span>
               <span aria-hidden="true">→</span>
-              <span className="whitespace-nowrap rounded-lg border border-primary/15 bg-background/80 px-2 py-0.5 font-semibold">
-                Installi
-              </span>
+              <span className="font-semibold">Installi</span>
             </p>
           </li>
         </ol>
