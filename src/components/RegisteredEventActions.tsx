@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import type { EventItem } from "@/lib/events";
+import { AddToCalendar } from "@/components/AddToCalendar";
 
 /** Koolitaja nimi ja kontaktlingid on kaardi pealkirja all (SpeakerLinks). */
 export function RegisteredEventActions({ event }: { event: EventItem }) {
@@ -17,6 +18,7 @@ export function RegisteredEventActions({ event }: { event: EventItem }) {
 
   return (
     <div className="mt-3 space-y-2">
+      <AddToCalendar event={event} />
       <div className="grid grid-cols-2 gap-2">
         <Button asChild variant="outline" className="h-10 rounded-full px-2 text-xs">
           <Link to="/tagasiside" search={{ sundmus: event.id }}>
