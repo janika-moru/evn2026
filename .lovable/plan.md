@@ -2,15 +2,15 @@
 
 ## Eesmärk
 
-Minu kava leht muutub suurema kirja ja Largerate vahedega kaardiks, mida on lihtne lugeda ja kus nupule tabamine ei nõua silmitsemist. Muudatus kehtib **ainult Minu kava** lehel — Kava ja sündmuse detailvaade jäävad senise kujuga. Üks suurus kõigile, lülitit ei tule.
+Minu kava leht muutub suurema kirja ja suuremate vahedega kaardiks, mida on lihtne lugeda ja kus nupule tabamine ei nõua silmitsemist. Muudatus kehtib **ainult Minu kava** lehel — Kava ja sündmuse detailvaade jäävad senise kujuga. Üks suurus kõigile, lülitit ei tule.
 
 ## Mis muutudes Minu kava vaates
 
 - Koolituse pealkiri, kellaaeg/kuupäev, lühikirjeldus ja koolitaja nimi saavad suurema kirja.
 - Koolitaja kontaktlingid (Koduleht, LinkedIn, Instagram) suurenevad ning nende vahe laieneb, et kõrvaline lingi peale vajutamine ei oleks lihtne viga.
-- Nupud „Anna tagasisidet" ja „Vaata slaide" kasvavad üleval ja laiemaks ning nende vahe suureneb.
+- Nupud „Anna tagasisidet" ja „Vaata slaide" kasvavad kõrgemaks ja laiemaks ning nende vahe suureneb.
 - Read „Lisa kalendrisse" ja „Ava Fienta" kasvavad samuti ning linkide tabamisalad muutuvad kõrgemaks.
-- Kaardisisene ja kaartevaheline ruum suureneb, samuti kaardi servade sisu (padding).
+- Kaardisisene ruum ja kaartevaheline vahe suureneb.
 - Samas vormis suureneb ka Minu kava sisselogimisplokk: väljad, nupp „Saada sisselogimislink", „Sisse logides saad" nimekiri ja „Logi välja" nupp.
 
 ## Kuidas tehakse
@@ -27,7 +27,7 @@ Kuskile ei kirjutata uut värvi ega brändi elementi — kasutatavad on olemasol
 
 ## Mõõdud
 
-| Element | Praegu | After |
+| Element | Praegu | Uus |
 | :--- | :--- | :--- |
 | Koolituse pealkiri | 16px | 20px |
 | Kuupäev ja kellaaeg | 14px | 16px |
@@ -39,7 +39,7 @@ Kuskile ei kirjutata uut värvi ega brändi elementi — kasutatavad on olemasol
 | Toimingute nupud | 40px kõrge, 12px tekst | 52px kõrge, 15px tekst |
 | „Lisa kalendrisse" / „Ava Fienta" read | 12px | 15px, linkide tabamisala vähemalt 44px kõrge |
 | Kaardi sisu ja kahe kaardi vahe | 16px / 12px | 20px / 16px |
-| Sisselogimise nupp | 3.5 padding | vähemalt 52px kõrge, 16px tekst |
+| Sisselogimise nupp | 16px tekst | 17px tekst, vähemalt 52px kõrge |
 
 Kõik puutetundlikud elemendid on vähemalt 44×44 px, mis on telefoni jaoks usaldusväärne miinimum.
 
