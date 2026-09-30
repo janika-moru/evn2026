@@ -25,7 +25,7 @@ export function RegisteredEventActions({
   // large (Minu kava): 52px kõrgused nupud, 15px tekst ja 44px tabamisalad.
   // Telefonis üks nupp rea kohta, et tekst mahuks mugavalt ära.
   const btn = large
-    ? "min-h-[52px] rounded-full px-4 text-[15px] [&_svg]:size-5"
+    ? "min-h-[52px] rounded-full border-background px-4 text-[15px] [&_svg]:size-5"
     : "h-10 rounded-full px-2 text-xs";
   const link = large
     ? "inline-flex min-h-[44px] items-center underline underline-offset-4"
@@ -59,7 +59,10 @@ export function RegisteredEventActions({
     <Dialog>
       <DialogTrigger asChild>
         {large ? (
-          <Button variant="outline" className="min-h-[52px] w-full bg-transparent px-4 text-[15px]">
+          <Button
+            variant="outline"
+            className="min-h-[52px] w-full rounded-full border-background bg-transparent px-4 text-[15px]"
+          >
             <Ticket className="size-5" />
             Ava Fienta: Pilet · QR-kood · loobumine
           </Button>
