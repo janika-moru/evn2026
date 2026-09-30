@@ -842,7 +842,9 @@ export function teamMembers(): (TeamMember & { imageUrl?: string; thumbUrl?: str
       : undefined;
     const imageUrl = member.imageUrl ?? speaker?.imageUrl;
     const thumbUrl = member.thumbUrl ?? speaker?.thumbUrl;
-    return imageUrl ? { ...member, imageUrl, thumbUrl } : member;
+    return imageUrl
+      ? { ...member, imageUrl, ...(thumbUrl ? { thumbUrl } : {}) }
+      : member;
   });
 }
 
