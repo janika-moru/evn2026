@@ -60,7 +60,7 @@ function MySchedulePage() {
 
 function SpecialOffer() {
   return (
-    <section className="mt-8 rounded-2xl bg-mindz-pink p-5">
+    <section className="mt-8 rounded-2xl bg-mindz-mint p-5">
       <h2 className="text-[17px] font-semibold">Ettevõtlusnädala eripakkumine!</h2>
       <p className="mt-2 text-[17px] leading-relaxed">
         Ettevõtlusnädala külalisena saad oma esimeselt ruumirendilt −20% soodustust.
@@ -74,7 +74,7 @@ function SpecialOffer() {
         href="https://www.mindz.ee"
         target="_blank"
         rel="noreferrer"
-        className="mt-3 inline-block text-[17px] underline underline-offset-2"
+        className="mt-3 inline-block text-[17px] text-mindz-green underline underline-offset-2"
       >
         www.mindz.ee
       </a>
