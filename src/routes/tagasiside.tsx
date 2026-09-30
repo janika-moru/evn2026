@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Camera, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
 import type { Speaker } from "@/lib/events";
@@ -80,10 +80,16 @@ function FeedbackPage() {
   useEffect(() => {
     if (fromEventSpeaker) setSpeaker((prev) => prev ?? fromEventSpeaker);
   }, [fromEventSpeaker]);
+  const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (speaker) formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [speaker]);
+    if (!speaker) return;
+    if (fromEventSpeaker && speaker.id === fromEventSpeaker.id) {
+      window.scrollTo({ top: 0 });
+      return;
+    }
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [speaker, fromEventSpeaker]);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -181,6 +187,28 @@ function FeedbackPage() {
           >
             Tagasi kava juurde
           </Link>
+        </div>
+      </main>
+    );
+  }
+
+  // Minu kava „Anna tagasisidet" → näita kohe ainult kirjutamisvormi
+  if (!type && fromEventSpeaker && speaker?.id === fromEventSpeaker.id) {
+    return (
+      <main className="px-4 pt-6 pb-8">
+        <Link
+          to="/minu-kava"
+          className="inline-flex min-h-11 items-center gap-1 text-base font-semibold text-muted-foreground"
+        >
+          <ArrowLeft className="size-5 shrink-0" /> Minu kava
+        </Link>
+        <div className="mt-2">
+          <SpeakerFeedbackForm
+            key={speaker.id}
+            speaker={speaker}
+            startOpen
+            onClose={() => navigate({ to: "/minu-kava" })}
+          />
         </div>
       </main>
     );
