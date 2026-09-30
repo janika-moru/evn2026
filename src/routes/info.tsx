@@ -13,7 +13,6 @@ import {
   Tag,
   ShieldCheck,
   Smartphone,
-  MoreVertical,
   Share,
   ChevronDown,
 } from "lucide-react";
