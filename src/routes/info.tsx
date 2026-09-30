@@ -280,7 +280,7 @@ function InfoPage() {
       </section>
 
       <section
-        className="mt-8 mb-8 rounded-2xl border border-mindz-pink bg-mindz-pink p-4"
+        className="mt-8 rounded-2xl border border-mindz-pink bg-mindz-pink p-4"
         aria-labelledby="install-heading"
       >
         <div className="flex items-center gap-2">
