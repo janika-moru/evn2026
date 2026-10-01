@@ -150,6 +150,7 @@ export function SpeakerFeedbackForm({
       attachment = path;
     }
     let dbErr = false;
+    let limited = false;
     try {
       const res = await submitFeedback({
         data: {
@@ -170,12 +171,17 @@ export function SpeakerFeedbackForm({
         },
       });
       dbErr = !res.ok;
+      limited = !res.ok && "rateLimited" in res && !!res.rateLimited;
     } catch {
       dbErr = true;
     }
     setSending(false);
     if (dbErr) {
-      setError("Saatmine ebaõnnestus. Proovi palun uuesti.");
+      setError(
+        limited
+          ? "Hetkel saadetakse tagasisidet palju korraga. Sinu tekst on alles — proovi mõne minuti pärast uuesti."
+          : "Saatmine ebaõnnestus. Proovi palun uuesti."
+      );
       return;
     }
     // Ainult kasutaja nõusolekul: nimi, roll ja meil selles seadmes (fotot ei hoita)
