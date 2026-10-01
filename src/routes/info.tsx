@@ -26,6 +26,8 @@ import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
 import meetingRoom from "@/assets/ruum-koosolek.jpg.asset.json";
 import kitchen from "@/assets/ruum-kook.jpg.asset.json";
 import room2 from "@/assets/MindZ_stuudioruumid_Tartu_009.jpg.asset.json";
+import loungeRoom from "@/assets/stuudio-lounge.jpg.asset.json";
+import loungeRoomThumb from "@/assets/room-thumbs/stuudio-lounge.webp.asset.json";
 import room3 from "@/assets/MindZ_stuudioruumid_Tartu_011.jpg.asset.json";
 import room4 from "@/assets/MindZ_stuudioruumid_Tartu_016.jpg.asset.json";
 import room5 from "@/assets/MindZ_stuudioruumid_Tartu_031.jpg.asset.json";
