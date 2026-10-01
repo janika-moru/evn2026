@@ -29,7 +29,6 @@ import kitchen from "@/assets/ruum-kook.jpg.asset.json";
 import room2 from "@/assets/MindZ_stuudioruumid_Tartu_009.jpg.asset.json";
 import loungeRoom from "@/assets/stuudio-lounge.jpg.asset.json";
 import loungeRoomThumb from "@/assets/room-thumbs/stuudio-lounge.webp.asset.json";
-import room3 from "@/assets/MindZ_stuudioruumid_Tartu_011.jpg.asset.json";
 import room4 from "@/assets/MindZ_stuudioruumid_Tartu_016.jpg.asset.json";
 import room5 from "@/assets/MindZ_stuudioruumid_Tartu_031.jpg.asset.json";
 import ettn2025Timo from "@/assets/ettn2025-timo-porval.jpg.asset.json";
@@ -43,7 +42,6 @@ import meetingRoomThumb from "@/assets/room-thumbs/ruum-koosolek.webp.asset.json
 import kitchenThumb from "@/assets/room-thumbs/ruum-kook.webp.asset.json";
 import largeRoomFrontThumb from "@/assets/room-thumbs/ruum-suur-eest.webp.asset.json";
 import largeRoomCircleThumb from "@/assets/room-thumbs/ruum-suur-ring.webp.asset.json";
-import room3Thumb from "@/assets/room-thumbs/MindZ_stuudioruumid_Tartu_011.webp.asset.json";
 import room4Thumb from "@/assets/room-thumbs/MindZ_stuudioruumid_Tartu_016.webp.asset.json";
 import ettn2025TimoThumb from "@/assets/room-thumbs/ettn2025-timo-porval.webp.asset.json";
 import ettn2025MariliisThumb from "@/assets/room-thumbs/ettn2025-mariliis-piikar.webp.asset.json";
@@ -65,7 +63,6 @@ const ROOM_IMAGES = [
   { src: loungeRoom.url, thumb: loungeRoomThumb.url, alt: "Studio MindZi lounge-nurk kiikvankiga ja tugitoolidega" },
   { src: largeRoomFront.url, thumb: largeRoomFrontThumb.url, alt: "Studio MindZi suur koolitusruum" },
   { src: largeRoomCircle.url, thumb: largeRoomCircleThumb.url, alt: "Studio MindZi suur koolitusruum ringis toolidega" },
-  { src: room3.url, thumb: room3Thumb.url, alt: "Studio MindZi koolitusruum pabertahvli ja istmetega" },
   { src: room4.url, thumb: room4Thumb.url, alt: "Studio MindZi koolitusruumi vaade köögivanni poolt" },
   { src: ettn2025Timo.url, thumb: ettn2025TimoThumb.url, alt: "Ettevõtlusnädal 2025: Timo Porval esinemas Studio MindZi ruumis" },
   {
