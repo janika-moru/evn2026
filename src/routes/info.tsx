@@ -59,6 +59,7 @@ const MAPS_URL =
 const ROOM_IMAGES = [
   { src: room5.url, thumb: room5Thumb.url, alt: "Studio MindZi koolitusruum roheliste tugitoolidega" },
   { src: room2.url, thumb: room2Thumb.url, alt: "Studio MindZi koolitusruum taimede ja valgustitega" },
+  { src: loungeRoom.url, thumb: loungeRoomThumb.url, alt: "Studio MindZi lounge-nurk kiikvangiga ja lammutoolidega" },
   { src: meetingRoom.url, thumb: meetingRoomThumb.url, alt: "Studio MindZi väike koosolekuruum" },
   { src: kitchen.url, thumb: kitchenThumb.url, alt: "Studio MindZi köök" },
   { src: largeRoomFront.url, thumb: largeRoomFrontThumb.url, alt: "Studio MindZi suur koolitusruum" },
