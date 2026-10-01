@@ -14,7 +14,8 @@ import {
   ShieldCheck,
   Smartphone,
   Share,
-    ChevronDown,
+  ChevronDown,
+  ScrollText,
   } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -183,6 +184,17 @@ function InfoPage() {
             </div>
           </li>
         ))}
+        <li className="flex gap-3 rounded-2xl border border-border bg-card p-4">
+          <ScrollText className="mt-0.5 size-5 shrink-0 text-primary" />
+          <p className="text-sm leading-relaxed text-foreground/80">
+            <span className="font-semibold text-foreground">NB!</span> Tartu Ettevõtlusnädala
+            sündmused on mõeldud ettevõtlusega seotud osalejatele – ettevõtjatele, juhtidele,
+            spetsialistidele, töötajatele ja alustavatele ettevõtjatele. Et tagada kõigile sisukas
+            ja meeldiv õpikeskkond, jätab Studio MindZ korraldajana endale õiguse piirata
+            osalemist või paluda lahkuda osalejal, kelle käitumine häirib sündmuse läbiviimist või
+            teisi osalejaid või kes ei järgi ruumi kodukorda ja korraldaja juhiseid.
+          </p>
+        </li>
         <li className="flex gap-3 rounded-2xl border border-border bg-card p-4">
           <Mail className="mt-0.5 size-5 shrink-0 text-primary" />
           <div>
