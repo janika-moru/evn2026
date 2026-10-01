@@ -69,7 +69,7 @@ function FeedbackPage() {
   const [field, setField] = useState("");
   const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
-  const [wantsContact, setWantsContact] = useState(false);
+  const [photoPromise, setPhotoPromise] = useState(false);
   const [contact, setContact] = useState("");
   const [publishConsent, setPublishConsent] = useState(false);
   const [remember, setRemember] = useState(false);
