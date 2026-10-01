@@ -100,6 +100,17 @@ export function SpeakerLinks({
                   Koduleht
                 </a>
               )}
+              {speaker.websites?.map((site) => (
+                <a
+                  key={site.url}
+                  href={site.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`${contactLink} ${large ? largeTap : ""}`}
+                >
+                  {site.label}
+                </a>
+              ))}
               {speaker.linkedinUrl && (
                 <a
                   href={speaker.linkedinUrl}

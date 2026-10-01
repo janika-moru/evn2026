@@ -138,6 +138,17 @@ function SpeakersPage() {
                     Koduleht
                   </a>
                 )}
+                {s.websites?.map((site) => (
+                  <a
+                    key={site.url}
+                    href={site.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={contactLink}
+                  >
+                    {site.label}
+                  </a>
+                ))}
                 {s.linkedinUrl && (
                   <a href={s.linkedinUrl} target="_blank" rel="noreferrer" className={contactLink}>
                     LinkedIn
