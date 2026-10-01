@@ -29,6 +29,8 @@ import kitchen from "@/assets/ruum-kook.jpg.asset.json";
 import room2 from "@/assets/MindZ_stuudioruumid_Tartu_009.jpg.asset.json";
 import loungeRoom from "@/assets/stuudio-lounge.jpg.asset.json";
 import loungeRoomThumb from "@/assets/room-thumbs/stuudio-lounge.webp.asset.json";
+import kiiaFounder from "@/assets/studio-mindz-looja-kiia-paal.jpg.asset.json";
+import kiiaFounderThumb from "@/assets/room-thumbs/studio-mindz-looja-kiia-paal.webp.asset.json";
 import room4 from "@/assets/MindZ_stuudioruumid_Tartu_016.jpg.asset.json";
 import room5 from "@/assets/MindZ_stuudioruumid_Tartu_031.jpg.asset.json";
 import ettn2025Timo from "@/assets/ettn2025-timo-porval.jpg.asset.json";
@@ -56,6 +58,7 @@ const MAPS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=Lutsu+t%C3%A4nav+3%2C+51005+Tartu%2C+Tartu+maakond%2C+Eesti";
 
 const ROOM_IMAGES = [
+  { src: kiiaFounder.url, thumb: kiiaFounderThumb.url, alt: "Studio MindZi looja Kiia Paal" },
   { src: room5.url, thumb: room5Thumb.url, alt: "Studio MindZi koolitusruum roheliste tugitoolidega" },
   { src: room2.url, thumb: room2Thumb.url, alt: "Studio MindZi koolitusruum taimede ja valgustitega" },
   { src: meetingRoom.url, thumb: meetingRoomThumb.url, alt: "Studio MindZi väike koosolekuruum" },
