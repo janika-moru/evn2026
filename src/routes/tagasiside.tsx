@@ -207,9 +207,13 @@ function FeedbackPage() {
               setRating(null);
               setKeepText("");
               setChangeText("");
+              setName("");
+              setField("");
               setPhoto(null);
-              setWantsContact(false);
+              setPhotoPromise(false);
               setContact("");
+              setPublishConsent(false);
+              setRemember(false);
             }}
             className="text-sm font-semibold text-primary"
           >
