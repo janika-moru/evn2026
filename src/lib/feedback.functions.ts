@@ -27,17 +27,21 @@ const schema = z.object({
   elapsed_ms: z.number().int().optional(),
 });
 
-const MIN_FILL_MS = 3000; // kiiremini täidetud vorm = robot
+const MIN_FILL_MS = 3000; // kahtlaselt kiiresti täidetud vorm
 const WINDOW_MIN = 10;
-const MAX_PER_WINDOW = 30; // kogu äpi peale 10 minuti jooksul
+const MAX_PER_WINDOW = 200; // kogu äpi peale 10 minuti jooksul (terve saal korraga)
 
 // Salvestab tagasiside ja saadab teavituse info@mindz.ee postkasti.
 export const submitFeedback = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => schema.parse(d))
   .handler(async ({ data }) => {
-    // Robot: vasta "ok", aga ära salvesta ega saada kirja
-    if (data.website || (data.elapsed_ms !== undefined && data.elapsed_ms < MIN_FILL_MS)) {
+    // Robot (honeypot täidetud): vasta "ok", aga ära salvesta ega saada kirja
+    if (data.website) {
       return { ok: true as const };
+    }
+    // Kahtlaselt kiire saatmine: ära salvesta, aga ütle ausalt, et saaks uuesti proovida
+    if (data.elapsed_ms !== undefined && data.elapsed_ms < MIN_FILL_MS) {
+      return { ok: false as const, tooFast: true };
     }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const since = new Date(Date.now() - WINDOW_MIN * 60_000).toISOString();
