@@ -26,6 +26,8 @@ import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
 import meetingRoom from "@/assets/ruum-koosolek.jpg.asset.json";
 import kitchen from "@/assets/ruum-kook.jpg.asset.json";
 import room2 from "@/assets/MindZ_stuudioruumid_Tartu_009.jpg.asset.json";
+import loungeRoom from "@/assets/stuudio-lounge.jpg.asset.json";
+import loungeRoomThumb from "@/assets/room-thumbs/stuudio-lounge.webp.asset.json";
 import room3 from "@/assets/MindZ_stuudioruumid_Tartu_011.jpg.asset.json";
 import room4 from "@/assets/MindZ_stuudioruumid_Tartu_016.jpg.asset.json";
 import room5 from "@/assets/MindZ_stuudioruumid_Tartu_031.jpg.asset.json";
@@ -59,6 +61,7 @@ const ROOM_IMAGES = [
   { src: room2.url, thumb: room2Thumb.url, alt: "Studio MindZi koolitusruum taimede ja valgustitega" },
   { src: meetingRoom.url, thumb: meetingRoomThumb.url, alt: "Studio MindZi väike koosolekuruum" },
   { src: kitchen.url, thumb: kitchenThumb.url, alt: "Studio MindZi köök" },
+  { src: loungeRoom.url, thumb: loungeRoomThumb.url, alt: "Studio MindZi lounge-nurk kiikvankiga ja tugitoolidega" },
   { src: largeRoomFront.url, thumb: largeRoomFrontThumb.url, alt: "Studio MindZi suur koolitusruum" },
   { src: largeRoomCircle.url, thumb: largeRoomCircleThumb.url, alt: "Studio MindZi suur koolitusruum ringis toolidega" },
   { src: room3.url, thumb: room3Thumb.url, alt: "Studio MindZi koolitusruum pabertahvli ja istmetega" },
