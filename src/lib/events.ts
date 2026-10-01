@@ -913,7 +913,15 @@ export function speakersInListOrder(): Speaker[] {
 /** Koolitaja sündmuste nimekirja rida — korduvad sessioonid on ühendatud seeriaks. */
 export type SpeakerEventRow =
   | { kind: "single"; event: EventItem }
-  | { kind: "series"; title: string; url: string; events: EventItem[] };
+  | {
+      kind: "series";
+      title: string;
+      /** Seeria Fienta leht — avatakse registreerimiseks. */
+      url: string;
+      /** Esimene sessioon — avab rakenduses koolituse kirjelduse lehe. */
+      event: EventItem;
+      events: EventItem[];
+    };
 
 /**
  * Koolitaja sündmused ridadena: samasse seeriasse kuuluvad sessioonid
@@ -947,7 +955,7 @@ export function speakerEventRows(speaker: Speaker): SpeakerEventRow[] {
       sorted.length > 1 && last
         ? `${shortTitle} — ${dayLabel(first.date)}–${dayLabel(last.date)}`
         : first.title;
-    rows.push({ kind: "series", title: label, url, events: sorted });
+    rows.push({ kind: "series", title: label, url, event: first, events: sorted });
   }
 
   return rows.sort((a, b) => {
