@@ -86,18 +86,32 @@ function FeedbackPage() {
   }, [fromEventSpeaker]);
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
+  const msgRef = useRef<HTMLTextAreaElement>(null);
   // Robotilõks: nähtamatu väli + vormi täitmise aeg
   const hpRef = useRef<HTMLInputElement>(null);
   const startedAt = useRef(Date.now());
-  // Eeltäide: kasutaja nõusolekul seadmesse jäetud meiliaadress/telefon
+  // Eeltäide: kasutaja nõusolekul seadmesse jäetud nimi, roll ja meiliaadress
   useEffect(() => {
     const saved = loadFeedbackProfile();
-    if (saved?.contact) {
-      setContact(saved.contact);
-      setWantsContact(true);
+    if (saved) {
+      if (saved.name) setName(saved.name);
+      if (saved.field) setField(saved.field);
+      if (saved.contact) setContact(saved.contact);
       setRemember(true);
     }
+    supabase.auth.getSession().then(({ data }) => {
+      const email = data.session?.user?.email;
+      if (email) setContact((prev) => prev || email);
+    });
   }, []);
+
+  // Tekstikast kasvab kirjutades koos tekstiga, et seda oleks mugav üle lugeda
+  useEffect(() => {
+    const el = msgRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }, [message]);
 
   useEffect(() => {
     if (!speaker) return;
