@@ -69,7 +69,7 @@ function FeedbackPage() {
   const [field, setField] = useState("");
   const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
-  const [wantsContact, setWantsContact] = useState(false);
+  const [photoPromise, setPhotoPromise] = useState(false);
   const [contact, setContact] = useState("");
   const [publishConsent, setPublishConsent] = useState(false);
   const [remember, setRemember] = useState(false);
@@ -86,18 +86,32 @@ function FeedbackPage() {
   }, [fromEventSpeaker]);
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
+  const msgRef = useRef<HTMLTextAreaElement>(null);
   // Robotilõks: nähtamatu väli + vormi täitmise aeg
   const hpRef = useRef<HTMLInputElement>(null);
   const startedAt = useRef(Date.now());
-  // Eeltäide: kasutaja nõusolekul seadmesse jäetud meiliaadress/telefon
+  // Eeltäide: kasutaja nõusolekul seadmesse jäetud nimi, roll ja meiliaadress
   useEffect(() => {
     const saved = loadFeedbackProfile();
-    if (saved?.contact) {
-      setContact(saved.contact);
-      setWantsContact(true);
+    if (saved) {
+      if (saved.name) setName(saved.name);
+      if (saved.field) setField(saved.field);
+      if (saved.contact) setContact(saved.contact);
       setRemember(true);
     }
+    supabase.auth.getSession().then(({ data }) => {
+      const email = data.session?.user?.email;
+      if (email) setContact((prev) => prev || email);
+    });
   }, []);
+
+  // Tekstikast kasvab kirjutades koos tekstiga, et seda oleks mugav üle lugeda
+  useEffect(() => {
+    const el = msgRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }, [message]);
 
   useEffect(() => {
     if (!speaker) return;
@@ -153,10 +167,11 @@ function FeedbackPage() {
           rating: training ? rating : null,
           keep_text: training ? keepText.trim() || null : null,
           change_text: training ? changeText.trim() || null : null,
-          respondent_name: training ? name.trim() || null : null,
-          respondent_field: training ? field.trim() || null : null,
-          contact_requested: wantsContact,
-          contact: wantsContact ? contact.trim() || null : null,
+          respondent_name: name.trim() || null,
+          respondent_field: field.trim() || null,
+          contact_requested: !!contact.trim() || photoPromise,
+          contact: contact.trim() || null,
+          photo_promise: photoPromise,
           publish_consent: publishConsent,
           attachment_url: attachment,
           website: hpRef.current?.value || "",
@@ -177,8 +192,8 @@ function FeedbackPage() {
       );
       return;
     }
-    // Ainult kasutaja nõusolekul: meil/telefon selles seadmes (fotot ei hoita)
-    saveFeedbackProfile(remember && wantsContact, { contact });
+    // Ainult kasutaja nõusolekul: nimi, roll ja meiliaadress selles seadmes (fotot ei hoita)
+    saveFeedbackProfile(remember, { name, field, contact });
     setSent(type);
   }
 
@@ -207,9 +222,13 @@ function FeedbackPage() {
               setRating(null);
               setKeepText("");
               setChangeText("");
+              setName("");
+              setField("");
               setPhoto(null);
-              setWantsContact(false);
+              setPhotoPromise(false);
               setContact("");
+              setPublishConsent(false);
+              setRemember(false);
             }}
             className="text-sm font-semibold text-primary"
           >
@@ -383,98 +402,112 @@ function FeedbackPage() {
           </>
         ) : (
           <>
-        <div>
-          <label htmlFor="msg" className="text-sm font-semibold">
-            Kirjuta meile
-          </label>
-          <textarea
-            id="msg"
-            rows={4}
-            maxLength={4000}
-            autoFocus
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder={current.hint}
-            className="mt-2 w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
-          />
-        </div>
+            <div>
+              <label htmlFor="msg" className="text-sm font-semibold">
+                Kirjuta meile
+              </label>
+              <textarea
+                id="msg"
+                ref={msgRef}
+                maxLength={4000}
+                autoFocus
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder={current.hint}
+                className="mt-2 max-h-[70vh] min-h-32 w-full resize-none overflow-y-auto rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+              />
+            </div>
 
-        {photo ? (
-          <div className="flex items-center gap-3 rounded-xl border border-border p-2">
-            <img
-              src={URL.createObjectURL(photo)}
-              alt="Lisatud foto"
-              className="size-14 rounded-lg object-cover"
-            />
-            <span className="flex-1 truncate text-sm">{photo.name}</span>
-            <button type="button" onClick={() => setPhoto(null)} aria-label="Eemalda foto">
-              <X className="size-5 text-muted-foreground" />
-            </button>
-          </div>
-        ) : (
-          <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold">
-            <Camera className="size-4" /> Lisa foto
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-                const f = e.target.files?.[0];
-                if (f && f.size > 10 * 1024 * 1024) setError("Foto on liiga suur (max 10 MB).");
-                else if (f) setPhoto(f);
-              }}
-            />
-          </label>
-        )}
+            <div className="grid gap-3">
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={200}
+                placeholder="Sinu nimi"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
+              />
+              <input
+                value={field}
+                onChange={(e) => setField(e.target.value)}
+                maxLength={200}
+                placeholder="Roll / valdkond"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
+              />
+              <input
+                id="contact"
+                type="email"
+                maxLength={300}
+                value={contact}
+                onChange={(e) => setContact(e.target.value)}
+                placeholder="Meiliaadress"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
+              />
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid tiimile vastamiseks —
+                anonüümselt vastamiseks jäta need täitmata.
+              </p>
+            </div>
 
-        <div className="rounded-xl bg-secondary p-4">
-          <label className="flex items-center gap-3 text-sm font-medium">
-            <input
-              type="checkbox"
-              checked={wantsContact}
-              onChange={(e) => setWantsContact(e.target.checked)}
-              className="size-5 accent-[var(--primary)]"
-            />
-            Soovin, et minuga võetaks ühendust.
-          </label>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-            Meiliaadress on vabatahtlik ning mõeldud vaid tiimile vastamiseks.
-          </p>
-          {wantsContact && (
-            <input
-              type="text"
-              required
-              maxLength={300}
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              placeholder="Meiliaadress või telefon"
-              className="mt-3 w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-            />
-          )}
-        </div>
+            {photo ? (
+              <div className="flex items-center gap-3 rounded-xl border border-border p-2">
+                <img
+                  src={URL.createObjectURL(photo)}
+                  alt="Lisatud foto"
+                  className="size-14 rounded-lg object-cover"
+                />
+                <span className="flex-1 truncate text-sm">{photo.name}</span>
+                <button type="button" onClick={() => setPhoto(null)} aria-label="Eemalda foto">
+                  <X className="size-5 text-muted-foreground" />
+                </button>
+              </div>
+            ) : (
+              <div>
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold">
+                  <Camera className="size-4" /> Lisa foto
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      if (f && f.size > 10 * 1024 * 1024) setError("Foto on liiga suur (max 10 MB).");
+                      else if (f) setPhoto(f);
+                    }}
+                  />
+                </label>
+                <label className="mt-2 flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+                  <input
+                    type="checkbox"
+                    checked={photoPromise}
+                    onChange={(e) => setPhotoPromise(e.target.checked)}
+                    className="mt-0.5 size-4 shrink-0 accent-primary"
+                  />
+                  Saadan pildi hiljem — tuleta meiliga meelde
+                </label>
+              </div>
+            )}
 
-        <div className="space-y-2">
-          <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
-            <input
-              type="checkbox"
-              checked={publishConsent}
-              onChange={(e) => setPublishConsent(e.target.checked)}
-              className="mt-0.5 size-4 shrink-0 accent-primary"
-            />
-            Luban Studio MindZil avaldada minu tagasiside koos nime ja fotoga kodulehel või
-            sotsiaalmeedias
-          </label>
-          <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
-            <input
-              type="checkbox"
-              checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
-              className="mt-0.5 size-4 shrink-0 accent-primary"
-            />
-            Jäta meiliaadress selles seadmes meelde
-          </label>
-        </div>
-
+            <div className="space-y-2">
+              <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+                <input
+                  type="checkbox"
+                  checked={publishConsent}
+                  onChange={(e) => setPublishConsent(e.target.checked)}
+                  className="mt-0.5 size-4 shrink-0 accent-primary"
+                />
+                Luban Studio MindZil avaldada minu tagasiside koos nime ja fotoga kodulehel või
+                sotsiaalmeedias
+              </label>
+              <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
+                <input
+                  type="checkbox"
+                  checked={remember}
+                  onChange={(e) => setRemember(e.target.checked)}
+                  className="mt-0.5 size-4 shrink-0 accent-primary"
+                />
+                Jäta nimi, roll ja meiliaadress selles seadmes meelde
+              </label>
+            </div>
           </>
         )}
 
