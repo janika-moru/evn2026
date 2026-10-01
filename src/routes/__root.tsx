@@ -37,7 +37,9 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error: unknownError, reset }: { error: unknown; reset: () => void }) {
+  // Error boundary edastab `error` kui `unknown`; koondame selle Error-iks.
+  const error = unknownError instanceof Error ? unknownError : new Error(String(unknownError));
   console.error(error);
   const router = useRouter();
   useEffect(() => {
