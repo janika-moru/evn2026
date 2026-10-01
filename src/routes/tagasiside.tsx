@@ -177,8 +177,8 @@ function FeedbackPage() {
       );
       return;
     }
-    // Ainult kasutaja nõusolekul: meil/telefon selles seadmes (fotot ei hoita)
-    saveFeedbackProfile(remember && wantsContact, { contact });
+    // Ainult kasutaja nõusolekul: nimi, roll ja meiliaadress selles seadmes (fotot ei hoita)
+    saveFeedbackProfile(remember, { name, field, contact });
     setSent(type);
   }
 
