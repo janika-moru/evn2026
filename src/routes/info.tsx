@@ -59,9 +59,9 @@ const MAPS_URL =
 const ROOM_IMAGES = [
   { src: room5.url, thumb: room5Thumb.url, alt: "Studio MindZi koolitusruum roheliste tugitoolidega" },
   { src: room2.url, thumb: room2Thumb.url, alt: "Studio MindZi koolitusruum taimede ja valgustitega" },
-  { src: loungeRoom.url, thumb: loungeRoomThumb.url, alt: "Studio MindZi lounge-nurk kiikvankiga ja tugitoolidega" },
   { src: meetingRoom.url, thumb: meetingRoomThumb.url, alt: "Studio MindZi väike koosolekuruum" },
   { src: kitchen.url, thumb: kitchenThumb.url, alt: "Studio MindZi köök" },
+  { src: loungeRoom.url, thumb: loungeRoomThumb.url, alt: "Studio MindZi lounge-nurk kiikvankiga ja tugitoolidega" },
   { src: largeRoomFront.url, thumb: largeRoomFrontThumb.url, alt: "Studio MindZi suur koolitusruum" },
   { src: largeRoomCircle.url, thumb: largeRoomCircleThumb.url, alt: "Studio MindZi suur koolitusruum ringis toolidega" },
   { src: room3.url, thumb: room3Thumb.url, alt: "Studio MindZi koolitusruum pabertahvli ja istmetega" },
