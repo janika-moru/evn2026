@@ -263,10 +263,12 @@ function FeedbackPage() {
               <button
                 key={item.id}
                 onClick={() => setType(item.id)}
-                className="flex items-center gap-3 rounded-2xl border border-primary/20 bg-background/70 px-4 py-3.5 text-left text-sm font-semibold transition active:scale-[0.98]"
+                className="flex items-center gap-3 rounded-2xl border border-primary/20 bg-background/70 px-4 py-3.5 text-sm font-semibold transition active:scale-[0.98]"
               >
                 <item.icon className="size-5 shrink-0 text-primary" />
-                {item.id === "keep" ? "Kiidan korraldust, ruume või tiimi" : "Parandusettepanek korraldusele, ruumidele või tiimile"}
+                <span className="flex-1 text-center">
+                  {item.id === "keep" ? "Kiidan korraldust, ruume või tiimi" : "Parandusettepanek korraldusele, ruumidele või tiimile"}
+                </span>
               </button>
             ))}
           </div>
