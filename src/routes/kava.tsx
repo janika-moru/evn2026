@@ -142,7 +142,7 @@ function SchedulePage() {
             <Instagram className="size-5" />
           </a>
           <a
-            href="https://www.facebook.com/studiomindztartu/"
+            href="https://www.facebook.com/studiomindZ"
             target="_blank"
             rel="noreferrer"
             aria-label="Studio MindZ Facebookis"

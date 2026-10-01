@@ -94,6 +94,8 @@ export interface Speaker {
   email?: string;
   phone?: string;
   websiteUrl?: string;
+  /** Lisaks kodulehele kuvatavad saidilingid (nt koolitaja kaks oma lehte). */
+  websites?: { label: string; url: string }[];
   linkedinUrl?: string;
   instagramUrl?: string;
   facebookUrl?: string;
@@ -520,8 +522,10 @@ export const SPEAKERS: Speaker[] = [
      "name": "Kiia Paal",
      "imageUrl": kiiaPaalPhoto.url,
      "thumbUrl": kiiaPaalThumb.url,
-     "websiteUrl": "https://www.hypnosynnitus.ee/",
-     "facebookUrl": "https://www.facebook.com/studiomindZ",
+     "websites": [
+       { "label": "www.pehmesynnikool.ee", "url": "https://www.pehmesynnikool.ee/" },
+       { "label": "www.mindz.ee", "url": "https://www.mindz.ee/" }
+     ],
      "role": "",
      "bio": "",
     "eventIds": [
@@ -800,7 +804,7 @@ export const ORGANIZERS: Speaker[] = [
     imageUrl: lopupeguPhoto.url,
     thumbUrl: lopupeguThumb.url,
     instagramUrl: "https://www.instagram.com/studiomindz/",
-    facebookUrl: "https://www.facebook.com/studiomindztartu/",
+    facebookUrl: "https://www.facebook.com/studiomindZ",
     eventIds: ["202960"],
     isOrganizer: true,
   },
