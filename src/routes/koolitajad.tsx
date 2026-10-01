@@ -101,17 +101,16 @@ function SpeakersPage() {
                   {rows.map((row) =>
                     row.kind === "series" ? (
                       <li key={row.url}>
-                        <a
-                          href={row.url}
-                          target="_blank"
-                          rel="noreferrer"
+                        <Link
+                          to="/sundmus/$id"
+                          params={{ id: row.event.id }}
                           className="text-sm font-medium text-primary underline underline-offset-2"
                         >
                           {row.title}
-                        </a>
+                        </Link>
                         <span className="block text-xs text-muted-foreground">
                           {row.events.length} hommikust sessiooni · kell{" "}
-                          {row.events[0] ? displayTime(row.events[0].startTime) : ""}
+                          {displayTime(row.event.startTime)}
                         </span>
                       </li>
                     ) : (

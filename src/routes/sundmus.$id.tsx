@@ -90,7 +90,7 @@ function EventDetailPage() {
         {open && (
           <div className="flex items-center gap-3">
             <a
-              href={event.registrationUrl}
+              href={event.seriesUrl ?? event.registrationUrl}
               className="flex min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
             >
               Registreeru
