@@ -19,28 +19,40 @@ export function AddToCalendar({
   large?: boolean;
 }) {
   if (large) {
-    // Minu kava: iga kalender oma nupuna, valge äärejoon roosa kaardi taustal —
-    // madal ja tihedam, et kast mahuks telefoni ekraanile algusest lõpuni.
-    const big =
-      "min-h-[40px] w-full rounded-full border border-background bg-transparent px-4 text-[14px] shadow-none";
+    // Minu kava: kolm kalendrit ühel real tavaliste linkidena, 15px tekst
+    // ja piisavalt suured tabamisalad.
     return (
-      <div className={`grid grid-cols-1 gap-1.5 ${className}`}>
-        <Button asChild variant="outline" className={big}>
-          <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer">
-            Lisa Google kalendrisse
-          </a>
-        </Button>
-        <Button asChild variant="outline" className={big}>
-          <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer">
-            Lisa Outlook'i kalendrisse
-          </a>
-        </Button>
-        <Button asChild variant="outline" className={big}>
-          <a href={icalDataUrl(event)} download={`${event.id}.ics`}>
-            Lisa Apple kalendrisse
-          </a>
-        </Button>
-      </div>
+      <p
+        className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] text-muted-foreground ${className}`}
+      >
+        <CalendarPlus className="size-5 shrink-0" />
+        <span>Lisa kalendrisse:</span>
+        <a
+          href={googleCalendarUrl(event)}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex min-h-[44px] items-center underline underline-offset-4"
+        >
+          Google
+        </a>
+        <span aria-hidden>·</span>
+        <a
+          href={outlookCalendarUrl(event)}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex min-h-[44px] items-center underline underline-offset-4"
+        >
+          Outlook
+        </a>
+        <span aria-hidden>·</span>
+        <a
+          href={icalDataUrl(event)}
+          download={`${event.id}.ics`}
+          className="inline-flex min-h-[44px] items-center underline underline-offset-4"
+        >
+          Apple (.ics)
+        </a>
+      </p>
     );
   }
 
