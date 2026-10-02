@@ -109,6 +109,12 @@ function PrivacyPage() {
           vabatahtlike väljade ja foto puhul nõusolek (p a).
         </p>
         <p>
+          <span className="font-semibold text-foreground">Küsimused koolitajale.</span> Küsimuse
+          tekst, vabatahtlikult nimi, valdkond ja ekraanipilt. Küsimusi näevad sama koolituse
+          osalejad ja koolitaja. Eesmärk: koolituse ajal küsimustele vastamine. Alus: õigustatud
+          huvi (p f), vabatahtlike väljade puhul nõusolek (p a).
+        </p>
+        <p>
           <span className="font-semibold text-foreground">Tagasiside avaldamine.</span> Nimi,
           roll, foto, hinnang ja arvamus avaldatakse kodulehel või sotsiaalmeedias ainult siis,
           kui oled vormis vastava märkeruudu ise linnukesega kinnitanud (p a).
