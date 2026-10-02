@@ -90,13 +90,14 @@ export function RegisteredEventActions({
   if (large) {
     return (
       <div className="mt-4 space-y-3">
-        {actionButtons}
-        {fientaDialog}
         <AddToCalendar event={event} large />
+        {fientaDialog}
         <TrainerQuestionButtons event={event} />
+        {actionButtons}
       </div>
     );
   }
+
 
   return (
     <div className="mt-3 space-y-2">
