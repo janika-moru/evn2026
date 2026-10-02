@@ -48,11 +48,9 @@ export function AddToCalendar({
 
   return (
     <p
-      className={`flex flex-wrap items-center text-muted-foreground ${
-        large ? "gap-x-3 text-[15px]" : "gap-x-1.5 gap-y-1 text-xs"
-      } ${className}`}
+      className={`flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-muted-foreground ${className}`}
     >
-      <CalendarPlus className={`shrink-0 ${large ? "size-5" : "size-3.5"}`} />
+      <CalendarPlus className="size-3.5 shrink-0" />
       <span>Lisa kalendrisse:</span>
       <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer" className={linkCls}>
         Google
