@@ -161,6 +161,68 @@ export type Database = {
         }
         Relationships: []
       }
+      trainer_question_votes: {
+        Row: {
+          created_at: string
+          question_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          question_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          question_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trainer_question_votes_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "trainer_questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      trainer_questions: {
+        Row: {
+          attachment_path: string | null
+          body: string
+          created_at: string
+          fienta_event_id: string
+          id: string
+          respondent_field: string | null
+          respondent_name: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attachment_path?: string | null
+          body: string
+          created_at?: string
+          fienta_event_id: string
+          id?: string
+          respondent_field?: string | null
+          respondent_name?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attachment_path?: string | null
+          body?: string
+          created_at?: string
+          fienta_event_id?: string
+          id?: string
+          respondent_field?: string | null
+          respondent_name?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string

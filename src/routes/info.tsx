@@ -209,7 +209,7 @@ function InfoPage() {
           <div>
             <p className="text-sm font-semibold">Andmetöötlus</p>
             <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
-              Registreeringuid, tagasisidet ja fotosid hoiame 1 aasta järgmise aasta programmi
+              Registreeringuid, tagasisidet, küsimusi koolitajale ja fotosid hoiame 1 aasta järgmise aasta programmi
               koostamiseks.{"\u00a0"}10. oktoobril 2027 kustutatakse need koos kasutajakontodega
               automaatselt.{"\u00a0"}
               <br />
