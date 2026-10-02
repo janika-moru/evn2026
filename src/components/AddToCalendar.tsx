@@ -1,7 +1,6 @@
 import { CalendarPlus } from "lucide-react";
 import type { EventItem } from "@/lib/events";
 import { googleCalendarUrl, outlookCalendarUrl, icalDataUrl } from "@/lib/calendar";
-import { Button } from "@/components/ui/button";
 
 /**
  * Diskreetne kalendrilinkide rida: Google · Outlook · Apple (.ics).
