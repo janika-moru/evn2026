@@ -333,6 +333,7 @@ export const EVENTS: EventItem[] = [
   {
     "id": "202958",
     "fientaEventId": "202958",
+    "capacity": 25,
     "title": "Nähtamatud mõjutajad ettevõttes: miks samad probleemid korduvad?",
     "speaker": "Ivar Raav",
     "shortDescription": "Mõnikord teed ettevõttes ikka ja jälle justkui õigeid asju, aga sama probleem tuleb tagasi. Turundad rohkem, kuid kliente ei lisandu. Muudad töökorraldust, aga meeskonnas kordub sama pinge. Proovid uut lahendust, kuid mõne aja pärast oled tuttavas kohas tagasi. Selles praktilises töötoas aitab Ivar Raav vaadata nähtavast probleemist sügavamale ja märgata, mis seda sinu ettevõttes tegelikult üleval hoiab.",
