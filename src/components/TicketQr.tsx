@@ -35,16 +35,6 @@ export function TicketQr({ fientaEventId }: { fientaEventId?: string | undefined
           Piletikood ilmub mõne hetke pärast.
         </p>
       )}
-      <p className="text-center">
-        <a
-          href="https://fienta.com/u/tickets"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex min-h-[44px] items-center text-[14px] text-muted-foreground underline underline-offset-4"
-        >
-          Loobumine Fientas
-        </a>
-      </p>
     </div>
   );
 }

@@ -13,6 +13,7 @@ import type { EventItem } from "@/lib/events";
 import { AddToCalendar } from "@/components/AddToCalendar";
 import { TrainerQuestionButtons } from "@/components/TrainerQuestions";
 import { TicketQr } from "@/components/TicketQr";
+import { WithdrawButton } from "@/components/WithdrawButton";
 
 /** Koolitaja nimi ja kontaktlingid on kaardi pealkirja all (SpeakerLinks). */
 export function RegisteredEventActions({
@@ -68,7 +69,7 @@ export function RegisteredEventActions({
             Näita QR-koodi
           </Button>
         ) : (
-          <button className={link}>QR-kood ja loobumine</button>
+          <button className={link}>QR-kood</button>
         )}
       </DialogTrigger>
       <DialogContent className="max-w-sm rounded-2xl">
@@ -86,6 +87,7 @@ export function RegisteredEventActions({
       <div className="mt-4 space-y-3">
         <AddToCalendar event={event} large />
         {fientaDialog}
+        <WithdrawButton event={event} large />
         <TrainerQuestionButtons event={event} />
         {actionButtons}
       </div>
@@ -103,6 +105,7 @@ export function RegisteredEventActions({
         <Ticket className="size-3.5 shrink-0" />
         <span>Ava Fienta:</span>
         {fientaDialog}
+        <WithdrawButton event={event} large />
       </p>
     </div>
   );
