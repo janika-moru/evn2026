@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import type { EventItem } from "@/lib/events";
 import { AddToCalendar } from "@/components/AddToCalendar";
+import { TrainerQuestionButtons } from "@/components/TrainerQuestions";
 
 /** Koolitaja nimi ja kontaktlingid on kaardi pealkirja all (SpeakerLinks). */
 export function RegisteredEventActions({
@@ -89,6 +90,7 @@ export function RegisteredEventActions({
   if (large) {
     return (
       <div className="mt-4 space-y-2">
+        <TrainerQuestionButtons event={event} />
         <AddToCalendar event={event} large />
         {fientaDialog}
         {actionButtons}

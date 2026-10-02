@@ -21,9 +21,10 @@ export const Route = createFileRoute("/api/public/hooks/evn-cleanup")({
           .select("token");
         if (!tok?.length) return new Response("Unauthorized", { status: 401 });
 
-        const bucket = supabaseAdmin.storage.from("feedback");
         let found = 0;
         let removed = 0;
+        for (const bucketName of ["feedback", "question-images"]) {
+        const bucket = supabaseAdmin.storage.from(bucketName);
         const { data: folders } = await bucket.list("", { limit: 1000 });
         for (const folder of folders ?? []) {
           for (;;) {
@@ -36,6 +37,7 @@ export const Route = createFileRoute("/api/public/hooks/evn-cleanup")({
             if (error) return Response.json({ ok: false, removed }, { status: 500 });
             removed += paths.length;
           }
+        }
         }
         return Response.json({ ok: true, found, removed });
       },
