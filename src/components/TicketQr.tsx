@@ -23,7 +23,7 @@ function QrImage({ code }: { code: string }) {
   );
 }
 
-export function TicketQr({ fientaEventId }: { fientaEventId?: string }) {
+export function TicketQr({ fientaEventId }: { fientaEventId?: string | undefined }) {
   const { codes } = useMyRegistrations();
   const list = fientaEventId ? (codes.get(fientaEventId) ?? []) : [];
   return (
