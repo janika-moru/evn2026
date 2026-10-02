@@ -103,8 +103,9 @@ export function RegisteredEventActions({
 
       <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-xs text-muted-foreground">
         <Ticket className="size-3.5 shrink-0" />
-        <span>Ava Fienta:</span>
         {fientaDialog}
+        <span>·</span>
+        <WithdrawButton event={event} />
       </p>
     </div>
   );
