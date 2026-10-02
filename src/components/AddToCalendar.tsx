@@ -18,31 +18,27 @@ export function AddToCalendar({
   large?: boolean;
 }) {
   if (large) {
-    // Minu kava: sildil oma rida, kolm kalendrit ühel real kõrvuti tavaliste
-    // linkidena, 15px tekst ja piisavalt suured tabamisalad.
+    // Minu kava: üks rida kolme lingiga. Terviklikud fraasid („Lisa Google
+    // kalendrisse" jne) võtaksid 390px ekraanil üle 500px ja isegi
+    // „Google'i kalender" kuju 375px, kaardisisene ruum on 316px.
     const linkCls = "inline-flex min-h-[44px] items-center underline underline-offset-4";
     return (
-      <div className={`text-[15px] text-muted-foreground ${className}`}>
-        <p className="mb-0.5 flex items-center gap-2">
-          <CalendarPlus className="size-5 shrink-0" />
-          <span>Lisa kalendrisse</span>
-        </p>
-        <p className="flex items-center justify-between">
-          <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer" className={linkCls}>
-            Google
-          </a>
-          <span aria-hidden>·</span>
-          <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer" className={linkCls}>
-            Outlook
-          </a>
-          <span aria-hidden>·</span>
-          <a href={icalDataUrl(event)} download={`${event.id}.ics`} className={linkCls}>
-            Apple (.ics)
-          </a>
-        </p>
-      </div>
+      <p
+        className={`flex items-center justify-between text-[15px] text-muted-foreground ${className}`}
+      >
+        <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer" className={linkCls}>
+          Lisa Google'i
+        </a>
+        <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer" className={linkCls}>
+          Lisa Outlook'i
+        </a>
+        <a href={icalDataUrl(event)} download={`${event.id}.ics`} className={linkCls}>
+          Lisa Apple'i
+        </a>
+      </p>
     );
   }
+
 
   const linkCls = "underline underline-offset-2";
 
