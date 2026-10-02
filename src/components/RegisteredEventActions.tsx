@@ -64,7 +64,7 @@ export function RegisteredEventActions({
         {large ? (
           <Button
             variant="outline"
-            className="min-h-[40px] w-full rounded-full border border-background bg-transparent px-3 text-center text-[14px] leading-snug shadow-none whitespace-normal"
+            className="min-h-[40px] w-full rounded-full border border-background bg-transparent px-2 text-center text-[14px] leading-snug shadow-none whitespace-normal"
           >
             Näita QR-koodi
           </Button>
@@ -86,8 +86,11 @@ export function RegisteredEventActions({
     return (
       <div className="mt-4 space-y-3">
         <AddToCalendar event={event} large />
-        {fientaDialog}
-        <WithdrawButton event={event} large />
+        {/* Kaks nuppu kõrvuti: QR-koodi paremas servas, et pöidlega mugavam avada. */}
+        <div className="grid grid-cols-2 gap-2">
+          <WithdrawButton event={event} large />
+          {fientaDialog}
+        </div>
         <TrainerQuestionButtons event={event} />
         {actionButtons}
       </div>
