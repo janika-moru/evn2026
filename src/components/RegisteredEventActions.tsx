@@ -12,6 +12,7 @@ import {
 import type { EventItem } from "@/lib/events";
 import { AddToCalendar } from "@/components/AddToCalendar";
 import { TrainerQuestionButtons } from "@/components/TrainerQuestions";
+import { TicketQr } from "@/components/TicketQr";
 
 /** Koolitaja nimi ja kontaktlingid on kaardi pealkirja all (SpeakerLinks). */
 export function RegisteredEventActions({
@@ -64,7 +65,7 @@ export function RegisteredEventActions({
             variant="outline"
             className="min-h-[40px] w-full rounded-full border border-background bg-transparent px-3 text-center text-[14px] leading-snug shadow-none whitespace-normal"
           >
-            Ava Fienta: QR-kood ja loobumine
+            Näita QR-koodi
           </Button>
         ) : (
           <button className={link}>QR-kood ja loobumine</button>
@@ -73,16 +74,9 @@ export function RegisteredEventActions({
       <DialogContent className="max-w-sm rounded-2xl">
         <DialogHeader>
           <DialogTitle>Sinu pilet</DialogTitle>
-          <DialogDescription>
-            Logi Fientasse sisse sama meiliga, millega registreerusid – sealt näed oma piletit ja
-            QR-koodi ning saad soovi korral kohast loobuda.
-          </DialogDescription>
+          <DialogDescription>Näita seda koodi kohapeal sissepääsul.</DialogDescription>
         </DialogHeader>
-        <Button asChild className="min-h-[52px] rounded-full px-6 text-[17px]">
-          <a href="https://fienta.com/u/tickets" target="_blank" rel="noreferrer">
-            Ava Fienta konto
-          </a>
-        </Button>
+        <TicketQr fientaEventId={event.fientaEventId} />
       </DialogContent>
     </Dialog>
   );

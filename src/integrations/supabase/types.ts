@@ -129,6 +129,7 @@ export type Database = {
           raw_payload: Json | null
           source: string
           status: string
+          ticket_code: string | null
           updated_at: string
         }
         Insert: {
@@ -143,6 +144,7 @@ export type Database = {
           raw_payload?: Json | null
           source?: string
           status?: string
+          ticket_code?: string | null
           updated_at?: string
         }
         Update: {
@@ -157,6 +159,7 @@ export type Database = {
           raw_payload?: Json | null
           source?: string
           status?: string
+          ticket_code?: string | null
           updated_at?: string
         }
         Relationships: []
