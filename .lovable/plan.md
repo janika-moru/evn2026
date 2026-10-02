@@ -2,9 +2,11 @@
 
 ## Mida koolitaja näeb (tartu.mindz.ee/<eesnimi>)
 - Pealkirja all koolituse nimi ja aeg nagu praegu.
-- Kaks vahelehte: **Küsimused** (praegune vaade, uueneb iga 5 s järel) ja **Tagasiside**.
-- Tagasiside vahelehel on iga tagasiside eraldi kastis nagu küsimustel: üleval nimi ja roll (või „Anonüümne“), siis hinnang 1–10, tekst, meiliaadress ja foto, mis avaneb vajutades suurelt. Uuemad on eespool. Kui tagasisidet pole, on kirjas „Tagasisidet veel ei ole.“
-- Lehe all on plokk **„Lisa slaidide link“**: lahter lingi jaoks, lahter PIN-koodi jaoks ja nupp „Salvesta“. Kui link on juba olemas, on see näha ja seda saab muuta või eemaldada.
+- Kaks vahelehte: **Küsimused** (praegune vaade, avatud kõigile, uueneb iga 5 s järel) ja **Tagasiside**.
+- Tagasiside vahelehel küsitakse esmalt koodi. Õige koodiga jääb see seadmesse meelde ja vahelehel on näha:
+  - Kokkuvõte: keskmine hinnang suure numbrina („8,4 / 10“), hinnangute arv ja tulpdiagramm, mis näitab, mitu korda iga hinnet 1–10 anti.
+  - Iga tagasiside eraldi kastis nagu küsimustel: üleval nimi ja roll (või „Anonüümne“), siis hinnang, tekst, meiliaadress ja foto, mis avaneb vajutades suurelt. Uuemad on eespool. Kui tagasisidet pole, on kirjas „Tagasisidet veel ei ole.“
+  - **„Lisa slaidide link“**: lahter lingi jaoks ja nupp „Salvesta“. Kui link on juba olemas, on see näha ja seda saab muuta või eemaldada. Sama kood kehtib ka siin.
 
 ## Osalejate vaade
 - Kui koolitaja on lingi lisanud, viib Minu kava ja koolituse lehe nupp „Vaata slaide“ sellele lingile. Kui koodis on slaidid juba olemas, jääb kehtima koolitaja lisatud link.
