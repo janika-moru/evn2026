@@ -69,8 +69,9 @@ export function SpeakerLinks({
             {speaker.isOrganizer ? (
               <p
                 className={`font-semibold text-foreground ${
-                  large ? "-mt-[2px] text-[17px] leading-[1.2]" : "text-sm"
+                  large ? "text-[17px] leading-[1.2]" : "text-sm"
                 }`}
+
               >
                 {speaker.name}
               </p>
