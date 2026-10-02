@@ -35,7 +35,7 @@ export function WithdrawButton({ event, large = false }: { event: EventItem; lar
           <Button
             variant="outline"
             disabled={done}
-            className="min-h-[40px] w-full rounded-full border border-background bg-transparent px-2 text-center text-[14px] leading-snug shadow-none whitespace-normal"
+            className="min-h-[40px] w-full rounded-full border-2 border-background bg-transparent px-2 text-center text-[14px] leading-snug shadow-none whitespace-normal"
           >
             {done ? "Loobumine saadetud" : "Loobu koolitusest"}
           </Button>
