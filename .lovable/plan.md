@@ -7,7 +7,7 @@
 - Oma küsimusel on väikesed 📝 (muuda) ja 🗑️ (tagasi võtta, enne küsitakse kinnitust). Teiste küsimusi muuta ei saa.
 - Iga küsimuse juures on 👍 koos arvuga. Ühe vajutusega saab hääle anda ja teisega selle tagasi võtta. Oma küsimusele häält anda ei saa. Küsimused on järjestatud häälte arvu ja seejärel aja järgi.
 - Küsimusi näevad ja neile hääli annavad ainult selle koolituse registreerunud ja sisseloginud osalejad.
-- **Koolitaja link (avalik)**: iga koolitaja link on kujul `tartu.mindz.ee/<eesnimi>`, näiteks `tartu.mindz.ee/mari`. Erandid on `tartu.mindz.ee/katrinv`, `tartu.mindz.ee/katrind`, `tartu.mindz.ee/papsid` ja `tartu.mindz.ee/kukkumiskaitse`. Lehel on selle koolitaja kõik koolitused, igaühe küsimused eraldi. Koolitaja näeb küsimusi ja pilte ilma sisselogimiseta suures, loetavas vaates. See vaade uueneb iga mõne sekundi järel ja on ainult vaatamiseks.
+- **Koolitaja link (avalik)**: iga koolitaja link on kujul `tartu.mindz.ee/<eesnimi>`, näiteks `tartu.mindz.ee/mari`. Erandid on `tartu.mindz.ee/katrinv`, `tartu.mindz.ee/katrind`, `tartu.mindz.ee/papsid` ja `tartu.mindz.ee/kukkumiskaitse`. Kiia hommikuste Morning Mindset koolituste lingid on `tartu.mindz.ee/kiiae`, `/kiiat`, `/kiiak`, `/kiian` ja `/kiiar`. Reedese kohvipausi koolituse link on `tartu.mindz.ee/kiia`. Lingis ei ole suured ja väikesed tähed olulised. Iga link avab ühe koolituse küsimused. Koolitaja näeb küsimusi ja pilte ilma sisselogimiseta suures, loetavas vaates. See vaade uueneb iga mõne sekundi järel ja on ainult vaatamiseks.
 
 ## Andmekaitse
 - Ekraanipildid on privaatses hoidlas ja neid näidatakse ainult ajutiste linkide kaudu. Lubatud on ainult pildifailid, kuni 10 MB.
