@@ -1,4 +1,5 @@
 import { CalendarPlus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import type { EventItem } from "@/lib/events";
 import { googleCalendarUrl, outlookCalendarUrl, icalDataUrl } from "@/lib/calendar";
 
@@ -18,24 +19,29 @@ export function AddToCalendar({
   large?: boolean;
 }) {
   if (large) {
-    // Minu kava: üks rida kolme lingiga. Terviklikud fraasid („Lisa Google
+    // Minu kava: kolm nuppu kõrvuti. Terviklikud fraasid („Lisa Google
     // kalendrisse" jne) võtaksid 390px ekraanil üle 500px ja isegi
     // „Google'i kalender" kuju 375px, kaardisisene ruum on 316px.
-    const linkCls = "inline-flex min-h-[44px] items-center underline underline-offset-4";
+    const btn =
+      "min-h-[44px] rounded-full border-2 border-background bg-transparent px-2 text-[14px] leading-tight shadow-none whitespace-normal";
     return (
-      <p
-        className={`flex items-center justify-between text-[15px] text-muted-foreground ${className}`}
-      >
-        <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer" className={linkCls}>
-          Lisa Google'i
-        </a>
-        <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer" className={linkCls}>
-          Lisa Outlook'i
-        </a>
-        <a href={icalDataUrl(event)} download={`${event.id}.ics`} className={linkCls}>
-          Lisa Apple'i
-        </a>
-      </p>
+      <div className={`grid grid-cols-3 gap-2 ${className}`}>
+        <Button asChild variant="outline" className={btn}>
+          <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer">
+            Lisa Google'i
+          </a>
+        </Button>
+        <Button asChild variant="outline" className={btn}>
+          <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer">
+            Lisa Outlook'i
+          </a>
+        </Button>
+        <Button asChild variant="outline" className={btn}>
+          <a href={icalDataUrl(event)} download={`${event.id}.ics`}>
+            Lisa Apple'i
+          </a>
+        </Button>
+      </div>
     );
   }
 
