@@ -30,17 +30,27 @@ export function useMyRegistrations() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("registrations")
-        .select("fienta_event_id, status")
+        .select("fienta_event_id, status, ticket_code")
         .eq("email_normalized", email!.trim().toLowerCase());
       if (error) throw error;
-      return new Set(
-        (data ?? [])
-          .filter((r) => !/cancel|refund|tühist/i.test(r.status))
-          .map((r) => r.fienta_event_id),
-      );
+      const active = (data ?? []).filter((r) => !/cancel|refund|tühist/i.test(r.status));
+      const codes = new Map<string, string[]>();
+      for (const r of active) {
+        if (!r.ticket_code) continue;
+        const list = codes.get(r.fienta_event_id) ?? [];
+        if (!list.includes(r.ticket_code)) list.push(r.ticket_code);
+        codes.set(r.fienta_event_id, list);
+      }
+      return { ids: new Set(active.map((r) => r.fienta_event_id)), codes };
     },
   });
-  return { session, ready, ids: q.data ?? new Set<string>(), query: q };
+  return {
+    session,
+    ready,
+    ids: q.data?.ids ?? new Set<string>(),
+    codes: q.data?.codes ?? new Map<string, string[]>(),
+    query: q,
+  };
 }
 
 export function effectiveStatus(event: EventItem, ids: Set<string>): RegistrationStatus {

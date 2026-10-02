@@ -167,6 +167,7 @@ export async function syncFromFientaApi(
             attendee_name: null,
             fienta_order_id: t["order_id"] != null ? String(t["order_id"]) : null,
             fienta_ticket_id: String(t["id"]),
+            ticket_code: t["code"] != null ? String(t["code"]) : null,
             status: String(t["status"] ?? "active").toLowerCase(),
             source: "api",
           });
