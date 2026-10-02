@@ -19,26 +19,40 @@ export function AddToCalendar({
   large?: boolean;
 }) {
   if (large) {
-    // Minu kava: kolm nuppu kõrvuti. Terviklikud fraasid („Lisa Google
-    // kalendrisse" jne) võtaksid 390px ekraanil üle 500px ja isegi
-    // „Google'i kalender" kuju 375px, kaardisisene ruum on 316px.
+    // Minu kava: kolm nuppu kõrvuti. Täissõnadena („Lisa Google kalendrisse")
+    // võtaksid nad 390px ekraanil üle 500px ja kahe reale murdudes tekivad
+    // poolikud read — seega lühendid, igaüks ühe reala.
     const btn =
-      "min-h-[44px] rounded-full border-2 border-background bg-transparent px-2 text-[14px] leading-tight shadow-none whitespace-normal";
+      "min-h-[44px] rounded-full border-2 border-background bg-transparent px-2 text-[14px] shadow-none whitespace-nowrap";
     return (
       <div className={`grid grid-cols-3 gap-2 ${className}`}>
         <Button asChild variant="outline" className={btn}>
-          <a href={googleCalendarUrl(event)} target="_blank" rel="noreferrer">
-            Lisa Google'i
+          <a
+            href={googleCalendarUrl(event)}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Lisa Google'i kalendrisse"
+          >
+            Google
           </a>
         </Button>
         <Button asChild variant="outline" className={btn}>
-          <a href={outlookCalendarUrl(event)} target="_blank" rel="noreferrer">
-            Lisa Outlook'i
+          <a
+            href={outlookCalendarUrl(event)}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Lisa Outlook'i kalendrisse"
+          >
+            Outlook
           </a>
         </Button>
         <Button asChild variant="outline" className={btn}>
-          <a href={icalDataUrl(event)} download={`${event.id}.ics`}>
-            Lisa Apple'i
+          <a
+            href={icalDataUrl(event)}
+            download={`${event.id}.ics`}
+            aria-label="Lisa Apple'i kalendrisse (.ics)"
+          >
+            Apple
           </a>
         </Button>
       </div>
