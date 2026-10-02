@@ -7,7 +7,7 @@
 - Oma küsimusel on väikesed 📝 (muuda) ja 🗑️ (tagasi võtta, enne küsitakse kinnitust). Teiste küsimusi muuta ei saa.
 - Iga küsimuse juures on 👍 koos arvuga. Ühe vajutusega saab hääle anda ja teisega selle tagasi võtta. Oma küsimusele häält anda ei saa. Küsimused on järjestatud häälte arvu ja seejärel aja järgi.
 - Küsimusi näevad ja neile hääli annavad ainult selle koolituse registreerunud ja sisseloginud osalejad.
-- **Koolitaja link**: iga koolitaja link on kujul `tartu.mindz.ee/<eesnimi>`, näiteks `tartu.mindz.ee/mari`. Erandid on `tartu.mindz.ee/katrinv`, `tartu.mindz.ee/katrind`, `tartu.mindz.ee/papsid` ja `tartu.mindz.ee/kukkumiskaitse`. Lehel on selle koolitaja kõik koolitused, igaühe küsimused eraldi. Koolitaja näeb küsimusi ja pilte ilma sisselogimiseta suures, loetavas vaates. See vaade uueneb iga mõne sekundi järel ja on ainult vaatamiseks. NB: sellist linki on lihtne ära arvata, nii et küsimused ja nende juures olevad nimed võivad jõuda ka kõrvaliste inimesteni.
+- **Koolitaja link (avalik)**: iga koolitaja link on kujul `tartu.mindz.ee/<eesnimi>`, näiteks `tartu.mindz.ee/mari`. Erandid on `tartu.mindz.ee/katrinv`, `tartu.mindz.ee/katrind`, `tartu.mindz.ee/papsid` ja `tartu.mindz.ee/kukkumiskaitse`. Lehel on selle koolitaja kõik koolitused, igaühe küsimused eraldi. Koolitaja näeb küsimusi ja pilte ilma sisselogimiseta suures, loetavas vaates. See vaade uueneb iga mõne sekundi järel ja on ainult vaatamiseks.
 
 ## Andmekaitse
 - Ekraanipildid on privaatses hoidlas ja neid näidatakse ainult ajutiste linkide kaudu. Lubatud on ainult pildifailid, kuni 10 MB.
