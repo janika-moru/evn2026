@@ -21,5 +21,4 @@
 - Uus privaatne salvestushoidla `question-images`, kuhu üleslaadimine on lubatud ainult kasutaja UUID-kausta. Koolitaja vaade saab allkirjastatud lingid avalikust serverifunktsioonist, mis kontrollib tokenit.
 - Avalik leht `src/routes/kysimused.$token.tsx` (noindex). Komponendid: `TrainerQuestions.tsx` (nimekiri, muutmine, hääled) ja `AskQuestionForm.tsx`. Suure pildi vaates kasutatakse uuesti galerii dialoogi lahendust.
 - Nupud lisatakse `RegisteredEventActions` komponenti. Nii ilmuvad need ka registreerunu sündmuse lehel, kooskõlas olemasoleva jagatud lahendusega.
-- Admin lehele lisatakse iga koolituse juurde nupp „Kopeeri koolitaja link”.
 - Funktsiooni `run_evn_cleanup` laiendatakse uute tabelitega ja puhastuse lõpp-punkti `question-images` hoidlaga.
