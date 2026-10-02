@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { HelpCircle, ImagePlus, MessagesSquare } from "lucide-react";
+import { HelpCircle, ImagePlus, MessagesSquare, Pencil, ThumbsUp, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -40,7 +40,7 @@ export function TrainerQuestionButtons({ event }: { event: EventItem }) {
         <MessagesSquare /> Vaata küsimusi koolitajale
       </Button>
       <Dialog open={askOpen} onOpenChange={setAskOpen}>
-        <DialogContent className="max-h-[90vh] max-w-md overflow-y-auto rounded-2xl">
+        <DialogContent className="max-h-[90vh] w-[calc(100vw-2rem)] max-w-md overflow-y-auto rounded-2xl md:max-w-2xl lg:max-w-3xl">
           <DialogHeader>
             <DialogTitle>Esita küsimus koolitajale</DialogTitle>
             <DialogDescription>{event.title}</DialogDescription>
@@ -260,22 +260,28 @@ export function QuestionCard({
         <p className={`font-semibold ${large ? "text-[19px]" : "text-[15px]"}`}>{questionAuthor(q)}</p>
         {q.mine && !editing && (
           <div className="flex shrink-0 gap-1">
-            <button
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
               aria-label="Muuda küsimust"
               onClick={() => setEditing(true)}
-              className="flex size-9 items-center justify-center rounded-full text-lg"
+              className="size-9 rounded-full text-muted-foreground"
             >
-              📝
-            </button>
-            <button
+              <Pencil className="size-4" aria-hidden="true" />
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
               aria-label="Võta küsimus tagasi"
               onClick={() => {
                 if (window.confirm("Kas võtad küsimuse tagasi?")) void run(onDelete);
               }}
-              className="flex size-9 items-center justify-center rounded-full text-lg"
+              className="size-9 rounded-full text-destructive"
             >
-              🗑️
-            </button>
+              <Trash2 className="size-4" aria-hidden="true" />
+            </Button>
           </div>
         )}
       </div>
@@ -331,19 +337,20 @@ export function QuestionCard({
       )}
       <div className="mt-3 flex justify-end">
         {onVote && !q.mine ? (
-          <button
+          <Button
+            type="button"
+            variant={q.votedByMe ? "default" : "secondary"}
+            size="sm"
             onClick={() => run(onVote)}
             aria-pressed={q.votedByMe}
             aria-label="Hea küsimus"
-            className={`flex min-h-[40px] items-center gap-1.5 rounded-full px-3 text-[15px] ${
-              q.votedByMe ? "bg-primary text-primary-foreground" : "bg-secondary"
-            }`}
+            className="min-h-[40px] rounded-full px-3 text-[15px]"
           >
-            👍 {q.votes}
-          </button>
+            <ThumbsUp className="size-4" aria-hidden="true" /> {q.votes}
+          </Button>
         ) : (
           <span className="flex min-h-[40px] items-center gap-1.5 px-3 text-[15px] text-muted-foreground">
-            👍 {q.votes}
+            <ThumbsUp className="size-4" aria-hidden="true" /> {q.votes}
           </span>
         )}
       </div>

@@ -194,6 +194,7 @@ export type Database = {
           created_at: string
           fienta_event_id: string
           id: string
+          owner_email_normalized: string | null
           respondent_field: string | null
           respondent_name: string | null
           updated_at: string
@@ -205,6 +206,7 @@ export type Database = {
           created_at?: string
           fienta_event_id: string
           id?: string
+          owner_email_normalized?: string | null
           respondent_field?: string | null
           respondent_name?: string | null
           updated_at?: string
@@ -216,6 +218,7 @@ export type Database = {
           created_at?: string
           fienta_event_id?: string
           id?: string
+          owner_email_normalized?: string | null
           respondent_field?: string | null
           respondent_name?: string | null
           updated_at?: string
