@@ -78,7 +78,7 @@ export function RegisteredEventActions({
           </DialogDescription>
         </DialogHeader>
         <Button asChild className="min-h-[52px] rounded-full px-6 text-[17px]">
-          <a href="https://fienta.com/et/u/tickets" target="_blank" rel="noreferrer">
+          <a href="https://fienta.com/u/tickets" target="_blank" rel="noreferrer">
             Ava Fienta konto
           </a>
         </Button>
