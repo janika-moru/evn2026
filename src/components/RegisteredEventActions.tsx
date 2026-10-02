@@ -105,7 +105,6 @@ export function RegisteredEventActions({
         <Ticket className="size-3.5 shrink-0" />
         <span>Ava Fienta:</span>
         {fientaDialog}
-        <WithdrawButton event={event} large />
       </p>
     </div>
   );
