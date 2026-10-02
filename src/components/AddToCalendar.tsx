@@ -23,7 +23,7 @@ export function AddToCalendar({
     // võtaksid nad 390px ekraanil üle 500px ja kahe reale murdudes tekivad
     // poolikud read — seega lühendid, igaüks ühe reala.
     const btn =
-      "min-h-[44px] rounded-full border-2 border-background bg-transparent px-2 text-[14px] shadow-none whitespace-nowrap";
+      "min-h-[44px] rounded-full border border-background bg-transparent px-2 text-[14px] shadow-none whitespace-nowrap";
     return (
       <div className={`grid grid-cols-3 gap-2 ${className}`}>
         <Button asChild variant="outline" className={btn}>
