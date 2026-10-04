@@ -158,6 +158,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kas-sinu-turundus-tootab-kadri-leppik-studio-mindzis",
     "registrationUrl": "https://fienta.com/kas-sinu-turundus-tootab-kadri-leppik-studio-mindzis",
+    "slidesUrl": "https://docs.google.com/presentation/d/1pWPCr5F8rWst4tvElGV286Z8Dy7rYiinuMuajEy6JAE/edit?usp=sharing",
     "registrationStatus": "open"
   },
   {
