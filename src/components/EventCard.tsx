@@ -1,4 +1,17 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+
+/** Toimunud = 15 min pärast lõpuaega Tallinna aja järgi (okt 2026: UTC+3). */
+function useIsPast(event: { date: string; endTime: string }) {
+  const [past, setPast] = useState(false);
+  useEffect(() => {
+    const end = Date.parse(`${event.date}T${event.endTime}:00+03:00`) + 15 * 60_000;
+    const check = () => setPast(Date.now() >= end);
+    check();
+    const t = setInterval(check, 60_000);
+    return () => clearInterval(t);
+  }, [event.date, event.endTime]);
+  return past;
+}
 import { Link } from "@tanstack/react-router";
 import { Clock, CheckCircle2 } from "lucide-react";
 import type { EventItem } from "@/lib/events";
@@ -88,6 +101,7 @@ export function EventCard({
   const status = effectiveStatus(event, ids);
   const displayStatus = status === "open" && availableSpots === 0 ? "full" : status;
   const registered = displayStatus === "registered";
+  const past = useIsPast(event);
 
   const eventLink =
     "block rounded-xl transition-colors active:bg-secondary/60";
@@ -95,7 +109,7 @@ export function EventCard({
   return (
     <div
       className={`rounded-2xl border border-border ${large ? "p-5" : "p-4"} ${
-        registered ? "bg-mindz-pink" : "bg-card"
+        past ? "bg-muted opacity-70" : registered ? "bg-mindz-pink" : "bg-card"
       }`}
     >
       <Link to="/sundmus/$id" params={{ id: event.id }} className={eventLink}>
