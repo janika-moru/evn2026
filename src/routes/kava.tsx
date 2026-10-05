@@ -140,3 +140,34 @@ function SchedulePage() {
     </main>
   );
 }
+
+function DayPicker({
+  selected,
+  onSelect,
+}: {
+  selected: string;
+  onSelect: (date: string) => void;
+}) {
+  return (
+    <div role="tablist" aria-label="Vali päev" className="mt-4 grid grid-cols-5 gap-1.5">
+      {EVENT_DAYS.map((d) => {
+        const active = d.date === selected;
+        return (
+          <button
+            key={d.date}
+            role="tab"
+            aria-selected={active}
+            onClick={() => onSelect(d.date)}
+            className={`rounded-2xl px-1 py-2.5 text-center transition-all duration-150 active:scale-95 ${
+              active
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "bg-secondary text-secondary-foreground"
+            }`}
+          >
+            <span className="block text-[14px] font-semibold leading-tight">{d.label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
