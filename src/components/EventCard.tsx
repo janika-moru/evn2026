@@ -42,16 +42,21 @@ export function SoldOutPill({
 export function StatusBadge({
   status,
   large = false,
+  grey = false,
 }: {
   status: EventItem["registrationStatus"];
   large?: boolean;
+  /** Toimunud koolitus — märk neutraalses toonis, mitte roheline. */
+  grey?: boolean;
 }) {
   if (status === "registered") {
     return (
       <span
-        className={`inline-flex items-center gap-1.5 rounded-full bg-primary font-semibold text-primary-foreground ${
-          large ? "min-h-[44px] px-4 text-sm" : "px-3 py-1 text-xs"
-        }`}
+        className={`inline-flex items-center gap-1.5 rounded-full font-semibold ${
+          grey
+            ? "border border-border text-muted-foreground"
+            : "bg-primary text-primary-foreground"
+        } ${large ? "min-h-[44px] px-4 text-sm" : "px-3 py-1 text-xs"}`}
       >
         <CheckCircle2 className={large ? "size-4" : "size-3.5"} />
         {statusLabel(status)}
