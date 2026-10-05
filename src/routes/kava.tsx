@@ -89,26 +89,7 @@ function SchedulePage() {
         </>
       )}
 
-      <div role="tablist" aria-label="Vali päev" className="mt-4 grid grid-cols-5 gap-1.5">
-        {EVENT_DAYS.map((d) => {
-          const active = d.date === selected;
-          return (
-            <button
-              key={d.date}
-              role="tab"
-              aria-selected={active}
-              onClick={() => selectDay(d.date)}
-              className={`rounded-2xl px-1 py-2.5 text-center transition-all duration-150 active:scale-95 ${
-                active
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "bg-secondary text-secondary-foreground"
-              }`}
-            >
-              <span className="block text-[14px] font-semibold leading-tight">{d.label}</span>
-            </button>
-          );
-        })}
-      </div>
+      <DayPicker selected={selected} onSelect={selectDay} />
 
       <div ref={dayStartRef} className="mt-5 scroll-mt-3">
         <h2 className="text-lg font-semibold first-letter:uppercase">{longDate(selected)}</h2>
@@ -123,6 +104,10 @@ function SchedulePage() {
           events.map((e) => <EventCard key={e.id} event={e} />)
         )}
       </div>
+
+      {/* Päevavaliku kordus lehe lõpus — mobiilil ei pea päevade vahetamiseks
+          üles kerima. Valimine tõstab sama päeva pealkirja ikkagist nähtavale. */}
+      <DayPicker selected={selected} onSelect={selectDay} />
 
       <section
         className="mt-8 mb-8 flex items-center justify-between gap-3"
