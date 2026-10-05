@@ -175,7 +175,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kuidas-introverdina-tulemuslikult-networkida-martin-mark-studio-mindzis",
     "registrationUrl": "https://fienta.com/kuidas-introverdina-tulemuslikult-networkida-martin-mark-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://drive.google.com/file/d/1gtlTiH8ubuUPeDRdDysAKCpbdvirQI5q/view?usp=sharing"
   },
   {
     "id": "202933",
