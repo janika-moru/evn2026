@@ -143,7 +143,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/mille-eest-rohkem-raha-kusida-ja-mida-delegeerida-mikk-orglaan-studio-mindzis",
     "registrationUrl": "https://fienta.com/mille-eest-rohkem-raha-kusida-ja-mida-delegeerida-mikk-orglaan-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://drive.google.com/file/d/1f8CG-bDOnR09OhImUns1Aw4NQYNPmxR5/view?usp=sharing"
   },
   {
     "id": "202930",
