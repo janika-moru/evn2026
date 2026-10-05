@@ -50,10 +50,14 @@ export function RegisteredEventActions({
           </a>
         </Button>
       ) : (
-        <Button disabled variant="outline" className={btn}>
-          <FileText />
-          Slaide veel pole
-        </Button>
+        // Kui slaide pole ega tule (nt lõpuõhtu), nuppu üldse ei näidata.
+        // Muul juhul jääb hall „Slaide veel pole", et osaleja teaks, et need tulevad.
+        event.slidesExpected === false ? null : (
+          <Button disabled variant="outline" className={btn}>
+            <FileText />
+            Slaide veel pole
+          </Button>
+        )
       )}
     </div>
   );
