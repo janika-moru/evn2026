@@ -77,6 +77,8 @@ export interface EventItem {
   icalUrl?: string;
   slidesUrl?: string;
   materialsUrl?: string;
+  /** False = koolitusel slaide pole ega tule (nt lõpuõhtu) — „Slaide veel pole" nuppu ei näidata. */
+  slidesExpected?: boolean;
   seriesUrl?: string; // Korduvate sessioonide seeria leht Fientas
   registrationStatus: RegistrationStatus;
 }
@@ -516,6 +518,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/ettevotlusnadala-lopuohtu-studio-mindzis",
     "registrationUrl": "https://fienta.com/ettevotlusnadala-lopuohtu-studio-mindzis",
+    "slidesExpected": false,
     "registrationStatus": "open"
   }
 ];
