@@ -152,19 +152,25 @@ export function EventCard({
           {(displayStatus === "open" || registered) && (
             <span className="ml-auto flex items-center gap-3">
               {availableSpots !== null && (
-                <span className={`text-primary ${large ? "text-base" : "text-sm"}`}>
+                <span
+                  className={`${past ? "text-muted-foreground" : "text-primary"} ${
+                    large ? "text-base" : "text-sm"
+                  }`}
+                >
                   Vabu kohti: {availableSpots}
                 </span>
               )}
               {registered ? (
-                <StatusBadge status="registered" large={large} />
+                <StatusBadge status="registered" large={large} grey={past} />
               ) : (
                 <Link
                   to="/sundmus/$id"
                   params={{ id: event.id }}
-                  className={`inline-flex items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground ${
-                    large ? "min-h-[48px] px-5 text-base" : "px-4 py-2 text-sm"
-                  }`}
+                  className={`inline-flex items-center justify-center rounded-full font-semibold ${
+                    past
+                      ? "border border-border bg-background text-foreground"
+                      : "bg-primary text-primary-foreground"
+                  } ${large ? "min-h-[48px] px-5 text-base" : "px-4 py-2 text-sm"}`}
                 >
                   Registreeru
                 </Link>
