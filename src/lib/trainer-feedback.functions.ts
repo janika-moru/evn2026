@@ -43,7 +43,6 @@ export const getTrainerFeedback = createServerFn({ method: "POST" })
         message: r.message,
         name: r.respondent_name,
         field: r.respondent_field,
-        publishConsent: r.publish_consent === true,
         createdAt: r.created_at,
       })),
     };
