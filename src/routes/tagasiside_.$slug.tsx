@@ -1,8 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useQuery } from "@tanstack/react-query";
 import { QUESTION_SLUGS } from "@/lib/questions";
 import {
   getTrainerFeedback,
@@ -28,73 +26,16 @@ export const Route = createFileRoute("/tagasiside_/$slug")({
   notFoundComponent: () => <p className="p-4">Lehte ei leitud.</p>,
 });
 
-const storeKey = (slug: string) => `smz-trainer-code-${slug.toLowerCase()}`;
-
 function TrainerFeedbackPage() {
   const { slug } = Route.useParams();
   const fetchFeedback = useServerFn(getTrainerFeedback);
-  const [code, setCode] = useState("");
-  const [state, setState] = useState<
-    | { kind: "idle" | "loading" }
-    | { kind: "error"; msg: string }
-    | { kind: "ok"; name: string; items: TrainerFeedbackItem[] }
-  >({ kind: "loading" });
-
-  async function load(c: string) {
-    setState({ kind: "loading" });
-    const res = await fetchFeedback({ data: { slug, code: c } }).catch(() => null);
-    if (res?.ok) {
-      localStorage.setItem(storeKey(slug), c);
-      setState({ kind: "ok", name: res.speakerName, items: res.items });
-    } else {
-      localStorage.removeItem(storeKey(slug));
-      const msg =
-        res?.reason === "locked"
-          ? "Liiga palju katseid. Proovi 15 minuti pärast uuesti."
-          : res?.reason === "wrong"
-            ? "Vale kood"
-            : "Laadimine ebaõnnestus";
-      setState(c ? { kind: "error", msg } : { kind: "idle" });
-    }
-  }
-
-  useEffect(() => {
-    const saved = localStorage.getItem(storeKey(slug));
-    if (saved) void load(saved);
-    else setState({ kind: "idle" });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
-
-  if (state.kind === "ok") return <Dashboard name={state.name} items={state.items} />;
-
-  return (
-    <main className="px-4 pt-8 pb-8">
-      <h1 className="text-2xl font-bold">Koolitaja tagasiside</h1>
-      <form
-        className="mt-6 space-y-3"
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (code.trim()) void load(code.trim());
-        }}
-      >
-        <label className="block text-[17px]" htmlFor="code">
-          Sisesta oma kood
-        </label>
-        <Input
-          id="code"
-          value={code}
-          onChange={(e) => setCode(e.target.value.toUpperCase())}
-          autoComplete="off"
-          maxLength={20}
-          className="h-12 text-lg tracking-widest uppercase"
-        />
-        {state.kind === "error" && <p className="text-destructive">{state.msg}</p>}
-        <Button type="submit" className="h-12 w-full" disabled={state.kind === "loading"}>
-          {state.kind === "loading" ? "Laen…" : "Ava"}
-        </Button>
-      </form>
-    </main>
-  );
+  const q = useQuery({
+    queryKey: ["trainer-feedback", slug.toLowerCase()],
+    queryFn: () => fetchFeedback({ data: { slug } }),
+  });
+  if (q.isLoading) return <p className="px-4 pt-8 text-muted-foreground">Laen…</p>;
+  if (!q.data?.ok) return <p className="px-4 pt-8">Laadimine ebaõnnestus.</p>;
+  return <Dashboard name={q.data.speakerName} items={q.data.items} />;
 }
 
 function Dashboard({ name, items }: { name: string; items: TrainerFeedbackItem[] }) {
