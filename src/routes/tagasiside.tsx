@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { loadFeedbackProfile, saveFeedbackProfile } from "@/lib/feedback-profile";
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, Camera, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star, X } from "lucide-react";
+import { ArrowLeft, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star } from "lucide-react";
 import type { Speaker } from "@/lib/events";
 import { EVENTS, getEvent, dayLabel, displayTime, trainingSpeakerForEvent } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
@@ -68,10 +68,7 @@ function FeedbackPage() {
   const [name, setName] = useState("");
   const [field, setField] = useState("");
   const [message, setMessage] = useState("");
-  const [photo, setPhoto] = useState<File | null>(null);
-  const [photoPromise, setPhotoPromise] = useState(false);
   const [contact, setContact] = useState("");
-  const [publishConsent, setPublishConsent] = useState(false);
   const [remember, setRemember] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
@@ -128,33 +125,12 @@ function FeedbackPage() {
     if (type === "training") {
       if (!target) return setError("Vali koolitus.");
       if (!rating) return setError("Vali hinnang 1–10.");
-    } else if (!message.trim() && !photo) {
-      setError("Kirjuta paar sõna või lisa foto.");
+    } else if (!message.trim()) {
+      setError("Kirjuta paar sõna.");
       return;
     }
     setSending(true);
     setError("");
-    let attachment: string | null = null;
-    if (photo) {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const userId = sessionData.session?.user.id;
-      if (!userId) {
-        setSending(false);
-        setError("Foto lisamiseks logi palun sisse — või saada tagasiside ilma pildita.");
-        return;
-      }
-      const ext = (photo.name.split(".").pop() || "jpg").toLowerCase().slice(0, 5);
-      const path = `${userId}/${crypto.randomUUID()}.${ext}`;
-      const { error: upErr } = await supabase.storage
-        .from("feedback")
-        .upload(path, photo, { contentType: photo.type || "image/jpeg" });
-      if (upErr) {
-        setSending(false);
-        setError("Foto üleslaadimine ebaõnnestus. Proovi väiksema pildiga või saada ilma.");
-        return;
-      }
-      attachment = path;
-    }
     const training = type === "training";
     let dbErr = false;
     let limited = false;
@@ -169,11 +145,8 @@ function FeedbackPage() {
           change_text: training ? changeText.trim() || null : null,
           respondent_name: name.trim() || null,
           respondent_field: field.trim() || null,
-          contact_requested: !!contact.trim() || photoPromise,
+          contact_requested: !!contact.trim(),
           contact: contact.trim() || null,
-          photo_promise: photoPromise,
-          publish_consent: publishConsent,
-          attachment_url: attachment,
           website: hpRef.current?.value || "",
           elapsed_ms: Date.now() - startedAt.current,
         },
@@ -224,10 +197,7 @@ function FeedbackPage() {
               setChangeText("");
               setName("");
               setField("");
-              setPhoto(null);
-              setPhotoPromise(false);
               setContact("");
-              setPublishConsent(false);
               setRemember(false);
             }}
             className="text-sm font-semibold text-primary"
@@ -448,56 +418,7 @@ function FeedbackPage() {
               </p>
             </div>
 
-            {photo ? (
-              <div className="flex items-center gap-3 rounded-xl border border-border p-2">
-                <img
-                  src={URL.createObjectURL(photo)}
-                  alt="Lisatud foto"
-                  className="size-14 rounded-lg object-cover"
-                />
-                <span className="flex-1 truncate text-sm">{photo.name}</span>
-                <button type="button" onClick={() => setPhoto(null)} aria-label="Eemalda foto">
-                  <X className="size-5 text-muted-foreground" />
-                </button>
-              </div>
-            ) : (
-              <div>
-                <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold">
-                  <Camera className="size-4" /> Lisa foto
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => {
-                      const f = e.target.files?.[0];
-                      if (f && f.size > 10 * 1024 * 1024) setError("Foto on liiga suur (max 10 MB).");
-                      else if (f) setPhoto(f);
-                    }}
-                  />
-                </label>
-                <label className="mt-2 flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
-                  <input
-                    type="checkbox"
-                    checked={photoPromise}
-                    onChange={(e) => setPhotoPromise(e.target.checked)}
-                    className="mt-0.5 size-4 shrink-0 accent-primary"
-                  />
-                  Saadan pildi hiljem — tuleta meiliga meelde
-                </label>
-              </div>
-            )}
-
             <div className="space-y-2">
-              <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
-                <input
-                  type="checkbox"
-                  checked={publishConsent}
-                  onChange={(e) => setPublishConsent(e.target.checked)}
-                  className="mt-0.5 size-4 shrink-0 accent-primary"
-                />
-                Luban Studio MindZil avaldada minu tagasiside koos nime ja fotoga kodulehel või
-                sotsiaalmeedias
-              </label>
               <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
                 <input
                   type="checkbox"
