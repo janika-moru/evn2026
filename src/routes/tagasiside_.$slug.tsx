@@ -80,12 +80,17 @@ function Dashboard({ name, items }: { name: string; items: TrainerFeedbackItem[]
               <p className="text-sm font-semibold text-primary">{q.rating} / 10</p>
             )}
             <blockquote className="mt-2 text-lg leading-relaxed whitespace-pre-line">
-              „{q.message!.trim()}“
+              „{q.message?.trim()}“
             </blockquote>
             <figcaption className="mt-4 text-sm">
               <span className="font-semibold">{q.name?.trim() || "Osaleja"}</span>
               {q.field?.trim() && <span className="text-muted-foreground">, {q.field.trim()}</span>}
             </figcaption>
+            {!q.publishConsent && (
+              <p className="mt-3 mb-4 text-sm font-medium text-foreground">
+                Avaldamise luba puudub
+              </p>
+            )}
             <span className="absolute right-4 bottom-3 text-xs text-muted-foreground">
               Studio MindZ
             </span>
