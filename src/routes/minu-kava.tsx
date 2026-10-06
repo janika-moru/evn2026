@@ -174,6 +174,7 @@ function SignInCard() {
           </p>
         )}
       </form>
+      {status === "sent" && <CodeForm email={email.trim().toLowerCase()} />}
     </>
   );
 }
