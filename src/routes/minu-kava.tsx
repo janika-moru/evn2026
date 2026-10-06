@@ -242,3 +242,47 @@ function MyScheduleEvent({ event }: { event: EventItem }) {
     />
   );
 }
+
+function CodeForm({ email }: { email: string }) {
+  const [code, setCode] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setError("");
+    const { error } = await supabase.auth.verifyOtp({
+      email,
+      token: code.replace(/\s/g, ""),
+      type: "email",
+    });
+    setBusy(false);
+    if (error) setError("Kood ei sobi või on aegunud. Küsi uus link.");
+  }
+
+  return (
+    <form onSubmit={submit} className="mt-4 rounded-2xl bg-secondary p-5">
+      <label htmlFor="otp" className="text-[17px] font-semibold">
+        Link ei tööta? Sisesta kirjas olev kood
+      </label>
+      <input
+        id="otp"
+        inputMode="numeric"
+        autoComplete="one-time-code"
+        required
+        value={code}
+        onChange={(e) => setCode(e.target.value)}
+        className="mt-2 min-h-[52px] w-full rounded-xl border border-border bg-background px-4 text-[20px] tracking-[0.3em] outline-none focus:ring-2 focus:ring-ring"
+      />
+      <button
+        type="submit"
+        disabled={busy || code.trim().length < 6}
+        className="mt-4 flex min-h-[52px] w-full items-center justify-center rounded-full bg-primary px-5 text-[17px] font-semibold text-primary-foreground disabled:opacity-60"
+      >
+        {busy ? "Kontrollin…" : "Logi sisse"}
+      </button>
+      {error && <p className="mt-3 text-[15px] text-destructive">{error}</p>}
+    </form>
+  );
+}
