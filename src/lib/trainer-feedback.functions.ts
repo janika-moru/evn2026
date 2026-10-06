@@ -29,7 +29,7 @@ export const getTrainerFeedback = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows } = await supabaseAdmin
       .from("feedback")
-      .select("id, rating, message, respondent_name, respondent_field, publish_consent, created_at")
+      .select("id, rating, message, respondent_name, respondent_field, created_at")
       .eq("feedback_type", "training")
       .in("event_id", speaker.eventIds)
       .order("created_at", { ascending: false });
