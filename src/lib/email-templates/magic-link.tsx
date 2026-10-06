@@ -4,9 +4,10 @@ import { Body, Button, Container, Head, Heading, Html, Preview, Text } from '@re
 interface MagicLinkEmailProps {
   siteName: string
   confirmationUrl: string
+  token?: string
 }
 
-export const MagicLinkEmail = ({ confirmationUrl }: MagicLinkEmailProps) => (
+export const MagicLinkEmail = ({ confirmationUrl, token }: MagicLinkEmailProps) => (
   <Html lang="et" dir="ltr">
     <Head />
     <Preview>Sinu sisselogimislink Tartu ettevõtlusnädala äppi</Preview>
@@ -19,6 +20,14 @@ export const MagicLinkEmail = ({ confirmationUrl }: MagicLinkEmailProps) => (
         <Button style={button} href={confirmationUrl}>
           Logi sisse
         </Button>
+        {token ? (
+          <>
+            <Text style={{ ...text, margin: '25px 0 8px' }}>
+              Kui link ei tööta, sisesta äpis see kood:
+            </Text>
+            <Text style={codeStyle}>{token}</Text>
+          </>
+        ) : null}
         <Text style={footer}>
           Link kehtib lühikest aega. Kui sa ei palunud sisselogimislinki, võid selle kirja lihtsalt eirata.
           Küsimuste korral kirjuta info@mindz.ee.
