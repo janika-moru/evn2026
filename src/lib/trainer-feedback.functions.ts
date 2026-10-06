@@ -9,7 +9,6 @@ export type TrainerFeedbackItem = {
   message: string | null;
   name: string | null;
   field: string | null;
-  publishConsent: boolean;
   createdAt: string;
 };
 
@@ -29,7 +28,7 @@ export const getTrainerFeedback = createServerFn({ method: "POST" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: rows } = await supabaseAdmin
       .from("feedback")
-      .select("id, rating, message, respondent_name, respondent_field, publish_consent, created_at")
+      .select("id, rating, message, respondent_name, respondent_field, created_at")
       .eq("feedback_type", "training")
       .in("event_id", speaker.eventIds)
       .order("created_at", { ascending: false });
@@ -43,7 +42,6 @@ export const getTrainerFeedback = createServerFn({ method: "POST" })
         message: r.message,
         name: r.respondent_name,
         field: r.respondent_field,
-        publishConsent: r.publish_consent === true,
         createdAt: r.created_at,
       })),
     };
