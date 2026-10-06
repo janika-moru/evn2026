@@ -164,6 +164,39 @@ export type Database = {
         }
         Relationships: []
       }
+      trainer_code_attempts: {
+        Row: {
+          created_at: string
+          id: string
+          speaker_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          speaker_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          speaker_id?: string
+        }
+        Relationships: []
+      }
+      trainer_codes: {
+        Row: {
+          code: string
+          speaker_id: string
+        }
+        Insert: {
+          code: string
+          speaker_id: string
+        }
+        Update: {
+          code?: string
+          speaker_id?: string
+        }
+        Relationships: []
+      }
       trainer_question_votes: {
         Row: {
           created_at: string

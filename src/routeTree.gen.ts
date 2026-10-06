@@ -19,6 +19,7 @@ import { Route as MinuKavaRouteImport } from './routes/minu-kava'
 import { Route as PrivaatsusRouteImport } from './routes/privaatsus'
 import { Route as TagasisideRouteImport } from './routes/tagasiside'
 import { Route as SundmusIdRouteImport } from './routes/sundmus.$id'
+import { Route as TagasisideSlugRouteImport } from './routes/tagasiside_.$slug'
 import { Route as ApiPublicFientaWebhookRouteImport } from './routes/api/public/fienta-webhook'
 import { Route as ApiPublicHooksEvnCleanupRouteImport } from './routes/api/public/hooks/evn-cleanup'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -75,6 +76,11 @@ const SundmusIdRoute = SundmusIdRouteImport.update({
   path: '/sundmus/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TagasisideSlugRoute = TagasisideSlugRouteImport.update({
+  id: '/tagasiside_/$slug',
+  path: '/tagasiside/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicFientaWebhookRoute = ApiPublicFientaWebhookRouteImport.update({
   id: '/api/public/fienta-webhook',
   path: '/api/public/fienta-webhook',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/privaatsus': typeof PrivaatsusRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
+  '/tagasiside/$slug': typeof TagasisideSlugRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
   '/api/public/hooks/evn-cleanup': typeof ApiPublicHooksEvnCleanupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/privaatsus': typeof PrivaatsusRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
+  '/tagasiside/$slug': typeof TagasisideSlugRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
   '/api/public/hooks/evn-cleanup': typeof ApiPublicHooksEvnCleanupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/privaatsus': typeof PrivaatsusRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
+  '/tagasiside_/$slug': typeof TagasisideSlugRoute
   '/api/public/fienta-webhook': typeof ApiPublicFientaWebhookRoute
   '/api/public/hooks/evn-cleanup': typeof ApiPublicHooksEvnCleanupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/privaatsus'
     | '/tagasiside'
     | '/sundmus/$id'
+    | '/tagasiside/$slug'
     | '/api/public/fienta-webhook'
     | '/api/public/hooks/evn-cleanup'
     | '/lovable/email/auth/preview'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/privaatsus'
     | '/tagasiside'
     | '/sundmus/$id'
+    | '/tagasiside/$slug'
     | '/api/public/fienta-webhook'
     | '/api/public/hooks/evn-cleanup'
     | '/lovable/email/auth/preview'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/privaatsus'
     | '/tagasiside'
     | '/sundmus/$id'
+    | '/tagasiside_/$slug'
     | '/api/public/fienta-webhook'
     | '/api/public/hooks/evn-cleanup'
     | '/lovable/email/auth/preview'
@@ -220,6 +232,7 @@ export interface RootRouteChildren {
   PrivaatsusRoute: typeof PrivaatsusRoute
   TagasisideRoute: typeof TagasisideRoute
   SundmusIdRoute: typeof SundmusIdRoute
+  TagasisideSlugRoute: typeof TagasisideSlugRoute
   ApiPublicFientaWebhookRoute: typeof ApiPublicFientaWebhookRoute
   ApiPublicHooksEvnCleanupRoute: typeof ApiPublicHooksEvnCleanupRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
@@ -299,6 +312,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SundmusIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tagasiside_/$slug': {
+      id: '/tagasiside_/$slug'
+      path: '/tagasiside/$slug'
+      fullPath: '/tagasiside/$slug'
+      preLoaderRoute: typeof TagasisideSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/fienta-webhook': {
       id: '/api/public/fienta-webhook'
       path: '/api/public/fienta-webhook'
@@ -348,6 +368,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivaatsusRoute: PrivaatsusRoute,
   TagasisideRoute: TagasisideRoute,
   SundmusIdRoute: SundmusIdRoute,
+  TagasisideSlugRoute: TagasisideSlugRoute,
   ApiPublicFientaWebhookRoute: ApiPublicFientaWebhookRoute,
   ApiPublicHooksEvnCleanupRoute: ApiPublicHooksEvnCleanupRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
