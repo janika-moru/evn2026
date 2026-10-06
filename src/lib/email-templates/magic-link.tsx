@@ -53,3 +53,4 @@ const button = {
   textDecoration: 'none',
 }
 const footer = { fontSize: '12px', color: '#999999', lineHeight: '1.5', margin: '30px 0 0' }
+const codeStyle = { fontSize: '28px', fontWeight: 'bold' as const, letterSpacing: '6px', color: '#1a1a1a', margin: '0 0 10px' }
