@@ -9,7 +9,6 @@ export type TrainerFeedbackItem = {
   message: string | null;
   name: string | null;
   field: string | null;
-  publishConsent: boolean;
   createdAt: string;
 };
 
