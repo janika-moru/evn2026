@@ -343,7 +343,7 @@ export const EVENTS: EventItem[] = [
   {
     "id": "202958",
     "fientaEventId": "202958",
-    "capacity": 25,
+    "capacity": 36,
     "title": "Nähtamatud mõjutajad ettevõttes: miks samad probleemid korduvad?",
     "speaker": "Ivar Raav",
     "shortDescription": "Mõnikord teed ettevõttes ikka ja jälle justkui õigeid asju, aga sama probleem tuleb tagasi. Turundad rohkem, kuid kliente ei lisandu. Muudad töökorraldust, aga meeskonnas kordub sama pinge. Proovid uut lahendust, kuid mõne aja pärast oled tuttavas kohas tagasi. Selles praktilises töötoas aitab Ivar Raav vaadata nähtavast probleemist sügavamale ja märgata, mis seda sinu ettevõttes tegelikult üleval hoiab.",
@@ -431,6 +431,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kusida-voib-koike-epp-karsin-studio-mindzis",
     "registrationUrl": "https://fienta.com/kusida-voib-koike-epp-karsin-studio-mindzis",
+    "capacity": 60,
     "registrationStatus": "open"
   },
   {
@@ -523,6 +524,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/ettevotlusnadala-lopuohtu-studio-mindzis",
     "registrationUrl": "https://fienta.com/ettevotlusnadala-lopuohtu-studio-mindzis",
+    "capacity": 70,
     "slidesExpected": false,
     "registrationStatus": "open"
   }
