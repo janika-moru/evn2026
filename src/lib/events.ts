@@ -229,6 +229,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kuidas-ai-ga-ettevotet-runnatakse-urmo-keskel-studio-mindzis",
     "registrationUrl": "https://fienta.com/kuidas-ai-ga-ettevotet-runnatakse-urmo-keskel-studio-mindzis",
+    "slidesUrl": "https://drive.google.com/file/d/1fVr1r6p_TopWJH09y-toGWPTxAz5Qer8/view?usp=sharing",
     "registrationStatus": "open"
   },
   {
