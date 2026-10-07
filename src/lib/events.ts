@@ -325,7 +325,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/turundajalt-turundajatele-turundusest-katrin-vilimaa-otsing-studio-mindzis",
     "registrationUrl": "https://fienta.com/turundajalt-turundajatele-turundusest-katrin-vilimaa-otsing-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://drive.google.com/file/d/141cibWwDQhcRl_0QpW_Z7mjqxkWJe9Xe/view?usp=sharing"
   },
   {
     "id": "202952",
@@ -340,7 +341,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/wordpressi-haldamine-ai-abil-marika-juusu-studio-mindzis",
     "registrationUrl": "https://fienta.com/wordpressi-haldamine-ai-abil-marika-juusu-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://docs.google.com/presentation/d/1hJGGtyD8RNogs4_RE25Dd5WiwReoLZGm9IinLLtc0pk/edit?usp=sharing"
   },
   {
     "id": "202958",
