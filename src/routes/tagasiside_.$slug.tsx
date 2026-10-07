@@ -9,7 +9,8 @@ import {
 
 export const Route = createFileRoute("/tagasiside_/$slug")({
   beforeLoad: ({ params }) => {
-    if (!QUESTION_SLUGS[params.slug.toLowerCase()]) throw notFound();
+    const s = params.slug.toLowerCase();
+    if (s !== "mindz" && !QUESTION_SLUGS[s]) throw notFound();
   },
   head: () => ({
     meta: [
