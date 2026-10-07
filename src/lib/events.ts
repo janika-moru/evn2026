@@ -308,6 +308,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/seo-lihtsalt-roland-kivitare-studio-mindzis",
     "registrationUrl": "https://fienta.com/seo-lihtsalt-roland-kivitare-studio-mindzis",
+    "slidesUrl": "https://claude.ai/artifact/VVMQCew8TD2YYw217ro9P1",
     "registrationStatus": "open"
   },
   {
