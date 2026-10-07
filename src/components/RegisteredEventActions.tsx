@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { FileText, MessageSquareHeart, Ticket } from "lucide-react";
+import { FileText, Mail, MessageSquareHeart, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -42,7 +42,33 @@ export function RegisteredEventActions({
           Anna tagasisidet
         </Link>
       </Button>
-      {slidesUrl ? (
+      {event.letter ? (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline" className={btn}>
+              <Mail />
+              Loe koolitajate kirja
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-h-[85vh] w-[calc(100vw-2rem)] overflow-y-auto md:max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Kiri koolitajatelt</DialogTitle>
+              <DialogDescription className="sr-only">{event.title}</DialogDescription>
+            </DialogHeader>
+            <div className="whitespace-pre-line text-base leading-relaxed">
+              {event.letter.trim().split(/(https?:\/\/\S+)/g).map((part, i) =>
+                /^https?:\/\//.test(part) ? (
+                  <a key={i} href={part} target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                    {part}
+                  </a>
+                ) : (
+                  part
+                ),
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
+      ) : slidesUrl ? (
         <Button asChild variant="outline" className={btn}>
           <a href={slidesUrl} target="_blank" rel="noreferrer">
             <FileText />

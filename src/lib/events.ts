@@ -19,6 +19,7 @@ import tambetPhoto from "@/assets/tambet.png.asset.json";
 import rolandPhoto from "@/assets/roland.png.asset.json";
 import mariPhoto from "@/assets/mari-maekivi.png.asset.json";
 import marikaPhoto from "@/assets/marika.png.asset.json";
+import papsidLetter from "@/content/papsid-kiri.md?raw";
 import papsidPhoto from "@/assets/papsid.png.asset.json";
 import katrinVilimaaPhoto from "@/assets/katrin-vilimaa-otsing.png.asset.json";
 import katrinDiffertPhoto from "@/assets/katrin-differt.png.asset.json";
@@ -79,6 +80,8 @@ export interface EventItem {
   materialsUrl?: string;
   /** False = koolitusel slaide pole ega tule (nt lõpuõhtu) — „Slaide veel pole" nuppu ei näidata. */
   slidesExpected?: boolean;
+  /** Koolitaja kiri osalejatele (näidatakse registreerunutele aknas). */
+  letter?: string;
   seriesUrl?: string; // Korduvate sessioonide seeria leht Fientas
   registrationStatus: RegistrationStatus;
 }
@@ -241,6 +244,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/ettevotlus-ja-paarisuhe-papsid-studio-mindzis",
     "registrationUrl": "https://fienta.com/ettevotlus-ja-paarisuhe-papsid-studio-mindzis",
+    "letter": papsidLetter,
     "registrationStatus": "open"
   },
   {
