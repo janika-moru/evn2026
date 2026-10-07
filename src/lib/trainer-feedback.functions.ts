@@ -21,6 +21,26 @@ export const getTrainerFeedback = createServerFn({ method: "POST" })
     z.object({ slug: z.string().max(40) }).parse(d),
   )
   .handler(async ({ data }): Promise<TrainerFeedbackResult> => {
+    if (data.slug.toLowerCase() === "mindz") {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      const { data: rows } = await supabaseAdmin
+        .from("feedback")
+        .select("id, rating, message, keep_text, change_text, respondent_name, respondent_field, created_at")
+        .in("feedback_type", ["keep", "change"])
+        .order("created_at", { ascending: false });
+      return {
+        ok: true,
+        speakerName: "Studio MindZ",
+        items: (rows ?? []).map((r) => ({
+          id: r.id,
+          rating: r.rating,
+          message: [r.message, r.keep_text, r.change_text].filter((t) => t?.trim()).join("\n\n") || null,
+          name: r.respondent_name,
+          field: r.respondent_field,
+          createdAt: r.created_at,
+        })),
+      };
+    }
     const eventId = QUESTION_SLUGS[data.slug.toLowerCase()];
     const speaker = eventId ? trainingSpeakerForEvent(eventId) : undefined;
     if (!speaker) return { ok: false, reason: "notfound" };
