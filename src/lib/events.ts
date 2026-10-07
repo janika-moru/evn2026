@@ -256,7 +256,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/taaskaivitada-meiliturundust-timo-porval-studio-mindzis",
     "registrationUrl": "https://fienta.com/taaskaivitada-meiliturundust-timo-porval-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://drive.google.com/file/d/14raFc2bkuxazP08I2wUH69nlJFWP3o-3/view?usp=drive_link"
   },
   {
     "id": "202945",
