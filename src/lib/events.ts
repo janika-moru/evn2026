@@ -390,7 +390,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kliendikeskne-ettevote-katrin-differt-studio-mindzis",
     "registrationUrl": "https://fienta.com/kliendikeskne-ettevote-katrin-differt-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://canva.link/v71f2n3gbv8u8dv"
   },
   {
     "id": "202957",
