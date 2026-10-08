@@ -407,6 +407,7 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/riskijaht-ettevottes-taavi-lukas-anders-veetamm-studio-mindzis",
     "registrationUrl": "https://fienta.com/riskijaht-ettevottes-taavi-lukas-anders-veetamm-studio-mindzis",
     "registrationStatus": "open",
+    "capacity": 62,
     // Koolitus jäi ära — slaide ei tule, seetõttu nuppu üldse ei näidata.
     "slidesExpected": false
   },
