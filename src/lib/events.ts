@@ -406,7 +406,9 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/riskijaht-ettevottes-taavi-lukas-anders-veetamm-studio-mindzis",
     "registrationUrl": "https://fienta.com/riskijaht-ettevottes-taavi-lukas-anders-veetamm-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    // Koolitus jäi ära — slaide ei tule, seetõttu nuppu üldse ei näidata.
+    "slidesExpected": false
   },
   {
     "id": "202954",
@@ -421,7 +423,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/muugikonede-tootuba-tambet-tallo-studio-mindzis",
     "registrationUrl": "https://fienta.com/muugikonede-tootuba-tambet-tallo-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://drive.google.com/file/d/13T_KNaEiIXN6dkpGOJFZetEZGFEP82ph/view?usp=sharing"
   },
   {
     "id": "202959",
