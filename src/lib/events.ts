@@ -440,7 +440,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kusida-voib-koike-epp-karsin-studio-mindzis",
     "registrationUrl": "https://fienta.com/kusida-voib-koike-epp-karsin-studio-mindzis",
-    "capacity": 62,
+    "capacity": 60,
     "registrationStatus": "open"
   },
   {
