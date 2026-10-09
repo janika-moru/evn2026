@@ -3,6 +3,7 @@ import {
   speakersInListOrder,
   speakerEventRows,
   speakerSlidesUrl,
+  speakerMaterials,
   isTeamSpeaker,
   initials,
   dayLabel,
@@ -57,6 +58,7 @@ function SpeakersPage() {
           const rows = speakerEventRows(s);
           const team = isTeamSpeaker(s);
           const slidesUrl = speakerSlidesUrl(s);
+          const materials = speakerMaterials(s);
           return (
             <article
               id={s.id}
@@ -169,6 +171,11 @@ function SpeakersPage() {
                   </a>
                 ) : (
                   <span className={disabledLink}>Slaidid</span>
+                )}
+                {materials && (
+                  <a href={materials.url} target="_blank" rel="noreferrer" className={contactLink}>
+                    {materials.label}
+                  </a>
                 )}
               </div>
 
