@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { FileText, Mail, MessageSquareHeart, Ticket } from "lucide-react";
+import { BookOpen, FileText, Mail, MessageSquareHeart, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,6 +24,9 @@ export function RegisteredEventActions({
   large?: boolean;
 }) {
   const slidesUrl = event.slidesUrl ?? event.materialsUrl;
+  // Eraldi lisamaterjal (nt töövihik), kui seda pole slaidiga ühte panna.
+  const materialsUrl =
+    event.materialsUrl && event.materialsUrl !== slidesUrl ? event.materialsUrl : undefined;
 
   // large (Minu kava): 52px kõrgused nupud, 15px tekst ja 44px tabamisalad.
   // Telefonis üks nupp rea kohta, et tekst mahuks mugavalt ära.
@@ -84,6 +87,18 @@ export function RegisteredEventActions({
             Slaide veel pole
           </Button>
         )
+      )}
+      {materialsUrl && (
+        <Button
+          asChild
+          variant="outline"
+          className={`${btn} ${large ? "sm:col-span-2" : "col-span-2"}`}
+        >
+          <a href={materialsUrl} target="_blank" rel="noreferrer">
+            <BookOpen />
+            {event.materialsLabel ?? "Lisamaterjalid"}
+          </a>
+        </Button>
       )}
     </div>
   );
