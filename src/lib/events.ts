@@ -523,7 +523,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/voorustamise-abc-anu-tahemaa-studio-mindzis",
     "registrationUrl": "https://fienta.com/voorustamise-abc-anu-tahemaa-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://claude.ai/artifact/8sKyqaL7Sg9F17tqwKvso2"
   },
   {
     "id": "202960",
