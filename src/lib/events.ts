@@ -78,6 +78,8 @@ export interface EventItem {
   icalUrl?: string;
   slidesUrl?: string;
   materialsUrl?: string;
+  /** Materjali nimi nupus/saidilingis, nt „Töövihik" — vaikimisi „Lisamaterjalid". */
+  materialsLabel?: string;
   /** False = koolitusel slaide pole ega tule (nt lõpuõhtu) — „Slaide veel pole" nuppu ei näidata. */
   slidesExpected?: boolean;
   /** Koolitaja kiri osalejatele (näidatakse registreerunutele aknas). */
@@ -473,6 +475,9 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/tee-oma-koolitus-paremaks-mari-maekivi-studio-mindzis",
     "registrationUrl": "https://fienta.com/tee-oma-koolitus-paremaks-mari-maekivi-studio-mindzis",
+    "slidesUrl": "https://docs.google.com/presentation/d/1tFhkPUSXSBXxnSjw16rgAGqbSHADoB74/edit?usp=sharing",
+    "materialsUrl": "https://lingid.ee/paremkoolitus",
+    "materialsLabel": "Töövihik",
     "registrationStatus": "open"
   },
   {
@@ -1002,6 +1007,21 @@ export function speakerSlidesUrl(speaker: Speaker): string | undefined {
   for (const event of events) {
     const url = event.slidesUrl ?? event.materialsUrl;
     if (url) return url;
+  }
+  return undefined;
+}
+
+/** Koolitaja lisamaterjal (nt töövihik) — vanim sündmus, millel see on olemas. */
+export function speakerMaterials(speaker: Speaker): { url: string; label: string } | undefined {
+  const events = speaker.eventIds
+    .map((id) => getEvent(id))
+    .filter((event): event is EventItem => Boolean(event))
+    .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`));
+
+  for (const event of events) {
+    if (event.materialsUrl) {
+      return { url: event.materialsUrl, label: event.materialsLabel ?? "Lisamaterjalid" };
+    }
   }
   return undefined;
 }
