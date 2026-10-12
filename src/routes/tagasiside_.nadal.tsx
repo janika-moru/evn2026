@@ -68,12 +68,7 @@ function WeekPage() {
 
   const counts = Array.from({ length: 10 }, (_, k) => training.filter((r) => r.rating === k + 1).length);
   const max = Math.max(1, ...counts);
-  const dayCounts = DAYS.map(([d, label]) => ({
-    label,
-    n: rows.filter((r) => tallinnDate(r.createdAt) === d).length,
-  }));
   const after = rows.filter((r) => tallinnDate(r.createdAt) > "2026-10-09").length;
-  const dayMax = Math.max(1, after, ...dayCounts.map((d) => d.n));
 
   const speakerNameOf = (r: WeekFeedbackRow) =>
     (r.eventId && trainingSpeakerForEvent(r.eventId)?.name) ||
