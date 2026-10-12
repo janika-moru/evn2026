@@ -122,15 +122,25 @@ function WeekPage() {
       <section className="mt-4 rounded-2xl border border-border bg-card p-5">
         <h2 className="font-semibold">Päevade kaupa</h2>
         <div className="mt-3 space-y-2">
-          {[...dayCounts, ...(after ? [{ label: "Hiljem", n: after }] : [])].map((d) => (
-            <div key={d.label} className="flex items-center gap-3 text-sm">
-              <span className="w-14 shrink-0">{d.label}</span>
-              <div className="h-3 flex-1 rounded-full bg-muted">
-                <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
-              </div>
-              <span className="w-6 text-right">{d.n}</span>
-            </div>
-          ))}
+          {dayOptions.map((d) => {
+            const active = dayFilter === d.key;
+            return (
+              <button
+                key={d.key}
+                type="button"
+                onClick={() => setDayFilter(active ? null : d.key)}
+                className={`flex w-full items-center gap-3 rounded-lg px-2 py-1 text-left text-sm ${
+                  active ? "bg-primary/10 font-semibold" : ""
+                }`}
+              >
+                <span className="w-14 shrink-0">{d.label}</span>
+                <div className="h-3 flex-1 rounded-full bg-muted">
+                  <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
+                </div>
+                <span className="w-6 text-right">{d.n}</span>
+              </button>
+            );
+          })}
         </div>
       </section>
 
