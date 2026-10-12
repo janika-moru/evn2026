@@ -360,7 +360,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/nahtamatud-mojutajad-ettevottes-ivar-raav-studio-mindzis",
     "registrationUrl": "https://fienta.com/nahtamatud-mojutajad-ettevottes-ivar-raav-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesExpected": false
   },
   {
     "id": "202967",
@@ -508,7 +509,8 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/hea-tooandja-sotsiaalmeedias-birgit-ruunik-studio-mindzis",
     "registrationUrl": "https://fienta.com/hea-tooandja-sotsiaalmeedias-birgit-ruunik-studio-mindzis",
-    "registrationStatus": "open"
+    "registrationStatus": "open",
+    "slidesUrl": "https://drive.google.com/file/d/14j88olCAHbvH0nCb8pgbyapVLd-yiQt3/view?usp=sharing"
   },
   {
     "id": "202953",
