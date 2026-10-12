@@ -36,8 +36,9 @@ const DAYS = [
 const tallinnDate = (iso: string) =>
   new Date(iso).toLocaleDateString("sv-SE", { timeZone: "Europe/Tallinn" });
 const LATER_LABEL = "Jooksev tagasiside Studio MindZile";
-/** Päevad, mille alla tagasiside kuulub: koolituse toimumise päev; Morning Mindset kõik päevad; tiimi oma andmise päev. */
+/** Päevad, mille alla tagasiside kuulub: koolituse toimumise päev; Morning Mindset kõik päevad; stuudiole jäetud oma jookseval real. */
 const feedbackDays = (r: WeekFeedbackRow): string[] => {
+  if (r.type !== "training") return ["later"];
   const ev = r.eventId ? getEvent(r.eventId) : undefined;
   if (ev?.seriesUrl) return DAYS.map(([d]) => d);
   if (ev) return [ev.date];
