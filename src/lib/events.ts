@@ -1124,6 +1124,10 @@ export function slidesPageRows(): SlidesPageRow[] {
     rows.push({
       event,
       speakerName: speaker ? (speaker.displayName ?? speaker.name) : event.speaker,
+      ...(speaker?.thumbUrl || speaker?.imageUrl
+        ? { speakerImageUrl: (speaker.thumbUrl ?? speaker.imageUrl) as string }
+        : {}),
+      ...(event.letter ? { letter: event.letter } : {}),
       ...(slidesUrl ? { slidesUrl } : {}),
       ...(materials ? { materials } : {}),
       cancelled: event.id === "202957", // Kukkumiskaitse koolitus jäi ära
