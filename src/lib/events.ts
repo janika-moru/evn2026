@@ -1091,6 +1091,10 @@ export type SlidesPageRow = {
   event: EventItem;
   /** Koolitaja kuvatav nimi (duodel firma nimi, nt „Papsid"). */
   speakerName: string;
+  /** Koolitaja pisipilt, kui see on olemas. */
+  speakerImageUrl?: string;
+  /** Kiri osalejatele (slaidide asemel, nt Papsid). */
+  letter?: string;
   /** Slaidide link (kui materjal on olemas). */
   slidesUrl?: string;
   /** Eraldi lisamaterjal (nt töövihik), kui see on olemas. */
