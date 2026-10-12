@@ -139,7 +139,7 @@ function WeekPage() {
                   active ? "bg-primary/10 font-semibold" : ""
                 }`}
               >
-                <span className="w-14 shrink-0">{d.label}</span>
+                <span className={d.key === "later" ? "w-28 shrink-0 leading-tight" : "w-14 shrink-0"}>{d.label}</span>
                 <div className="h-3 flex-1 rounded-full bg-muted">
                   <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
                 </div>
@@ -201,7 +201,7 @@ function WeekPage() {
           <span className="text-muted-foreground">Filter:</span>
           <span className="rounded-full bg-primary/10 px-3 py-1 font-semibold">
             {[
-              dayFilter && (dayFilter === "later" ? "Hiljem" : DAYS.find(([d]) => d === dayFilter)?.[1]),
+              dayFilter && (dayFilter === "later" ? LATER_LABEL : DAYS.find(([d]) => d === dayFilter)?.[1]),
               speakerFilter,
             ]
               .filter(Boolean)
