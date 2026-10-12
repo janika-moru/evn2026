@@ -42,6 +42,8 @@ function WeekPage() {
   const fetchRows = useServerFn(getWeekFeedback);
   const q = useQuery({ queryKey: ["week-feedback"], queryFn: () => fetchRows() });
   const [tab, setTab] = useState<Tab>("programm");
+  const [dayFilter, setDayFilter] = useState<string | null>(null);
+  const [speakerFilter, setSpeakerFilter] = useState<string | null>(null);
   if (q.isLoading) return <p className="px-4 pt-8 text-muted-foreground">Laen…</p>;
   if (!q.data) return <p className="px-4 pt-8">Laadimine ebaõnnestus.</p>;
 
