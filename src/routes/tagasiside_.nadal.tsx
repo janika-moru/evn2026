@@ -75,7 +75,30 @@ function WeekPage() {
   const after = rows.filter((r) => tallinnDate(r.createdAt) > "2026-10-09").length;
   const dayMax = Math.max(1, after, ...dayCounts.map((d) => d.n));
 
-  const list = tab === "kiitus" ? keep : tab === "ettepanek" ? change : training;
+  const speakerNameOf = (r: WeekFeedbackRow) =>
+    (r.eventId && trainingSpeakerForEvent(r.eventId)?.name) ||
+    (r.eventId && getEvent(r.eventId)?.title) ||
+    "Muu";
+
+  const inDay = (r: WeekFeedbackRow) => {
+    if (!dayFilter) return true;
+    const d = tallinnDate(r.createdAt);
+    return dayFilter === "later" ? d > "2026-10-09" : d === dayFilter;
+  };
+  const inSpeaker = (r: WeekFeedbackRow) =>
+    !speakerFilter || (r.type === "training" && speakerNameOf(r) === speakerFilter);
+
+  const baseList = tab === "kiitus" ? keep : tab === "ettepanek" ? change : training;
+  const list = baseList.filter((r) => inDay(r) && inSpeaker(r));
+
+  const dayOptions: { key: string; label: string; n: number }[] = [
+    ...DAYS.map(([d, label]) => ({
+      key: d,
+      label,
+      n: rows.filter((r) => tallinnDate(r.createdAt) === d).length,
+    })),
+    ...(after ? [{ key: "later", label: "Hiljem", n: after }] : []),
+  ];
 
   return (
     <main className="px-4 pt-8 pb-10">
