@@ -191,7 +191,34 @@ function WeekPage() {
         ))}
       </div>
 
+      {(dayFilter || speakerFilter) && (
+        <div className="mt-4 flex items-center gap-2 text-sm">
+          <span className="text-muted-foreground">Filter:</span>
+          <span className="rounded-full bg-primary/10 px-3 py-1 font-semibold">
+            {[
+              dayFilter && (dayFilter === "later" ? "Hiljem" : DAYS.find(([d]) => d === dayFilter)?.[1]),
+              speakerFilter,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setDayFilter(null);
+              setSpeakerFilter(null);
+            }}
+            className="font-semibold text-primary"
+          >
+            ✕ Eemalda
+          </button>
+        </div>
+      )}
+
       <div className="mt-4 space-y-3">
+        {list.filter((r) => r.message?.trim()).length === 0 && (
+          <p className="text-sm text-muted-foreground">Selle valikuga tagasisidet pole.</p>
+        )}
         {list.filter((r) => r.message?.trim()).map((r) => (
           <figure key={r.id} className="rounded-2xl bg-mindz-pink p-5">
             <p className="text-xs text-muted-foreground">
