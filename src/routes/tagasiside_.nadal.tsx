@@ -35,6 +35,15 @@ const DAYS = [
 ] as const;
 const tallinnDate = (iso: string) =>
   new Date(iso).toLocaleDateString("sv-SE", { timeZone: "Europe/Tallinn" });
+const LATER_LABEL = "Jooksev tagasiside Studio MindZile";
+/** Päevad, mille alla tagasiside kuulub: koolituse toimumise päev; Morning Mindset kõik päevad; tiimi oma andmise päev. */
+const feedbackDays = (r: WeekFeedbackRow): string[] => {
+  const ev = r.eventId ? getEvent(r.eventId) : undefined;
+  if (ev?.seriesUrl) return DAYS.map(([d]) => d);
+  if (ev) return [ev.date];
+  const d = tallinnDate(r.createdAt);
+  return [d > "2026-10-09" ? "later" : d];
+};
 
 type Tab = "programm" | "kiitus" | "ettepanek";
 
@@ -68,18 +77,14 @@ function WeekPage() {
 
   const counts = Array.from({ length: 10 }, (_, k) => training.filter((r) => r.rating === k + 1).length);
   const max = Math.max(1, ...counts);
-  const after = rows.filter((r) => tallinnDate(r.createdAt) > "2026-10-09").length;
+  const after = rows.filter((r) => feedbackDays(r).includes("later")).length;
 
   const speakerNameOf = (r: WeekFeedbackRow) =>
     (r.eventId && trainingSpeakerForEvent(r.eventId)?.name) ||
     (r.eventId && getEvent(r.eventId)?.title) ||
     "Muu";
 
-  const inDay = (r: WeekFeedbackRow) => {
-    if (!dayFilter) return true;
-    const d = tallinnDate(r.createdAt);
-    return dayFilter === "later" ? d > "2026-10-09" : d === dayFilter;
-  };
+  const inDay = (r: WeekFeedbackRow) => !dayFilter || feedbackDays(r).includes(dayFilter);
   const inSpeaker = (r: WeekFeedbackRow) =>
     !speakerFilter || (r.type === "training" && speakerNameOf(r) === speakerFilter);
 
@@ -90,9 +95,9 @@ function WeekPage() {
     ...DAYS.map(([d, label]) => ({
       key: d,
       label,
-      n: rows.filter((r) => tallinnDate(r.createdAt) === d).length,
+      n: rows.filter((r) => feedbackDays(r).includes(d)).length,
     })),
-    ...(after ? [{ key: "later", label: "Hiljem", n: after }] : []),
+    ...(after ? [{ key: "later", label: LATER_LABEL, n: after }] : []),
   ];
   const dayMax = Math.max(1, ...dayOptions.map((d) => d.n));
 
@@ -134,7 +139,7 @@ function WeekPage() {
                   active ? "bg-primary/10 font-semibold" : ""
                 }`}
               >
-                <span className="w-14 shrink-0">{d.label}</span>
+                <span className={d.key === "later" ? "w-28 shrink-0 leading-tight" : "w-14 shrink-0"}>{d.label}</span>
                 <div className="h-3 flex-1 rounded-full bg-muted">
                   <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
                 </div>
@@ -196,7 +201,7 @@ function WeekPage() {
           <span className="text-muted-foreground">Filter:</span>
           <span className="rounded-full bg-primary/10 px-3 py-1 font-semibold">
             {[
-              dayFilter && (dayFilter === "later" ? "Hiljem" : DAYS.find(([d]) => d === dayFilter)?.[1]),
+              dayFilter && (dayFilter === "later" ? LATER_LABEL : DAYS.find(([d]) => d === dayFilter)?.[1]),
               speakerFilter,
             ]
               .filter(Boolean)
