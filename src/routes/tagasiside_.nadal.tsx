@@ -149,13 +149,23 @@ function WeekPage() {
         <h2 className="font-semibold">Koolitajad</h2>
         <table className="mt-3 w-full text-sm">
           <tbody>
-            {speakerRows.map((s) => (
-              <tr key={s.name} className="border-t border-border">
-                <td className="py-2 pr-2">{s.name}</td>
-                <td className="py-2 text-right text-muted-foreground">{s.n}</td>
-                <td className="py-2 pl-3 text-right font-semibold">{s.avg != null ? fmt(s.avg) : "–"}</td>
-              </tr>
-            ))}
+            {speakerRows.map((s) => {
+              const active = speakerFilter === s.name;
+              return (
+                <tr
+                  key={s.name}
+                  onClick={() => {
+                    setSpeakerFilter(active ? null : s.name);
+                    if (!active) setTab("programm");
+                  }}
+                  className={`cursor-pointer border-t border-border ${active ? "bg-primary/10 font-semibold" : ""}`}
+                >
+                  <td className="py-2 pr-2">{s.name}</td>
+                  <td className="py-2 text-right text-muted-foreground">{s.n}</td>
+                  <td className="py-2 pl-3 text-right font-semibold">{s.avg != null ? fmt(s.avg) : "–"}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </section>
