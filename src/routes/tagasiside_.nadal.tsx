@@ -36,8 +36,9 @@ const DAYS = [
 const tallinnDate = (iso: string) =>
   new Date(iso).toLocaleDateString("sv-SE", { timeZone: "Europe/Tallinn" });
 const LATER_LABEL = "Jooksev tagasiside Studio MindZile";
-/** Päevad, mille alla tagasiside kuulub: koolituse toimumise päev; Morning Mindset kõik päevad; tiimi oma andmise päev. */
+/** Päevad, mille alla tagasiside kuulub: koolituse toimumise päev; Morning Mindset kõik päevad; stuudiole jäetud oma jookseval real. */
 const feedbackDays = (r: WeekFeedbackRow): string[] => {
+  if (r.type !== "training") return ["later"];
   const ev = r.eventId ? getEvent(r.eventId) : undefined;
   if (ev?.seriesUrl) return DAYS.map(([d]) => d);
   if (ev) return [ev.date];
@@ -130,20 +131,40 @@ function WeekPage() {
         <div className="mt-3 space-y-2">
           {dayOptions.map((d) => {
             const active = dayFilter === d.key;
+            const bar = (
+              <div className="h-3 flex-1 rounded-full bg-muted">
+                <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
+              </div>
+            );
+            const num = <span className="w-6 text-right">{d.n}</span>;
             return (
               <button
                 key={d.key}
                 type="button"
-                onClick={() => setDayFilter(active ? null : d.key)}
-                className={`flex w-full items-center gap-3 rounded-lg px-2 py-1 text-left text-sm ${
+                onClick={() => {
+                  setDayFilter(active ? null : d.key);
+                  if (!active) setTab(d.key === "later" ? "kiitus" : "programm");
+                }}
+                className={`w-full rounded-lg px-2 py-1 text-left text-sm ${
                   active ? "bg-primary/10 font-semibold" : ""
                 }`}
               >
-                <span className={d.key === "later" ? "w-28 shrink-0 leading-tight" : "w-14 shrink-0"}>{d.label}</span>
-                <div className="h-3 flex-1 rounded-full bg-muted">
-                  <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
-                </div>
-                <span className="w-6 text-right">{d.n}</span>
+                {d.key === "later" ? (
+                  <div>
+                    <div className="leading-tight">{d.label}</div>
+                    <div className="mt-1.5 flex items-center gap-3">
+                      <div aria-hidden="true" className="w-14 shrink-0" />
+                      {bar}
+                      {num}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    <span className="w-14 shrink-0">{d.label}</span>
+                    {bar}
+                    {num}
+                  </div>
+                )}
               </button>
             );
           })}
