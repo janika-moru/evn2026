@@ -94,6 +94,7 @@ function WeekPage() {
     })),
     ...(after ? [{ key: "later", label: "Hiljem", n: after }] : []),
   ];
+  const dayMax = Math.max(1, ...dayOptions.map((d) => d.n));
 
   return (
     <main className="px-4 pt-8 pb-10">
