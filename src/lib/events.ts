@@ -1085,3 +1085,42 @@ export function statusLabel(status: RegistrationStatus): string {
       return "Registreerimine lõppenud";
   }
 }
+
+/** Slaidilehe rida — üks koolitus (Morning Mindseti seeria ühe reana). */
+export type SlidesPageRow = {
+  event: EventItem;
+  /** Koolitaja kuvatav nimi (duodel firma nimi, nt „Papsid"). */
+  speakerName: string;
+  /** Slaidide link (kui materjal on olemas). */
+  slidesUrl?: string;
+  /** Eraldi lisamaterjal (nt töövihik), kui see on olemas. */
+  materials?: { url: string; label: string };
+  /** Koolitus jäi ära — slaidid ei tule. */
+  cancelled?: boolean;
+};
+
+/** Kõik koolitused ajajärjekorras koos slaidide infoga — slaidide lehe jaoks. */
+export function slidesPageRows(): SlidesPageRow[] {
+  const seriesSeen = new Set<string>();
+  return [...EVENTS]
+    .filter((event) => event.id !== "202960") // lõpuõhtu on võrgustumine, mitte koolitus
+    .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
+    .flatMap((event) => {
+      if (event.seriesUrl) {
+        if (seriesSeen.has(event.seriesUrl)) return [];
+        seriesSeen.add(event.seriesUrl);
+      }
+      const speaker = trainingSpeakerForEvent(event.id);
+      return [
+        {
+          event,
+          speakerName: speaker ? (speaker.displayName ?? speaker.name) : event.speaker,
+          slidesUrl: event.slidesUrl ?? event.materialsUrl,
+          materials: event.materialsUrl
+            ? { url: event.materialsUrl, label: event.materialsLabel ?? "Lisamaterjalid" }
+            : undefined,
+          cancelled: event.id === "202957", // Kukkumiskaitse koolitus jäi ära
+        },
+      ];
+    });
+}
