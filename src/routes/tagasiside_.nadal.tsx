@@ -135,7 +135,10 @@ function WeekPage() {
               <button
                 key={d.key}
                 type="button"
-                onClick={() => setDayFilter(active ? null : d.key)}
+                onClick={() => {
+                  setDayFilter(active ? null : d.key);
+                  if (!active) setTab(d.key === "later" ? "kiitus" : "programm");
+                }}
                 className={`flex w-full items-center gap-3 rounded-lg px-2 py-1 text-left text-sm ${
                   active ? "bg-primary/10 font-semibold" : ""
                 }`}
