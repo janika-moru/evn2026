@@ -143,7 +143,7 @@ function WeekPage() {
                   active ? "bg-primary/10 font-semibold" : ""
                 }`}
               >
-                <span className={d.key === "later" ? "w-28 shrink-0 leading-tight" : "w-14 shrink-0"}>{d.label}</span>
+                <span className={d.key === "later" ? "w-40 shrink-0 leading-tight" : "w-14 shrink-0"}>{d.label}</span>
                 <div className="h-3 flex-1 rounded-full bg-muted">
                   <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
                 </div>
