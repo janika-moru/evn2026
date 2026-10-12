@@ -17,6 +17,7 @@ import { Route as KavaRouteImport } from './routes/kava'
 import { Route as KoolitajadRouteImport } from './routes/koolitajad'
 import { Route as MinuKavaRouteImport } from './routes/minu-kava'
 import { Route as PrivaatsusRouteImport } from './routes/privaatsus'
+import { Route as SlaididRouteImport } from './routes/slaidid'
 import { Route as TagasisideRouteImport } from './routes/tagasiside'
 import { Route as SundmusIdRouteImport } from './routes/sundmus.$id'
 import { Route as TagasisideSlugRouteImport } from './routes/tagasiside_.$slug'
@@ -65,6 +66,11 @@ const MinuKavaRoute = MinuKavaRouteImport.update({
 const PrivaatsusRoute = PrivaatsusRouteImport.update({
   id: '/privaatsus',
   path: '/privaatsus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SlaididRoute = SlaididRouteImport.update({
+  id: '/slaidid',
+  path: '/slaidid',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TagasisideRoute = TagasisideRouteImport.update({
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/koolitajad': typeof KoolitajadRoute
   '/minu-kava': typeof MinuKavaRoute
   '/privaatsus': typeof PrivaatsusRoute
+  '/slaidid': typeof SlaididRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/tagasiside/$slug': typeof TagasisideSlugRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/koolitajad': typeof KoolitajadRoute
   '/minu-kava': typeof MinuKavaRoute
   '/privaatsus': typeof PrivaatsusRoute
+  '/slaidid': typeof SlaididRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/tagasiside/$slug': typeof TagasisideSlugRoute
@@ -163,6 +171,7 @@ export interface FileRoutesById {
   '/koolitajad': typeof KoolitajadRoute
   '/minu-kava': typeof MinuKavaRoute
   '/privaatsus': typeof PrivaatsusRoute
+  '/slaidid': typeof SlaididRoute
   '/tagasiside': typeof TagasisideRoute
   '/sundmus/$id': typeof SundmusIdRoute
   '/tagasiside_/$slug': typeof TagasisideSlugRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/koolitajad'
     | '/minu-kava'
     | '/privaatsus'
+    | '/slaidid'
     | '/tagasiside'
     | '/sundmus/$id'
     | '/tagasiside/$slug'
@@ -203,6 +213,7 @@ export interface FileRouteTypes {
     | '/koolitajad'
     | '/minu-kava'
     | '/privaatsus'
+    | '/slaidid'
     | '/tagasiside'
     | '/sundmus/$id'
     | '/tagasiside/$slug'
@@ -222,6 +233,7 @@ export interface FileRouteTypes {
     | '/koolitajad'
     | '/minu-kava'
     | '/privaatsus'
+    | '/slaidid'
     | '/tagasiside'
     | '/sundmus/$id'
     | '/tagasiside_/$slug'
@@ -242,6 +254,7 @@ export interface RootRouteChildren {
   KoolitajadRoute: typeof KoolitajadRoute
   MinuKavaRoute: typeof MinuKavaRoute
   PrivaatsusRoute: typeof PrivaatsusRoute
+  SlaididRoute: typeof SlaididRoute
   TagasisideRoute: typeof TagasisideRoute
   SundmusIdRoute: typeof SundmusIdRoute
   TagasisideSlugRoute: typeof TagasisideSlugRoute
@@ -309,6 +322,13 @@ declare module '@tanstack/react-router' {
       path: '/privaatsus'
       fullPath: '/privaatsus'
       preLoaderRoute: typeof PrivaatsusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/slaidid': {
+      id: '/slaidid'
+      path: '/slaidid'
+      fullPath: '/slaidid'
+      preLoaderRoute: typeof SlaididRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tagasiside': {
@@ -386,6 +406,7 @@ const rootRouteChildren: RootRouteChildren = {
   KoolitajadRoute: KoolitajadRoute,
   MinuKavaRoute: MinuKavaRoute,
   PrivaatsusRoute: PrivaatsusRoute,
+  SlaididRoute: SlaididRoute,
   TagasisideRoute: TagasisideRoute,
   SundmusIdRoute: SundmusIdRoute,
   TagasisideSlugRoute: TagasisideSlugRoute,
