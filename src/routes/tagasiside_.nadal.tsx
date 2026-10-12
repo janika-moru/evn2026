@@ -42,6 +42,8 @@ function WeekPage() {
   const fetchRows = useServerFn(getWeekFeedback);
   const q = useQuery({ queryKey: ["week-feedback"], queryFn: () => fetchRows() });
   const [tab, setTab] = useState<Tab>("programm");
+  const [dayFilter, setDayFilter] = useState<string | null>(null);
+  const [speakerFilter, setSpeakerFilter] = useState<string | null>(null);
   if (q.isLoading) return <p className="px-4 pt-8 text-muted-foreground">Laen…</p>;
   if (!q.data) return <p className="px-4 pt-8">Laadimine ebaõnnestus.</p>;
 
@@ -66,14 +68,33 @@ function WeekPage() {
 
   const counts = Array.from({ length: 10 }, (_, k) => training.filter((r) => r.rating === k + 1).length);
   const max = Math.max(1, ...counts);
-  const dayCounts = DAYS.map(([d, label]) => ({
-    label,
-    n: rows.filter((r) => tallinnDate(r.createdAt) === d).length,
-  }));
   const after = rows.filter((r) => tallinnDate(r.createdAt) > "2026-10-09").length;
-  const dayMax = Math.max(1, after, ...dayCounts.map((d) => d.n));
 
-  const list = tab === "kiitus" ? keep : tab === "ettepanek" ? change : training;
+  const speakerNameOf = (r: WeekFeedbackRow) =>
+    (r.eventId && trainingSpeakerForEvent(r.eventId)?.name) ||
+    (r.eventId && getEvent(r.eventId)?.title) ||
+    "Muu";
+
+  const inDay = (r: WeekFeedbackRow) => {
+    if (!dayFilter) return true;
+    const d = tallinnDate(r.createdAt);
+    return dayFilter === "later" ? d > "2026-10-09" : d === dayFilter;
+  };
+  const inSpeaker = (r: WeekFeedbackRow) =>
+    !speakerFilter || (r.type === "training" && speakerNameOf(r) === speakerFilter);
+
+  const baseList = tab === "kiitus" ? keep : tab === "ettepanek" ? change : training;
+  const list = baseList.filter((r) => inDay(r) && inSpeaker(r));
+
+  const dayOptions: { key: string; label: string; n: number }[] = [
+    ...DAYS.map(([d, label]) => ({
+      key: d,
+      label,
+      n: rows.filter((r) => tallinnDate(r.createdAt) === d).length,
+    })),
+    ...(after ? [{ key: "later", label: "Hiljem", n: after }] : []),
+  ];
+  const dayMax = Math.max(1, ...dayOptions.map((d) => d.n));
 
   return (
     <main className="px-4 pt-8 pb-10">
@@ -102,15 +123,25 @@ function WeekPage() {
       <section className="mt-4 rounded-2xl border border-border bg-card p-5">
         <h2 className="font-semibold">Päevade kaupa</h2>
         <div className="mt-3 space-y-2">
-          {[...dayCounts, ...(after ? [{ label: "Hiljem", n: after }] : [])].map((d) => (
-            <div key={d.label} className="flex items-center gap-3 text-sm">
-              <span className="w-14 shrink-0">{d.label}</span>
-              <div className="h-3 flex-1 rounded-full bg-muted">
-                <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
-              </div>
-              <span className="w-6 text-right">{d.n}</span>
-            </div>
-          ))}
+          {dayOptions.map((d) => {
+            const active = dayFilter === d.key;
+            return (
+              <button
+                key={d.key}
+                type="button"
+                onClick={() => setDayFilter(active ? null : d.key)}
+                className={`flex w-full items-center gap-3 rounded-lg px-2 py-1 text-left text-sm ${
+                  active ? "bg-primary/10 font-semibold" : ""
+                }`}
+              >
+                <span className="w-14 shrink-0">{d.label}</span>
+                <div className="h-3 flex-1 rounded-full bg-muted">
+                  <div className="h-3 rounded-full bg-primary" style={{ width: `${(d.n / dayMax) * 100}%` }} />
+                </div>
+                <span className="w-6 text-right">{d.n}</span>
+              </button>
+            );
+          })}
         </div>
       </section>
 
@@ -118,13 +149,23 @@ function WeekPage() {
         <h2 className="font-semibold">Koolitajad</h2>
         <table className="mt-3 w-full text-sm">
           <tbody>
-            {speakerRows.map((s) => (
-              <tr key={s.name} className="border-t border-border">
-                <td className="py-2 pr-2">{s.name}</td>
-                <td className="py-2 text-right text-muted-foreground">{s.n}</td>
-                <td className="py-2 pl-3 text-right font-semibold">{s.avg != null ? fmt(s.avg) : "–"}</td>
-              </tr>
-            ))}
+            {speakerRows.map((s) => {
+              const active = speakerFilter === s.name;
+              return (
+                <tr
+                  key={s.name}
+                  onClick={() => {
+                    setSpeakerFilter(active ? null : s.name);
+                    if (!active) setTab("programm");
+                  }}
+                  className={`cursor-pointer border-t border-border ${active ? "bg-primary/10 font-semibold" : ""}`}
+                >
+                  <td className="py-2 pr-2">{s.name}</td>
+                  <td className="py-2 text-right text-muted-foreground">{s.n}</td>
+                  <td className="py-2 pl-3 text-right font-semibold">{s.avg != null ? fmt(s.avg) : "–"}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </section>
@@ -150,7 +191,34 @@ function WeekPage() {
         ))}
       </div>
 
+      {(dayFilter || speakerFilter) && (
+        <div className="mt-4 flex items-center gap-2 text-sm">
+          <span className="text-muted-foreground">Filter:</span>
+          <span className="rounded-full bg-primary/10 px-3 py-1 font-semibold">
+            {[
+              dayFilter && (dayFilter === "later" ? "Hiljem" : DAYS.find(([d]) => d === dayFilter)?.[1]),
+              speakerFilter,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setDayFilter(null);
+              setSpeakerFilter(null);
+            }}
+            className="font-semibold text-primary"
+          >
+            ✕ Eemalda
+          </button>
+        </div>
+      )}
+
       <div className="mt-4 space-y-3">
+        {list.filter((r) => r.message?.trim()).length === 0 && (
+          <p className="text-sm text-muted-foreground">Selle valikuga tagasisidet pole.</p>
+        )}
         {list.filter((r) => r.message?.trim()).map((r) => (
           <figure key={r.id} className="rounded-2xl bg-mindz-pink p-5">
             <p className="text-xs text-muted-foreground">
