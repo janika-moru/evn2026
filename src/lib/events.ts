@@ -494,6 +494,7 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/mida-koolituse-tellimisel-labi-moelda-kiia-paal-studio-mindzis",
     "registrationUrl": "https://fienta.com/mida-koolituse-tellimisel-labi-moelda-kiia-paal-studio-mindzis",
+    "slidesUrl": "https://claude.ai/artifact/5MTaP8jmESZBGq2qmcewP6",
     "registrationStatus": "open"
   },
   {
