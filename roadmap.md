@@ -66,4 +66,4 @@
 
 - [x] Minu kava: ainult tagasiside ja materjalid, isiklik olek ning käsitsi märkimine
 
-- [ ] Jagatav Minu kava, lühendatud Info ja registreeringupõhine materjalide ligipääs
+- [x] Jagatav Minu kava, lühendatud Info ja registreeringupõhine materjalide ligipääs
