@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { getRequestHeader } from "@tanstack/react-start/server";
 
 const text = (max: number) => z.string().trim().max(max).nullish();
 
@@ -76,6 +77,27 @@ export const submitFeedback = createServerFn({ method: "POST" })
     if (error || !row) {
       console.error("feedback insert failed", error);
       return { ok: false as const };
+    }
+
+    // Associate completion only with a server-verified account, never the form contact.
+    if (data.feedback_type === "training" && data.event_id) {
+      const header = getRequestHeader("authorization");
+      const token = header?.startsWith("Bearer ") ? header.slice(7) : undefined;
+      if (token) {
+        const { data: identity, error: authError } = await supabaseAdmin.auth.getUser(token);
+        const user = identity.user;
+        if (!authError && user?.email) {
+          const { data: registration } = await supabaseAdmin.from("registrations")
+            .select("id").eq("email_normalized", user.email.trim().toLowerCase())
+            .eq("fienta_event_id", data.event_id).limit(1).maybeSingle();
+          if (registration) {
+            const { error: completionError } = await supabaseAdmin.from("feedback_completion").upsert({
+              user_id: user.id, event_id: data.event_id, registration_id: registration.id, submitted: true,
+            }, { onConflict: "user_id,event_id" });
+            if (completionError) console.error("feedback completion save failed");
+          }
+        }
+      }
     }
 
     // Teavituskiri — ebaõnnestumine ei tohi osaleja jaoks tagasisidet katki teha

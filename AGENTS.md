@@ -16,7 +16,7 @@
 - Repeated sessions are tagged with seriesUrl on EVENTS and collapsed to one row by speakerEventRows() (src/lib/events.ts) — keeps the koolitajad list scannable and links to the Fienta series page instead of five near-duplicate events.
 - Event dates and times stay in ISO/Fienta format internally and are localized only for display through helpers in src/lib/events.ts — preserves sorting, comparisons, and calendar exports.
 - Brand tints are semantic tokens in src/styles.css (@theme --color-mindz-*), e.g. --color-mindz-mint for the light-green team card — never hardcode hex in components, so theming and dark mode keep working.
-- Registered-event actions are shared through RegisteredEventActions in both Minu kava and the event detail — keeps feedback, slides, and speaker contacts identical on both paths.
+- RegisteredEventActions shares material rendering; Minu kava uses a completion-aware actions variant while event-detail actions stay independent, so page-specific simplification does not remove other workflows.
 - Fienta sync throttling uses DB function try_start_fienta_sync (advisory lock) called only from server; runs in background from Minu kava only — atomic, avoids parallel syncs.
 - Fienta raw payloads are never persisted (registrations/webhook_logs); webhook_logs purged after 30 days via pg_cron — GDPR data minimisation.
 
@@ -28,3 +28,5 @@
 - Trainer questions (trainer_questions/votes) are server-function-only; access is checked against the caller's Fienta registration, question ownership follows the normalized account email across devices, and public trainer links /<slug> map via QUESTION_SLUGS — keeps writes validated and links readable.
 - Trainer feedback dashboard /tagasiside/<slug> is open by URL (no code, per user decision) and server-function-only; contact/photo fields are never returned — feedback PII stays private.
 - Trainer feedback responses include the explicit publication-consent flag without filtering entries, so the dashboard can identify feedback that must not be republished.
+
+- Personal feedback completion is account/event scoped, read through authenticated RPCs and recorded only after feedback insertion with a verified bearer; manual flags never create feedback, and registration foreign keys cascade during existing cleanup.

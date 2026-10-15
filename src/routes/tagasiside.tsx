@@ -1,6 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { loadFeedbackProfile, saveFeedbackProfile } from "@/lib/feedback-profile";
 import { useEffect, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { feedbackCompletionKey } from "@/hooks/use-feedback-completion";
 import { ArrowLeft, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star } from "lucide-react";
 import type { Speaker } from "@/lib/events";
 import { EVENTS, getEvent, dayLabel, displayTime, trainingSpeakerForEvent } from "@/lib/events";
@@ -52,6 +55,8 @@ const TYPES: { id: FType; label: string; short: string; icon: typeof HeartHandsh
 ];
 
 function FeedbackPage() {
+  const queryClient = useQueryClient();
+  const sendFeedback = useServerFn(submitFeedback);
   const { sundmus } = Route.useSearch();
   const fromEvent = sundmus && getEvent(sundmus) ? sundmus : null;
   // Minu kava „Anna tagasisidet" avab sama koolitaja vormi, mis koolitaja
@@ -135,7 +140,7 @@ function FeedbackPage() {
     let dbErr = false;
     let limited = false;
     try {
-      const res = await submitFeedback({
+      const res = await sendFeedback({
         data: {
           event_id: training ? target : null,
           feedback_type: type,
@@ -167,6 +172,7 @@ function FeedbackPage() {
     }
     // Ainult kasutaja nõusolekul: nimi, roll ja meiliaadress selles seadmes (fotot ei hoita)
     saveFeedbackProfile(remember, { name, field, contact });
+    void queryClient.invalidateQueries({ queryKey: feedbackCompletionKey });
     setSent(type);
   }
 
@@ -230,6 +236,7 @@ function FeedbackPage() {
           <SpeakerFeedbackForm
             key={speaker.id}
             speaker={speaker}
+            eventId={fromEvent ?? undefined}
             startOpen
             onClose={() => navigate({ to: "/minu-kava" })}
           />

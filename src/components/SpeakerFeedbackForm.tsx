@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { feedbackCompletionKey } from "@/hooks/use-feedback-completion";
 import { CheckCircle2, GraduationCap, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { submitFeedback } from "@/lib/feedback.functions";
@@ -17,11 +20,15 @@ export function SpeakerFeedbackForm({
   speaker,
   startOpen = false,
   onClose,
+  eventId,
 }: {
   speaker: Speaker;
+  eventId?: string | undefined;
   startOpen?: boolean;
   onClose?: () => void;
 }) {
+  const queryClient = useQueryClient();
+  const sendFeedback = useServerFn(submitFeedback);
   const [open, setOpen] = useState(startOpen);
   const [rating, setRating] = useState<number | null>(null);
   const [message, setMessage] = useState("");
@@ -128,9 +135,9 @@ export function SpeakerFeedbackForm({
     let dbErr = false;
     let limited = false;
     try {
-      const res = await submitFeedback({
+      const res = await sendFeedback({
         data: {
-          event_id: eventOptions[0]?.id ?? null,
+          event_id: eventId ?? eventOptions[0]?.id ?? null,
           speaker_id: speaker.id,
           feedback_type: "training",
           message: message.trim() || null,
@@ -159,6 +166,7 @@ export function SpeakerFeedbackForm({
     }
     // Ainult kasutaja nõusolekul: nimi, roll ja meil selles seadmes (fotot ei hoita)
     saveFeedbackProfile(remember, { name, field, contact });
+    void queryClient.invalidateQueries({ queryKey: feedbackCompletionKey });
     setSent(true);
   }
 

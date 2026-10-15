@@ -63,3 +63,5 @@
 - [x] Minu kava: koolitaja pilt, nimi ja lingid ühe tiheda plokina — nimi joondub pildi ülemise, lingid pildi alumise äärega
 - [x] Sotsiaalmeedia: „Jälgi ettevõtlusnädala melu sotsiaalmeediast" — Instagram ja Facebook ikoonidena Kava lehe all (tekst vasakul, ikoonid paremal)
 - [x] Lõpuõhtu korraldajaks Studio MindZ — korraldaja pilt (üleslaaditud foto) + Instagram ja Facebook lingid Kava kaardil ja sündmuse lehel
+
+- [ ] Minu kava: ainult tagasiside ja materjalid, isiklik olek ning käsitsi märkimine
