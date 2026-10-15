@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Värvilised Minu kava kaardid, stuudio tagasiside koolituste ees ja kahe valikuga menüü
+- [x] Värvilised Minu kava kaardid, stuudio tagasiside koolituste ees ja kahe valikuga menüü
 
 - [x] Tagasiside alumise menüü punktiks; hõljuv nupp eemaldatud
 - [x] „Täna“ leht eemaldatud; `/` suunab Kava lehele
