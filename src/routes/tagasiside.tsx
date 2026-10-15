@@ -9,7 +9,8 @@ import type { Speaker } from "@/lib/events";
 import { EVENTS, getEvent, dayLabel, displayTime, trainingSpeakerForEvent } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
 import { submitFeedback } from "@/lib/feedback.functions";
-import { MeeskondRow, KoolitajadPills } from "@/components/SpeakersTeamLinks";
+import { KoolitajadPills } from "@/components/SpeakersTeamLinks";
+import { StudioFeedbackSection } from "@/components/StudioFeedbackSection";
 import { SpeakerFeedbackForm } from "@/components/SpeakerFeedbackForm";
 
 
@@ -248,35 +249,7 @@ function FeedbackPage() {
   if (!type) {
     return (
       <main className="px-4 pt-6 pb-8">
-        <section className="rounded-3xl border border-primary/25 bg-mindz-mint p-4">
-          <h2 className="text-base font-semibold">Jäta tagasiside tiimile</h2>
-          <div className="mt-3">
-            <MeeskondRow />
-          </div>
-
-          <div className="mt-4 grid gap-2">
-            {TYPES.filter((item) => item.id !== "training").map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setType(item.id)}
-                className="flex items-center gap-3 rounded-2xl border border-primary/20 bg-background/70 px-4 py-3.5 text-sm font-semibold transition active:scale-[0.98]"
-              >
-                <item.icon className="size-5 shrink-0 text-primary" />
-                <span className="flex-1 text-center">
-                  {item.id === "keep" ? "Kiidan korraldust, ruume või tiimi" : "Parandusettepanek korraldusele, ruumidele või tiimile"}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <a
-            href={GOOGLE_REVIEW_URL}
-            className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-mindz-pink p-4 text-sm font-semibold transition active:scale-[0.98]"
-          >
-            <Star className="size-5 text-primary" />
-            Lisa Google arvustus
-          </a>
-        </section>
+        <StudioFeedbackSection />
 
         <KoolitajadPills onSelect={setSpeaker} selectedId={speaker?.id ?? null}>
           {speaker && (
