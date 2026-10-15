@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Värvilised Minu kava kaardid, stuudio tagasiside koolituste ees ja kahe valikuga menüü
+
 - [x] Tagasiside alumise menüü punktiks; hõljuv nupp eemaldatud
 - [x] „Täna“ leht eemaldatud; `/` suunab Kava lehele
 - [x] „Järgmine sündmus“ plokk Kava lehel eemaldatud; päevade riba näitab iga päeva koolituste arvu ja valitud päev tuhub nimekirjaga sisse

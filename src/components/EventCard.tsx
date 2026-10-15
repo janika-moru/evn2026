@@ -94,19 +94,22 @@ export function EventCard({
   actions,
   hideRegisteredBadge = false,
   large = false,
+  mutePast = true,
 }: {
   event: EventItem;
   showDate?: boolean;
   actions?: ReactNode;
   hideRegisteredBadge?: boolean;
   large?: boolean;
+  mutePast?: boolean;
 }) {
   const { session, ids } = useMyRegistrations();
   const { availableSpots } = useEventAvailability(event.fientaEventId);
   const status = effectiveStatus(event, ids);
   const displayStatus = status === "open" && availableSpots === 0 ? "full" : status;
   const registered = displayStatus === "registered";
-  const past = useIsPast(event);
+  const isPast = useIsPast(event);
+  const past = mutePast && isPast;
 
   const eventLink =
     "block rounded-xl transition-colors active:bg-secondary/60";

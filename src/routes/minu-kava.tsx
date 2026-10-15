@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { RegisteredEventActions } from "@/components/RegisteredEventActions";
 import { EventCard } from "@/components/EventCard";
+import { StudioFeedbackSection } from "@/components/StudioFeedbackSection";
 import { useFeedbackCompletion } from "@/hooks/use-feedback-completion";
 import type { FeedbackCompletion } from "@/lib/feedback-completion";
 import { EVENTS, type EventItem } from "@/lib/events";
@@ -21,16 +22,16 @@ const BENEFITS = [
 export const Route = createFileRoute("/minu-kava")({
   head: () => ({
     meta: [
-      { title: "Minu kava — Studio MindZ 2026" },
+      { title: "Koolitajate slaidid ja tagasiside — Studio MindZ 2026" },
       {
         name: "description",
         content:
-          "Oma koolituste materjalid ja tagasisideolek. Logi sisse sama meiliaadressiga, mida kasutasid Fientas.",
+          "Koolitajate slaidid, oma tagasisideolek ja tagasiside Studio MindZi tiimile. Logi sisse sama meiliaadressiga, mida kasutasid Fientas.",
       },
-      { property: "og:title", content: "Minu kava — Studio MindZ 2026" },
+      { property: "og:title", content: "Koolitajate slaidid ja tagasiside — Studio MindZ 2026" },
       {
         property: "og:description",
-        content: "Oma koolituste materjalid ja tagasisideolek.",
+        content: "Koolitajate slaidid, oma tagasisideolek ja tagasiside Studio MindZi tiimile.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -46,7 +47,8 @@ function MySchedulePage() {
 
   return (
     <main className="px-4 pt-8">
-      <h1 className="text-2xl font-bold">Minu kava</h1>
+      <h1 className="text-2xl font-bold">Koolitajate slaidid ja tagasiside</h1>
+      <StudioFeedbackSection className="mt-6 mb-6" returnLabel="Tagasi slaidide juurde" />
 
       {!ready ? (
         <p className="mt-4 text-[15px] text-muted-foreground">Laen…</p>
@@ -241,6 +243,7 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
       showDate
       hideRegisteredBadge
       large
+      mutePast={false}
       actions={<RegisteredEventActions event={event} large feedbackState={feedbackState} />}
     />
   );
