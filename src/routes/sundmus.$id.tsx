@@ -54,11 +54,11 @@ function EventDetailPage() {
   return (
     <main className="px-4 pt-6">
       <Link
-        to="/kava"
+        to="/minu-kava"
         search={{}}
         className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground"
       >
-        <ArrowLeft className="size-4" /> Tagasi kava juurde
+        <ArrowLeft className="size-4" /> Tagasi Minu kavasse
       </Link>
 
       <p className="mt-5 text-sm font-semibold text-primary">
@@ -101,30 +101,6 @@ function EventDetailPage() {
           </div>
         )}
         {displayStatus === "full" && <SoldOutPill className="w-full py-3.5 text-base" />}
-        {status !== "registered" && (event.slidesUrl || event.materialsUrl) && (
-          <div className="flex flex-col gap-2">
-            {event.slidesUrl && (
-              <a
-                href={event.slidesUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-center rounded-full border-2 border-primary px-5 py-3 text-base font-semibold text-primary"
-              >
-                Vaata slaide
-              </a>
-            )}
-            {event.materialsUrl && event.materialsUrl !== event.slidesUrl && (
-              <a
-                href={event.materialsUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-center rounded-full border-2 border-primary px-5 py-3 text-base font-semibold text-primary"
-              >
-                {event.materialsLabel ?? "Lisamaterjalid"}
-              </a>
-            )}
-          </div>
-        )}
         {status === "registered" && (
           <>
             <p className="text-sm font-semibold text-primary">

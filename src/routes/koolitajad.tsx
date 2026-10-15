@@ -2,8 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   speakersInListOrder,
   speakerEventRows,
-  speakerSlidesUrl,
-  speakerMaterials,
   isTeamSpeaker,
   initials,
   dayLabel,
@@ -15,16 +13,16 @@ import { SpeakerFeedbackForm } from "@/components/SpeakerFeedbackForm";
 export const Route = createFileRoute("/koolitajad")({
   head: () => ({
     meta: [
-      { title: "Koolitajad & materjalid — Studio MindZ 2026" },
+      { title: "Koolitajad — Studio MindZ 2026" },
       {
         name: "description",
         content:
-          "Studio MindZi ettevõtlusnädala koolitajate kontaktid, sündmused ja koolitusmaterjalid.",
+          "Studio MindZi ettevõtlusnädala koolitajate kontaktid ja sündmused.",
       },
-      { property: "og:title", content: "Koolitajad & materjalid — Studio MindZ 2026" },
+      { property: "og:title", content: "Koolitajad — Studio MindZ 2026" },
       {
         property: "og:description",
-        content: "Koolitajate kontaktid, sündmused ja materjalid ühes kohas.",
+        content: "Koolitajate kontaktid ja sündmused ühes kohas.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -38,7 +36,6 @@ export const Route = createFileRoute("/koolitajad")({
 
 const contactLink =
   "text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-foreground";
-const disabledLink = "text-muted-foreground/45";
 
 function SpeakersPage() {
   return (
@@ -48,17 +45,15 @@ function SpeakersPage() {
         alt="Tartu Ettevõtlusnädala koolitajad, 5.–9. oktoober Studio MindZis"
         className="w-full rounded-2xl"
       />
-      <h1 className="mt-4 text-2xl font-bold">Koolitajad &amp; materjalid</h1>
+      <h1 className="mt-4 text-2xl font-bold">Koolitajad</h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Kontaktid ja materjalid leiad siit ka pärast koolitust.
+        
       </p>
 
       <div className="mt-5 space-y-4">
         {speakersInListOrder().map((s) => {
           const rows = speakerEventRows(s);
           const team = isTeamSpeaker(s);
-          const slidesUrl = speakerSlidesUrl(s);
-          const materials = speakerMaterials(s);
           return (
             <article
               id={s.id}
@@ -163,18 +158,6 @@ function SpeakersPage() {
                 {s.instagramUrl && (
                   <a href={s.instagramUrl} target="_blank" rel="noreferrer" className={contactLink}>
                     Instagram
-                  </a>
-                )}
-                {slidesUrl ? (
-                  <a href={slidesUrl} target="_blank" rel="noreferrer" className={contactLink}>
-                    Slaidid
-                  </a>
-                ) : (
-                  <span className={disabledLink}>Slaidid</span>
-                )}
-                {materials && (
-                  <a href={materials.url} target="_blank" rel="noreferrer" className={contactLink}>
-                    {materials.label}
                   </a>
                 )}
               </div>
