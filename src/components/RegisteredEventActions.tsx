@@ -16,6 +16,7 @@ import { TicketQr } from "@/components/TicketQr";
 import { WithdrawButton } from "@/components/WithdrawButton";
 import type { FeedbackCompletion } from "@/lib/feedback-completion";
 import { FeedbackCompletionButton } from "@/components/FeedbackCompletionButton";
+import { useMyMaterials } from "@/hooks/use-my-materials";
 
 /** Koolitaja nimi ja kontaktlingid on kaardi pealkirja all (SpeakerLinks). */
 export function RegisteredEventActions({
@@ -27,10 +28,12 @@ export function RegisteredEventActions({
   large?: boolean;
   feedbackState?: { completion?: FeedbackCompletion | undefined; loading: boolean; failed: boolean; retry: () => void } | undefined;
 }) {
-  const slidesUrl = event.slidesUrl ?? event.materialsUrl;
+  const materialQuery = useMyMaterials();
+  const material = materialQuery.data?.[event.fientaEventId ?? event.id];
+  const slidesUrl = material?.slidesUrl ?? material?.materialsUrl;
   // Eraldi lisamaterjal (nt töövihik), kui seda pole slaidiga ühte panna.
   const materialsUrl =
-    event.materialsUrl && event.materialsUrl !== slidesUrl ? event.materialsUrl : undefined;
+    material?.materialsUrl && material.materialsUrl !== slidesUrl ? material.materialsUrl : undefined;
 
   // large (Minu kava): 52px kõrgused nupud, 15px tekst ja 44px tabamisalad.
   // Telefonis üks nupp rea kohta, et tekst mahuks mugavalt ära.
@@ -49,7 +52,7 @@ export function RegisteredEventActions({
           Anna tagasisidet
         </Link>
       </Button>}
-      {event.letter ? (
+      {materialQuery.isPending ? <p className="text-sm text-muted-foreground">Laen materjale…</p> : materialQuery.isError ? <Button variant="outline" className={btn} onClick={() => { void materialQuery.refetch(); }}>Proovi materjale uuesti laadida</Button> : material?.letter ? (
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="outline" className={btn}>
@@ -63,7 +66,7 @@ export function RegisteredEventActions({
               <DialogDescription className="sr-only">{event.title}</DialogDescription>
             </DialogHeader>
             <div className="whitespace-pre-line text-base leading-relaxed">
-              {event.letter.trim().split(/(https?:\/\/\S+)/g).map((part, i) =>
+              {material.letter.trim().split(/(https?:\/\/\S+)/g).map((part, i) =>
                 /^https?:\/\//.test(part) ? (
                   <a key={i} href={part} target="_blank" rel="noreferrer" className="underline underline-offset-2">
                     {part}
@@ -100,7 +103,7 @@ export function RegisteredEventActions({
         >
           <a href={materialsUrl} target="_blank" rel="noreferrer">
             <BookOpen />
-            {event.materialsLabel ?? "Lisamaterjalid"}
+            {material?.materialsLabel ?? "Lisamaterjalid"}
           </a>
         </Button>
       )}
