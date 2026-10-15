@@ -116,6 +116,38 @@ export type Database = {
         }
         Relationships: []
       }
+      feedback_completion: {
+        Row: {
+          event_id: string
+          manual: boolean
+          registration_id: string | null
+          submitted: boolean
+          user_id: string
+        }
+        Insert: {
+          event_id: string
+          manual?: boolean
+          registration_id?: string | null
+          submitted?: boolean
+          user_id: string
+        }
+        Update: {
+          event_id?: string
+          manual?: boolean
+          registration_id?: string | null
+          submitted?: boolean
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_completion_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       registrations: {
         Row: {
           attendee_name: string | null
@@ -325,7 +357,19 @@ export type Database = {
         }
         Returns: boolean
       }
+      my_feedback_completion: {
+        Args: never
+        Returns: {
+          event_id: string
+          manual: boolean
+          submitted: boolean
+        }[]
+      }
       run_evn_cleanup: { Args: never; Returns: undefined }
+      set_manual_feedback_completion: {
+        Args: { _event_id: string; _manual: boolean }
+        Returns: undefined
+      }
       try_start_fienta_sync: {
         Args: { _min_interval_seconds: number }
         Returns: boolean
