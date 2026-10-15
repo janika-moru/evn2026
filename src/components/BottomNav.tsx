@@ -1,8 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { CalendarDays, CalendarCheck, Info, MessageSquareHeart } from "lucide-react";
+import { CalendarCheck, Info, MessageSquareHeart } from "lucide-react";
 
 const ITEMS = [
-  { to: "/kava", label: "Kava", icon: CalendarDays },
   { to: "/minu-kava", label: "Minu kava", icon: CalendarCheck },
   { to: "/info", label: "Info", icon: Info },
   { to: "/tagasiside", label: "Tagasiside", icon: MessageSquareHeart },
@@ -16,7 +15,7 @@ export function BottomNav() {
       aria-label="Põhinavigatsioon"
       className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background pb-[env(safe-area-inset-bottom)]"
     >
-      <div className="mx-auto grid max-w-md grid-cols-4 md:max-w-2xl lg:max-w-3xl">
+      <div className="mx-auto grid max-w-md grid-cols-3 md:max-w-2xl lg:max-w-3xl">
         {ITEMS.map(({ to, label, icon: Icon }) => {
           const active = pathname.startsWith(to);
           return (

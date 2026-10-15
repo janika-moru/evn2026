@@ -65,3 +65,5 @@
 - [x] Lõpuõhtu korraldajaks Studio MindZ — korraldaja pilt (üleslaaditud foto) + Instagram ja Facebook lingid Kava kaardil ja sündmuse lehel
 
 - [x] Minu kava: ainult tagasiside ja materjalid, isiklik olek ning käsitsi märkimine
+
+- [x] Jagatav Minu kava, lühendatud Info ja registreeringupõhine materjalide ligipääs

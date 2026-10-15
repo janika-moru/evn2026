@@ -28,10 +28,11 @@ export function useMyRegistrations() {
     queryKey: ["my-registrations", email],
     enabled: !!email,
     queryFn: async () => {
+      if (!email) return { ids: new Set<string>(), codes: new Map<string, string[]>() };
       const { data, error } = await supabase
         .from("registrations")
         .select("fienta_event_id, status, ticket_code")
-        .eq("email_normalized", email!.trim().toLowerCase());
+        .eq("email_normalized", email.trim().toLowerCase());
       if (error) throw error;
       const active = (data ?? []).filter((r) => !/cancel|refund|tühist/i.test(r.status));
       const codes = new Map<string, string[]>();
@@ -69,6 +70,7 @@ export function useFientaBackgroundSync(email: string | null) {
       .then((r) => {
         if (cancelled || !r || r.skipped) return;
         qc.invalidateQueries({ queryKey: ["my-registrations", email] });
+        qc.invalidateQueries({ queryKey: ["my-materials"] });
         qc.invalidateQueries({ queryKey: ["event-availability-all"] });
       })
       .catch((e) => console.warn("[sync]", e));

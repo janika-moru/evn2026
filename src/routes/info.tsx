@@ -1,27 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  MapPin,
-  Navigation,
-  Footprints,
-  Car,
-  CircleAlert,
-  Backpack,
-  Clock,
-  Mail,
-  Camera,
-  Building2,
-  Tag,
-  ShieldCheck,
-  Smartphone,
-  Share,
-  ChevronDown,
-  ScrollText,
-  } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Building2, Tag, ShieldCheck } from "lucide-react";
 
 import { MeeskondCard } from "@/components/SpeakersTeamLinks";
 import { RoomGallery } from "@/components/RoomGallery";
-import directionsImage from "@/assets/studio-mindz-asukoht.jpg.asset.json";
 import largeRoomFront from "@/assets/ruum-suur-eest.jpg.asset.json";
 import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
 import meetingRoom from "@/assets/ruum-koosolek.jpg.asset.json";
@@ -49,12 +30,6 @@ import ettn2025MariliisThumb from "@/assets/room-thumbs/ettn2025-mariliis-piikar
 import ettn2025AnuThumb from "@/assets/room-thumbs/ettn2025-anu-tahemaa.webp.asset.json";
 import ettn2025JanikaThumb from "@/assets/room-thumbs/ettn2025-janika-moru.webp.asset.json";
 
-/** Kohale tuleku juhise pilt. */
-const DIRECTIONS_IMAGE_URL: string | null = directionsImage.url;
-
-const MAPS_URL =
-  "https://www.google.com/maps/dir/?api=1&destination=Lutsu+t%C3%A4nav+3%2C+51005+Tartu%2C+Tartu+maakond%2C+Eesti";
-
 const ROOM_IMAGES = [
   { src: kiiaFounder.url, thumb: kiiaFounderThumb.url, alt: "Studio MindZi looja Kiia Paal" },
   { src: room5.url, thumb: room5Thumb.url, alt: "Studio MindZi koolitusruum roheliste tugitoolidega" },
@@ -75,44 +50,19 @@ const ROOM_IMAGES = [
   { src: ettn2025Janika.url, thumb: ettn2025JanikaThumb.url, alt: "Ettevõtlusnädal 2025: Janika Mõru juhendamas rühmatööd" },
 ];
 
-const STEPS: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: Footprints, title: "Saabumine", text: "Hoovis liigu puittrepi juurde ja tule üles 2. korrusele." },
-  { icon: Car, title: "Parkimine", text: "Parkimine toimub linna üldkorra alusel." },
-  {
-    icon: CircleAlert,
-    title: "Vahetusjalanõud!",
-    text: "Puitpõranda kaitseks võib ruumis viibida sokkides või ilma terava kontsata vahetusjalanõudes.",
-  },
-  {
-    icon: Backpack,
-    title: "Võta kaasa",
-    text: "Võta kaasa hea tuju ja märkmete tegemiseks arvuti või märkmik.",
-  },
-  {
-    icon: Clock,
-    title: "Tule 15 minutit varem",
-    text: "Palun jõua kohale vähemalt 15 minutit enne algust. Koolitus algab täpselt märgitud ajal.",
-  },
-  {
-    icon: Camera,
-    title: "Video- ja fotosalvestused",
-    text: "Koolitustest tehakse video- ja fotosalvestusi koolitaja ja Studio MindZi kasutuseks. Kui Sa ei soovi pildile jääda, anna sellest enne koolituse algust korraldajale teada.",
-  },
-];
-
 export const Route = createFileRoute("/info")({
   head: () => ({
     meta: [
-      { title: "Kohale tulek — Studio MindZ 2026" },
+      { title: "Studio ja ruumid — Studio MindZ 2026" },
       {
         name: "description",
         content:
-          "Studio MindZ, Lutsu 3, Tartu, Antoniuse Õuemaja 2. korrus. Kohale tuleku juhis ja kasulik info enne koolitust.",
+          "Studio MindZi meeskond, ruumid, rendiinfo ja andmetöötlustingimused.",
       },
-      { property: "og:title", content: "Kohale tulek — Studio MindZ 2026" },
+      { property: "og:title", content: "Studio ja ruumid — Studio MindZ 2026" },
       {
         property: "og:description",
-        content: "Studio MindZ, Lutsu 3, Tartu, Antoniuse Õuemaja 2. korrus.",
+        content: "Studio MindZi meeskond, ruumid ja andmetöötlustingimused.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -126,114 +76,6 @@ export const Route = createFileRoute("/info")({
 function InfoPage() {
   return (
     <main className="px-4 pt-8">
-      {DIRECTIONS_IMAGE_URL && (
-        <img
-          src={DIRECTIONS_IMAGE_URL}
-          alt="Studio MindZ asukoht: Lutsu 3, Tartu, Antoniuse õuemaja — puittrepp viib teisele korrusele"
-          className="w-full rounded-2xl object-cover"
-        />
-      )}
-
-      <section className="mt-4 rounded-2xl bg-secondary p-4">
-        <div className="flex items-center gap-2">
-          <MapPin className="size-5 shrink-0 text-primary" />
-          <p className="text-lg font-semibold leading-snug">Studio MindZ</p>
-        </div>
-        <p className="mt-1 text-base">Lutsu 3, Tartu</p>
-        <p className="text-base">Antoniuse Õuemaja, 2. korrus</p>
-        <a
-          href={MAPS_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 text-base font-semibold text-primary-foreground"
-        >
-          <Navigation className="size-5" /> Ava Google Mapsis
-        </a>
-      </section>
-
-      <ul className="mt-4 space-y-3">
-        {STEPS.map((st) => (
-          <li key={st.title} className="flex gap-3 rounded-2xl border border-border bg-card p-4">
-            <st.icon className="mt-0.5 size-5 shrink-0 text-primary" />
-            <div className="min-w-0">
-              <p className="text-sm font-semibold">{st.title}</p>
-              <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">{st.text}</p>
-              {st.title === "Parkimine" && (
-                <div className="mt-2 flex flex-col items-start gap-1.5">
-                  <a
-                    href="https://tartu.ee/et/parkimine"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-sm font-semibold text-primary underline underline-offset-2"
-                  >
-                    Tartu linna parkimiskord
-                  </a>
-                  <a
-                    href="https://gis.tartulv.ee/portal/apps/experiencebuilder/experience/?id=de369a00ca89413489cbb10fc794b93f"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-sm font-semibold text-primary underline underline-offset-2"
-                  >
-                    Vaata parkimisalade kaarti
-                  </a>
-                </div>
-              )}
-            </div>
-          </li>
-        ))}
-        <li className="flex gap-3 rounded-2xl border border-border bg-card p-4">
-          <ScrollText className="mt-0.5 size-5 shrink-0 text-primary" />
-          <p className="text-sm leading-relaxed text-foreground/80">
-            <span className="font-semibold text-foreground">NB!</span> Tartu Ettevõtlusnädala
-            sündmused on mõeldud ettevõtlusega seotud osalejatele – ettevõtjatele, juhtidele,
-            spetsialistidele, töötajatele ja alustavatele ettevõtjatele. Et tagada kõigile sisukas
-            ja meeldiv õpikeskkond, jätab Studio MindZ korraldajana endale õiguse piirata
-            osalemist või paluda lahkuda osalejal, kelle käitumine häirib sündmuse läbiviimist või
-            teisi osalejaid või kes ei järgi ruumi kodukorda ja korraldaja juhiseid.
-          </p>
-        </li>
-        <li className="flex gap-3 rounded-2xl border border-border bg-card p-4">
-          <Mail className="mt-0.5 size-5 shrink-0 text-primary" />
-          <div>
-            <p className="text-sm font-semibold">Kontakt</p>
-            <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
-              Küsimuste või murede korral kirjuta julgelt{" "}
-              <a href="mailto:info@mindz.ee" className="font-semibold text-primary underline">
-                info@mindz.ee
-              </a>
-            </p>
-          </div>
-        </li>
-        <li className="flex gap-3 rounded-2xl border border-border bg-card p-4">
-          <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" />
-          <div>
-            <p className="text-sm font-semibold">Andmetöötlus</p>
-            <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
-              Registreeringuid, tagasisidet, küsimusi koolitajale ja fotosid hoiame 1 aasta järgmise aasta programmi
-              koostamiseks.{"\u00a0"}10. oktoobril 2027 kustutatakse need koos kasutajakontodega
-              automaatselt.{"\u00a0"}
-              <br />
-              Tehnilised logid kustuvad automaatselt 30 päeva pärast.
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-foreground/80">
-              Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
-              vastamiseks.
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-foreground/80">
-              Koolitusele registreerunu meiliaadressi jagame koolitajaga, et ta saaks koolituseks
-              valmistuda ja saata lisamaterjale.
-            </p>
-            <Link
-              to="/privaatsus"
-              className="mt-2 inline-block text-sm font-semibold text-primary underline underline-offset-2"
-            >
-              Privaatsus- ja andmetöötlustingimused
-            </Link>
-          </div>
-
-        </li>
-      </ul>
-
       <MeeskondCard />
 
       <section className="mt-8" aria-labelledby="rooms-heading">
@@ -304,55 +146,34 @@ function InfoPage() {
         </div>
       </section>
 
-      <section
-        className="mt-8 mb-8 rounded-2xl border border-mindz-pink bg-mindz-pink p-4"
-        aria-labelledby="install-heading"
-      >
-        <div className="flex items-center gap-2">
-          <Smartphone className="size-5 shrink-0 text-primary" />
-          <h2 id="install-heading" className="text-base font-bold">
-            Lisa veebiäpp oma telefoni
-          </h2>
-        </div>
-        <ol className="mt-2 space-y-3">
-          <li>
-            <p>iPhone</p>
-            <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 leading-relaxed">
-              <span>Ava link brauseris. Kliki all paremas nurgas kolme täpi peal</span>
-              <span aria-hidden="true">→</span>
-              <span className="inline-flex items-center gap-1">
-                <Share className="size-3.5" /> Jaga
-              </span>
-              <span aria-hidden="true">→</span>
-              <span className="inline-flex items-center gap-1 text-foreground/70">
-                <ChevronDown className="size-3.5" /> keri veidi alla
-              </span>
-              <span aria-hidden="true">→</span>
-              <span>Add to Home screen</span>
-              <span aria-hidden="true">→</span>
-              <span>Add</span>
+      <section className="mt-8 mb-8 flex gap-3 rounded-2xl border border-border bg-card p-4">
+          <ShieldCheck className="mt-0.5 size-5 shrink-0 text-primary" />
+          <div>
+            <p className="text-sm font-semibold">Andmetöötlus</p>
+            <p className="mt-0.5 text-sm leading-relaxed text-foreground/80">
+              Registreeringuid, tagasisidet, küsimusi koolitajale ja fotosid hoiame 1 aasta järgmise aasta programmi
+              koostamiseks.{"\u00a0"}10. oktoobril 2027 kustutatakse need koos kasutajakontodega
+              automaatselt.{"\u00a0"}
+              <br />
+              Tehnilised logid kustuvad automaatselt 30 päeva pärast.
             </p>
-          </li>
-          <li>
-            <p>Android</p>
-            <p className="mt-1 flex flex-wrap items-center gap-x-1.5 gap-y-1 leading-relaxed">
-              <span>Ava link brauseris. Kliki üleval paremas nurgas kolme täpi peal</span>
-              <span aria-hidden="true">→</span>
-              <span className="inline-flex items-center gap-1 text-foreground/70">
-                <ChevronDown className="size-3.5" /> keri veidi alla
-              </span>
-              <span aria-hidden="true">→</span>
-              <span>Installi ja loo otsetee</span>
-              <span aria-hidden="true">→</span>
-              <span>Installi</span>
+            <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+              Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid koolitajale ja tiimile
+              vastamiseks.
             </p>
-          </li>
-        </ol>
-        <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-          Nii lood oma telefoni otsetee Studio MindZ ettevõtlusnädala veebilehele.
-        </p>
-      </section>
+            <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+              Koolitusele registreerunu meiliaadressi jagame koolitajaga, et ta saaks koolituseks
+              valmistuda ja saata lisamaterjale.
+            </p>
+            <Link
+              to="/privaatsus"
+              className="mt-2 inline-block text-sm font-semibold text-primary underline underline-offset-2"
+            >
+              Privaatsus- ja andmetöötlustingimused
+            </Link>
+          </div>
+
+        </section>
     </main>
   );
 }
-

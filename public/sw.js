@@ -3,7 +3,7 @@
  * - staatilised failid (fondid, pildid, JS/CSS): cache-first
  * - lehed: network-first, halva levi korral viimati nähtud versioon
  */
-const CACHE = "mindz-v1";
+const CACHE = "mindz-v2-registered-materials";
 const OFFLINE_FALLBACK = "/";
 
 self.addEventListener("install", (event) => {

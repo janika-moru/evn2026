@@ -19,7 +19,6 @@ import tambetPhoto from "@/assets/tambet.png.asset.json";
 import rolandPhoto from "@/assets/roland.png.asset.json";
 import mariPhoto from "@/assets/mari-maekivi.png.asset.json";
 import marikaPhoto from "@/assets/marika.png.asset.json";
-import papsidLetter from "@/content/papsid-kiri.md?raw";
 import papsidPhoto from "@/assets/papsid.png.asset.json";
 import katrinVilimaaPhoto from "@/assets/katrin-vilimaa-otsing.png.asset.json";
 import katrinDiffertPhoto from "@/assets/katrin-differt.png.asset.json";
@@ -151,7 +150,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/mille-eest-rohkem-raha-kusida-ja-mida-delegeerida-mikk-orglaan-studio-mindzis",
     "registrationUrl": "https://fienta.com/mille-eest-rohkem-raha-kusida-ja-mida-delegeerida-mikk-orglaan-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://drive.google.com/file/d/1f8CG-bDOnR09OhImUns1Aw4NQYNPmxR5/view?usp=sharing"
   },
   {
     "id": "202930",
@@ -166,7 +164,6 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kas-sinu-turundus-tootab-kadri-leppik-studio-mindzis",
     "registrationUrl": "https://fienta.com/kas-sinu-turundus-tootab-kadri-leppik-studio-mindzis",
-    "slidesUrl": "https://docs.google.com/presentation/d/1pWPCr5F8rWst4tvElGV286Z8Dy7rYiinuMuajEy6JAE/edit?usp=sharing",
     "registrationStatus": "open"
   },
   {
@@ -183,7 +180,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/kuidas-introverdina-tulemuslikult-networkida-martin-mark-studio-mindzis",
     "registrationUrl": "https://fienta.com/kuidas-introverdina-tulemuslikult-networkida-martin-mark-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://drive.google.com/file/d/1gtlTiH8ubuUPeDRdDysAKCpbdvirQI5q/view?usp=sharing"
   },
   {
     "id": "202933",
@@ -192,7 +188,6 @@ export const EVENTS: EventItem[] = [
     "speaker": "Janika Mõru",
     "shortDescription": "Kui kasutad AI-d juba igapäevaselt, aga tulemus ei ole alati see, mida vestlust alustades lootsid, aitab koolitus saada AI-ga koostöös osavamaks ja jõuda sagedamini päriselt kasutatava tulemuseni.",
     "description": "Kui kasutad AI-d juba igapäevaselt, aga tulemus ei ole alati see, mida vestlust alustades lootsid, aitab koolitus saada AI-ga koostöös osavamaks ja jõuda sagedamini päriselt kasutatava tulemuseni.\n\nKellele?\n\nKoolitus on mõeldud neile, kes kasutavad juba ChatGPT-d, Gemini, Claude’i, Copilotit või mõnda muud AI-tööriista ning tahavad saada sellest oma igapäevatöös rohkem kasu.\n\nSee ei ole AI-ga alustamise koolitus ega keskendu agentidele, automatsioonidele või erinevate AI-tööriistade võrdlemisele.\n\nMida koolituselt saad?\n\nSaad paremini aru, miks AI võib vestluse jooksul hakata pakkuma lahendusi, mis viivad algsest eesmärgist eemale, ja kuidas koostööd ise teadlikumalt juhtida.\n\nÕpid selgemalt paika panema, mida tahad AI abil saavutada, andma paremat sisendit ja tagasisidet ning paluma AI-l ka enda pakutud lahendust kriitiliselt hinnata ja parandada.\n\nSaad teada, kuidas kasutada hästi õnnestunud näiteid järgmiste tulemuste parandamiseks ning kuidas muuta hea vestluse tulemus korduvkasutatavaks promptiks või juhiseks. Nii ei pea sarnase ülesande puhul iga kord kogu mõttetööd ja parandamist algusest alustama.\n\nKoolitaja annab edasi lihtsad põhimõtted ja enda lemmikud täiendavad tööriistad, mida saad kasutada koos erinevate LLMidega sõltumata sellest, millist AI-tööriista eelistad. Koolituse jooksul saab arutada ka enda näiteid ja küsida soovitusi konkreetsete kasutusjuhtude kohta.\n\nKoolitaja\n\nJanika Mõru on koolitaja ja koolituste korraldaja, kes on kasvanud virtuaalse assistendi rollist Veebikooli kliendihoidmise juhiks ning pakub selle kõrvalt AI-koolitusi ja mentorlust. Ta kasutab AI-d igapäevases töös ning keskendub koolitustel praktilistele töövõtetele, mis aitavad saada AI-st paremaid tulemusi ilma, et töö sõltuks ühest konkreetsest tööriistast.",
-    "slidesUrl": "https://claude.ai/artifact/M5xBvAc27NkNkvdHqvCwdP",
     "date": "2026-10-05",
     "startTime": "17:30",
     "endTime": "19:00",
@@ -231,7 +226,6 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/kuidas-ai-ga-ettevotet-runnatakse-urmo-keskel-studio-mindzis",
     "registrationUrl": "https://fienta.com/kuidas-ai-ga-ettevotet-runnatakse-urmo-keskel-studio-mindzis",
-    "slidesUrl": "https://drive.google.com/file/d/1fVr1r6p_TopWJH09y-toGWPTxAz5Qer8/view?usp=sharing",
     "registrationStatus": "open"
   },
   {
@@ -247,7 +241,6 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/ettevotlus-ja-paarisuhe-papsid-studio-mindzis",
     "registrationUrl": "https://fienta.com/ettevotlus-ja-paarisuhe-papsid-studio-mindzis",
-    "letter": papsidLetter,
     "registrationStatus": "open"
   },
   {
@@ -264,7 +257,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/taaskaivitada-meiliturundust-timo-porval-studio-mindzis",
     "registrationUrl": "https://fienta.com/taaskaivitada-meiliturundust-timo-porval-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://drive.google.com/file/d/14raFc2bkuxazP08I2wUH69nlJFWP3o-3/view?usp=drive_link"
   },
   {
     "id": "202945",
@@ -311,7 +303,6 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/seo-lihtsalt-roland-kivitare-studio-mindzis",
     "registrationUrl": "https://fienta.com/seo-lihtsalt-roland-kivitare-studio-mindzis",
-    "slidesUrl": "https://claude.ai/artifact/VVMQCew8TD2YYw217ro9P1",
     "registrationStatus": "open"
   },
   {
@@ -328,7 +319,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/turundajalt-turundajatele-turundusest-katrin-vilimaa-otsing-studio-mindzis",
     "registrationUrl": "https://fienta.com/turundajalt-turundajatele-turundusest-katrin-vilimaa-otsing-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://drive.google.com/file/d/141cibWwDQhcRl_0QpW_Z7mjqxkWJe9Xe/view?usp=sharing"
   },
   {
     "id": "202952",
@@ -344,7 +334,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/wordpressi-haldamine-ai-abil-marika-juusu-studio-mindzis",
     "registrationUrl": "https://fienta.com/wordpressi-haldamine-ai-abil-marika-juusu-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://docs.google.com/presentation/d/1hJGGtyD8RNogs4_RE25Dd5WiwReoLZGm9IinLLtc0pk/edit?usp=sharing"
   },
   {
     "id": "202958",
@@ -394,7 +383,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/kliendikeskne-ettevote-katrin-differt-studio-mindzis",
     "registrationUrl": "https://fienta.com/kliendikeskne-ettevote-katrin-differt-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://canva.link/v71f2n3gbv8u8dv"
   },
   {
     "id": "202957",
@@ -428,7 +416,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/muugikonede-tootuba-tambet-tallo-studio-mindzis",
     "registrationUrl": "https://fienta.com/muugikonede-tootuba-tambet-tallo-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://drive.google.com/file/d/13T_KNaEiIXN6dkpGOJFZetEZGFEP82ph/view?usp=sharing"
   },
   {
     "id": "202959",
@@ -476,9 +463,6 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/tee-oma-koolitus-paremaks-mari-maekivi-studio-mindzis",
     "registrationUrl": "https://fienta.com/tee-oma-koolitus-paremaks-mari-maekivi-studio-mindzis",
-    "slidesUrl": "https://docs.google.com/presentation/d/1tFhkPUSXSBXxnSjw16rgAGqbSHADoB74/edit?usp=sharing",
-    "materialsUrl": "https://lingid.ee/paremkoolitus",
-    "materialsLabel": "Töövihik",
     "registrationStatus": "open"
   },
   {
@@ -494,7 +478,6 @@ export const EVENTS: EventItem[] = [
     "venue": "Studio MindZ, Lutsu tänav 3, 51005 Tartu, Tartu maakond",
     "fientaUrl": "https://fienta.com/mida-koolituse-tellimisel-labi-moelda-kiia-paal-studio-mindzis",
     "registrationUrl": "https://fienta.com/mida-koolituse-tellimisel-labi-moelda-kiia-paal-studio-mindzis",
-    "slidesUrl": "https://claude.ai/artifact/5MTaP8jmESZBGq2qmcewP6",
     "registrationStatus": "open"
   },
   {
@@ -511,7 +494,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/hea-tooandja-sotsiaalmeedias-birgit-ruunik-studio-mindzis",
     "registrationUrl": "https://fienta.com/hea-tooandja-sotsiaalmeedias-birgit-ruunik-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://drive.google.com/file/d/14j88olCAHbvH0nCb8pgbyapVLd-yiQt3/view?usp=sharing"
   },
   {
     "id": "202953",
@@ -527,7 +509,6 @@ export const EVENTS: EventItem[] = [
     "fientaUrl": "https://fienta.com/voorustamise-abc-anu-tahemaa-studio-mindzis",
     "registrationUrl": "https://fienta.com/voorustamise-abc-anu-tahemaa-studio-mindzis",
     "registrationStatus": "open",
-    "slidesUrl": "https://claude.ai/artifact/8sKyqaL7Sg9F17tqwKvso2"
   },
   {
     "id": "202960",

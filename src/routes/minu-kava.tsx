@@ -11,7 +11,7 @@ import { EVENTS, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations, useFientaBackgroundSync } from "@/hooks/use-my-registrations";
 
 const BENEFITS = [
-  "näha oma registreerimisi",
+  "näha koolitusi, kuhu registreerusid",
   "ligipääsu slaididele ja lisamaterjalidele",
   "lingid koolitaja kontaktidele",
   "jätta tagasisidet koolitajale",
@@ -25,12 +25,12 @@ export const Route = createFileRoute("/minu-kava")({
       {
         name: "description",
         content:
-          "Näe kõiki oma Studio MindZi registreeringuid ühes kohas. Logi sisse sama meiliaadressiga, mida kasutasid Fientas.",
+          "Oma koolituste materjalid ja tagasisideolek. Logi sisse sama meiliaadressiga, mida kasutasid Fientas.",
       },
       { property: "og:title", content: "Minu kava — Studio MindZ 2026" },
       {
         property: "og:description",
-        content: "Näe kõiki oma Studio MindZi registreeringuid ühes kohas.",
+        content: "Oma koolituste materjalid ja tagasisideolek.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -213,8 +213,8 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
           </p>
           <div className="mt-5 flex justify-center">
             <Button asChild className="min-h-[52px] rounded-full px-6 text-[17px]">
-              <Link to="/kava" search={{}}>
-                Vaata kava
+              <Link to="/tagasiside" search={{}}>
+                Jäta tagasisidet
               </Link>
             </Button>
           </div>
