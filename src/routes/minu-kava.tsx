@@ -5,11 +5,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { RegisteredEventActions } from "@/components/RegisteredEventActions";
 import { EventCard } from "@/components/EventCard";
+import { useFeedbackCompletion } from "@/hooks/use-feedback-completion";
+import type { FeedbackCompletion } from "@/lib/feedback-completion";
 import { EVENTS, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations, useFientaBackgroundSync } from "@/hooks/use-my-registrations";
 
 const BENEFITS = [
-  "näha ja tühistada oma registreerimisi",
+  "näha oma registreerimisi",
   "ligipääsu slaididele ja lisamaterjalidele",
   "lingid koolitaja kontaktidele",
   "jätta tagasisidet koolitajale",
@@ -49,7 +51,7 @@ function MySchedulePage() {
       {!ready ? (
         <p className="mt-4 text-[15px] text-muted-foreground">Laen…</p>
       ) : session ? (
-        <SignedIn email={session.user.email ?? ""} />
+        <SignedIn email={session.user.email ?? ""} userId={session.user.id} />
       ) : (
         <SignInCard />
       )}
@@ -179,7 +181,8 @@ function SignInCard() {
   );
 }
 
-function SignedIn({ email }: { email: string }) {
+function SignedIn({ email, userId }: { email: string; userId: string }) {
+  const feedback = useFeedbackCompletion(userId);
   const { ids, query } = useMyRegistrations();
   useFientaBackgroundSync(email || null);
   const mine = EVENTS.filter((e) => e.fientaEventId && ids.has(e.fientaEventId));
@@ -221,7 +224,7 @@ function SignedIn({ email }: { email: string }) {
           {[...mine]
             .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
             .map((event) => (
-              <MyScheduleEvent key={event.id} event={event} />
+              <MyScheduleEvent key={event.id} event={event} feedbackState={{ completion: feedback.data?.[event.id], loading: feedback.isPending, failed: feedback.isError, retry: () => { void feedback.refetch(); } }} />
             ))}
         </div>
       )}
@@ -231,14 +234,14 @@ function SignedIn({ email }: { email: string }) {
   );
 }
 
-function MyScheduleEvent({ event }: { event: EventItem }) {
+function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackState: { completion?: FeedbackCompletion | undefined; loading: boolean; failed: boolean; retry: () => void } }) {
   return (
     <EventCard
       event={event}
       showDate
       hideRegisteredBadge
       large
-      actions={<RegisteredEventActions event={event} large />}
+      actions={<RegisteredEventActions event={event} large feedbackState={feedbackState} />}
     />
   );
 }

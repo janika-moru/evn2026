@@ -50,7 +50,7 @@ function PrivacyPage() {
         Privaatsus- ja andmetöötlustingimused
       </h1>
       <p className="mt-2 text-sm text-foreground/70">
-        Kehtivad alates oktoobrist 2026. Viimati uuendatud 30. septembril 2026.
+        Kehtivad alates oktoobrist 2026. Viimati uuendatud 15. oktoobril 2026.
       </p>
       <p className="mt-3 text-sm leading-relaxed text-foreground/80">
         Need tingimused kirjeldavad, kuidas Studio MindZ OÜ kogub, töötleb ja kaitseb Sinu
@@ -107,6 +107,15 @@ function PrivacyPage() {
           Eesmärk: koolituste ja korralduse kvaliteedi hindamine, tagasiside edastamine
           koolitajale, vajadusel Sinuga ühenduse võtmine. Alus: õigustatud huvi (p f),
           vabatahtlike väljade ja foto puhul nõusolek (p a).
+        </p>
+        <p>
+          <span className="font-semibold text-foreground">Tagasiside isiklik olek.</span>{" "}
+          Sisselogituna seome koolitusele antud tagasiside oleku Sinu kontoga, et näeksid
+          Minu kavas, millistele koolitustele oled juba vastanud. Varasemaid vastuseid
+          tuvastame konto meiliaadressi järgi. Saad ka ise märkida, et oled varem vastanud.
+          See seos ei avalda koolitajale Sinu isikut ega muuda tagasisidestatistikat.
+          Alus: lepingu täitmine (p b). Olekud kustutatakse koos registreeringutega
+          10. oktoobril 2027.
         </p>
         <p>
           <span className="font-semibold text-foreground">Küsimused koolitajale.</span> Küsimuse

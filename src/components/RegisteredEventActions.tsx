@@ -14,14 +14,18 @@ import { AddToCalendar } from "@/components/AddToCalendar";
 import { TrainerQuestionButtons } from "@/components/TrainerQuestions";
 import { TicketQr } from "@/components/TicketQr";
 import { WithdrawButton } from "@/components/WithdrawButton";
+import type { FeedbackCompletion } from "@/lib/feedback-completion";
+import { FeedbackCompletionButton } from "@/components/FeedbackCompletionButton";
 
 /** Koolitaja nimi ja kontaktlingid on kaardi pealkirja all (SpeakerLinks). */
 export function RegisteredEventActions({
   event,
   large = false,
+  feedbackState,
 }: {
   event: EventItem;
   large?: boolean;
+  feedbackState?: { completion?: FeedbackCompletion | undefined; loading: boolean; failed: boolean; retry: () => void } | undefined;
 }) {
   const slidesUrl = event.slidesUrl ?? event.materialsUrl;
   // Eraldi lisamaterjal (nt töövihik), kui seda pole slaidiga ühte panna.
@@ -31,7 +35,7 @@ export function RegisteredEventActions({
   // large (Minu kava): 52px kõrgused nupud, 15px tekst ja 44px tabamisalad.
   // Telefonis üks nupp rea kohta, et tekst mahuks mugavalt ära.
   const btn = large
-    ? "min-h-[52px] rounded-full border-2 border-background px-4 text-[15px] [&_svg]:size-5"
+    ? "min-h-[60px] h-auto rounded-full border-2 border-background px-4 py-3 text-[15px] whitespace-normal [&_svg]:size-5"
     : "h-10 rounded-full px-2 text-xs";
   const link = large
     ? "inline-flex min-h-[44px] items-center underline underline-offset-4"
@@ -39,12 +43,12 @@ export function RegisteredEventActions({
 
   const actionButtons = (
     <div className={large ? "grid grid-cols-1 gap-3 sm:grid-cols-2" : "grid grid-cols-2 gap-2"}>
-      <Button asChild variant="outline" className={btn}>
-        <Link to="/tagasiside" search={{ sundmus: event.id }}>
+      {large && feedbackState ? <FeedbackCompletionButton eventId={event.id} {...feedbackState} /> : <Button asChild variant="outline" className={btn}>
+        <Link to="/tagasiside" search={{ sundmus: event.id }}> 
           <MessageSquareHeart />
           Anna tagasisidet
         </Link>
-      </Button>
+      </Button>}
       {event.letter ? (
         <Dialog>
           <DialogTrigger asChild>
@@ -130,13 +134,6 @@ export function RegisteredEventActions({
   if (large) {
     return (
       <div className="mt-4 space-y-3">
-        <AddToCalendar event={event} large />
-        {/* Kaks nuppu kõrvuti: QR-koodi paremas servas, et pöidlega mugavam avada. */}
-        <div className="grid grid-cols-2 gap-2">
-          <WithdrawButton event={event} large />
-          {fientaDialog}
-        </div>
-        <TrainerQuestionButtons event={event} />
         {actionButtons}
       </div>
     );
