@@ -30,5 +30,6 @@
 - Trainer feedback responses include the explicit publication-consent flag without filtering entries, so the dashboard can identify feedback that must not be republished.
 
 - Personal feedback completion is account/event scoped, read through authenticated RPCs and recorded only after feedback insertion with a verified bearer; manual flags never create feedback, and registration foreign keys cascade during existing cleanup.
+- Studio feedback selection and forms share StudioFeedbackSection across feedback and schedule pages, so validation and submission behavior remain consistent.
 
 - Material URLs and participant letters live in a server-only event-keyed catalog and are returned by an authenticated server function after matching active email-keyed Fienta registrations; public event DTOs never contain these resources, preventing public bundle exposure.
