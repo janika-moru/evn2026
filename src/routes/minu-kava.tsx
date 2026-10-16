@@ -244,6 +244,7 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
       hideRegisteredBadge
       large
       mutePast={false}
+      plain
       actions={<RegisteredEventActions event={event} large feedbackState={feedbackState} />}
     />
   );

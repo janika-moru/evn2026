@@ -157,7 +157,7 @@ export function EventCard({
           {displayStatus === "closed" && <StatusBadge status={displayStatus} large={large} />}
           {(displayStatus === "open" || registered) && (
             <span className="ml-auto flex items-center gap-3">
-              {availableSpots !== null && (
+              {!plain && availableSpots !== null && (
                 <span
                   className={`${past ? "text-muted-foreground" : "text-primary"} ${
                     large ? "text-base" : "text-sm"

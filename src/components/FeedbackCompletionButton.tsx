@@ -22,7 +22,7 @@ export function FeedbackCompletionButton({ eventId, completion, loading, failed,
   const write = useServerFn(setMyManualFeedbackCompletion);
   const queryClient = useQueryClient();
   const done = isFeedbackComplete(completion);
-  const cls = "min-h-[60px] h-auto w-full rounded-full border-2 border-background px-4 py-3 text-[15px] leading-snug whitespace-normal [&_svg]:size-5 [&_svg]:shrink-0";
+  const cls = "min-h-[60px] h-auto w-full rounded-full px-4 py-3 text-[15px] leading-snug whitespace-normal [&_svg]:size-5 [&_svg]:shrink-0";
 
   async function mark(manual: boolean) {
     setBusy(true);
