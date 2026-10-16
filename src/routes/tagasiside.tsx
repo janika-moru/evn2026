@@ -281,8 +281,6 @@ function FeedbackPage() {
           aria-hidden="true"
           className="absolute -left-[9999px] h-0 w-0 opacity-0"
         />
-        {type === "training" ? (
-          <>
             {fixedEvent ? (
               <p className="rounded-xl bg-secondary px-4 py-3 text-sm">
                 <span className="font-semibold">{fixedEvent.title}</span>
