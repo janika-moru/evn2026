@@ -15,3 +15,8 @@ export const getMyMaterials = createServerFn({ method: "POST" })
     const { EVENT_MATERIALS } = await import("./materials.server");
     return registeredMaterials(EVENT_MATERIALS, data ?? []);
   });
+/** Tiimi slaidide koondleht (/slaidid) — kõik materjalid, avatud lingiga. */
+export const getAllMaterials = createServerFn({ method: "GET" }).handler(async () => {
+  const { EVENT_MATERIALS } = await import("./materials.server");
+  return EVENT_MATERIALS;
+});
