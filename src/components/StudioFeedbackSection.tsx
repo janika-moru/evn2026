@@ -15,12 +15,12 @@ export function StudioFeedbackSection({ className = "" }: { className?: string }
     >
       <h2 className="text-base font-semibold">Jäta tagasiside tiimile</h2>
       <div className="mt-3">
-        <MeeskondRow />
+        <MeeskondRow largeText />
       </div>
       <Button
         asChild
         variant="secondary"
-        className="mt-4 h-auto min-h-12 w-full whitespace-normal rounded-2xl bg-mindz-pink p-4 text-sm font-semibold"
+        className="mt-4 h-auto min-h-12 w-full whitespace-normal rounded-2xl bg-mindz-pink p-4 text-base font-semibold"
       >
         <a href={GOOGLE_REVIEW_URL}>
           <Star className="size-5 text-primary" />

@@ -20,9 +20,9 @@ export function KoolitajadCard() {
 }
 
 /** Meeskonna pallikeste rida ilma kaardita — kasutamiseks rohelise bloki sees. */
-export function MeeskondRow() {
+export function MeeskondRow({ largeText = false }: { largeText?: boolean }) {
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className={largeText ? "grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-4" : "grid grid-cols-5 gap-2"}>
       {teamMembers().map((member) => {
         const cell = (
           <>
@@ -40,7 +40,7 @@ export function MeeskondRow() {
                 {initials(member.name)}
               </div>
             )}
-            <span className="text-center text-[12px] font-medium leading-tight">
+            <span className={largeText ? "text-center text-base font-medium leading-snug" : "text-center text-[12px] font-medium leading-tight"}>
               {nameLines(member.name).map((line) => (
                 <span key={line} className="block">
                   {line}
