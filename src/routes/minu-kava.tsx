@@ -235,7 +235,7 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
           </div>
         </div>
       ) : (
-        <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
+        <div className="mt-6 flex flex-col gap-3">
           {[...mine]
             .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
             .map((event) => (
