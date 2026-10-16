@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Building2, Tag, ShieldCheck } from "lucide-react";
 
-import { MeeskondCard } from "@/components/SpeakersTeamLinks";
+import { StudioFeedbackSection } from "@/components/StudioFeedbackSection";
 import { RoomGallery } from "@/components/RoomGallery";
 import largeRoomFront from "@/assets/ruum-suur-eest.jpg.asset.json";
 import largeRoomCircle from "@/assets/ruum-suur-ring.jpg.asset.json";
@@ -76,7 +76,7 @@ export const Route = createFileRoute("/info")({
 function InfoPage() {
   return (
     <main className="px-4 pt-8">
-      <MeeskondCard />
+      <StudioFeedbackSection className="mt-4" />
 
       <section className="mt-8" aria-labelledby="rooms-heading">
         <div className="flex items-center gap-2">
