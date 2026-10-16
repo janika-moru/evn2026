@@ -11,7 +11,7 @@ export function StudioFeedbackSection({ className = "" }: { className?: string }
   return (
     <section
       aria-label="Tagasiside stuudio tiimile"
-      className={`rounded-3xl border border-primary/25 bg-mindz-mint p-4 ${className}`}
+      className={`rounded-3xl border-2 border-primary bg-mindz-mint p-4 shadow-mindz-glow ${className}`}
     >
       <h2 className="text-base font-semibold">Jäta tagasiside tiimile</h2>
       <div className="mt-3">

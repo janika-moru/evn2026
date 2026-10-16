@@ -125,6 +125,10 @@
   --color-mindz-pink: var(--mindz-pink);
   --color-mindz-grey: var(--mindz-grey);
   --color-mindz-mint: var(--mindz-mint);
+
+  /* Roheline helendus, mis toob olulise ploki (nt tiimi tagasiside) esile. */
+  --shadow-mindz-glow: 0 0 0 4px color-mix(in oklab, var(--primary) 14%, transparent),
+    0 12px 32px -10px color-mix(in oklab, var(--primary) 45%, transparent);
 }
 
 :root {
