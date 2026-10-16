@@ -61,23 +61,25 @@ function SlidesPage() {
             key={row.event.id}
             className="flex flex-col rounded-2xl border border-border bg-card p-4"
           >
-            {row.speakerImageUrl && (
-              <img
-                src={row.speakerImageUrl}
-                alt={row.speakerName}
-                loading="lazy"
-                className="h-16 w-16 rounded-full object-cover"
-              />
-            )}
-            <h2 className="mt-2 text-base font-semibold leading-snug">
-              {row.speakerName}
-            </h2>
-            <p className="mt-0.5 text-sm text-muted-foreground">
-              {row.event.title}
-            </p>
-            <p className="mt-0.5 text-sm text-muted-foreground">
-              {dayLabel(row.event.date)} kell {displayTime(row.event.startTime)}
-            </p>
+            <div className="flex items-start gap-2 sm:gap-3">
+              {row.speakerImageUrl && (
+                <img
+                  src={row.speakerImageUrl}
+                  alt={row.speakerName}
+                  loading="lazy"
+                  className="h-10 w-10 shrink-0 rounded-full object-cover sm:h-12 sm:w-12"
+                />
+              )}
+              <div className="min-w-0">
+                <h2 className="text-base font-semibold leading-snug">{row.speakerName}</h2>
+                <p className="mt-0.5 text-sm leading-snug break-words text-muted-foreground">
+                  {row.event.title}
+                </p>
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  {dayLabel(row.event.date)} kell {displayTime(row.event.startTime)}
+                </p>
+              </div>
+            </div>
             <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-3">
               {row.cancelled ? (
                 <span className={missingMark}>Koolitus jäi ära</span>
