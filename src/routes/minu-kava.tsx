@@ -56,14 +56,19 @@ function MySchedulePage() {
   return (
     <main className="px-4 pt-8">
       <h1 className="text-2xl font-bold">Koolitajate slaidid ja tagasiside</h1>
-      <StudioFeedbackSection className="mt-6 mb-6" />
 
       {!ready ? (
         <p className="mt-4 text-[15px] text-muted-foreground">Laen…</p>
       ) : session ? (
-        <SignedIn email={session.user.email ?? ""} userId={session.user.id} />
+        <>
+          <StudioFeedbackSection className="mt-6 mb-6" />
+          <SignedIn email={session.user.email ?? ""} userId={session.user.id} />
+        </>
       ) : (
-        <SignInCard />
+        <>
+          <SignInCard />
+          <StudioFeedbackSection className="mt-8 mb-2" />
+        </>
       )}
     </main>
   );
@@ -131,7 +136,7 @@ function SignInCard() {
 
   return (
     <>
-      <h2 className="mt-4 text-xl font-semibold">Vaata oma kava</h2>
+      <h2 className="mt-4 text-xl font-semibold">Logi sisse, et vaadata slaide ja anda tagasisidet</h2>
       <p className="mt-2 text-[17px] leading-relaxed text-muted-foreground">
         Logi sisse sama meiliaadressiga, mida kasutasid Fientas registreerumisel.
       </p>
