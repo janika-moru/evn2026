@@ -34,14 +34,14 @@ export function MeeskondRow() {
                 decoding="async"
                 width={56}
                 height={56}
-                className="size-14 rounded-full object-cover"
+                className="size-14 max-w-full rounded-full object-cover"
               />
             ) : (
               <div className="flex size-14 items-center justify-center rounded-full bg-secondary text-base font-semibold">
                 {initials(member.name)}
               </div>
             )}
-            <span className={largeText ? "text-center text-base font-medium leading-snug" : "text-center text-[12px] font-medium leading-tight"}>
+            <span className="text-center text-[12px] font-medium leading-tight">
               {nameLines(member.name).map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -50,7 +50,7 @@ export function MeeskondRow() {
             </span>
           </>
         );
-        const className = "flex flex-col items-center gap-1.5";
+        const className = "flex min-w-0 flex-col items-center gap-1.5";
         return member.speakerId ? (
           <Link key={member.id} to="/koolitajad" hash={member.speakerId} className={className}>
             {cell}

@@ -15,7 +15,7 @@ export function StudioFeedbackSection({ className = "" }: { className?: string }
     >
       <h2 className="text-base font-semibold">Jäta tagasiside tiimile</h2>
       <div className="mt-3">
-        <MeeskondRow largeText />
+        <MeeskondRow />
       </div>
       <Button
         asChild
