@@ -140,7 +140,7 @@ function SignInCard() {
         </ul>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-6 rounded-2xl bg-secondary p-5">
+      <form onSubmit={handleSubmit} className="mt-6 rounded-2xl border border-border bg-card p-5">
         <label htmlFor="email" className="text-[17px] font-semibold">
           Meiliaadress
         </label>
@@ -269,7 +269,7 @@ function CodeForm({ email }: { email: string }) {
   }
 
   return (
-    <form onSubmit={submit} className="mt-4 rounded-2xl bg-secondary p-5">
+    <form onSubmit={submit} className="mt-4 rounded-2xl border border-border bg-card p-5">
       <label htmlFor="otp" className="text-[17px] font-semibold">
         Link ei tööta? Sisesta kirjas olev kood
       </label>
