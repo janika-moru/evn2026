@@ -230,7 +230,7 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
           </div>
         </div>
       ) : (
-        <div className="mt-6 space-y-4">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {[...mine]
             .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
             .map((event) => (
