@@ -9,12 +9,13 @@ import { setMyManualFeedbackCompletion } from "@/lib/feedback-completion.functio
 import { isFeedbackComplete, type FeedbackCompletion } from "@/lib/feedback-completion";
 import { feedbackCompletionKey } from "@/hooks/use-feedback-completion";
 
-export function FeedbackCompletionButton({ eventId, completion, loading, failed, retry }: {
+export function FeedbackCompletionButton({ eventId, completion, loading, failed, retry, asLink }: {
   eventId: string;
   completion?: FeedbackCompletion | undefined;
   loading: boolean;
   failed: boolean;
   retry: () => void;
+  asLink?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -23,6 +24,8 @@ export function FeedbackCompletionButton({ eventId, completion, loading, failed,
   const queryClient = useQueryClient();
   const done = isFeedbackComplete(completion);
   const cls = "min-h-[48px] h-auto w-full rounded-full px-4 py-2 text-[15px] leading-snug whitespace-normal [&_svg]:size-5 [&_svg]:shrink-0";
+  const linkCls = "inline-flex items-center gap-1 text-sm font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
+  const doneCls = "inline-flex items-center gap-1 text-sm font-medium text-muted-foreground";
 
   async function mark(manual: boolean) {
     setBusy(true);
@@ -36,6 +39,11 @@ export function FeedbackCompletionButton({ eventId, completion, loading, failed,
     } finally { setBusy(false); }
   }
 
+  if (asLink) {
+    if (loading) return null;
+    if (failed) return <button type="button" className={linkCls} onClick={retry}>Proovi uuesti</button>;
+    if (completion?.submitted) return <span className={doneCls}><Heart className="size-4 fill-current text-primary" />Tagasiside antud</span>;
+  }
   if (loading) return <Button disabled variant="outline" className={cls}>Laen tagasiside olekut…</Button>;
   if (failed) return <Button variant="outline" className={cls} onClick={retry}>Proovi tagasiside olekut uuesti laadida</Button>;
   if (completion?.submitted) return <Button disabled variant="outline" className={`${cls} disabled:opacity-100`}><Heart className="fill-current text-primary" /><span>Tagasiside koolitajale: juba antud</span></Button>;
@@ -43,10 +51,17 @@ export function FeedbackCompletionButton({ eventId, completion, loading, failed,
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
+        {asLink ? (
+          <button type="button" className={done ? doneCls : linkCls}>
+            {done && <Heart className="size-4 fill-current text-primary" />}
+            {done ? "Tagasiside antud" : "Anna tagasisidet"}
+          </button>
+        ) : (
         <Button variant="outline" className={cls}>
           {done ? <Heart className="fill-current text-primary" /> : <MessageSquareHeart />}
           <span>{done ? "Tagasiside koolitajale: juba antud" : "Tagasiside koolitajale: veel andmata"}</span>
         </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="max-w-sm">
         <DialogHeader>
