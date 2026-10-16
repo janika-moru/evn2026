@@ -120,9 +120,6 @@ function FeedbackPage() {
     if (type === "training") {
       if (!target) return setError("Vali koolitus.");
       if (!rating) return setError("Vali hinnang 1–10.");
-    } else if (!message.trim()) {
-      setError("Kirjuta paar sõna.");
-      return;
     }
     setSending(true);
     setError("");
@@ -134,7 +131,7 @@ function FeedbackPage() {
         data: {
           event_id: training ? target : null,
           feedback_type: type,
-          message: training ? null : message.trim() || null,
+          message: null,
           rating: training ? rating : null,
           keep_text: training ? keepText.trim() || null : null,
           change_text: training ? changeText.trim() || null : null,
