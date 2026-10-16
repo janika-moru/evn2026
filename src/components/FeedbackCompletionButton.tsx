@@ -22,7 +22,7 @@ export function FeedbackCompletionButton({ eventId, completion, loading, failed,
   const write = useServerFn(setMyManualFeedbackCompletion);
   const queryClient = useQueryClient();
   const done = isFeedbackComplete(completion);
-  const cls = "min-h-[60px] h-auto w-full rounded-full px-4 py-3 text-[15px] leading-snug whitespace-normal [&_svg]:size-5 [&_svg]:shrink-0";
+  const cls = "min-h-[48px] h-auto w-full rounded-full px-4 py-2 text-[15px] leading-snug whitespace-normal [&_svg]:size-5 [&_svg]:shrink-0";
 
   async function mark(manual: boolean) {
     setBusy(true);
@@ -38,14 +38,14 @@ export function FeedbackCompletionButton({ eventId, completion, loading, failed,
 
   if (loading) return <Button disabled variant="outline" className={cls}>Laen tagasiside olekut…</Button>;
   if (failed) return <Button variant="outline" className={cls} onClick={retry}>Proovi tagasiside olekut uuesti laadida</Button>;
-  if (completion?.submitted) return <Button disabled variant="outline" className={`${cls} disabled:opacity-100`}><Heart className="fill-current text-primary" /><span>Aitäh, tagasiside koolitajale antud</span></Button>;
+  if (completion?.submitted) return <Button disabled variant="outline" className={`${cls} disabled:opacity-100`}><Heart className="fill-current text-primary" /><span>Tagasiside koolitajale: juba antud</span></Button>;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className={cls}>
           {done ? <Heart className="fill-current text-primary" /> : <MessageSquareHeart />}
-          <span>{done ? "Aitäh, tagasiside koolitajale antud" : "Tagasiside koolitajale veel andmata!"}</span>
+          <span>{done ? "Tagasiside koolitajale: juba antud" : "Tagasiside koolitajale: veel andmata"}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-sm">
