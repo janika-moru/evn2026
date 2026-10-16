@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { feedbackCompletionKey } from "@/hooks/use-feedback-completion";
-import { ArrowLeft, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star } from "lucide-react";
+import { ArrowLeft, CheckCircle2, GraduationCap, Star } from "lucide-react";
 import type { Speaker } from "@/lib/events";
 import { EVENTS, getEvent, dayLabel, displayTime, trainingSpeakerForEvent } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
@@ -30,12 +30,12 @@ export const Route = createFileRoute("/tagasiside")({
       {
         name: "description",
         content:
-          "Hinda koolitust, kiida või paku muutmist — ja jäta meile Google'i arvustus. Tagasiside on anonüümne.",
+          "Hinda koolitust 1–10 ja jäta meile Google'i arvustus. Tagasiside on anonüümne.",
       },
       { property: "og:title", content: "Anna tagasisidet — Studio MindZ 2026" },
       {
         property: "og:description",
-        content: "Hinda koolitust, kiida või paku muutmist — ja jäta meile Google'i arvustus.",
+        content: "Hinda koolitust 1–10 ja jäta meile Google'i arvustus.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -44,15 +44,13 @@ export const Route = createFileRoute("/tagasiside")({
   component: FeedbackPage,
 });
 
-type FType = "training" | "keep" | "change";
+type FType = "training";
 
 // Google'i arvustuse otselink (Studio MindZ) — avab otse arvustuse kirjutamise vormi
 const GOOGLE_REVIEW_URL = "https://g.page/r/CcA2FXmeWHxzEBM/review";
 
-const TYPES: { id: FType; label: string; short: string; icon: typeof HeartHandshake; hint: string }[] = [
-  { id: "training", label: "Jäta tagasiside koolitusele", short: "Koolitus", icon: GraduationCap, hint: "" },
-  { id: "keep", label: "Kiidan korraldust/ruume/tiimi", short: "Kiidan", icon: HeartHandshake, hint: "Mis tiimi, korralduse või ruumide juures meeldis?" },
-  { id: "change", label: "Parandusettepanek korraldusele/ruumidele/tiimile", short: "Parandus", icon: Lightbulb, hint: "Mida tiimi, korralduse või ruumide juures muuta?" },
+const TYPES: { id: FType; label: string; short: string; icon: typeof GraduationCap }[] = [
+  { id: "training", label: "Jäta tagasiside koolitusele", short: "Koolitus", icon: GraduationCap },
 ];
 
 function FeedbackPage() {
@@ -73,7 +71,6 @@ function FeedbackPage() {
   const [changeText, setChangeText] = useState("");
   const [name, setName] = useState("");
   const [field, setField] = useState("");
-  const [message, setMessage] = useState("");
   const [contact, setContact] = useState("");
   const [remember, setRemember] = useState(false);
   const [sending, setSending] = useState(false);
@@ -89,7 +86,6 @@ function FeedbackPage() {
   }, [fromEventSpeaker]);
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
-  const msgRef = useRef<HTMLTextAreaElement>(null);
   // Robotilõks: nähtamatu väli + vormi täitmise aeg
   const hpRef = useRef<HTMLInputElement>(null);
   const startedAt = useRef(Date.now());
@@ -108,13 +104,6 @@ function FeedbackPage() {
     });
   }, []);
 
-  // Tekstikast kasvab kirjutades koos tekstiga, et seda oleks mugav üle lugeda
-  useEffect(() => {
-    const el = msgRef.current;
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = `${el.scrollHeight}px`;
-  }, [message]);
 
   useEffect(() => {
     if (!speaker) return;
