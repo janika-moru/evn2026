@@ -332,68 +332,6 @@ function FeedbackPage() {
                 vastamiseks.
               </p>
             </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <label htmlFor="msg" className="text-sm font-semibold">
-                Kirjuta meile
-              </label>
-              <textarea
-                id="msg"
-                ref={msgRef}
-                maxLength={4000}
-                autoFocus
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder={current.hint}
-                className="mt-2 max-h-[70vh] min-h-32 w-full resize-none overflow-y-auto rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-
-            <div className="grid gap-3">
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                maxLength={200}
-                placeholder="Sinu nimi"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-              />
-              <input
-                value={field}
-                onChange={(e) => setField(e.target.value)}
-                maxLength={200}
-                placeholder="Roll / valdkond"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-              />
-              <input
-                id="contact"
-                type="email"
-                maxLength={300}
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-                placeholder="Meiliaadress"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-              />
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid tiimile vastamiseks —
-                anonüümselt vastamiseks jäta need täitmata.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={(e) => setRemember(e.target.checked)}
-                  className="mt-0.5 size-4 shrink-0 accent-primary"
-                />
-                Jäta nimi, roll ja meiliaadress selles seadmes meelde
-              </label>
-            </div>
-          </>
-        )}
 
         {error && <p className="text-sm text-destructive">{error}</p>}
 
