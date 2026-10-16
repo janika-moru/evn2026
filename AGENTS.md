@@ -34,4 +34,4 @@
 
 - Material URLs and participant letters live in a server-only event-keyed catalog and are returned by an authenticated server function after matching active email-keyed Fienta registrations; public event DTOs never contain these resources, preventing public bundle exposure.
 
-- Team rows support an explicit large-text variant for feedback sections, keeping larger names readable without changing the compact Info layout.
+- The team row always shows every member on one row (five columns) with compact small-text labels.
