@@ -286,7 +286,6 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
           <Dialog>
             <DialogTrigger asChild>
               <button type="button" className={slidesLink}>
-                <Mail className="size-4" />
                 Loe koolitajate kirja
               </button>
             </DialogTrigger>
@@ -310,7 +309,6 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
           </Dialog>
         ) : slidesUrl ? (
           <a href={slidesUrl} target="_blank" rel="noreferrer" className={slidesLink}>
-            <FileText className="size-4" />
             Vaata slaide
           </a>
         ) : event.slidesExpected === false ? (
