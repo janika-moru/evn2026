@@ -23,9 +23,9 @@ export function FeedbackCompletionButton({ eventId, completion, loading, failed,
   const write = useServerFn(setMyManualFeedbackCompletion);
   const queryClient = useQueryClient();
   const done = isFeedbackComplete(completion);
-  const cls = "min-h-[48px] h-auto w-full rounded-full px-4 py-2 text-[15px] leading-snug whitespace-normal [&_svg]:size-5 [&_svg]:shrink-0";
-  const linkCls = "inline-flex items-center gap-1 text-sm font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
-  const doneCls = "inline-flex items-center gap-1 text-sm font-medium text-muted-foreground";
+  const cls = "min-h-[48px] h-auto w-full rounded-full px-4 py-2 text-base leading-snug whitespace-normal [&_svg]:size-5 [&_svg]:shrink-0";
+  const linkCls = "inline-flex items-center gap-1 text-base font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
+  const doneCls = "inline-flex items-center gap-1 text-base font-medium text-muted-foreground";
 
   async function mark(manual: boolean) {
     setBusy(true);
@@ -68,13 +68,13 @@ export function FeedbackCompletionButton({ eventId, completion, loading, failed,
           <DialogTitle>{done ? "Tagasiside antud" : "Tagasiside koolitajale"}</DialogTitle>
           <DialogDescription className="sr-only">Vali tagasiside tegevus</DialogDescription>
         </DialogHeader>
-        <Button asChild className="min-h-12 h-auto rounded-full whitespace-normal">
+        <Button asChild className="min-h-12 h-auto rounded-full text-base whitespace-normal">
           <Link to="/tagasiside" search={{ sundmus: eventId }}><MessageSquareHeart />{done ? "Jäta veel tagasisidet" : "Jäta tagasisidet koolitajale"}</Link>
         </Button>
-        <Button variant="outline" disabled={busy} onClick={() => mark(!done)} className="min-h-12 h-auto rounded-full whitespace-normal">
+        <Button variant="outline" disabled={busy} onClick={() => mark(!done)} className="min-h-12 h-auto rounded-full text-base whitespace-normal">
           {done ? <Undo2 /> : <Heart />}{busy ? "Salvestan…" : done ? "Võta minu märge tagasi" : "Olen juba tagasisidet andnud"}
         </Button>
-        {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
+        {error && <p role="alert" className="text-base text-destructive">{error}</p>}
       </DialogContent>
     </Dialog>
   );
