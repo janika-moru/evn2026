@@ -184,7 +184,6 @@ function FeedbackPage() {
             onClick={() => {
               setSent(null);
               setType(null);
-              setMessage("");
               setRating(null);
               setKeepText("");
               setChangeText("");
