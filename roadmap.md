@@ -70,4 +70,5 @@
 
 - [x] Jagatav Minu kava, lühendatud Info ja registreeringupõhine materjalide ligipääs
 - [x] Tiimi tagasiside: „Kiidan" ja „Parandusettepanek" eemaldatud — roheline plokk = meeskond + „Lisa Google arvustus"
+- [x] Minu kava: „Vaata oma kava" → „Logi sisse, et vaadata slaide ja anda tagasisidet"; sisselogimata = sisselogimise kutse ees ja tiimi plokk all, sisseloginud = tiimi plokk kõige ees
 
