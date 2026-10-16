@@ -277,7 +277,7 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
         )}
         <div className="min-w-0">
           <h2 className="text-base font-semibold leading-snug">{speakerName}</h2>
-          <p className="mt-0.5 text-sm leading-snug text-muted-foreground">{event.title}</p>
+          <p className="mt-0.5 text-sm leading-snug break-words text-muted-foreground">{event.title}</p>
           <p className="mt-0.5 text-sm text-muted-foreground">
             {dayLabel(event.date)} kell {displayTime(event.startTime)}
           </p>
