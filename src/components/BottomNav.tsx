@@ -22,7 +22,7 @@ export function BottomNav() {
               key={to}
               to={to}
               search={{}}
-              className={`flex min-h-[84px] min-w-0 flex-col items-center justify-center gap-1 px-3 py-2.5 text-center text-[13px] leading-snug font-medium transition-colors ${
+              className={`flex min-h-[84px] min-w-0 flex-col items-center justify-center gap-1 px-3 py-2.5 text-center text-[15px] leading-snug font-medium transition-colors ${
                 active ? "text-primary" : "text-muted-foreground"
               }`}
             >

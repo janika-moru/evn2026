@@ -77,16 +77,21 @@
 
 @theme inline {
   /*
-   * Ühtlaselt suurem kiri kogu äpis (Minu kava suurus on siht):
-   * xs 12→14px, sm 14→16px, base 16→17px. Suured pealkirjad (lg, xl, 2xl)
-   * jäävad samaks, et hierarhia säiliks.
+   * Ühtlaselt suur, mugav kiri kogu äpis (Info lehe suurus on siht):
+   * xs 15px, sm 17px, base 18px, lg 20px, xl 22px, 2xl 26px.
    */
-  --text-xs: 0.875rem;
+  --text-xs: 0.9375rem;
   --text-xs--line-height: 1.45;
-  --text-sm: 1rem;
+  --text-sm: 1.0625rem;
   --text-sm--line-height: 1.5;
-  --text-base: 1.0625rem;
+  --text-base: 1.125rem;
   --text-base--line-height: 1.55;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.45;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.4;
+  --text-2xl: 1.625rem;
+  --text-2xl--line-height: 1.35;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
