@@ -61,13 +61,13 @@ function SlidesPage() {
             key={row.event.id}
             className="flex flex-col rounded-2xl border border-border bg-card p-4"
           >
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-2 sm:gap-3">
               {row.speakerImageUrl && (
                 <img
                   src={row.speakerImageUrl}
                   alt={row.speakerName}
                   loading="lazy"
-                  className="h-12 w-12 shrink-0 rounded-full object-cover"
+                  className="h-10 w-10 shrink-0 rounded-full object-cover sm:h-12 sm:w-12"
                 />
               )}
               <div className="min-w-0">
