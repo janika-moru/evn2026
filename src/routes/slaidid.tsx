@@ -36,7 +36,7 @@ export const Route = createFileRoute("/slaidid")({
 
 const slidesLink =
   "text-sm font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
-const missingMark = "text-sm text-muted-foreground/45";
+const missingMark = "text-base text-muted-foreground/45";
 
 function SlidesPage() {
   const all = Route.useLoaderData();
@@ -47,7 +47,7 @@ function SlidesPage() {
         Kõikide koolituste slaidid ja materjalid ühes kohas.
       </p>
 
-      <div className="mt-5 grid grid-cols-2 gap-3">
+      <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2">
         {slidesPageRows().map((base) => {
           const m = all[base.event.fientaEventId ?? base.event.id] ?? all[base.event.id] ?? {};
           const row = {
@@ -61,21 +61,21 @@ function SlidesPage() {
             key={row.event.id}
             className="flex flex-col rounded-2xl border border-border bg-card p-4"
           >
-            <div className="flex items-start gap-2 sm:gap-3">
+            <div className="flex items-start gap-3">
               {row.speakerImageUrl && (
                 <img
                   src={row.speakerImageUrl}
                   alt={row.speakerName}
                   loading="lazy"
-                  className="h-10 w-10 shrink-0 rounded-full object-cover sm:h-12 sm:w-12"
+                  className="h-14 w-14 shrink-0 rounded-full object-cover"
                 />
               )}
               <div className="min-w-0">
-                <h2 className="text-base font-semibold leading-snug">{row.speakerName}</h2>
-                <p className="mt-0.5 text-sm leading-snug break-words text-muted-foreground">
+                <h2 className="text-[18px] font-semibold leading-snug">{row.speakerName}</h2>
+                <p className="mt-1 text-[17px] leading-snug break-words text-foreground">
                   {row.event.title}
                 </p>
-                <p className="mt-0.5 text-sm text-muted-foreground">
+                <p className="mt-1 text-[15px] text-muted-foreground">
                   {dayLabel(row.event.date)} kell {displayTime(row.event.startTime)}
                 </p>
               </div>

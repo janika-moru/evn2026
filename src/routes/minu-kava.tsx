@@ -235,7 +235,7 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
           </div>
         </div>
       ) : (
-        <div className="mt-6 grid grid-cols-2 gap-3">
+        <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
           {[...mine]
             .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
             .map((event) => (
@@ -250,8 +250,8 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
 }
 
 const slidesLink =
-  "inline-flex min-h-[44px] items-center gap-1.5 text-sm font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
-const missingMark = "text-sm text-muted-foreground/45";
+  "inline-flex min-h-[44px] items-center gap-1.5 text-base font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
+const missingMark = "text-base text-muted-foreground/45";
 
 /** Kaart slaidide lehe ruudustikus: pilt ja tekst kõrvuti + materjalid ja tagasiside olek. */
 function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackState: { completion?: FeedbackCompletion | undefined; loading: boolean; failed: boolean; retry: () => void } }) {
@@ -266,19 +266,19 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
 
   return (
     <article className="flex flex-col rounded-2xl border border-border bg-card p-4">
-      <div className="flex items-start gap-2 sm:gap-3">
+      <div className="flex items-start gap-3">
         {speakerImageUrl && (
           <img
             src={speakerImageUrl}
             alt={speakerName}
             loading="lazy"
-            className="h-10 w-10 shrink-0 rounded-full object-cover sm:h-12 sm:w-12"
+            className="h-14 w-14 shrink-0 rounded-full object-cover"
           />
         )}
         <div className="min-w-0">
-          <h2 className="text-base font-semibold leading-snug">{speakerName}</h2>
-          <p className="mt-0.5 text-sm leading-snug break-words text-muted-foreground">{event.title}</p>
-          <p className="mt-0.5 text-sm text-muted-foreground">
+          <h2 className="text-[18px] font-semibold leading-snug">{speakerName}</h2>
+          <p className="mt-1 text-[17px] leading-snug break-words text-foreground">{event.title}</p>
+          <p className="mt-1 text-[15px] text-muted-foreground">
             {dayLabel(event.date)} kell {displayTime(event.startTime)}
           </p>
         </div>
