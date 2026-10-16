@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { CalendarCheck, Check, FileText, LogOut, Mail } from "lucide-react";
+import { CalendarCheck, Check, LogOut, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import {
@@ -230,7 +230,7 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
           </div>
         </div>
       ) : (
-        <div className="mt-6 space-y-4">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
           {[...mine]
             .sort((a, b) => `${a.date}T${a.startTime}`.localeCompare(`${b.date}T${b.startTime}`))
             .map((event) => (
@@ -245,10 +245,10 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
 }
 
 const slidesLink =
-  "inline-flex min-h-[44px] items-center gap-1.5 text-[15px] font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
-const missingMark = "text-[15px] text-muted-foreground/45";
+  "inline-flex min-h-[44px] items-center gap-1.5 text-sm font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
+const missingMark = "text-sm text-muted-foreground/45";
 
-/** Puhas kaart nagu slaidide lehel: pilt, nimi, pealkiri, aeg + slaidid ja tagasiside olek. */
+/** Kaart slaidide lehe ruudustikus: pilt, nimi, pealkiri, aeg + materjalid ja tagasiside olek. */
 function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackState: { completion?: FeedbackCompletion | undefined; loading: boolean; failed: boolean; retry: () => void } }) {
   const materialQuery = useMyMaterials();
   const material = materialQuery.data?.[event.fientaEventId ?? event.id];
@@ -260,37 +260,32 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
   const speakerImageUrl = speaker?.thumbUrl ?? speaker?.imageUrl;
 
   return (
-    <article className="rounded-2xl border border-border bg-card p-5">
-      <div className="flex items-start gap-4">
-        {speakerImageUrl && (
-          <img
-            src={speakerImageUrl}
-            alt={speakerName}
-            loading="lazy"
-            className="h-14 w-14 shrink-0 rounded-full object-cover"
-          />
-        )}
-        <div className="min-w-0">
-          <h2 className="text-[17px] font-semibold leading-snug">{speakerName}</h2>
-          <p className="mt-0.5 text-[15px] text-muted-foreground">{event.title}</p>
-          <p className="mt-0.5 text-[15px] text-muted-foreground">
-            {dayLabel(event.date)} kell {displayTime(event.startTime)}
-          </p>
-        </div>
-      </div>
+    <article className="flex flex-col rounded-2xl border border-border bg-card p-4">
+      {speakerImageUrl && (
+        <img
+          src={speakerImageUrl}
+          alt={speakerName}
+          loading="lazy"
+          className="h-16 w-16 rounded-full object-cover"
+        />
+      )}
+      <h2 className="mt-2 text-base font-semibold leading-snug">{speakerName}</h2>
+      <p className="mt-0.5 text-sm text-muted-foreground">{event.title}</p>
+      <p className="mt-0.5 text-sm text-muted-foreground">
+        {dayLabel(event.date)} kell {displayTime(event.startTime)}
+      </p>
 
-      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1">
+      <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-3">
         {materialQuery.isPending ? (
           <span className={missingMark}>Laen materjale…</span>
         ) : materialQuery.isError ? (
           <button type="button" className={slidesLink} onClick={() => { void materialQuery.refetch(); }}>
-            Proovi materjale uuesti laadida
+            Proovi uuesti
           </button>
         ) : material?.letter ? (
           <Dialog>
             <DialogTrigger asChild>
               <button type="button" className={slidesLink}>
-                <Mail className="size-4" />
                 Loe koolitajate kirja
               </button>
             </DialogTrigger>
@@ -314,7 +309,6 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
           </Dialog>
         ) : slidesUrl ? (
           <a href={slidesUrl} target="_blank" rel="noreferrer" className={slidesLink}>
-            <FileText className="size-4" />
             Vaata slaide
           </a>
         ) : event.slidesExpected === false ? (
