@@ -253,7 +253,7 @@ const slidesLink =
   "inline-flex min-h-[44px] items-center gap-1.5 text-sm font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
 const missingMark = "text-sm text-muted-foreground/45";
 
-/** Kaart slaidide lehe ruudustikus: pilt, nimi, pealkiri, aeg + materjalid ja tagasiside olek. */
+/** Kaart slaidide lehe ruudustikus: pilt ja tekst kõrvuti + materjalid ja tagasiside olek. */
 function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackState: { completion?: FeedbackCompletion | undefined; loading: boolean; failed: boolean; retry: () => void } }) {
   const materialQuery = useMyMaterials();
   const material = materialQuery.data?.[event.fientaEventId ?? event.id];
@@ -266,19 +266,23 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
 
   return (
     <article className="flex flex-col rounded-2xl border border-border bg-card p-4">
-      {speakerImageUrl && (
-        <img
-          src={speakerImageUrl}
-          alt={speakerName}
-          loading="lazy"
-          className="h-16 w-16 rounded-full object-cover"
-        />
-      )}
-      <h2 className="mt-2 text-base font-semibold leading-snug">{speakerName}</h2>
-      <p className="mt-0.5 text-sm text-muted-foreground">{event.title}</p>
-      <p className="mt-0.5 text-sm text-muted-foreground">
-        {dayLabel(event.date)} kell {displayTime(event.startTime)}
-      </p>
+      <div className="flex items-start gap-3">
+        {speakerImageUrl && (
+          <img
+            src={speakerImageUrl}
+            alt={speakerName}
+            loading="lazy"
+            className="h-12 w-12 shrink-0 rounded-full object-cover"
+          />
+        )}
+        <div className="min-w-0">
+          <h2 className="text-base font-semibold leading-snug">{speakerName}</h2>
+          <p className="mt-0.5 text-sm leading-snug text-muted-foreground">{event.title}</p>
+          <p className="mt-0.5 text-sm text-muted-foreground">
+            {dayLabel(event.date)} kell {displayTime(event.startTime)}
+          </p>
+        </div>
+      </div>
 
       <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-3">
         {materialQuery.isPending ? (
