@@ -1,14 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { CalendarCheck, Check, LogOut, Mail } from "lucide-react";
+import { CalendarCheck, Check, FileText, LogOut, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { RegisteredEventActions } from "@/components/RegisteredEventActions";
-import { EventCard } from "@/components/EventCard";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { FeedbackCompletionButton } from "@/components/FeedbackCompletionButton";
 import { StudioFeedbackSection } from "@/components/StudioFeedbackSection";
 import { useFeedbackCompletion } from "@/hooks/use-feedback-completion";
+import { useMyMaterials } from "@/hooks/use-my-materials";
 import type { FeedbackCompletion } from "@/lib/feedback-completion";
-import { EVENTS, type EventItem } from "@/lib/events";
+import { EVENTS, dayLabel, displayTime, trainingSpeakerForEvent, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations, useFientaBackgroundSync } from "@/hooks/use-my-registrations";
 
 const BENEFITS = [
@@ -236,17 +244,95 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
   );
 }
 
+const slidesLink =
+  "inline-flex min-h-[44px] items-center gap-1.5 text-[15px] font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
+const missingMark = "text-[15px] text-muted-foreground/45";
+
+/** Puhas kaart nagu slaidide lehel: pilt, nimi, pealkiri, aeg + slaidid ja tagasiside olek. */
 function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackState: { completion?: FeedbackCompletion | undefined; loading: boolean; failed: boolean; retry: () => void } }) {
+  const materialQuery = useMyMaterials();
+  const material = materialQuery.data?.[event.fientaEventId ?? event.id];
+  const slidesUrl = material?.slidesUrl ?? material?.materialsUrl;
+  const materialsUrl =
+    material?.materialsUrl && material.materialsUrl !== slidesUrl ? material.materialsUrl : undefined;
+  const speaker = trainingSpeakerForEvent(event.id);
+  const speakerName = speaker ? (speaker.displayName ?? speaker.name) : event.speaker;
+  const speakerImageUrl = speaker?.thumbUrl ?? speaker?.imageUrl;
+
   return (
-    <EventCard
-      event={event}
-      showDate
-      hideRegisteredBadge
-      large
-      mutePast={false}
-      plain
-      actions={<RegisteredEventActions event={event} large feedbackState={feedbackState} />}
-    />
+    <article className="rounded-2xl border border-border bg-card p-5">
+      <div className="flex items-start gap-4">
+        {speakerImageUrl && (
+          <img
+            src={speakerImageUrl}
+            alt={speakerName}
+            loading="lazy"
+            className="h-14 w-14 shrink-0 rounded-full object-cover"
+          />
+        )}
+        <div className="min-w-0">
+          <h2 className="text-[17px] font-semibold leading-snug">{speakerName}</h2>
+          <p className="mt-0.5 text-[15px] text-muted-foreground">{event.title}</p>
+          <p className="mt-0.5 text-[15px] text-muted-foreground">
+            {dayLabel(event.date)} kell {displayTime(event.startTime)}
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1">
+        {materialQuery.isPending ? (
+          <span className={missingMark}>Laen materjale…</span>
+        ) : materialQuery.isError ? (
+          <button type="button" className={slidesLink} onClick={() => { void materialQuery.refetch(); }}>
+            Proovi materjale uuesti laadida
+          </button>
+        ) : material?.letter ? (
+          <Dialog>
+            <DialogTrigger asChild>
+              <button type="button" className={slidesLink}>
+                <Mail className="size-4" />
+                Loe koolitajate kirja
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-h-[85vh] w-[calc(100vw-2rem)] overflow-y-auto md:max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Kiri koolitajatelt</DialogTitle>
+                <DialogDescription className="sr-only">{event.title}</DialogDescription>
+              </DialogHeader>
+              <div className="whitespace-pre-line text-base leading-relaxed">
+                {material.letter.trim().split(/(https?:\/\/\S+)/g).map((part, i) =>
+                  /^https?:\/\//.test(part) ? (
+                    <a key={i} href={part} target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                      {part}
+                    </a>
+                  ) : (
+                    part
+                  ),
+                )}
+              </div>
+            </DialogContent>
+          </Dialog>
+        ) : slidesUrl ? (
+          <a href={slidesUrl} target="_blank" rel="noreferrer" className={slidesLink}>
+            <FileText className="size-4" />
+            Vaata slaide
+          </a>
+        ) : event.slidesExpected === false ? (
+          <span className={missingMark}>Slaide pole</span>
+        ) : (
+          <span className={missingMark}>Slaide veel pole</span>
+        )}
+        {materialsUrl && (
+          <a href={materialsUrl} target="_blank" rel="noreferrer" className={slidesLink}>
+            {material?.materialsLabel ?? "Lisamaterjalid"}
+          </a>
+        )}
+      </div>
+
+      <div className="mt-3">
+        <FeedbackCompletionButton eventId={event.id} {...feedbackState} />
+      </div>
+    </article>
   );
 }
 
