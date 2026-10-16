@@ -1,14 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { CalendarCheck, Check, LogOut, Mail } from "lucide-react";
+import { CalendarCheck, Check, FileText, LogOut, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { RegisteredEventActions } from "@/components/RegisteredEventActions";
-import { EventCard } from "@/components/EventCard";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { FeedbackCompletionButton } from "@/components/FeedbackCompletionButton";
 import { StudioFeedbackSection } from "@/components/StudioFeedbackSection";
 import { useFeedbackCompletion } from "@/hooks/use-feedback-completion";
+import { useMyMaterials } from "@/hooks/use-my-materials";
 import type { FeedbackCompletion } from "@/lib/feedback-completion";
-import { EVENTS, type EventItem } from "@/lib/events";
+import { EVENTS, dayLabel, displayTime, trainingSpeakerForEvent, type EventItem } from "@/lib/events";
 import { useSession, useMyRegistrations, useFientaBackgroundSync } from "@/hooks/use-my-registrations";
 
 const BENEFITS = [
