@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { feedbackCompletionKey } from "@/hooks/use-feedback-completion";
-import { ArrowLeft, CheckCircle2, GraduationCap, HeartHandshake, Lightbulb, Star } from "lucide-react";
+import { ArrowLeft, CheckCircle2, GraduationCap, Star } from "lucide-react";
 import type { Speaker } from "@/lib/events";
 import { EVENTS, getEvent, dayLabel, displayTime, trainingSpeakerForEvent } from "@/lib/events";
 import { supabase } from "@/integrations/supabase/client";
@@ -30,12 +30,12 @@ export const Route = createFileRoute("/tagasiside")({
       {
         name: "description",
         content:
-          "Hinda koolitust, kiida või paku muutmist — ja jäta meile Google'i arvustus. Tagasiside on anonüümne.",
+          "Hinda koolitust 1–10 ja jäta meile Google'i arvustus. Tagasiside on anonüümne.",
       },
       { property: "og:title", content: "Anna tagasisidet — Studio MindZ 2026" },
       {
         property: "og:description",
-        content: "Hinda koolitust, kiida või paku muutmist — ja jäta meile Google'i arvustus.",
+        content: "Hinda koolitust 1–10 ja jäta meile Google'i arvustus.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -44,15 +44,13 @@ export const Route = createFileRoute("/tagasiside")({
   component: FeedbackPage,
 });
 
-type FType = "training" | "keep" | "change";
+type FType = "training";
 
 // Google'i arvustuse otselink (Studio MindZ) — avab otse arvustuse kirjutamise vormi
 const GOOGLE_REVIEW_URL = "https://g.page/r/CcA2FXmeWHxzEBM/review";
 
-const TYPES: { id: FType; label: string; short: string; icon: typeof HeartHandshake; hint: string }[] = [
-  { id: "training", label: "Jäta tagasiside koolitusele", short: "Koolitus", icon: GraduationCap, hint: "" },
-  { id: "keep", label: "Kiidan korraldust/ruume/tiimi", short: "Kiidan", icon: HeartHandshake, hint: "Mis tiimi, korralduse või ruumide juures meeldis?" },
-  { id: "change", label: "Parandusettepanek korraldusele/ruumidele/tiimile", short: "Parandus", icon: Lightbulb, hint: "Mida tiimi, korralduse või ruumide juures muuta?" },
+const TYPES: { id: FType; label: string; short: string; icon: typeof GraduationCap }[] = [
+  { id: "training", label: "Jäta tagasiside koolitusele", short: "Koolitus", icon: GraduationCap },
 ];
 
 function FeedbackPage() {
@@ -73,7 +71,6 @@ function FeedbackPage() {
   const [changeText, setChangeText] = useState("");
   const [name, setName] = useState("");
   const [field, setField] = useState("");
-  const [message, setMessage] = useState("");
   const [contact, setContact] = useState("");
   const [remember, setRemember] = useState(false);
   const [sending, setSending] = useState(false);
@@ -89,7 +86,6 @@ function FeedbackPage() {
   }, [fromEventSpeaker]);
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
-  const msgRef = useRef<HTMLTextAreaElement>(null);
   // Robotilõks: nähtamatu väli + vormi täitmise aeg
   const hpRef = useRef<HTMLInputElement>(null);
   const startedAt = useRef(Date.now());
@@ -108,13 +104,6 @@ function FeedbackPage() {
     });
   }, []);
 
-  // Tekstikast kasvab kirjutades koos tekstiga, et seda oleks mugav üle lugeda
-  useEffect(() => {
-    const el = msgRef.current;
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = `${el.scrollHeight}px`;
-  }, [message]);
 
   useEffect(() => {
     if (!speaker) return;
@@ -131,9 +120,6 @@ function FeedbackPage() {
     if (type === "training") {
       if (!target) return setError("Vali koolitus.");
       if (!rating) return setError("Vali hinnang 1–10.");
-    } else if (!message.trim()) {
-      setError("Kirjuta paar sõna.");
-      return;
     }
     setSending(true);
     setError("");
@@ -145,7 +131,7 @@ function FeedbackPage() {
         data: {
           event_id: training ? target : null,
           feedback_type: type,
-          message: training ? null : message.trim() || null,
+          message: null,
           rating: training ? rating : null,
           keep_text: training ? keepText.trim() || null : null,
           change_text: training ? changeText.trim() || null : null,
@@ -198,7 +184,6 @@ function FeedbackPage() {
             onClick={() => {
               setSent(null);
               setType(null);
-              setMessage("");
               setRating(null);
               setKeepText("");
               setChangeText("");
@@ -296,8 +281,6 @@ function FeedbackPage() {
           aria-hidden="true"
           className="absolute -left-[9999px] h-0 w-0 opacity-0"
         />
-        {type === "training" ? (
-          <>
             {fixedEvent ? (
               <p className="rounded-xl bg-secondary px-4 py-3 text-sm">
                 <span className="font-semibold">{fixedEvent.title}</span>
@@ -349,68 +332,6 @@ function FeedbackPage() {
                 vastamiseks.
               </p>
             </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <label htmlFor="msg" className="text-sm font-semibold">
-                Kirjuta meile
-              </label>
-              <textarea
-                id="msg"
-                ref={msgRef}
-                maxLength={4000}
-                autoFocus
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder={current.hint}
-                className="mt-2 max-h-[70vh] min-h-32 w-full resize-none overflow-y-auto rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
-              />
-            </div>
-
-            <div className="grid gap-3">
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                maxLength={200}
-                placeholder="Sinu nimi"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-              />
-              <input
-                value={field}
-                onChange={(e) => setField(e.target.value)}
-                maxLength={200}
-                placeholder="Roll / valdkond"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-              />
-              <input
-                id="contact"
-                type="email"
-                maxLength={300}
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-                placeholder="Meiliaadress"
-                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-base"
-              />
-              <p className="text-xs leading-relaxed text-muted-foreground">
-                Nimi ja meiliaadress on vabatahtlikud ning mõeldud vaid tiimile vastamiseks —
-                anonüümselt vastamiseks jäta need täitmata.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <label className="flex cursor-pointer items-start gap-2.5 text-sm leading-snug text-muted-foreground">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={(e) => setRemember(e.target.checked)}
-                  className="mt-0.5 size-4 shrink-0 accent-primary"
-                />
-                Jäta nimi, roll ja meiliaadress selles seadmes meelde
-              </label>
-            </div>
-          </>
-        )}
 
         {error && <p className="text-sm text-destructive">{error}</p>}
 

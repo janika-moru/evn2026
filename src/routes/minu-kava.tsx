@@ -56,7 +56,7 @@ function MySchedulePage() {
   return (
     <main className="px-4 pt-8">
       <h1 className="text-2xl font-bold">Koolitajate slaidid ja tagasiside</h1>
-      <StudioFeedbackSection className="mt-6 mb-6" returnLabel="Tagasi slaidide juurde" />
+      <StudioFeedbackSection className="mt-6 mb-6" />
 
       {!ready ? (
         <p className="mt-4 text-[15px] text-muted-foreground">Laen…</p>

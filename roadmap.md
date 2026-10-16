@@ -69,3 +69,5 @@
 - [x] Minu kava: ainult tagasiside ja materjalid, isiklik olek ning käsitsi märkimine
 
 - [x] Jagatav Minu kava, lühendatud Info ja registreeringupõhine materjalide ligipääs
+- [x] Tiimi tagasiside: „Kiidan" ja „Parandusettepanek" eemaldatud — roheline plokk = meeskond + „Lisa Google arvustus"
+
