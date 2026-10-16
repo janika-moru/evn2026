@@ -136,9 +136,9 @@ function SignInCard() {
 
   return (
     <>
-      <h2 className="mt-4 text-xl font-semibold">Logi sisse, et vaadata slaide ja anda tagasisidet</h2>
+      <h2 className="mt-4 text-xl font-semibold">Logi sisse sama meiliaadressiga, mida kasutasid Fientas registreerumisel.</h2>
       <p className="mt-2 text-base leading-relaxed text-muted-foreground">
-        Logi sisse sama meiliaadressiga, mida kasutasid Fientas registreerumisel.
+        {"\n"}
       </p>
 
       <div className="mt-6">
