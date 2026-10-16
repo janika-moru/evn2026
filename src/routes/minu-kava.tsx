@@ -250,10 +250,10 @@ function SignedIn({ email, userId }: { email: string; userId: string }) {
 }
 
 const slidesLink =
-  "inline-flex min-h-[44px] items-center gap-1.5 text-base font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
+  "text-sm font-medium text-primary underline underline-offset-2 transition-colors hover:opacity-80";
 const missingMark = "text-base text-muted-foreground/45";
 
-/** Kaart slaidide lehe ruudustikus: pilt ja tekst kõrvuti + materjalid ja tagasiside olek. */
+/** Kaart samas kujunduses nagu /slaidid leht + tagasiside link. */
 function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackState: { completion?: FeedbackCompletion | undefined; loading: boolean; failed: boolean; retry: () => void } }) {
   const materialQuery = useMyMaterials();
   const material = materialQuery.data?.[event.fientaEventId ?? event.id];
@@ -286,7 +286,7 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
 
       <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-3">
         {materialQuery.isPending ? (
-          <span className={missingMark}>Laen materjale…</span>
+          <span className={missingMark}>Laen…</span>
         ) : materialQuery.isError ? (
           <button type="button" className={slidesLink} onClick={() => { void materialQuery.refetch(); }}>
             Proovi uuesti
@@ -320,20 +320,15 @@ function MyScheduleEvent({ event, feedbackState }: { event: EventItem; feedbackS
           <a href={slidesUrl} target="_blank" rel="noreferrer" className={slidesLink}>
             Vaata slaide
           </a>
-        ) : event.slidesExpected === false ? (
-          <span className={missingMark}>Slaide pole</span>
         ) : (
-          <span className={missingMark}>Slaide veel pole</span>
+          <span className={missingMark}>Slaide pole</span>
         )}
         {materialsUrl && (
           <a href={materialsUrl} target="_blank" rel="noreferrer" className={slidesLink}>
             {material?.materialsLabel ?? "Lisamaterjalid"}
           </a>
         )}
-      </div>
-
-      <div className="mt-3">
-        <FeedbackCompletionButton eventId={event.id} {...feedbackState} />
+        <FeedbackCompletionButton eventId={event.id} asLink {...feedbackState} />
       </div>
     </article>
   );
