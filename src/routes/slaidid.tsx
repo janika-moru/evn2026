@@ -47,7 +47,7 @@ function SlidesPage() {
         Kõikide koolituste slaidid ja materjalid ühes kohas.
       </p>
 
-      <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="mt-5 grid grid-cols-2 gap-3">
         {slidesPageRows().map((base) => {
           const m = all[base.event.fientaEventId ?? base.event.id] ?? all[base.event.id] ?? {};
           const row = {
