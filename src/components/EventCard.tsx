@@ -95,6 +95,8 @@ export function EventCard({
   hideRegisteredBadge = false,
   large = false,
   mutePast = true,
+  /** Puhas valge kaart (Minu kava) — ilma roosa tausta ja kohtade loendurita. */
+  plain = false,
 }: {
   event: EventItem;
   showDate?: boolean;
@@ -102,6 +104,7 @@ export function EventCard({
   hideRegisteredBadge?: boolean;
   large?: boolean;
   mutePast?: boolean;
+  plain?: boolean;
 }) {
   const { session, ids } = useMyRegistrations();
   const { availableSpots } = useEventAvailability(event.fientaEventId);
@@ -117,7 +120,7 @@ export function EventCard({
   return (
     <div
       className={`rounded-2xl border border-border ${large ? "p-5" : "p-4"} ${
-        past ? "bg-muted opacity-70" : registered ? "bg-mindz-pink" : "bg-card"
+        past ? "bg-muted opacity-70" : registered && !plain ? "bg-mindz-pink" : "bg-card"
       }`}
     >
       <Link to="/sundmus/$id" params={{ id: event.id }} className={eventLink}>
@@ -154,7 +157,7 @@ export function EventCard({
           {displayStatus === "closed" && <StatusBadge status={displayStatus} large={large} />}
           {(displayStatus === "open" || registered) && (
             <span className="ml-auto flex items-center gap-3">
-              {availableSpots !== null && (
+              {!plain && availableSpots !== null && (
                 <span
                   className={`${past ? "text-muted-foreground" : "text-primary"} ${
                     large ? "text-base" : "text-sm"

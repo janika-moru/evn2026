@@ -38,7 +38,7 @@ export function RegisteredEventActions({
   // large (Minu kava): 52px kõrgused nupud, 15px tekst ja 44px tabamisalad.
   // Telefonis üks nupp rea kohta, et tekst mahuks mugavalt ära.
   const btn = large
-    ? "min-h-[60px] h-auto rounded-full border-2 border-background px-4 py-3 text-[15px] whitespace-normal [&_svg]:size-5"
+    ? "min-h-[60px] h-auto rounded-full px-4 py-3 text-[15px] whitespace-normal [&_svg]:size-5"
     : "h-10 rounded-full px-2 text-xs";
   const link = large
     ? "inline-flex min-h-[44px] items-center underline underline-offset-4"
