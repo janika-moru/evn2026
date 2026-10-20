@@ -61,11 +61,21 @@ export function SpeakerFeedbackForm({
   }, []);
 
   // Tekstikast kasvab kirjutades koos tekstiga, et seda oleks mugav üle lugeda
+  // (piiranguta kõrgus — kirjutatav rida ei peitu kunagi kasti sisse kerimise taha)
   useEffect(() => {
     const el = msgRef.current;
     if (!el) return;
+    const scrollY = window.scrollY;
     el.style.height = "auto";
-    el.style.height = `${el.scrollHeight}px`;
+    el.style.height = `${el.scrollHeight + 2}px`;
+    window.scrollTo({ top: scrollY });
+    // Kui kursor on teksti lõpus, hoia kirjutatav rida ekraanil nähtaval
+    if (document.activeElement === el && el.selectionStart >= el.value.length - 1) {
+      const rect = el.getBoundingClientRect();
+      const bottomSpace = 120; // alumine menüü
+      const overflow = rect.bottom - (window.innerHeight - bottomSpace);
+      if (overflow > 0) window.scrollBy({ top: overflow });
+    }
   }, [message, open]);
 
   // Kinnitus tuhil pärast saatmist ekraanile, et osaleja näeks kindlalt selle kätte
@@ -229,7 +239,7 @@ export function SpeakerFeedbackForm({
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Mis koolituse juures meeldis ja mida võiks järgmine kord lahendada teisiti?"
-        className="max-h-[70vh] min-h-32 w-full resize-none overflow-y-auto rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+        className="min-h-32 w-full resize-none overflow-hidden rounded-xl border border-border bg-background px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
       />
 
       <div className="grid gap-3">
